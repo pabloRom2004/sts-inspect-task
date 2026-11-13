@@ -1,0 +1,4 @@
+name: sts_hawk/first_combat
+version: 1-A
+description: Visual first-combat and offline-wiki infrastructure smoke; not a SpireClimb benchmark score.
+upstream_methodology: https://epoch.ai/benchmarks/spireclimb
