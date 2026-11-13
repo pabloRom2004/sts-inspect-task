@@ -3,8 +3,9 @@ set -euo pipefail
 trap 'touch /tmp/sts-failed' EXIT
 ulimit -n 8192
 export DISPLAY=:99 DISPLAY_NUM=99 WIDTH=1280 HEIGHT=720
-pulseaudio --start --exit-idle-time=-1 --daemonize
-pactl load-module module-null-sink sink_name=DummyOutput >/dev/null
+export ALSOFT_DRIVERS=null
+exec >>/tmp/sts-startup.log 2>&1
+echo 'Starting the X display with null audio'
 Xvnc :99 -geometry 1280x720 -depth 24 -rfbport 5900 -SecurityTypes None \
     -AlwaysShared -AcceptKeyEvents -AcceptPointerEvents >/tmp/xvnc.log 2>&1 &
 for attempt in $(seq 1 60); do
@@ -13,6 +14,7 @@ for attempt in $(seq 1 60); do
 done
 xdpyinfo >/dev/null
 touch /tmp/xfce_started
+echo 'X display ready; starting Java'
 cd /game
 printf '1280\n720\n60\nfalse\nfalse\ntrue\n' > info.displayconfig
 python3 - <<'PY'
