@@ -1,3 +1,4 @@
+import base64
 import tempfile
 from pathlib import Path
 from typing import Any
@@ -5,8 +6,10 @@ from typing import Any
 import yaml
 from inspect_ai import Task, task
 from inspect_ai.dataset import Sample
-from inspect_ai.model import GenerateConfig
+from inspect_ai.model import ContentImage, ContentText, GenerateConfig
+from inspect_ai.scorer import includes
 from inspect_ai.solver import Generate, Solver, TaskState, solver
+from inspect_ai.solver import generate as generate_response
 from inspect_ai.tool import computer
 
 from sts_hawk import agent, scorers
@@ -91,3 +94,28 @@ def runtime_probe(**kwargs: Any) -> Task:
     result = first_combat(**kwargs)
     result.solver = capture_runtime()
     return result
+
+
+@task
+def provider_probe() -> Task:
+    """Verify a single paid vision request on the selected Hawk provider route."""
+    png = (Path(__file__).parent / "assets/provider-probe.png").read_bytes()
+    return Task(
+        name="sts_provider_probe",
+        dataset=[
+            Sample(
+                id="vision-tile",
+                input=[
+                    ContentText(text="Name this tile's color using one word."),
+                    ContentImage(
+                        image="data:image/png;base64," + base64.b64encode(png).decode()
+                    ),
+                ],
+                target="white",
+            )
+        ],
+        solver=generate_response(),
+        scorer=includes(),
+        config=GenerateConfig(**DEFAULTS["generate_config"]),
+        epochs=1,
+    )

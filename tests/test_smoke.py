@@ -132,3 +132,20 @@ def test_death_and_victory_are_distinct() -> None:
     history = RunState(store=Store())
     observe(combat(hp=0, screen="DEATH"), history)
     assert history.died and not history.won
+
+
+def test_provider_probe_is_one_generation(tmp_path) -> None:
+    """Verify the vision probe reaches scoring after exactly one mock response."""
+    from sts_hawk.task import provider_probe
+
+    model = get_model(
+        "mockllm/model",
+        custom_outputs=[
+            ModelOutput.from_content("mockllm/model", "white"),
+        ],
+    )
+    log = inspect_eval(
+        provider_probe(), model=model, log_dir=str(tmp_path), display="none"
+    )[0]
+    assert log.status == "success"
+    assert log.samples[0].scores["includes"].value == "C"

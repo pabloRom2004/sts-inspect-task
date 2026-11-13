@@ -23,6 +23,13 @@ path.write_text(json.dumps(data))
 player = Path('preferences/STSPlayer')
 data = json.loads(player.read_text())
 data['name'] = 'Hawk visual smoke'
+data['seenFTUE'] = True
+data.update({f'seenFTUE{i}': True for i in range(1, 101)})
+for name in ['COMBAT', 'MAP', 'SHOP', 'EVENT', 'REST', 'TREASURE', 'CARD_REWARD',
+             'BOSS', 'DECK', 'HAND', 'POTION', 'RELIC', 'ENERGY', 'DISCARD',
+             'DRAW', 'EXHAUST']:
+    data[name + '_TIP'] = 2
+data['NEOW_SKIP'] = 2
 player.write_text(json.dumps(data))
 PY
 java -XX:ActiveProcessorCount=2 -Xmx1536m -jar ModTheSpire.jar --skip-launcher --skip-intro \
