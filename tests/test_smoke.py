@@ -116,6 +116,9 @@ def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) ->
         if mode == "beat_game"
         else "play Slay the Spire for me as Ironclad"
     )
+    expected_prompt += (
+        "\n\nAn offline Slay the Spire wiki is available at /opt/sts/wiki.md."
+    )
     assert task.dataset[0].input == expected_prompt
     task.sandbox = None
     log = inspect_eval(task, model=model, log_dir=str(tmp_path), display="none")[0]
