@@ -14,11 +14,9 @@ rm /opt/sts/asset-url
 tar -xf /tmp/sts-runtime.tar -C /game
 rm /tmp/sts-runtime.tar
 mkdir -p /game/jre/bin /root/.steam/steam/steamapps/common/SlayTheSpire \
-    /root/.steam/steam/steamapps/workshop/content/646570 /root/.config/ModTheSpire/CommunicationMod
+    /root/.steam/steam/steamapps/workshop/content/646570 /root/.config/ModTheSpire
 ln -sf /usr/bin/java /game/jre/bin/java
 ln -sf /game/desktop-1.0.jar /root/.steam/steam/steamapps/common/SlayTheSpire/desktop-1.0.jar
 ln -sf /game/mods /root/.steam/steam/steamapps/common/SlayTheSpire/mods
 echo '"appid" "646570"' > /root/.steam/steam/steamapps/appmanifest_646570.acf
 echo '[]' > /root/.config/ModTheSpire/WorkshopInfo.json
-printf 'command=python3 /opt/sts/observer.py\nrunAtGameStart=true\nallowCheats=false\n' \
-    > /root/.config/ModTheSpire/CommunicationMod/config.properties

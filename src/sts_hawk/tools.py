@@ -4,7 +4,7 @@ from pathlib import Path
 
 from inspect_ai.tool import Tool, tool
 
-from sts_hawk.state import RunState, WikiRead
+from sts_hawk.state import WikiHistory
 
 
 @cache
@@ -47,14 +47,23 @@ def wiki() -> Tool:
                         if query.lower() in body.lower()
                     ]
                 return "Matching article titles:\n" + "\n".join(titles)
-        history = RunState()
-        history.wiki_reads = history.wiki_reads + [
-            WikiRead(
-                title=exact,
-                before_victory=not history.won,
-                enemies_present=history.first_enemies,
-            )
-        ]
+        history = WikiHistory()
+        history.titles = history.titles + [exact]
         return articles[exact]
+
+    return execute
+
+
+@tool
+def submit_floor() -> Tool:
+    """Create the unverified integer floor-reporting tool."""
+
+    async def execute(max_floor: int) -> str:
+        """Finish the run by reporting the maximum floor reached.
+
+        Args:
+            max_floor: The maximum floor number you reached during this run.
+        """
+        return str(max_floor)
 
     return execute

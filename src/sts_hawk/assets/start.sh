@@ -22,7 +22,7 @@ import json
 from pathlib import Path
 path = Path('preferences/STSGameplaySettings')
 data = json.loads(path.read_text())
-data.update({'Fast Mode': 'false', 'Controller Enabled': 'false', 'Upload Data': 'false'})
+data.update({'Fast Mode': 'false', 'Controller Enabled': 'false', 'Upload Data': 'false', 'Ascension Mode Default': 'true'})
 path.write_text(json.dumps(data))
 player = Path('preferences/STSPlayer')
 data = json.loads(player.read_text())
@@ -37,5 +37,5 @@ data['NEOW_SKIP'] = 2
 player.write_text(json.dumps(data))
 PY
 java -XX:ActiveProcessorCount=2 -Xmx1536m -jar ModTheSpire.jar --skip-launcher --skip-intro \
-    --mods basemod,CommunicationMod,determinismfix,UnlockEverythingMod >/tmp/game.log 2>&1 || true
+    --mods basemod,determinismfix,UnlockEverythingMod >/tmp/game.log 2>&1 || true
 touch /tmp/sts-failed

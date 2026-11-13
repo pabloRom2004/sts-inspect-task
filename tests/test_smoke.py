@@ -1,34 +1,16 @@
-import json
-
 import pytest
-from inspect_ai import Task
 from inspect_ai import eval as inspect_eval
-from inspect_ai.dataset import Sample
 from inspect_ai.model import ModelOutput, get_model
-from inspect_ai.util import Store
-from inspect_ai.util._subprocess import ExecResult
+from inspect_ai.tool import ToolDef
+from inspect_ai.util import ExecResult, Store
 
-from sts_hawk.agent import visual_agent
-from sts_hawk.scorers import combat_and_wiki
-from sts_hawk.state import RunState, observe, wiki_requirement
-from sts_hawk.tools import wiki_articles
-
-
-def combat(screen: str = "NONE", hp: int = 80, floor: int = 1) -> dict:
-    """Make an explicit observer-protocol fixture for a first encounter."""
-    return {
-        "in_game": True,
-        "game_state": {
-            "floor": floor,
-            "current_hp": hp,
-            "screen_type": screen,
-            "combat_state": {"monsters": [{"name": "Jaw Worm"}]},
-        },
-    }
+from sts_hawk.state import WikiHistory
+from sts_hawk.task import first_combat
+from sts_hawk.tools import submit_floor, wiki_articles
 
 
 def test_wiki_titles() -> None:
-    """Require real enemy articles and their source attribution in the copied wiki."""
+    """Require real enemy articles and source attribution in the copied wiki."""
     articles = wiki_articles()
     assert len(articles) == 750
     for enemy in ["Cultist", "Jaw Worm", "Louses", "Acid Slime", "Spike Slime"]:
@@ -36,129 +18,90 @@ def test_wiki_titles() -> None:
         assert "https://slay-the-spire.fandom.com" in articles[enemy]
 
 
-def test_observer_errors_are_not_losses() -> None:
-    """Keep broken infrastructure distinct from a legitimate lost encounter."""
-    history = RunState(store=Store())
-    with pytest.raises(RuntimeError, match="observer failed"):
-        observe({"error": "timeout"}, history)
-    with pytest.raises(ValueError, match="in_game"):
-        observe({}, history)
-    with pytest.raises(RuntimeError, match="without observing"):
-        observe(combat(floor=2), history)
-
-
-@pytest.mark.parametrize("read_wiki,expected", [(True, "C"), (False, "I")])
-def test_real_react_tool_and_scorer_path(
-    monkeypatch, tmp_path, read_wiki, expected
+@pytest.mark.parametrize("setup_ok", [True, False])
+def test_real_setup_react_and_integer_submission(
+    monkeypatch, tmp_path, setup_ok
 ) -> None:
-    """Exercise stock computer parsing, offline wiki, persisted grading, and auto-stop."""
+    """Exercise setup, stock computer parsing, wiki and integer submission without a grader."""
     import inspect_ai.tool._tools._computer._common as computer_common
 
     from sts_hawk import runtime
 
-    class ProtocolSandbox:
-        """Replace only external game transport with deterministic protocol fixtures."""
+    class TransportSandbox:
+        """Replace external Linux execution while preserving the real tool protocol."""
 
         def __init__(self) -> None:
-            """Begin with a live enemy and track actual computer invocations."""
-            self.won = False
+            """Track setup writes, executed commands and computer requests."""
+            self.files = {}
+            self.commands = []
             self.actions = 0
 
-        async def exec(self, command, **kwargs):
-            """Return either a fresh game observation or the computer protocol response."""
-            if command[1] == "/opt/sts/observer.py":
-                raw = combat("COMBAT_REWARD" if self.won else "NONE")
-                return ExecResult(
-                    success=True, returncode=0, stdout=json.dumps(raw), stderr=""
-                )
-            assert command[:2] == ["python3", "/opt/inspect/tool/computer_tool.py"]
-            self.actions += 1
-            if command[2] == "left_click":
-                self.won = True
-            return ExecResult(
-                success=True,
-                returncode=0,
-                stdout='{"output":"fixture","error":null}',
-                stderr="",
-            )
+        async def write_file(self, path, content):
+            """Capture installation assets passed to the sandbox."""
+            self.files[path] = content
 
-    sb = ProtocolSandbox()
+        async def exec(self, command, **kwargs):
+            """Return setup status or a stock computer-tool JSON response."""
+            self.commands.append(command)
+            if command == ["bash", "/opt/sts/install.sh"] and not setup_ok:
+                return ExecResult(False, 1, "", "fixture installation failed")
+            if command[:2] == ["python3", "/opt/inspect/tool/computer_tool.py"]:
+                self.actions += 1
+                return ExecResult(
+                    True, 0, '{"output":"transport fixture","error":null}', ""
+                )
+            return ExecResult(True, 0, "game-launch-triggered", "")
+
+    sb = TransportSandbox()
 
     async def computer_sandbox():
-        """Bind the stock computer tool to the protocol fixture for this test."""
+        """Bind the real stock computer parser to the transport fixture."""
         return sb
 
+    monkeypatch.setenv("STS_ASSET_URL", "https://example.invalid/private-test-fixture")
     monkeypatch.setattr(runtime, "sandbox", lambda: sb)
     monkeypatch.setattr(computer_common, "computer_sandbox", computer_sandbox)
-    outputs = [
-        ModelOutput.for_tool_call("mockllm/model", "computer", {"action": "screenshot"})
-    ]
-    if read_wiki:
-        outputs.append(
-            ModelOutput.for_tool_call("mockllm/model", "wiki", {"query": "Jaw Worm"})
-        )
-    outputs.append(
-        ModelOutput.for_tool_call(
-            "mockllm/model",
-            "computer",
-            {"action": "left_click", "coordinate": [600, 500]},
-        )
-    )
-    outputs.append(ModelOutput.from_content("mockllm/model", "UNREACHABLE EXTRA TURN"))
-    model = get_model("mockllm/model", custom_outputs=outputs)
-    log = inspect_eval(
-        Task(
-            dataset=[Sample(id="fixture", input="Exercise tools")],
-            solver=visual_agent(),
-            scorer=combat_and_wiki(observer_timeout=30),
-        ),
-        model=model,
-        log_dir=str(tmp_path),
-        display="none",
-    )[0]
-    assert log.status == "success"
-    sample = log.samples[0]
-    assert sample.scores["combat_and_wiki"].value == expected
-    assert sb.actions == 2
-    assert "UNREACHABLE EXTRA TURN" not in str(sample.messages)
-    history = RunState(store=Store(sample.store))
-    assert history.won
-    assert wiki_requirement(history) == read_wiki
-    assert bool(history.wiki_reads) == read_wiki
-
-
-def test_death_and_victory_are_distinct() -> None:
-    """Record actual death without awarding a first-combat victory."""
-    history = RunState(store=Store())
-    observe(combat(hp=0, screen="DEATH"), history)
-    assert history.died and not history.won
-
-
-def test_provider_probe_is_one_generation(tmp_path) -> None:
-    """Verify the vision probe reaches scoring after exactly one mock response."""
-    from sts_hawk.task import provider_probe
-
     model = get_model(
         "mockllm/model",
         custom_outputs=[
-            ModelOutput.from_content("mockllm/model", "white"),
+            ModelOutput.for_tool_call(
+                "mockllm/model", "computer", {"action": "screenshot"}
+            ),
+            ModelOutput.for_tool_call("mockllm/model", "wiki", {"query": "Jaw Worm"}),
+            ModelOutput.for_tool_call("mockllm/model", "submit", {"max_floor": 1.5}),
+            ModelOutput.for_tool_call("mockllm/model", "submit", {"max_floor": 1}),
+            ModelOutput.from_content("mockllm/model", "UNREACHABLE EXTRA TURN"),
         ],
     )
-    log = inspect_eval(
-        provider_probe(), model=model, log_dir=str(tmp_path), display="none"
-    )[0]
+    task = first_combat()
+    task.sandbox = None
+    log = inspect_eval(task, model=model, log_dir=str(tmp_path), display="none")[0]
+    sample = log.samples[0]
+    assert not sample.scores
+    if not setup_ok:
+        assert log.status == "error"
+        assert "fixture installation failed" in sample.error.message
+        assert sb.actions == 0
+        return
     assert log.status == "success"
-    assert log.samples[0].scores["includes"].value == "C"
+    assert sample.output.completion == "1"
+    assert sb.actions == 1
+    assert "UNREACHABLE EXTRA TURN" not in str(sample.messages)
+    assert WikiHistory(store=Store(sample.store)).titles == ["Jaw Worm"]
+    assert "/opt/inspect/tool/computer_tool.py" in sb.files
+    assert any("/tmp/sts-runtime-ready" in str(cmd) for cmd in sb.commands)
+    assert any(getattr(msg, "error", None) for msg in sample.messages)
+    submission = ToolDef(submit_floor()).parameters
+    assert submission.properties["max_floor"].type == "integer"
+    assert submission.required == ["max_floor"]
 
 
 def test_hawk_compose_conversion(tmp_path) -> None:
-    """Reproduce Hawk's ruamel-to-PyYAML conversion with the real K8s converter."""
+    """Reproduce Hawk's ruamel-to-PyYAML path using the real K8s converter."""
     from pathlib import Path
 
     import ruamel.yaml
     from k8s_sandbox.compose import convert_compose_to_helm_values
-
-    from sts_hawk.task import first_combat
 
     original = Path(first_combat().sandbox.config)
     yaml = ruamel.yaml.YAML(typ="safe")
@@ -169,56 +112,3 @@ def test_hawk_compose_conversion(tmp_path) -> None:
         yaml.dump(data, stream)
     result = convert_compose_to_helm_values(sanitized)
     assert result["services"]["default"]["image"] == "ubuntu:24.04"
-
-
-def test_observer_pipe_handshake_and_fresh_state(tmp_path) -> None:
-    """Exercise the real observer process and Unix socket against a game-protocol fixture."""
-    import select
-    import subprocess
-    import sys
-    import time
-    import uuid
-    from pathlib import Path
-
-    from sts_hawk import runtime
-
-    script = Path(runtime.__file__).parent / "assets/observer.py"
-    address = "/tmp/sts-observer-" + uuid.uuid4().hex + ".sock"
-    loader = (
-        "import runpy; d=runpy.run_path(" + repr(str(script)) + "); "
-        "d['Observer'].run.__globals__['SOCKET']=" + repr(address) + "; "
-    )
-    server = subprocess.Popen(
-        [sys.executable, "-c", loader + "d['Observer']().run()"],
-        stdin=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-        bufsize=1,
-    )
-    try:
-        assert select.select([server.stdout], [], [], 5)[0]
-        assert server.stdout.readline().strip() == "ready"
-        server.stdin.write(json.dumps({"in_game": False}) + "\n")
-        server.stdin.flush()
-        deadline = time.monotonic() + 5
-        while not Path(address).exists():
-            assert time.monotonic() < deadline
-            time.sleep(0.01)
-        client = subprocess.Popen(
-            [sys.executable, "-c", loader + "d['client']('STATE')"],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-        )
-        assert select.select([server.stdout], [], [], 5)[0]
-        assert server.stdout.readline().strip() == "STATE"
-        server.stdin.write(json.dumps(combat()) + "\n")
-        server.stdin.flush()
-        output, error = client.communicate(timeout=5)
-        assert client.returncode == 0, error
-        assert json.loads(output)["game_state"]["floor"] == 1
-    finally:
-        server.terminate()
-        server.communicate(timeout=5)
-        Path(address).unlink(missing_ok=True)

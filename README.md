@@ -1,33 +1,47 @@
 # Slay the Spire visual smoke
 
-This standalone Inspect AI task tests a visual game runtime on Generality Hawk. The model plays Ironclad at Ascension 20, reads the first enemy's article from a user-provided offline wiki, defeats one encounter, and stops.
+This standalone Inspect AI task runs a first-combat visual smoke on Generality Hawk. GPT-6 Luna plays Ironclad at Ascension 20, reads the first enemy's article from an offline wiki, defeats one encounter, and submits the highest floor reached as an integer.
 
-It adapts the [published SpireClimb methodology](https://epoch.ai/benchmarks/spireclimb). Epoch's implementation and prompt were not available during this work. This package is an independent smoke task, with no full-run benchmark score or claim of exact reproduction.
+It is an independent adaptation of [Epoch's published SpireClimb methodology](https://epoch.ai/benchmarks/spireclimb). Epoch's complete implementation and prompt were unavailable. This task has no automated grader and does not produce a SpireClimb benchmark score.
 
-## Installation and use
+## Usage
 
-Install the package with `pip install .`. A licensed Linux copy of the game, ModTheSpire, BaseMod, CommunicationMod, DeterminismFix, Unlock Everything, and preference files are supplied separately in a private runtime archive. The archive is not committed to this repository. Set `STS_ASSET_URL` to a temporary private download URL for that archive.
+Install the package with `pip install .`. Supply a licensed Linux game and the mods separately in a private runtime archive; game files are excluded from this repository. Set `STS_ASSET_URL` to a temporary private download URL for that archive.
 
-Run `inspect eval sts_hawk/first_combat --model openrouter/openai/gpt-6-luna` on the intended Linux infrastructure. `sts_hawk/runtime_probe` exercises the same setup, screenshot and scoring paths without generating a model response. Real model evaluation is intended to run on Hawk; local tests use mockllm.
+On the intended Linux infrastructure:
 
-The sandbox installs Java 8, TigerVNC, graphics/audio dependencies and the stock Inspect computer backend into Ubuntu 24.04. It renders at 1280×720. Fast Mode and SuperFastMode are disabled; Unlock Everything is enabled. CommunicationMod is used only by controller setup and deterministic scoring. The model receives no text-state or game-command tool.
+```bash
+inspect eval sts_hawk/first_combat --model openrouter/openai/gpt-6-luna
+```
 
-## Configuration
+Real model evaluations run on Hawk. Local validation uses mockllm. `sts_hawk/runtime_probe` performs the same installation and captures a screenshot without a model generation. These are separate checks: provider connectivity does not prove the game runs, and a runtime screenshot does not prove the agent can play.
 
-`src/sts_hawk/run_configs/default.yaml` owns task, solver, generation and limit defaults. Native Inspect run-config and solver overrides remain available. Setup remains outside the replaceable solver. Sandbox resources live in `assets/compose.yaml`; two CPUs and 4 GB are initial single-sample smoke allocations, not measured production batch requirements.
+### Configuration
 
-The configuration selects one seeded Ironclad A20 sample, stock Inspect ReAct and `computer()`, and an offline `wiki` tool. It retains one screenshot in model context. GPT-6 Luna's verified 1,050,000-token context gives a 787,500-token compaction trigger under the user's 75% policy; maximum response output is 128,000 tokens. Reasoning effort is `max`, matching Epoch's published choice. Model and billing-route selection belongs to the Hawk launch configuration.
+`src/sts_hawk/run_configs/default.yaml` owns task, solver, generation and evaluation defaults. Copy it to change settings; native Inspect run-config and solver overrides remain available. Setup stays outside the replaceable solver. This is a new smoke task with no upstream implementation to reproduce, so there is no `original.yaml`.
 
-This is a new smoke task with no historical implementation of its own, so it has no `original.yaml`. Differences from Epoch's full evaluation are deliberate: first-combat scope, new prompt and seed, offline Fandom wiki instead of the published web lookup, and the user's 75% compaction policy instead of Epoch's published 300k threshold. It does not reproduce the complete A20 Heart evaluation across characters and seeds.
+The default selects one Ironclad A20 sample, stock Inspect ReAct and `computer()`, and the offline `wiki` tool. It retains one screenshot in context. Compaction is triggered at 787,500 tokens, following the user's 75% policy for Luna's verified 1,050,000-token context. Maximum response output is 128,000 tokens and reasoning effort is `max`. Model and billing-route selection belong to the Hawk launch configuration.
 
-## Result and logs
+Differences from Epoch's full benchmark include first-combat scope, a new prompt, an offline Fandom wiki, the 75% compaction policy and no automated grading. No seed list or A20 Heart completion benchmark is implemented.
 
-The smoke pass requires both a first-floor combat reward screen while alive and a relevant enemy article returned by the wiki tool before victory. The observer checks after each ReAct iteration and stops before the next model generation on victory or death. An early submission or missing wiki read fails the smoke; infrastructure and malformed-state errors raise instead of becoming a loss. The grader does not trust the model's final claim.
+## Runtime
 
-Wiki reads and trusted observations persist in Inspect's typed store and `.eval` log. Wiki text retains original Fandom URLs. The copied computer backend is from Inspect AI 0.3.289 and retains its MIT license.
+The sandbox installs Java 8, TigerVNC, graphics dependencies and Inspect's stock computer backend into Ubuntu 24.04, rendering at 1280×720. BaseMod, DeterminismFix and Unlock Everything are enabled. Fast Mode and SuperFastMode are disabled. The task uses graphical input; it does not load CommunicationMod or expose a game-state command tool.
 
-For live viewing, set `STS_VIEWER_PORT` in the Hawk runner environment and enable Hawk `log_realtime`. The optional hook serves Inspect View only on the runner's loopback interface. An authenticated `hawk attach RUN --port PORT --local-port PORT` relay makes it reachable at localhost on the viewing Mac. The viewer terminates with the evaluation; final `.eval` archives can be downloaded and viewed locally afterwards.
+Sandbox resources live in `assets/compose.yaml`. Two CPUs and 4 GB are initial single-smoke allocations, not measured production batch requirements. Container internet access is enabled for OS installation and the private archive download. Runtime assets and download URLs must stay private.
+
+## Parameters
+
+`first_combat` accepts `character` (`IRONCLAD`), `ascension` (`20`), `prompt_name` (`first_combat`), `setup_timeout` (`900` seconds), `command_timeout` (`180` seconds) and `sandbox_image` (`ubuntu:24.04`). The requested character and difficulty are instructions for the model to select and verify visually; no hidden controller starts a run for it.
+
+The `visual_agent` solver accepts `max_screenshots` (`1`), `tool_timeout` (`180` seconds) and `compaction_threshold` (`787500` tokens). The offline wiki contains 750 pages and returns original article text and source URLs. See `THIRD_PARTY.md` for attribution. The vendored stock computer backend retains Inspect's MIT license.
+
+## Submission and logs
+
+The agent finishes with `submit(max_floor: int)`. Inspect stores the integer as the final completion and retains the tool call. This is an unverified self-report. The user checks screenshots to determine whether the first encounter was won and whether the floor report is accurate. Wiki reads are recorded in the typed Inspect store. There is no grader or aggregate score.
+
+Hawk's live viewer shows actions and screenshots when `log_realtime` is enabled. No local viewer or relay is required. Installation and sandbox failures remain errors rather than game losses.
 
 ## Validation
 
-`pytest tests` covers wiki articles, observer error attribution, death and victory, and a mockllm end-to-end trajectory through stock computer-tool parsing, wiki lookup, typed history, automatic termination, and the real scorer. These tests simulate external game transport; a separate native Linux runtime probe verifies the actual game and screenshot path before the Luna smoke. `ruff check .` and `ruff format --check .` cover authored code. Inspect's vendored computer backend is excluded from formatting changes.
+Run `pytest tests`, `ruff check .` and `ruff format --check .`. Tests exercise the actual task setup, stock computer parser, wiki tool, invalid and valid integer submissions, unscored completion, and setup-error propagation through mockllm. They also exercise the real Hawk Compose-to-Kubernetes conversion. External execution is simulated in local tests; the separate Linux runtime probe must establish actual game startup before the paid gameplay smoke.

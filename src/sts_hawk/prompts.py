@@ -18,12 +18,12 @@ FIRST_COMBAT = Prompt(
     origin="https://epoch.ai/benchmarks/spireclimb",
     origin_note="New smoke prompt inspired by the published methodology; not Epoch's unreleased prompt.",
     text="""Play Slay the Spire through its graphical interface. You are {character} at Ascension {ascension}.
-Use computer screenshots and graphical actions to play. Start by taking a screenshot.
+Use computer screenshots and graphical actions to play. Start by taking a screenshot. If the game is loading, wait. Start a normal run, choose {character}, and verify Ascension {ascension} is enabled.
 Choose your starting bonus and enter the first combat. Identify the enemy or enemies from the screen, then use wiki to read the relevant enemy article before fighting.
 The wiki tool reads an offline copy of the Slay the Spire wiki. A title query returns an article; a broader query returns matching titles.
-Defeat that first encounter, then stop. Do not begin a second combat. The harness also stops automatically when it detects the first combat victory or your death.
+Defeat that first encounter, then use submit to stop. Do not begin a second combat. If you die, submit and stop.
 If an animation is still running, use computer's wait action and inspect the next screenshot.
-Report briefly whether you defeated the encounter and which wiki article you consulted.""",
+When you finish, call submit with max_floor set to the maximum floor number you reached, as an integer.""",
 )
 
 PROMPTS = {FIRST_COMBAT.title: FIRST_COMBAT}

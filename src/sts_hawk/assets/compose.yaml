@@ -15,6 +15,7 @@ services:
         limits:
           cpus: '2'
           memory: 4G
+
 x-inspect_k8s_sandbox:
   allow_entities: [world]
   allow_domains:
