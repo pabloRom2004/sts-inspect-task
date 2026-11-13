@@ -149,3 +149,23 @@ def test_provider_probe_is_one_generation(tmp_path) -> None:
     )[0]
     assert log.status == "success"
     assert log.samples[0].scores["includes"].value == "C"
+
+
+def test_hawk_compose_conversion(tmp_path) -> None:
+    """Reproduce Hawk's ruamel-to-PyYAML conversion with the real K8s converter."""
+    from pathlib import Path
+
+    import ruamel.yaml
+    from k8s_sandbox.compose import convert_compose_to_helm_values
+
+    from sts_hawk.task import first_combat
+
+    original = Path(first_combat().sandbox.config)
+    yaml = ruamel.yaml.YAML(typ="safe")
+    data = yaml.load(original.read_text())
+    assert data["services"]["default"].pop("platform") == "linux/amd64"
+    sanitized = tmp_path / "sanitized-compose.yaml"
+    with sanitized.open("w") as stream:
+        yaml.dump(data, stream)
+    result = convert_compose_to_helm_values(sanitized)
+    assert result["services"]["default"]["image"] == "ubuntu:24.04"
