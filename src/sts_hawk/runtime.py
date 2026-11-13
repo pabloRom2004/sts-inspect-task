@@ -1,5 +1,6 @@
 import asyncio
 import json
+import logging
 import os
 from pathlib import Path
 from typing import Any
@@ -10,6 +11,7 @@ from inspect_ai.util import sandbox
 from sts_hawk.state import RunState, observe
 
 ASSETS = Path(__file__).parent / "assets"
+logger = logging.getLogger(__name__)
 
 
 async def checked_exec(command: list[str], timeout: int) -> str:
@@ -59,7 +61,11 @@ def prepare_game(
             await sandbox().write_file(
                 f"/opt/inspect/tool/{source.name}", source.read_text()
             )
+        logger.info(
+            "Installing Linux runtime and transferring the private game archive"
+        )
         await checked_exec(["bash", "/opt/sts/install.sh"], setup_timeout)
+        logger.info("Runtime installed; launching the Java game and X display")
         await checked_exec(
             [
                 "bash",
@@ -84,6 +90,7 @@ def prepare_game(
                     )
                     raise RuntimeError(f"Game exited during startup: {diagnostics}")
                 await asyncio.sleep(1)
+        logger.info("Game observer is ready; starting the seeded A20 run")
         started = await game_command(
             f"START {character} {ascension} {seed}", observer_timeout
         )
