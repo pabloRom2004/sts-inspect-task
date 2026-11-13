@@ -260,7 +260,7 @@ async def test_stateless_responses_request(monkeypatch) -> None:
             for block in item.get("content", [])
             if isinstance(block, dict)
         )
-        == 1
+        == 3
     )
     retained = [
         block
@@ -268,7 +268,7 @@ async def test_stateless_responses_request(monkeypatch) -> None:
         for block in item.get("content", [])
         if isinstance(block, dict) and block.get("type") == "input_image"
     ]
-    assert retained[0]["detail"] == "high"
+    assert retained[-1]["detail"] == "high"
     # Request pruning must preserve the original replay images.
     assert (
         sum(
@@ -305,3 +305,68 @@ async def test_missing_browser_is_recoverable(monkeypatch, action) -> None:
         else await client.navigate("https://example.com")
     )
     assert result.error == "Firefox ESR is not installed in this sandbox."
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("fallback", [False, True])
+async def test_compaction_prunes_images_and_preserves_replay(monkeypatch, fallback):
+    """Keep three screenshots on native and summary paths with a long replay."""
+    from inspect_ai.model import ChatMessageTool, ChatMessageUser, ContentImage
+    from inspect_ai.tool import computer, tool_with
+
+    from sts_hawk.compaction import ScreenshotCompaction
+    from sts_hawk.inspect_compat import apply_hawk_image_counter_fix
+
+    apply_hawk_image_counter_fix()
+    model = get_model("mockllm/model")
+    messages = [ChatMessageUser(content="Play the game.")]
+    for i in range(62):
+        messages.append(
+            ChatMessageTool(
+                function="desktop",
+                content=[ContentImage(image=f"data:image/png;base64,fixture{i}")],
+            )
+        )
+        messages.append(ChatMessageTool(function="bash", content="wiki"))
+    captured = []
+
+    def capture(input):
+        """Require exactly the latest three screenshots at each request boundary."""
+        images = [
+            b.image
+            for m in input
+            if isinstance(m.content, list)
+            for b in m.content
+            if b.type == "image"
+        ]
+        assert images == [f"data:image/png;base64,fixture{i}" for i in (59, 60, 61)]
+        captured.append(images)
+
+    async def native(input, tools, instructions=None):
+        """Capture a native request and optionally exercise summary fallback."""
+        capture(input)
+        if fallback:
+            raise NotImplementedError("fixture: native compaction unavailable")
+        return [ChatMessageUser(content="summary")], None
+
+    async def generate(input, **kwargs):
+        """Capture the fallback summary request without paid inference."""
+        capture(input)
+        return ModelOutput.from_content("mockllm/model", "summary")
+
+    monkeypatch.setattr(model, "compact", native)
+    monkeypatch.setattr(model, "generate", generate)
+    strategy = ScreenshotCompaction(
+        tool_with(computer(max_screenshots=3), name="desktop"), threshold=787500
+    )
+    await strategy.compact_outcome(model, messages, [])
+    assert len(captured) == (2 if fallback else 1)
+    assert (
+        sum(
+            b.type == "image"
+            for m in messages
+            if isinstance(m.content, list)
+            for b in m.content
+        )
+        == 62
+    )

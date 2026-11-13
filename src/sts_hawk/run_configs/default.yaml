@@ -11,7 +11,7 @@ task:
 solver:
   solver: sts_hawk/visual_agent
   args:
-    max_screenshots: 1
+    max_screenshots: 3
     tool_timeout: 180
     compaction_threshold: 787500
 
