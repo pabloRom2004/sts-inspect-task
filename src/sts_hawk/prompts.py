@@ -20,4 +20,12 @@ FIRST_COMBAT = Prompt(
     text="play Slay the Spire for me",
 )
 
-PROMPTS = {FIRST_COMBAT.title: FIRST_COMBAT}
+BEAT_GAME = Prompt(
+    title="beat_game",
+    role="subject",
+    origin="User request, 2026-11-13",
+    origin_note="Minimal prompt for the user's requested full-game Ascension 20 attempt.",
+    text="Try to beat Slay the Spire on Ascension {ascension}.",
+)
+
+PROMPTS = {prompt.title: prompt for prompt in [FIRST_COMBAT, BEAT_GAME]}

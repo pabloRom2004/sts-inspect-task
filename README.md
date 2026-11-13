@@ -19,6 +19,8 @@ inspect eval sts_hawk/first_combat --model openrouter/openai/gpt-6-luna \
   -M responses_api=true -M responses_store=false
 ```
 
+For the full-game A20 attempt, pass `-T prompt_name=beat_game`. Its complete prompt is “Try to beat Slay the Spire on Ascension 20.” The general tools and integer submission are unchanged. No first-combat stopping rule applies.
+
 Real model evaluations run on Hawk. Local validation uses mockllm. `sts_hawk/runtime_probe` performs the same installation and captures a screenshot without a model generation. These are separate checks: provider connectivity does not prove the game runs, and a runtime screenshot does not prove the agent can play.
 
 ### Configuration

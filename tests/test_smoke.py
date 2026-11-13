@@ -19,7 +19,7 @@ def test_wiki_titles() -> None:
         assert "https://slay-the-spire.fandom.com" in articles[enemy]
 
 
-@pytest.mark.parametrize("mode", ["agent", "probe", "setup_error"])
+@pytest.mark.parametrize("mode", ["agent", "beat_game", "probe", "setup_error"])
 def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) -> None:
     """Exercise setup, stock desktop/shell/Python tools and integer submission without a grader."""
     import inspect_ai.tool._tools._computer._common as computer_common
@@ -88,9 +88,20 @@ def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) ->
             ModelOutput.from_content("mockllm/model", "UNREACHABLE EXTRA TURN"),
         ],
     )
-    task = runtime_probe() if mode == "probe" else first_combat()
+    task = (
+        runtime_probe()
+        if mode == "probe"
+        else first_combat(
+            prompt_name="beat_game" if mode == "beat_game" else "first_combat"
+        )
+    )
     assert task.config.reasoning_effort == "max"
-    assert task.dataset[0].input == "play Slay the Spire for me"
+    expected_prompt = (
+        "Try to beat Slay the Spire on Ascension 20."
+        if mode == "beat_game"
+        else "play Slay the Spire for me"
+    )
+    assert task.dataset[0].input == expected_prompt
     task.sandbox = None
     log = inspect_eval(task, model=model, log_dir=str(tmp_path), display="none")[0]
     sample = log.samples[0]
@@ -105,6 +116,7 @@ def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) ->
         assert sb.actions == 1
         assert not log.stats.model_usage
         return
+    assert sample.input == expected_prompt
     assert sample.output.completion == "1"
     assert sb.actions == 1
     assert "UNREACHABLE EXTRA TURN" not in str(sample.messages)

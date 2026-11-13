@@ -42,10 +42,10 @@ def first_combat(
     selected = PROMPTS[prompt_name]
     slv = getattr(agent, DEFAULTS["solver"]["solver"].split("/")[-1])
     return Task(
-        name="sts_first_combat",
+        name=f"sts_{prompt_name}",
         dataset=[
             Sample(
-                id=f"{character.lower()}-a{ascension}-first-combat",
+                id=f"{character.lower()}-a{ascension}-{prompt_name.replace('_', '-')}",
                 input=selected.text.format(character=character, ascension=ascension),
             )
         ],
