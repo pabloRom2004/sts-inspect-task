@@ -9,6 +9,21 @@ from sts_hawk.task import first_combat, runtime_probe
 from sts_hawk.tools import submit_floor
 
 
+@pytest.mark.parametrize("action", ["wait", "hold_key"])
+@pytest.mark.parametrize("duration", ["0.5", "2"])
+def test_computer_duration_parser(action, duration) -> None:
+    """Accept fractional and whole-second durations through the backend CLI."""
+    import runpy
+
+    parse_arguments = runpy.run_path(ASSETS / "computer" / "_args.py")[
+        "parse_arguments"
+    ]
+    arguments = [action, "--duration", duration]
+    if action == "hold_key":
+        arguments += ["--text", "Shift_L"]
+    assert parse_arguments(arguments).duration == float(duration)
+
+
 def test_wiki_titles() -> None:
     """Require real enemy articles and source attribution in the copied wiki."""
     text = (ASSETS / "wiki.md").read_text()

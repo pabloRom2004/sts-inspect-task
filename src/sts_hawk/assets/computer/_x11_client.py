@@ -106,7 +106,7 @@ class X11Client:
     async def key(self, text: str) -> ToolResult:
         return await self._shell(f"{self.xdotool} key -- {_key_arg_for_text(text)}")
 
-    async def hold_key(self, text: str, duration: int) -> ToolResult:
+    async def hold_key(self, text: str, duration: float) -> ToolResult:
         key_arg = _key_arg_for_text(text)
         await self._shell(f"{self.xdotool} keydown -- {key_arg}", False)
         await asyncio.sleep(duration)
@@ -225,7 +225,7 @@ class X11Client:
                 f"{self.xdotool} click --repeat {scroll_amount} {scroll_button}"
             )
 
-    async def wait(self, duration: int) -> ToolResult:
+    async def wait(self, duration: float) -> ToolResult:
         await asyncio.sleep(duration)
         return await self.screenshot()
 

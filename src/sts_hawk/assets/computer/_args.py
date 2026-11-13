@@ -86,7 +86,7 @@ def _add_start_coordinate(subparser: ArgumentParser) -> Action:
 
 
 def _add_duration(subparser: ArgumentParser) -> Action:
-    return subparser.add_argument("--duration", type=int, required=True)
+    return subparser.add_argument("--duration", type=float, required=True)
 
 
 def _add_text(subparser: ArgumentParser, required: bool = True) -> Action:
