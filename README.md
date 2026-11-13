@@ -2,7 +2,7 @@
 
 This standalone Inspect AI task runs Slay the Spire on Generality Hawk with a normal ReAct agent. The task prompt is exactly:
 
-> play Slay the Spire for me
+> play Slay the Spire for me as Ironclad
 
 The agent has desktop, Bash and Python tools and can create files and run code in its sandbox. An offline wiki is available at `/opt/sts/wiki.md`; its location is included in the Bash tool description. There is no custom wiki tool or required lookup sequence.
 
@@ -19,7 +19,7 @@ inspect eval sts_hawk/first_combat --model openrouter/openai/gpt-6-luna \
   -M responses_api=true -M responses_store=false
 ```
 
-For the full-game A20 attempt, pass `-T prompt_name=beat_game`. Its complete prompt is “Try to beat Slay the Spire on Ascension 20.” The general tools and integer submission are unchanged. No first-combat stopping rule applies.
+For the full-game A20 attempt, pass `-T prompt_name=beat_game`. Its complete prompt is “Try to beat Slay the Spire on Ascension 20 as Ironclad.” The general tools and integer submission are unchanged. No first-combat stopping rule applies.
 
 Real model evaluations run on Hawk. Local validation uses mockllm. `sts_hawk/runtime_probe` performs the same installation and captures a screenshot without a model generation. These are separate checks: provider connectivity does not prove the game runs, and a runtime screenshot does not prove the agent can play.
 
@@ -27,7 +27,7 @@ Real model evaluations run on Hawk. Local validation uses mockllm. `sts_hawk/run
 
 `src/sts_hawk/run_configs/default.yaml` owns task, solver, generation and evaluation defaults. Copy it to change settings; native Inspect run-config and solver overrides remain available. Setup stays outside the replaceable solver. This is a new smoke task with no upstream implementation to reproduce, so there is no `original.yaml`.
 
-The default selects one sample and stock Inspect ReAct with `computer()` exposed as `desktop`, `bash()` and `python()`. Screenshot pruning is disabled on Hawk's pinned Inspect build: its old per-tool counter removes even the newest screenshot after any Bash/Python call. Inspect 0.3.289 fixes that counter, but Hawk currently pins the older version. Compaction is triggered at 787,500 tokens, following the user's 75% policy for Luna's verified 1,050,000-token context. Maximum response output is 128,000 tokens and reasoning effort is `max`. Model and billing-route selection belong to the Hawk launch configuration.
+The default selects one sample and stock Inspect ReAct with `computer()` exposed as `desktop`, `bash()` and `python()`. Only the latest desktop screenshot is sent to the model; the full screenshot history remains in the log. Hawk's pinned Inspect build has a per-tool count bug that otherwise drops the newest screenshot after Bash/Python calls. A version-scoped backport applies the upstream 0.3.289 fix. Keeping all screenshots was tested but hit the provider's 50-image request limit, so it is not the default. Compaction is triggered at 787,500 tokens, following the user's 75% policy for Luna's verified 1,050,000-token context. Maximum response output is 128,000 tokens and reasoning effort is `max`. Model and billing-route selection belong to the Hawk launch configuration.
 
 The computer tool is exposed as `desktop` using Inspect's `tool_with`; its actions and backend are unchanged. This keeps it as a function tool because Inspect's native OpenAI computer mode forces `store=true`, which OpenRouter's stateless Responses API rejects. Luna requires Responses for function calling with reasoning. Pass `responses_api: true` and `responses_store: false` in the Hawk model arguments too. The task supports Hawk’s pinned Inspect 0.3.286.dev10+g3a44082ca and newer releases. On that older Hawk build, include `agent-client-protocol==0.12.1` in runner packages: ACP 1.0 removed an import it needs. Inspect 0.3.289 fixes that upstream, but Hawk currently pins its framework version.
 
@@ -41,9 +41,9 @@ Sandbox resources live in `assets/compose.yaml`. Two CPUs and 4 GB are initial s
 
 ## Parameters
 
-`first_combat` accepts `character` (`IRONCLAD`), `ascension` (`20`), `prompt_name` (`first_combat`), `setup_timeout` (`900` seconds), `command_timeout` (`180` seconds) and `sandbox_image` (`ubuntu:24.04`). The `first_combat` entrypoint and sample labels are retained for compatibility. Character and ascension are requested-run labels; the minimal prompt does not instruct the model to select them, and no hidden controller starts a run. Verify the actual selection from screenshots. The prompt no longer imposes a first-combat stopping rule; bounded smoke tests must be stopped externally.
+`first_combat` accepts `character` (`IRONCLAD`), `ascension` (`20`), `prompt_name` (`first_combat`), `setup_timeout` (`900` seconds), `command_timeout` (`180` seconds) and `sandbox_image` (`ubuntu:24.04`). The `first_combat` entrypoint and sample labels are retained for compatibility. The character parameter is included in both prompts and defaults to Ironclad. The full-game prompt also includes ascension. No hidden controller starts a run. Verify the actual selection from screenshots. The prompt no longer imposes a first-combat stopping rule; bounded smoke tests must be stopped externally.
 
-The `visual_agent` solver accepts `max_screenshots` (`null`), `tool_timeout` (`180` seconds) and `compaction_threshold` (`787500` tokens). The offline wiki file contains 750 pages with original article text and source URLs. See `THIRD_PARTY.md` for attribution. The vendored computer backend retains Inspect's MIT license. A small local availability check makes its browser actions return a recoverable tool error when Firefox ESR is absent, rather than timing out and aborting the sample.
+The `visual_agent` solver accepts `max_screenshots` (`1`), `tool_timeout` (`180` seconds) and `compaction_threshold` (`787500` tokens). The offline wiki file contains 750 pages with original article text and source URLs. See `THIRD_PARTY.md` for attribution. The vendored computer backend retains Inspect's MIT license. A small local availability check makes its browser actions return a recoverable tool error when Firefox ESR is absent, rather than timing out and aborting the sample.
 
 ## Submission and logs
 

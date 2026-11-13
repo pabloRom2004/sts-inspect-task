@@ -97,9 +97,9 @@ def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) ->
     )
     assert task.config.reasoning_effort == "max"
     expected_prompt = (
-        "Try to beat Slay the Spire on Ascension 20."
+        "Try to beat Slay the Spire on Ascension 20 as Ironclad."
         if mode == "beat_game"
-        else "play Slay the Spire for me"
+        else "play Slay the Spire for me as Ironclad"
     )
     assert task.dataset[0].input == expected_prompt
     task.sandbox = None
@@ -179,7 +179,10 @@ async def test_stateless_responses_request(monkeypatch) -> None:
     )
     from inspect_ai.tool import ToolCall, bash, computer, python, tool_with
 
+    from sts_hawk.agent import visual_agent
     from sts_hawk.run_config import default_run_config
+
+    visual_agent()
 
     class RequestCaptured(BaseException):
         """Stop immediately before the SDK would send a request."""
@@ -203,11 +206,23 @@ async def test_stateless_responses_request(monkeypatch) -> None:
             image="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jfLQAAAAASUVORK5CYII="
         )
         messages = [ChatMessageUser(content="Inspect the screen and wiki.")]
-        for call_id, function, arguments, content in [
+        sequence = [
             ("c1", "desktop", {"action": "screenshot"}, [image]),
             ("c2", "bash", {"command": "cat /opt/sts/wiki.md"}, "wiki text"),
             ("c3", "desktop", {"action": "screenshot"}, [image]),
-        ]:
+        ]
+        sequence += [
+            (f"desktop-{i}", "desktop", {"action": "screenshot"}, [image])
+            for i in range(60)
+        ]
+        sequence[-1] = (
+            "latest-desktop",
+            "desktop",
+            {"action": "screenshot"},
+            [image.model_copy(update={"detail": "high"})],
+        )
+        sequence += [("python-last", "python", {"code": "print(1)"}, "1")]
+        for call_id, function, arguments, content in sequence:
             messages.extend(
                 [
                     ChatMessageAssistant(
@@ -245,7 +260,24 @@ async def test_stateless_responses_request(monkeypatch) -> None:
             for block in item.get("content", [])
             if isinstance(block, dict)
         )
-        == 2
+        == 1
+    )
+    retained = [
+        block
+        for item in captured["input"]
+        for block in item.get("content", [])
+        if isinstance(block, dict) and block.get("type") == "input_image"
+    ]
+    assert retained[0]["detail"] == "high"
+    # Request pruning must preserve the original replay images.
+    assert (
+        sum(
+            block.type == "image"
+            for msg in messages
+            if isinstance(msg.content, list)
+            for block in msg.content
+        )
+        == 62
     )
     assert captured["store"] is False
     assert captured["reasoning"]["effort"] == "max"

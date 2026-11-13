@@ -46,7 +46,9 @@ def first_combat(
         dataset=[
             Sample(
                 id=f"{character.lower()}-a{ascension}-{prompt_name.replace('_', '-')}",
-                input=selected.text.format(character=character, ascension=ascension),
+                input=selected.text.format(
+                    character=character.title(), ascension=ascension
+                ),
             )
         ],
         setup=prepare_game(setup_timeout, command_timeout),
