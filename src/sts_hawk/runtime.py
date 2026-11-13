@@ -34,6 +34,7 @@ def prepare_game(setup_timeout: int, command_timeout: int) -> Solver:
         await sandbox().write_file("/opt/sts/asset-url", os.environ["STS_ASSET_URL"])
         for name in ["install.sh", "start.sh"]:
             await sandbox().write_file(f"/opt/sts/{name}", (ASSETS / name).read_text())
+        await sandbox().write_file("/opt/sts/wiki.md", (ASSETS / "wiki.md").read_text())
         for source in (ASSETS / "computer").glob("*.py"):
             await sandbox().write_file(
                 f"/opt/inspect/tool/{source.name}", source.read_text()

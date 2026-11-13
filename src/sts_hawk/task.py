@@ -38,7 +38,7 @@ def first_combat(
     command_timeout: int = ARGS["command_timeout"],
     sandbox_image: str = ARGS["sandbox_image"],
 ) -> Task:
-    """Compose one visual A20 first-combat sample using the local wiki."""
+    """Compose a minimal Slay the Spire agent task with an offline wiki."""
     selected = PROMPTS[prompt_name]
     slv = getattr(agent, DEFAULTS["solver"]["solver"].split("/")[-1])
     return Task(
@@ -55,12 +55,12 @@ def first_combat(
         config=GenerateConfig(**DEFAULTS["generate_config"]),
         **DEFAULTS["eval_config"],
         metadata={
-            "purpose": "One-combat infrastructure smoke, not a SpireClimb score",
+            "purpose": "Minimal gameplay task, not a SpireClimb score",
             "prompt_origin": selected.origin_note,
             "wiki": "User-provided offline Fandom scrape (750 pages)",
-            "model_visible": "Stock Inspect computer screenshots/actions as desktop, local wiki, submit",
-            "grading": "Unscored smoke; verify first-combat success from screenshots",
-            "differences_from_epoch": "Offline wiki; first combat only; new prompt; 75% context compaction; no grader",
+            "model_visible": "Stock desktop, bash and python tools; wiki at /opt/sts/wiki.md; submit",
+            "grading": "Unscored; verify gameplay and self-reported floor manually",
+            "differences_from_epoch": "Offline wiki file; general shell/Python access; user-requested minimal prompt; 75% context compaction; no grader",
         },
     )
 
