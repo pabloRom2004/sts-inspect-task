@@ -4,9 +4,9 @@ build-backend = "hatchling.build"
 
 [project]
 name = "sts-hawk-smoke"
-version = "0.2.14"
+version = "0.2.15"
 requires-python = ">=3.12"
-dependencies = ["inspect-ai>=0.3.286.dev10,<0.4", "openai>=3.3.1,<4", "PyYAML>=6", "pydantic>=2"]
+dependencies = ["inspect-ai>=0.3.286.dev10,<0.4", "openai>=3.3.1,<4", "PyYAML>=6", "pydantic>=2", "jsonschema>=4"]
 
 [project.optional-dependencies]
 dev = ["pytest", "pytest-asyncio", "ruff", "inspect-k8s-sandbox==0.14.0", "ruamel.yaml"]

@@ -48,6 +48,13 @@ def main():
             )
         )
         my_logger.debug("SUCCESS")
+    except TimeoutError as e:
+        message = (
+            f"Desktop action timed out: {e}. Some input may already have taken effect; "
+            "take a screenshot before retrying."
+        )
+        my_logger.warning(message)
+        print(json.dumps({"output": None, "error": message, "base64_image": None}))
     except (ArgumentError, ComputerToolError, X11CoordinateError) as e:
         # exit 0 with an `error` so the host raises a ToolError the model can retry
         my_logger.warning(f"Invalid computer action: {e}")

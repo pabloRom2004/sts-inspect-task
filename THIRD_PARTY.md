@@ -23,4 +23,8 @@ Local modification: duration arguments accept fractional seconds for waiting and
 
 Local modification: parser and explicit action-input errors return the backend's JSON error response, which stock Inspect exposes to the model as a recoverable `ToolError`. Durations must be finite and non-negative. Unexpected backend failures retain their nonzero exit status.
 
+Local modification: backend command timeouts return the same recoverable error response with guidance to inspect the screen before retrying. `_run.py` starts a separate process group and kills that group on timeout, avoiding a surviving child command after its shell is terminated.
+
+`src/sts_hawk/desktop.py` wraps the stock host-side tool with batch input validation. This catches malformed nested fields before stock helpers can raise uncaught Python exceptions. It retains the stock tool schema and model-input screenshot handler.
+
 `src/sts_hawk/inspect_compat.py` backports `resolve_tool_model_input` from Inspect AI 0.3.289 (upstream commit `099d83a`, `src/inspect_ai/model/_model.py`). It corrects the per-tool message count only on Hawk's exact 0.3.286.dev10+g3a44082ca build. The upstream MIT license is retained at `src/sts_hawk/assets/computer/LICENSE`.

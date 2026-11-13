@@ -87,3 +87,39 @@ def test_unexpected_backend_failure_remains_fatal(backend_main, monkeypatch, cap
     assert caught.value.code == 1
     captured = capsys.readouterr()
     assert not captured.out and "display connection lost" in captured.err
+
+
+def test_backend_timeout_returns_recovery_guidance(backend_main, monkeypatch, capsys):
+    """Report action timeouts without promising that input had no side effects."""
+    monkeypatch.setattr(sys, "argv", ["computer_tool", "screenshot"])
+
+    async def stalled_action(args):
+        """Simulate a command exceeding the backend's deadline."""
+        raise TimeoutError("command exceeded deadline")
+
+    monkeypatch.setitem(backend_main.__globals__, "execute_action", stalled_action)
+    backend_main()
+    error = json.loads(capsys.readouterr().out)["error"]
+    assert "timed out" in error and "take a screenshot before retrying" in error
+
+
+@pytest.mark.asyncio
+async def test_timeout_kills_child_commands(tmp_path):
+    """A timed-out shell must not leave its action subprocess running afterward."""
+    import asyncio
+    import shlex
+
+    run = runpy.run_path(ASSETS / "computer" / "_run.py")["run"]
+    started = tmp_path / "started"
+    leaked = tmp_path / "leaked"
+    code = (
+        "from pathlib import Path; import time; "
+        f"Path({str(started)!r}).touch(); time.sleep(0.5); "
+        f"Path({str(leaked)!r}).touch()"
+    )
+    command = f"{shlex.quote(sys.executable)} -c {shlex.quote(code)}; true"
+    with pytest.raises(TimeoutError, match="timed out"):
+        await run(command, timeout=0.2)
+    assert started.exists(), "The action must start before testing its cleanup"
+    await asyncio.sleep(0.5)
+    assert not leaked.exists()

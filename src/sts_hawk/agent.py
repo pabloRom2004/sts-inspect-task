@@ -1,8 +1,9 @@
 from inspect_ai.agent import AgentSubmit, as_solver, react
 from inspect_ai.solver import Solver, solver
-from inspect_ai.tool import ToolDef, bash, computer, python, tool_with
+from inspect_ai.tool import ToolDef, bash, python, tool_with
 
 from sts_hawk.compaction import ScreenshotCompaction
+from sts_hawk.desktop import desktop_tool
 from sts_hawk.inspect_compat import apply_hawk_image_counter_fix
 from sts_hawk.run_config import default_run_config
 from sts_hawk.tools import submit_floor
@@ -19,10 +20,7 @@ def visual_agent(
     """Use stock ReAct with desktop, shell and Python tools."""
     apply_hawk_image_counter_fix()
     # Keep function calling on stateless Responses API providers.
-    desktop = tool_with(
-        computer(max_screenshots=max_screenshots, timeout=tool_timeout),
-        name="desktop",
-    )
+    desktop = desktop_tool(max_screenshots=max_screenshots, timeout=tool_timeout)
     shell = bash(timeout=tool_timeout)
     shell = tool_with(
         shell,

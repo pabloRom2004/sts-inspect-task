@@ -195,9 +195,10 @@ async def test_stateless_responses_request(monkeypatch) -> None:
         ContentImage,
         GenerateConfig,
     )
-    from inspect_ai.tool import ToolCall, bash, computer, python, tool_with
+    from inspect_ai.tool import ToolCall, bash, python
 
     from sts_hawk.agent import visual_agent
+    from sts_hawk.desktop import desktop_tool
     from sts_hawk.run_config import default_run_config
 
     visual_agent()
@@ -257,13 +258,11 @@ async def test_stateless_responses_request(monkeypatch) -> None:
         await model.generate(
             messages,
             tools=[
-                tool_with(
-                    computer(
-                        max_screenshots=default_run_config()["solver"]["args"][
-                            "max_screenshots"
-                        ]
-                    ),
-                    name="desktop",
+                desktop_tool(
+                    max_screenshots=default_run_config()["solver"]["args"][
+                        "max_screenshots"
+                    ],
+                    timeout=180,
                 ),
                 bash(),
                 python(),
@@ -330,9 +329,9 @@ async def test_missing_browser_is_recoverable(monkeypatch, action) -> None:
 async def test_compaction_prunes_images_and_preserves_replay(monkeypatch, fallback):
     """Keep three screenshots on native and summary paths with a long replay."""
     from inspect_ai.model import ChatMessageTool, ChatMessageUser, ContentImage
-    from inspect_ai.tool import computer, tool_with
 
     from sts_hawk.compaction import ScreenshotCompaction
+    from sts_hawk.desktop import desktop_tool
     from sts_hawk.inspect_compat import apply_hawk_image_counter_fix
 
     apply_hawk_image_counter_fix()
@@ -375,7 +374,7 @@ async def test_compaction_prunes_images_and_preserves_replay(monkeypatch, fallba
     monkeypatch.setattr(model, "compact", native)
     monkeypatch.setattr(model, "generate", generate)
     strategy = ScreenshotCompaction(
-        tool_with(computer(max_screenshots=3), name="desktop"), threshold=787500
+        desktop_tool(max_screenshots=3, timeout=180), threshold=787500
     )
     await strategy.compact_outcome(model, messages, [])
     assert len(captured) == (2 if fallback else 1)
