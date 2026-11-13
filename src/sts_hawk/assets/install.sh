@@ -11,7 +11,8 @@ mkdir -p /game
 curl --fail --location --retry 2 --max-time 300 --silent --show-error \
     "$(cat /opt/sts/asset-url)" -o /tmp/sts-runtime.tar
 rm /opt/sts/asset-url
-tar -xf /tmp/sts-runtime.tar -C /game
+# macOS resource-fork files look like extra JARs to the mod loader on Linux.
+tar --exclude='._*' --exclude='*/._*' -xf /tmp/sts-runtime.tar -C /game
 rm /tmp/sts-runtime.tar
 mkdir -p /game/jre/bin /root/.steam/steam/steamapps/common/SlayTheSpire \
     /root/.steam/steam/steamapps/workshop/content/646570 /root/.config/ModTheSpire
