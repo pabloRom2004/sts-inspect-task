@@ -1,7 +1,7 @@
 from inspect_ai.agent import AgentSubmit, as_solver, react
 from inspect_ai.model import CompactionAuto
 from inspect_ai.solver import Solver, solver
-from inspect_ai.tool import computer
+from inspect_ai.tool import computer, tool_with
 
 from sts_hawk.run_config import default_run_config
 from sts_hawk.tools import submit_floor, wiki
@@ -19,7 +19,11 @@ def visual_agent(
     return as_solver(
         react(
             tools=[
-                computer(max_screenshots=max_screenshots, timeout=tool_timeout),
+                # Keep function calling on stateless Responses API providers.
+                tool_with(
+                    computer(max_screenshots=max_screenshots, timeout=tool_timeout),
+                    name="desktop",
+                ),
                 wiki(),
             ],
             submit=AgentSubmit(

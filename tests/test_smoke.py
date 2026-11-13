@@ -63,7 +63,7 @@ def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) ->
         "mockllm/model",
         custom_outputs=[
             ModelOutput.for_tool_call(
-                "mockllm/model", "computer", {"action": "screenshot"}
+                "mockllm/model", "desktop", {"action": "screenshot"}
             ),
             ModelOutput.for_tool_call("mockllm/model", "wiki", {"query": "Jaw Worm"}),
             ModelOutput.for_tool_call("mockllm/model", "submit", {"max_floor": 1.5}),
@@ -131,3 +131,43 @@ def test_hawk_compose_conversion(tmp_path) -> None:
     container = stateful_set["spec"]["template"]["spec"]["containers"][0]
     assert container["command"] == ["bash", "-lc"]
     assert "/tmp/sts-runtime-ready" in container["args"][0]
+
+
+@pytest.mark.asyncio
+async def test_stateless_responses_request(monkeypatch) -> None:
+    """Serialize the real computer schema without native tools or API storage."""
+    from inspect_ai.model import GenerateConfig
+    from inspect_ai.tool import computer, tool_with
+
+    from sts_hawk.tools import wiki
+
+    class RequestCaptured(BaseException):
+        """Stop immediately before the SDK would send a request."""
+
+    model = get_model(
+        "openrouter/openai/gpt-6-luna",
+        api_key="local-test-placeholder",
+        responses_api=True,
+        responses_store=False,
+    )
+    captured = {}
+
+    async def capture_request(**kwargs):
+        """Capture the completed provider payload without network access."""
+        captured.update(kwargs)
+        raise RequestCaptured
+
+    monkeypatch.setattr(model.api.client.responses, "create", capture_request)
+    with pytest.raises(RequestCaptured):
+        await model.generate(
+            "Take a screenshot.",
+            tools=[tool_with(computer(), name="desktop"), wiki(), submit_floor()],
+            config=GenerateConfig(reasoning_effort="max", max_tokens=128000),
+        )
+    assert captured["store"] is False
+    assert captured["reasoning"]["effort"] == "max"
+    assert captured["max_output_tokens"] == 128000
+    assert all(tool["type"] == "function" for tool in captured["tools"])
+    desktop = next(tool for tool in captured["tools"] if tool["name"] == "desktop")
+    assert desktop["strict"] is False
+    assert "coordinate" in desktop["parameters"]["properties"]

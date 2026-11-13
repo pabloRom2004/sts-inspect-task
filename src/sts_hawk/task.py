@@ -58,7 +58,7 @@ def first_combat(
             "purpose": "One-combat infrastructure smoke, not a SpireClimb score",
             "prompt_origin": selected.origin_note,
             "wiki": "User-provided offline Fandom scrape (750 pages)",
-            "model_visible": "Stock Inspect computer screenshots/actions, local wiki, submit",
+            "model_visible": "Stock Inspect computer screenshots/actions as desktop, local wiki, submit",
             "grading": "Unscored smoke; verify first-combat success from screenshots",
             "differences_from_epoch": "Offline wiki; first combat only; new prompt; 75% context compaction; no grader",
         },

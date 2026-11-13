@@ -11,7 +11,8 @@ Install the package with `pip install .`. Supply a licensed Linux game and the m
 On the intended Linux infrastructure:
 
 ```bash
-inspect eval sts_hawk/first_combat --model openrouter/openai/gpt-6-luna
+inspect eval sts_hawk/first_combat --model openrouter/openai/gpt-6-luna \
+  -M responses_api=true -M responses_store=false
 ```
 
 Real model evaluations run on Hawk. Local validation uses mockllm. `sts_hawk/runtime_probe` performs the same installation and captures a screenshot without a model generation. These are separate checks: provider connectivity does not prove the game runs, and a runtime screenshot does not prove the agent can play.
@@ -21,6 +22,8 @@ Real model evaluations run on Hawk. Local validation uses mockllm. `sts_hawk/run
 `src/sts_hawk/run_configs/default.yaml` owns task, solver, generation and evaluation defaults. Copy it to change settings; native Inspect run-config and solver overrides remain available. Setup stays outside the replaceable solver. This is a new smoke task with no upstream implementation to reproduce, so there is no `original.yaml`.
 
 The default selects one Ironclad A20 sample, stock Inspect ReAct and `computer()`, and the offline `wiki` tool. It retains one screenshot in context. Compaction is triggered at 787,500 tokens, following the user's 75% policy for Luna's verified 1,050,000-token context. Maximum response output is 128,000 tokens and reasoning effort is `max`. Model and billing-route selection belong to the Hawk launch configuration.
+
+The computer tool is exposed as `desktop` using Inspect's `tool_with`; its actions and backend are unchanged. This keeps it as a function tool because Inspect's native OpenAI computer mode forces `store=true`, which OpenRouter's stateless Responses API rejects. Luna requires Responses for function calling with reasoning. Pass `responses_api: true` and `responses_store: false` in the Hawk model arguments too. The supported Inspect version is at least 0.3.289.
 
 Differences from Epoch's full benchmark include first-combat scope, a new prompt, an offline Fandom wiki, the 75% compaction policy and no automated grading. No seed list or A20 Heart completion benchmark is implemented.
 
@@ -45,3 +48,5 @@ Hawk's live viewer shows actions and screenshots when `log_realtime` is enabled.
 ## Validation
 
 Run `pytest tests`, `ruff check .` and `ruff format --check .`. Tests exercise the actual task setup, stock computer parser, wiki tool, invalid and valid integer submissions, unscored completion, and setup-error propagation through mockllm. They also exercise the real Hawk Compose-to-Kubernetes conversion. External execution is simulated in local tests; the separate Linux runtime probe must establish actual game startup before the paid gameplay smoke.
+
+Validate the real Docker runtime and tools locally with mockllm before launching on Hawk. Keep local containers bounded at two CPUs and 4 GB, reuse cached OS layers, mount the private archive read-only for installation, and remove the test containers afterwards. A scripted menu click and wiki read verify integration, not model playing ability.
