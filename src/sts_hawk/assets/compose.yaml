@@ -2,7 +2,10 @@ services:
   default:
     image: ubuntu:24.04
     platform: linux/amd64
-    command: [sleep, infinity]
+    command:
+      - bash
+      - -lc
+      - while [ ! -f /tmp/sts-runtime-ready ]; do sleep 1; done; exec bash /opt/sts/start.sh
     environment:
       DISPLAY_NUM: '99'
       WIDTH: '1280'

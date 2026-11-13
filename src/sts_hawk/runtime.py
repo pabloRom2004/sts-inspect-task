@@ -67,11 +67,7 @@ def prepare_game(
         await checked_exec(["bash", "/opt/sts/install.sh"], setup_timeout)
         logger.info("Runtime installed; launching the Java game and X display")
         await checked_exec(
-            [
-                "bash",
-                "-lc",
-                "nohup bash /opt/sts/start.sh >/tmp/sts-startup.log 2>&1 </dev/null &",
-            ],
+            ["touch", "/tmp/sts-runtime-ready"],
             observer_timeout,
         )
         polls = 0
