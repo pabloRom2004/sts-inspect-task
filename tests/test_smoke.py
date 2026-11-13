@@ -169,3 +169,56 @@ def test_hawk_compose_conversion(tmp_path) -> None:
         yaml.dump(data, stream)
     result = convert_compose_to_helm_values(sanitized)
     assert result["services"]["default"]["image"] == "ubuntu:24.04"
+
+
+def test_observer_pipe_handshake_and_fresh_state(tmp_path) -> None:
+    """Exercise the real observer process and Unix socket against a game-protocol fixture."""
+    import select
+    import subprocess
+    import sys
+    import time
+    import uuid
+    from pathlib import Path
+
+    from sts_hawk import runtime
+
+    script = Path(runtime.__file__).parent / "assets/observer.py"
+    address = "/tmp/sts-observer-" + uuid.uuid4().hex + ".sock"
+    loader = (
+        "import runpy; d=runpy.run_path(" + repr(str(script)) + "); "
+        "d['Observer'].run.__globals__['SOCKET']=" + repr(address) + "; "
+    )
+    server = subprocess.Popen(
+        [sys.executable, "-c", loader + "d['Observer']().run()"],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        bufsize=1,
+    )
+    try:
+        assert select.select([server.stdout], [], [], 5)[0]
+        assert server.stdout.readline().strip() == "ready"
+        server.stdin.write(json.dumps({"in_game": False}) + "\n")
+        server.stdin.flush()
+        deadline = time.monotonic() + 5
+        while not Path(address).exists():
+            assert time.monotonic() < deadline
+            time.sleep(0.01)
+        client = subprocess.Popen(
+            [sys.executable, "-c", loader + "d['client']('STATE')"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        assert select.select([server.stdout], [], [], 5)[0]
+        assert server.stdout.readline().strip() == "STATE"
+        server.stdin.write(json.dumps(combat()) + "\n")
+        server.stdin.flush()
+        output, error = client.communicate(timeout=5)
+        assert client.returncode == 0, error
+        assert json.loads(output)["game_state"]["floor"] == 1
+    finally:
+        server.terminate()
+        server.communicate(timeout=5)
+        Path(address).unlink(missing_ok=True)
