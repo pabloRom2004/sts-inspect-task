@@ -72,6 +72,7 @@ def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) ->
         ],
     )
     task = runtime_probe() if mode == "probe" else first_combat()
+    assert task.config.reasoning_effort == "max"
     task.sandbox = None
     log = inspect_eval(task, model=model, log_dir=str(tmp_path), display="none")[0]
     sample = log.samples[0]
