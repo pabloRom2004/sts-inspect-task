@@ -53,6 +53,8 @@ Sandbox resources live in `assets/compose.yaml`. Two CPUs and 4 GB are initial s
 
 The `visual_agent` solver accepts `max_screenshots` (`3`), `tool_timeout` (`180` seconds) and `compaction_threshold` (`787500` tokens). The offline wiki file contains 750 pages with original article text and source URLs. See `THIRD_PARTY.md` for attribution. The vendored computer backend retains Inspect's MIT license. A small local availability check makes its browser actions return a recoverable tool error when Firefox ESR is absent, rather than timing out and aborting the sample.
 
+Desktop argument-parsing failures are returned to the model as recoverable tool errors so it can correct the action. Batched waits accept fractional seconds; negative and non-finite durations are rejected. Unexpected backend failures still surface as evaluation errors.
+
 ## Submission and logs
 
 The agent finishes with `submit(max_floor: int)`. Inspect stores the integer as the final completion and retains the tool call. This is an unverified self-report. The user checks screenshots to determine gameplay progress and whether the floor report is accurate. Ordinary shell/Python calls are recorded in the transcript. There is no grader or aggregate score.

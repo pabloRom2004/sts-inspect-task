@@ -1,13 +1,30 @@
-from argparse import Action, ArgumentParser, Namespace
+import math
+from argparse import (
+    Action,
+    ArgumentError,
+    ArgumentParser,
+    ArgumentTypeError,
+    Namespace,
+)
 from typing import Sequence
 
 
+class ComputerArgumentParser(ArgumentParser):
+    """Report invalid action arguments without terminating the backend process."""
+
+    def error(self, message: str) -> None:
+        """Raise a recoverable argument error for both root and action parsers."""
+        raise ArgumentError(None, message)
+
+
 def parse_arguments(args: Sequence[str] | None = None) -> Namespace:
+    """Parse an action or raise an argument error that can be returned to the model."""
     return _create_parser().parse_args(args)
 
 
 def _create_parser() -> ArgumentParser:
-    parser = ArgumentParser(prog="computer_tool")
+    """Build the desktop action parser with recoverable input validation."""
+    parser = ComputerArgumentParser(prog="computer_tool")
     subparsers = parser.add_subparsers(dest="action", required=True)
 
     # these take no additional arguments
@@ -86,7 +103,20 @@ def _add_start_coordinate(subparser: ArgumentParser) -> Action:
 
 
 def _add_duration(subparser: ArgumentParser) -> Action:
-    return subparser.add_argument("--duration", type=float, required=True)
+    """Accept a finite, non-negative duration in fractional or whole seconds."""
+    return subparser.add_argument("--duration", type=_duration, required=True)
+
+
+def _duration(value: str) -> float:
+    """Reject durations that cannot represent a bounded wait."""
+    message = "duration must be a finite, non-negative number of seconds"
+    try:
+        duration = float(value)
+    except ValueError as error:
+        raise ArgumentTypeError(message) from error
+    if not math.isfinite(duration) or duration < 0:
+        raise ArgumentTypeError(message)
+    return duration
 
 
 def _add_text(subparser: ArgumentParser, required: bool = True) -> Action:

@@ -4,7 +4,7 @@ import logging
 import os
 import sys
 import time
-from argparse import Namespace
+from argparse import ArgumentError, Namespace
 from typing import TypeVar
 
 from _args import parse_arguments
@@ -32,6 +32,7 @@ my_logger = setup_logger(logging.INFO)
 
 
 def main():
+    """Return correctable input errors through the desktop tool's JSON protocol."""
     try:
         args = parse_arguments()
         my_logger.info(f"({args})")
@@ -47,9 +48,9 @@ def main():
             )
         )
         my_logger.debug("SUCCESS")
-    except X11CoordinateError as e:
+    except (ArgumentError, ComputerToolError, X11CoordinateError) as e:
         # exit 0 with an `error` so the host raises a ToolError the model can retry
-        my_logger.warning(f"Invalid coordinate: {e}")
+        my_logger.warning(f"Invalid computer action: {e}")
         print(json.dumps({"output": None, "error": str(e), "base64_image": None}))
     except Exception as e:
         my_logger.warning(f"An error occurred: {e}")
