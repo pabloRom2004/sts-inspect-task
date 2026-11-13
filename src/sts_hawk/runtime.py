@@ -74,6 +74,8 @@ def prepare_game(
             ],
             observer_timeout,
         )
+        polls = 0
+        previous_diagnostics = ""
         async with asyncio.timeout(setup_timeout):
             while True:
                 ready = await sandbox().exec(
@@ -85,10 +87,30 @@ def prepare_game(
                     ["test", "-f", "/tmp/sts-failed"], timeout=observer_timeout
                 )
                 if failed.success:
-                    diagnostics = await checked_exec(
-                        ["tail", "-60", "/tmp/game.log"], observer_timeout
+                    diagnostic = await sandbox().exec(
+                        [
+                            "bash",
+                            "-lc",
+                            "tail -60 /tmp/sts-startup.log /tmp/game.log 2>/dev/null",
+                        ],
+                        timeout=observer_timeout,
                     )
-                    raise RuntimeError(f"Game exited during startup: {diagnostics}")
+                    raise RuntimeError(
+                        f"Game exited during startup: {diagnostic.stdout}"
+                    )
+                polls += 1
+                if polls % 10 == 0:
+                    diagnostic = await sandbox().exec(
+                        [
+                            "bash",
+                            "-lc",
+                            "tail -12 /tmp/sts-startup.log /tmp/game.log 2>/dev/null",
+                        ],
+                        timeout=observer_timeout,
+                    )
+                    if diagnostic.stdout != previous_diagnostics:
+                        logger.info("Game startup progress:\n%s", diagnostic.stdout)
+                        previous_diagnostics = diagnostic.stdout
                 await asyncio.sleep(1)
         logger.info("Game observer is ready; starting the seeded A20 run")
         started = await game_command(
