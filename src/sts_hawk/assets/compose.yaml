@@ -12,3 +12,8 @@ services:
         limits:
           cpus: '2'
           memory: 4G
+x-inspect_k8s_sandbox:
+  allow_domains:
+    - archive.ubuntu.com
+    - security.ubuntu.com
+    - release-assets.githubusercontent.com

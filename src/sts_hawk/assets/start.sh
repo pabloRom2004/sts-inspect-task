@@ -11,6 +11,7 @@ for attempt in $(seq 1 60); do
     sleep 0.25
 done
 xdpyinfo >/dev/null
+touch /tmp/xfce_started
 cd /game
 printf '1280\n720\n60\nfalse\nfalse\ntrue\n' > info.displayconfig
 python3 - <<'PY'
