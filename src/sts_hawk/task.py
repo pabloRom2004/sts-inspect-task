@@ -12,7 +12,7 @@ from inspect_ai.tool import computer
 from sts_hawk import agent
 from sts_hawk.prompts import PROMPTS
 from sts_hawk.run_config import default_run_config
-from sts_hawk.runtime import prepare_game
+from sts_hawk.runtime import checked_exec, logger, prepare_game
 
 DEFAULTS = default_run_config()
 ARGS = DEFAULTS["task"]["args"]
@@ -71,11 +71,28 @@ def capture_runtime() -> Solver:
 
     async def solve(state: TaskState, generate: Generate) -> TaskState:
         """Exercise the installed stock computer tool before the real model smoke."""
-        state.messages.append(
-            ChatMessageUser(
-                content=await computer(timeout=180)(action="wait", duration=15)
+        try:
+            state.messages.append(
+                ChatMessageUser(
+                    content=await computer(timeout=180)(action="wait", duration=15)
+                )
             )
-        )
+        finally:
+            logger.info(
+                "Runtime diagnostics:\n%s",
+                await checked_exec(
+                    [
+                        "bash",
+                        "-lc",
+                        (
+                            "printf 'PID 1: '; tr '\\0' ' ' < /proc/1/cmdline; "
+                            "printf '\\n'; tail -30 /tmp/sts-startup.log /tmp/game.log "
+                            "/tmp/xvnc.log 2>/dev/null || true"
+                        ),
+                    ],
+                    180,
+                ),
+            )
         return state
 
     return solve

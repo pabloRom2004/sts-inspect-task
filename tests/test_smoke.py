@@ -5,7 +5,7 @@ from inspect_ai.tool import ToolDef
 from inspect_ai.util import ExecResult, Store
 
 from sts_hawk.state import WikiHistory
-from sts_hawk.task import first_combat
+from sts_hawk.task import first_combat, runtime_probe
 from sts_hawk.tools import submit_floor, wiki_articles
 
 
@@ -18,10 +18,8 @@ def test_wiki_titles() -> None:
         assert "https://slay-the-spire.fandom.com" in articles[enemy]
 
 
-@pytest.mark.parametrize("setup_ok", [True, False])
-def test_real_setup_react_and_integer_submission(
-    monkeypatch, tmp_path, setup_ok
-) -> None:
+@pytest.mark.parametrize("mode", ["agent", "probe", "setup_error"])
+def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) -> None:
     """Exercise setup, stock computer parsing, wiki and integer submission without a grader."""
     import inspect_ai.tool._tools._computer._common as computer_common
 
@@ -43,7 +41,7 @@ def test_real_setup_react_and_integer_submission(
         async def exec(self, command, **kwargs):
             """Return setup status or a stock computer-tool JSON response."""
             self.commands.append(command)
-            if command == ["bash", "/opt/sts/install.sh"] and not setup_ok:
+            if command == ["bash", "/opt/sts/install.sh"] and mode == "setup_error":
                 return ExecResult(False, 1, "", "fixture installation failed")
             if command[:2] == ["python3", "/opt/inspect/tool/computer_tool.py"]:
                 self.actions += 1
@@ -73,17 +71,21 @@ def test_real_setup_react_and_integer_submission(
             ModelOutput.from_content("mockllm/model", "UNREACHABLE EXTRA TURN"),
         ],
     )
-    task = first_combat()
+    task = runtime_probe() if mode == "probe" else first_combat()
     task.sandbox = None
     log = inspect_eval(task, model=model, log_dir=str(tmp_path), display="none")[0]
     sample = log.samples[0]
     assert not sample.scores
-    if not setup_ok:
+    if mode == "setup_error":
         assert log.status == "error"
         assert "fixture installation failed" in sample.error.message
         assert sb.actions == 0
         return
     assert log.status == "success"
+    if mode == "probe":
+        assert sb.actions == 1
+        assert not log.stats.model_usage
+        return
     assert sample.output.completion == "1"
     assert sb.actions == 1
     assert "UNREACHABLE EXTRA TURN" not in str(sample.messages)
@@ -98,9 +100,11 @@ def test_real_setup_react_and_integer_submission(
 
 def test_hawk_compose_conversion(tmp_path) -> None:
     """Reproduce Hawk's ruamel-to-PyYAML path using the real K8s converter."""
+    import subprocess
     from pathlib import Path
 
     import ruamel.yaml
+    from k8s_sandbox._helm import DEFAULT_CHART
     from k8s_sandbox.compose import convert_compose_to_helm_values
 
     original = Path(first_combat().sandbox.config)
@@ -112,3 +116,18 @@ def test_hawk_compose_conversion(tmp_path) -> None:
         yaml.dump(data, stream)
     result = convert_compose_to_helm_values(sanitized)
     assert result["services"]["default"]["image"] == "ubuntu:24.04"
+    assert result["services"]["default"]["command"] == ["bash", "-lc"]
+    values = tmp_path / "values.yaml"
+    with values.open("w") as stream:
+        yaml.dump(result, stream)
+    rendered = subprocess.run(
+        ["helm", "template", "sts-probe", str(DEFAULT_CHART), "-f", str(values)],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    manifests = yaml.load_all(rendered.stdout)
+    stateful_set = next(doc for doc in manifests if doc["kind"] == "StatefulSet")
+    container = stateful_set["spec"]["template"]["spec"]["containers"][0]
+    assert container["command"] == ["bash", "-lc"]
+    assert "/tmp/sts-runtime-ready" in container["args"][0]

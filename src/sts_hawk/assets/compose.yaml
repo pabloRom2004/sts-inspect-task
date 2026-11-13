@@ -2,9 +2,10 @@ services:
   default:
     image: ubuntu:24.04
     platform: linux/amd64
-    command:
+    entrypoint:
       - bash
       - -lc
+    command:
       - while [ ! -f /tmp/sts-runtime-ready ]; do sleep 1; done; exec bash /opt/sts/start.sh
     environment:
       DISPLAY_NUM: '99'
