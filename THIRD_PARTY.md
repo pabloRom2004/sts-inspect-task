@@ -16,3 +16,5 @@ retained in that directory.
 Slay the Spire, its game files, ModTheSpire and game mods are not included in
 this repository or its release assets. Users must supply an appropriately
 licensed private runtime separately.
+
+Local modification: `_x11_client.py` checks for Firefox ESR before browser actions and returns an ordinary tool error when it is absent. Screenshot/input behavior is unchanged.

@@ -170,8 +170,16 @@ def test_hawk_compose_conversion(tmp_path) -> None:
 @pytest.mark.asyncio
 async def test_stateless_responses_request(monkeypatch) -> None:
     """Serialize the real computer schema without native tools or API storage."""
-    from inspect_ai.model import GenerateConfig
-    from inspect_ai.tool import bash, computer, python, tool_with
+    from inspect_ai.model import (
+        ChatMessageAssistant,
+        ChatMessageTool,
+        ChatMessageUser,
+        ContentImage,
+        GenerateConfig,
+    )
+    from inspect_ai.tool import ToolCall, bash, computer, python, tool_with
+
+    from sts_hawk.run_config import default_run_config
 
     class RequestCaptured(BaseException):
         """Stop immediately before the SDK would send a request."""
@@ -191,16 +199,54 @@ async def test_stateless_responses_request(monkeypatch) -> None:
 
     monkeypatch.setattr(model.api.client.responses, "create", capture_request)
     with pytest.raises(RequestCaptured):
+        image = ContentImage(
+            image="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jfLQAAAAASUVORK5CYII="
+        )
+        messages = [ChatMessageUser(content="Inspect the screen and wiki.")]
+        for call_id, function, arguments, content in [
+            ("c1", "desktop", {"action": "screenshot"}, [image]),
+            ("c2", "bash", {"command": "cat /opt/sts/wiki.md"}, "wiki text"),
+            ("c3", "desktop", {"action": "screenshot"}, [image]),
+        ]:
+            messages.extend(
+                [
+                    ChatMessageAssistant(
+                        content="",
+                        tool_calls=[
+                            ToolCall(id=call_id, function=function, arguments=arguments)
+                        ],
+                    ),
+                    ChatMessageTool(
+                        tool_call_id=call_id, function=function, content=content
+                    ),
+                ]
+            )
         await model.generate(
-            "Take a screenshot.",
+            messages,
             tools=[
-                tool_with(computer(), name="desktop"),
+                tool_with(
+                    computer(
+                        max_screenshots=default_run_config()["solver"]["args"][
+                            "max_screenshots"
+                        ]
+                    ),
+                    name="desktop",
+                ),
                 bash(),
                 python(),
                 submit_floor(),
             ],
             config=GenerateConfig(reasoning_effort="max", max_tokens=128000),
         )
+    assert (
+        sum(
+            block.get("type") == "input_image"
+            for item in captured["input"]
+            for block in item.get("content", [])
+            if isinstance(block, dict)
+        )
+        == 2
+    )
     assert captured["store"] is False
     assert captured["reasoning"]["effort"] == "max"
     assert captured["max_output_tokens"] == 128000
@@ -208,3 +254,22 @@ async def test_stateless_responses_request(monkeypatch) -> None:
     desktop = next(tool for tool in captured["tools"] if tool["name"] == "desktop")
     assert desktop["strict"] is False
     assert "coordinate" in desktop["parameters"]["properties"]
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("action", ["open_web_browser", "navigate"])
+async def test_missing_browser_is_recoverable(monkeypatch, action) -> None:
+    """Return an ordinary tool error without waiting for an absent browser window."""
+    monkeypatch.syspath_prepend(str(ASSETS / "computer"))
+    import _x11_client
+
+    monkeypatch.setattr(_x11_client.shutil, "which", lambda name: None)
+    monkeypatch.setenv("WIDTH", "1280")
+    monkeypatch.setenv("HEIGHT", "720")
+    client = _x11_client.X11Client()
+    result = (
+        await client.open_web_browser()
+        if action == "open_web_browser"
+        else await client.navigate("https://example.com")
+    )
+    assert result.error == "Firefox ESR is not installed in this sandbox."

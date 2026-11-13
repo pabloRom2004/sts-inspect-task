@@ -5,6 +5,7 @@ import base64
 import logging
 import os
 import shlex
+import shutil
 from pathlib import Path
 from typing import Literal, TypedDict
 from uuid import uuid4
@@ -233,6 +234,8 @@ class X11Client:
 
     async def open_web_browser(self) -> ToolResult:
         """Open the web browser (Firefox) in full screen view."""
+        if shutil.which("firefox-esr") is None:
+            return ToolResult(error="Firefox ESR is not installed in this sandbox.")
         await run(f"{self._display_prefix}firefox-esr --new-window >/dev/null 2>&1 &")
         # Wait for a visible Firefox window to appear, then activate it
         await run(f"{self.xdotool} search --sync --onlyvisible --class firefox-esr")
@@ -243,6 +246,8 @@ class X11Client:
 
     async def navigate(self, url: str) -> ToolResult:
         """Navigate to a URL in the browser."""
+        if shutil.which("firefox-esr") is None:
+            return ToolResult(error="Firefox ESR is not installed in this sandbox.")
         await self._activate_browser()
         await run(f"{self.xdotool} key ctrl+l")
         await asyncio.sleep(0.5)
