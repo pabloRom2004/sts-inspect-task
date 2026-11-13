@@ -6,7 +6,7 @@ from typing import Any
 import yaml
 from inspect_ai import Task, task
 from inspect_ai.dataset import Sample
-from inspect_ai.model import ContentImage, ContentText, GenerateConfig
+from inspect_ai.model import ChatMessageUser, ContentImage, ContentText, GenerateConfig
 from inspect_ai.scorer import includes
 from inspect_ai.solver import Generate, Solver, TaskState, solver
 from inspect_ai.solver import generate as generate_response
@@ -78,8 +78,6 @@ def capture_runtime() -> Solver:
 
     async def solve(state: TaskState, generate: Generate) -> TaskState:
         """Exercise the installed stock computer tool before the real model smoke."""
-        from inspect_ai.model import ChatMessageUser
-
         state.messages.append(
             ChatMessageUser(content=await computer()(action="screenshot"))
         )
@@ -106,9 +104,14 @@ def provider_probe() -> Task:
             Sample(
                 id="vision-tile",
                 input=[
-                    ContentText(text="Name this tile's color using one word."),
-                    ContentImage(
-                        image="data:image/png;base64," + base64.b64encode(png).decode()
+                    ChatMessageUser(
+                        content=[
+                            ContentText(text="Name this tile's color using one word."),
+                            ContentImage(
+                                image="data:image/png;base64,"
+                                + base64.b64encode(png).decode()
+                            ),
+                        ]
                     ),
                 ],
                 target="white",
