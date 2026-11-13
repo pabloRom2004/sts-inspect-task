@@ -13,6 +13,7 @@ for attempt in $(seq 1 60); do
     sleep 0.25
 done
 xdpyinfo >/dev/null
+xrandr --query
 touch /tmp/xfce_started
 echo 'X display ready; starting Java'
 cd /game
