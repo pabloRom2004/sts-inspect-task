@@ -16,7 +16,8 @@ async def checked_exec(command: list[str], timeout: int) -> str:
     result = await sandbox().exec(command, timeout=timeout)
     if not result.success:
         raise RuntimeError(
-            f"Runtime setup failed: {result.stderr[-4000:]} {result.stdout[-4000:]}"
+            f"Runtime setup failed (exit {result.returncode}): "
+            f"{result.stderr[-4000:]} {result.stdout[-4000:]}"
         )
     return result.stdout
 
