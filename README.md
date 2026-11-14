@@ -4,6 +4,8 @@ This standalone Inspect AI task runs Slay the Spire on Generality Hawk with a no
 
 > play Slay the Spire for me as Ironclad
 >
+> Defeat the Heart to win.
+>
 > Play one round and do not restart the game. Play until victory or defeat.
 >
 > Enter seed 1 in the game's seed field before starting the run.
@@ -29,6 +31,8 @@ For the full-game A20 attempt, pass `-T prompt_name=beat_game`. Its prompt is:
 
 > Try to beat Slay the Spire on Ascension 20 as Ironclad.
 >
+> Defeat the Heart to win.
+>
 > Play one round and do not restart the game. Play until victory or defeat.
 >
 > Enter seed 1 in the game's seed field before starting the run.
@@ -47,7 +51,7 @@ The default selects one sample and stock Inspect ReAct with `computer()` exposed
 
 The computer tool is exposed as `desktop` using Inspect's `tool_with`, with input validation before stock action execution and the backend error-handling fixes described below. Its model-visible schema and screenshot filtering are preserved. This keeps it as a function tool because Inspect's native OpenAI computer mode forces `store=true`, which OpenRouter's stateless Responses API rejects. Luna requires Responses for function calling with reasoning. Pass `responses_api: true` and `responses_store: false` in the Hawk model arguments too. The task supports Hawk’s pinned Inspect 0.3.286.dev10+g3a44082ca and newer releases. On that older Hawk build, include `agent-client-protocol==0.12.1` in runner packages: ACP 1.0 removed an import it needs. Inspect 0.3.289 fixes that upstream, but Hawk currently pins its framework version.
 
-Differences from Epoch's benchmark include the user-specified prompt, general shell/Python access, an offline Fandom wiki, the 75% compaction policy and no automated grading. The exact Epoch prompt has not been verified. The task requests one game seed at a time; it does not implement the full 15-seed or A20 Heart completion benchmark.
+Differences from Epoch's benchmark include the user-specified prompt, general shell/Python access, an offline Fandom wiki, the 75% compaction policy and no automated grading. The exact Epoch prompt has not been verified. Both prompts require defeating the Heart to win, but completion is not mechanically verified. The task requests one game seed at a time; it does not implement the full 15-seed benchmark.
 
 ## Runtime
 
