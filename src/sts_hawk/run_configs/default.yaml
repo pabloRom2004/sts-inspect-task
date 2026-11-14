@@ -3,6 +3,7 @@ task:
   args:
     character: IRONCLAD
     ascension: 20
+    game_seed: '1'
     prompt_name: first_combat
     setup_timeout: 900
     sandbox_image: ubuntu:24.04

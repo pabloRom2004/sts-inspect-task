@@ -117,6 +117,7 @@ def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) ->
         else "play Slay the Spire for me as Ironclad"
     )
     expected_prompt += (
+        "\n\nEnter seed 1 in the game's seed field before starting the run."
         "\n\nAn offline Slay the Spire wiki is available at /opt/sts/wiki.md."
     )
     assert task.dataset[0].input == expected_prompt
@@ -148,6 +149,23 @@ def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) ->
     submission = ToolDef(submit_floor()).parameters
     assert submission.properties["max_floor"].type == "integer"
     assert submission.required == ["max_floor"]
+
+
+@pytest.mark.parametrize("prompt_name", ["first_combat", "beat_game"])
+@pytest.mark.parametrize("game_seed", [None, "1", 15])
+def test_game_seed_instruction_and_metadata(prompt_name, game_seed):
+    """Keep game seeds in the prompt and run identity, separate from model sampling."""
+    task = first_combat(prompt_name=prompt_name, game_seed=game_seed)
+    sample = task.dataset[0]
+    assert sample.metadata["requested_game_seed"] == game_seed
+    assert task.metadata["requested_game_seed"] == game_seed
+    assert task.config.seed is None
+    if game_seed is None:
+        assert "Enter seed" not in sample.input
+        assert "-seed-" not in sample.id
+    else:
+        assert f"Enter seed {game_seed} in the game's seed field" in sample.input
+        assert sample.id.endswith(f"-seed-{game_seed}")
 
 
 def test_hawk_compose_conversion(tmp_path) -> None:

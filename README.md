@@ -4,6 +4,8 @@ This standalone Inspect AI task runs Slay the Spire on Generality Hawk with a no
 
 > play Slay the Spire for me as Ironclad
 >
+> Enter seed 1 in the game's seed field before starting the run.
+>
 > An offline Slay the Spire wiki is available at /opt/sts/wiki.md.
 
 The agent has desktop, Bash and Python tools and can create files and run code in its sandbox. The offline wiki location is included in the task prompt and Bash tool description. There is no custom wiki tool or required lookup sequence.
@@ -25,6 +27,8 @@ For the full-game A20 attempt, pass `-T prompt_name=beat_game`. Its prompt is:
 
 > Try to beat Slay the Spire on Ascension 20 as Ironclad.
 >
+> Enter seed 1 in the game's seed field before starting the run.
+>
 > An offline Slay the Spire wiki is available at /opt/sts/wiki.md.
 
 The general tools and integer submission are unchanged. No first-combat stopping rule applies.
@@ -39,17 +43,21 @@ The default selects one sample and stock Inspect ReAct with `computer()` exposed
 
 The computer tool is exposed as `desktop` using Inspect's `tool_with`, with input validation before stock action execution and the backend error-handling fixes described below. Its model-visible schema and screenshot filtering are preserved. This keeps it as a function tool because Inspect's native OpenAI computer mode forces `store=true`, which OpenRouter's stateless Responses API rejects. Luna requires Responses for function calling with reasoning. Pass `responses_api: true` and `responses_store: false` in the Hawk model arguments too. The task supports Hawk’s pinned Inspect 0.3.286.dev10+g3a44082ca and newer releases. On that older Hawk build, include `agent-client-protocol==0.12.1` in runner packages: ACP 1.0 removed an import it needs. Inspect 0.3.289 fixes that upstream, but Hawk currently pins its framework version.
 
-Differences from Epoch's benchmark include the user-specified prompt, general shell/Python access, an offline Fandom wiki, the 75% compaction policy and no automated grading. The exact Epoch prompt has not been verified. No seed list or A20 Heart completion benchmark is implemented.
+Differences from Epoch's benchmark include the user-specified prompt, general shell/Python access, an offline Fandom wiki, the 75% compaction policy and no automated grading. The exact Epoch prompt has not been verified. The task requests one game seed at a time; it does not implement the full 15-seed or A20 Heart completion benchmark.
 
 ## Runtime
 
 The sandbox installs Java 8, TigerVNC, graphics dependencies and Inspect's stock computer backend into Ubuntu 24.04, rendering at 1280×720. BaseMod, DeterminismFix and Unlock Everything are enabled. Fast Mode and SuperFastMode are disabled. The task does not load CommunicationMod or expose a custom game-state command tool. Shell and Python access are ordinary sandbox tools, without a wiki-only restriction.
 
+Startup explicitly focuses the game window. Without a window manager, Xvnc can leave keyboard focus on ModTheSpire's hidden launcher window even while mouse clicks reach the game.
+
 Sandbox resources live in `assets/compose.yaml`. Two CPUs and 4 GB are initial single-smoke allocations, not measured production batch requirements. Container internet access is enabled for OS installation and the private archive download. Runtime assets and download URLs must stay private.
 
 ## Parameters
 
-`first_combat` accepts `character` (`IRONCLAD`), `ascension` (`20`), `prompt_name` (`first_combat`), `setup_timeout` (`900` seconds), `command_timeout` (`180` seconds) and `sandbox_image` (`ubuntu:24.04`). The `first_combat` entrypoint and sample labels are retained for compatibility. The character parameter is included in both prompts and defaults to Ironclad. The full-game prompt also includes ascension. No hidden controller starts a run. Verify the actual selection from screenshots. The prompt no longer imposes a first-combat stopping rule; bounded smoke tests must be stopped externally.
+`first_combat` accepts `character` (`IRONCLAD`), `ascension` (`20`), `game_seed` (`"1"`), `prompt_name` (`first_combat`), `setup_timeout` (`900` seconds), `command_timeout` (`180` seconds) and `sandbox_image` (`ubuntu:24.04`). The `first_combat` entrypoint is retained for compatibility. The character parameter is included in both prompts and defaults to Ironclad. The full-game prompt also includes ascension. No hidden controller starts a run. Verify the actual selection from screenshots. The prompt no longer imposes a first-combat stopping rule; bounded smoke tests must be stopped externally.
+
+Pass `-T game_seed=1` to request literal seed `1` in the game's seed field. This instruction is included in either gameplay prompt, and the requested seed is recorded in task/sample metadata and the sample ID. The AI must enter it through the game interface; setup does not inject a seed. Set `game_seed: null` in task arguments to omit the instruction and retain the prior unseeded sample ID. This parameter is separate from `generate_config.seed`, which controls model sampling and remains unset. A requested seed is not proof of the seed actually used: verify the visible seed after the run starts.
 
 The `visual_agent` solver accepts `max_screenshots` (`3`), `tool_timeout` (`180` seconds) and `compaction_threshold` (`787500` tokens). The offline wiki file contains 750 pages with original article text and source URLs. See `THIRD_PARTY.md` for attribution. The vendored computer backend retains Inspect's MIT license. A small local availability check makes its browser actions return a recoverable tool error when Firefox ESR is absent, rather than timing out and aborting the sample.
 

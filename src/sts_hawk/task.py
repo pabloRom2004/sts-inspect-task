@@ -33,6 +33,7 @@ def sandbox_config(image: str) -> str:
 def first_combat(
     character: str = ARGS["character"],
     ascension: int = ARGS["ascension"],
+    game_seed: str | int | None = ARGS["game_seed"],
     prompt_name: str = ARGS["prompt_name"],
     setup_timeout: int = ARGS["setup_timeout"],
     command_timeout: int = ARGS["command_timeout"],
@@ -45,10 +46,16 @@ def first_combat(
         name=f"sts_{prompt_name}",
         dataset=[
             Sample(
-                id=f"{character.lower()}-a{ascension}-{prompt_name.replace('_', '-')}",
-                input=selected.text.format(
-                    character=character.title(), ascension=ascension
+                id=(
+                    f"{character.lower()}-a{ascension}-{prompt_name.replace('_', '-')}"
+                    + (f"-seed-{game_seed}" if game_seed is not None else "")
                 ),
+                input=selected.render(
+                    character=character.title(),
+                    ascension=ascension,
+                    game_seed=game_seed,
+                ),
+                metadata={"requested_game_seed": game_seed},
             )
         ],
         setup=prepare_game(setup_timeout, command_timeout),
@@ -59,6 +66,7 @@ def first_combat(
         metadata={
             "purpose": "Minimal gameplay task, not a SpireClimb score",
             "prompt_origin": selected.origin_note,
+            "requested_game_seed": game_seed,
             "wiki": "User-provided offline Fandom scrape (750 pages)",
             "model_visible": "Stock desktop, bash and python tools; wiki at /opt/sts/wiki.md; submit",
             "grading": "Unscored; verify gameplay and self-reported floor manually",

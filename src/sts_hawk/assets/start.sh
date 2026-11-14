@@ -38,5 +38,11 @@ data['NEOW_SKIP'] = 2
 player.write_text(json.dumps(data))
 PY
 java -XX:ActiveProcessorCount=2 -Xmx1536m -jar ModTheSpire.jar --skip-launcher --skip-intro \
-    --mods basemod,determinismfix,UnlockEverythingMod >/tmp/game.log 2>&1 || true
+    --mods basemod,determinismfix,UnlockEverythingMod >/tmp/game.log 2>&1 &
+game_pid=$!
+# Xvnc has no window manager to move focus away from the launcher's FocusProxy.
+timeout 180 xdotool search --sync --onlyvisible --name '^Modded Slay the Spire$' > /tmp/sts-game-window
+xdotool windowfocus --sync "$(head -n 1 /tmp/sts-game-window)"
+echo 'Keyboard focus set to the game window'
+wait "$game_pid" || true
 touch /tmp/sts-failed
