@@ -117,6 +117,7 @@ def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) ->
         else "play Slay the Spire for me as Ironclad"
     )
     expected_prompt += (
+        "\n\nPlay one round and do not restart the game. Play until victory or defeat."
         "\n\nEnter seed 1 in the game's seed field before starting the run."
         "\n\nAn offline Slay the Spire wiki is available at /opt/sts/wiki.md."
     )

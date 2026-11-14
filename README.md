@@ -4,6 +4,8 @@ This standalone Inspect AI task runs Slay the Spire on Generality Hawk with a no
 
 > play Slay the Spire for me as Ironclad
 >
+> Play one round and do not restart the game. Play until victory or defeat.
+>
 > Enter seed 1 in the game's seed field before starting the run.
 >
 > An offline Slay the Spire wiki is available at /opt/sts/wiki.md.
@@ -26,6 +28,8 @@ inspect eval sts_hawk/first_combat --model openrouter/openai/gpt-6-luna \
 For the full-game A20 attempt, pass `-T prompt_name=beat_game`. Its prompt is:
 
 > Try to beat Slay the Spire on Ascension 20 as Ironclad.
+>
+> Play one round and do not restart the game. Play until victory or defeat.
 >
 > Enter seed 1 in the game's seed field before starting the run.
 >

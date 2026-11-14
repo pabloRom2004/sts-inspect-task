@@ -34,6 +34,7 @@ FIRST_COMBAT = Prompt(
     origin_note="Minimal user-requested prompt with character, offline wiki location and optional game-seed instruction; not a verified Epoch prompt.",
     text=(
         "play Slay the Spire for me as {character}\n\n"
+        "Play one round and do not restart the game. Play until victory or defeat.\n\n"
         "{seed_instruction}"
         "An offline Slay the Spire wiki is available at /opt/sts/wiki.md."
     ),
@@ -46,6 +47,7 @@ BEAT_GAME = Prompt(
     origin_note="Minimal prompt for the user's requested full-game Ascension 20 attempt, including the offline wiki location and optional game-seed instruction.",
     text=(
         "Try to beat Slay the Spire on Ascension {ascension} as {character}.\n\n"
+        "Play one round and do not restart the game. Play until victory or defeat.\n\n"
         "{seed_instruction}"
         "An offline Slay the Spire wiki is available at /opt/sts/wiki.md."
     ),
