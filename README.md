@@ -1,6 +1,6 @@
 # Slay the Spire agent
 
-This standalone Inspect AI task runs Slay the Spire on Generality Hawk with a normal ReAct agent. The task prompt is exactly:
+This standalone Inspect AI task runs Slay the Spire on Generality Hawk with Inspect ReAct or native Codex CLI. ReAct is the default. The task prompt is exactly:
 
 > play Slay the Spire for me as Ironclad
 >
@@ -12,7 +12,7 @@ This standalone Inspect AI task runs Slay the Spire on Generality Hawk with a no
 >
 > An offline Slay the Spire wiki is available at /opt/sts/wiki.md.
 
-The agent has desktop, Bash and Python tools and can create files and run code in its sandbox. The offline wiki location is included in the task prompt and Bash tool description. There is no custom wiki tool or required lookup sequence.
+The agent has desktop, shell and Python tools and can create files and run code in its sandbox. The offline wiki location is included in the task prompt and ReAct's Bash tool description. There is no custom wiki tool or required lookup sequence.
 
 It is an independent adaptation of [Epoch's published SpireClimb methodology](https://epoch.ai/benchmarks/spireclimb). Epoch's complete implementation and prompt were unavailable. This task has no automated grader and does not produce a SpireClimb benchmark score.
 
@@ -49,7 +49,27 @@ Real model evaluations run on Hawk. Local validation uses mockllm. `sts_hawk/run
 
 The default selects one sample and stock Inspect ReAct with `computer()` exposed as `desktop`, `bash()` and `python()`. Up to the three latest desktop screenshots are sent to the model; the full screenshot history remains in the log. Hawk's pinned Inspect build has a per-tool count bug that otherwise drops the newest screenshot after Bash/Python calls. A version-scoped backport applies the upstream 0.3.289 fix. Keeping all screenshots was tested but hit the provider's 50-image request limit, so it is not the default. The same screenshot policy is applied before both native and summary compaction, because Inspect does not apply tool input handlers on those paths. Compaction is triggered at 787,500 tokens, following the user's 75% policy for Luna's verified 1,050,000-token context. Maximum response output is 128,000 tokens and reasoning effort is `max`. Model and billing-route selection belong to the Hawk launch configuration.
 
-The computer tool is exposed as `desktop` using Inspect's `tool_with`, with input validation before stock action execution and the backend error-handling fixes described below. Its model-visible schema and screenshot filtering are preserved. This keeps it as a function tool because Inspect's native OpenAI computer mode forces `store=true`, which OpenRouter's stateless Responses API rejects. Luna requires Responses for function calling with reasoning. Pass `responses_api: true` and `responses_store: false` in the Hawk model arguments too. The task supports Hawk’s pinned Inspect 0.3.286.dev10+g3a44082ca and newer releases. On that older Hawk build, include `agent-client-protocol==0.12.1` in runner packages: ACP 1.0 removed an import it needs. Inspect 0.3.289 fixes that upstream, but Hawk currently pins its framework version.
+The computer tool is exposed as `desktop` using Inspect's `tool_with`, with input validation before stock action execution and the backend error-handling fixes described below. Its model-visible schema and screenshot filtering are preserved. This keeps it as a function tool because Inspect's native OpenAI computer mode forces `store=true`, which OpenRouter's stateless Responses API rejects. Luna requires Responses for function calling with reasoning. Pass `responses_api: true` and `responses_store: false` in the Hawk model arguments too. ReAct supports the older Hawk Inspect 0.3.286.dev10+g3a44082ca build and newer releases. On that older build, include `agent-client-protocol==0.12.1` in runner packages: ACP 1.0 removed an import it needs. Inspect 0.3.289 fixes that upstream; Codex requires at least that release.
+
+### Codex CLI
+
+Install the optional adapter with `pip install '.[codex]'`. It requires Inspect >=0.3.289 and pins [Inspect SWE](https://meridianlabs-ai.github.io/inspect_swe/codex_cli.html) 0.3.0. Select Codex through the existing solver parameter:
+
+```bash
+inspect eval sts_hawk/first_combat --model openrouter/openai/gpt-6-luna \
+  -M responses_api=true -M responses_store=false \
+  -S harness=codex -T prompt_name=beat_game
+```
+
+[Codex CLI 0.169.0](https://github.com/openai/codex/releases/tag/rust-v0.169.0) runs inside the same Linux game sandbox. Its own agent loop, instructions, code-mode tools, shell and file handling replace ReAct. Inspect SWE proxies inference back to the selected Inspect model and records it in `.eval`; the Codex process receives a placeholder proxy key, not the provider credential. The desktop and integer `submit` tools are exposed through MCP. Subagents, goal tools and native web search are disabled. Native shell and Python remain available, including access to `/opt/sts/wiki.md`.
+
+`solver.args.codex` in `default.yaml` owns the native version, prompt/tool slug (`model_config`), context, compaction threshold and workspace paths. The slug is explicitly `gpt-6-luna` so an OpenRouter model name does not silently select Codex's generic fallback prompt. It selects Codex's local instructions and tools; it does not change the inference model. Change it deliberately when testing another model.
+
+The Codex arm uses its native 272,000-token context. Codex reserves 5% and reports 258,400 usable tokens in its native token-count events, so its explicit automatic-compaction threshold is 193,800 (75% of that verified effective window). ReAct retains 1,050,000 and 787,500 respectively. Both arms keep the 128,000 per-response output limit and `max` reasoning through Inspect's effective generation config. These are context-management differences in the comparison, not identical harness settings.
+
+The bridge removes all but the latest three images from outgoing model requests while retaining text and reasoning. Native Codex still owns its session history and compaction; this is not ReAct's compactor. Code-mode desktop calls must emit their returned image using `image(...)` for the next model request to include it. All executed desktop calls and their screenshots remain in tool events. On a valid submission, the next inference request receives a local integer final response and the run ends without a further provider call. If Codex exits normally without submitting, its final text is retained and `FloorSubmission:native_exit_without_submit` is set in the sample store. No floor is invented and the run is not labelled an infrastructure error. There is no automatic continuation after such a voluntary exit.
+
+This is the supported open-source Codex CLI harness with the existing Inspect desktop backend. It does not recreate the Codex Desktop app's built-in computer-use implementation. Setup, sandbox and native-process failures remain evaluation errors. Native checkpoint/resume and full-game performance need separate remote validation; short scripted transport tests do not establish them.
 
 Differences from Epoch's benchmark include the user-specified prompt, general shell/Python access, an offline Fandom wiki, the 75% compaction policy and no automated grading. The exact Epoch prompt has not been verified. Both prompts require defeating the Heart to win, but completion is not mechanically verified. The task requests one game seed at a time; it does not implement the full 15-seed benchmark.
 
@@ -67,7 +87,7 @@ Sandbox resources live in `assets/compose.yaml`. Two CPUs and 4 GB are initial s
 
 Pass `-T game_seed=1` to request literal seed `1` in the game's seed field. This instruction is included in either gameplay prompt, and the requested seed is recorded in task/sample metadata and the sample ID. The AI must enter it through the game interface; setup does not inject a seed. Set `game_seed: null` in task arguments to omit the instruction and retain the prior unseeded sample ID. This parameter is separate from `generate_config.seed`, which controls model sampling and remains unset. A requested seed is not proof of the seed actually used: verify the visible seed after the run starts.
 
-The `visual_agent` solver accepts `max_screenshots` (`3`), `tool_timeout` (`180` seconds) and `compaction_threshold` (`787500` tokens). The offline wiki file contains 750 pages with original article text and source URLs. See `THIRD_PARTY.md` for attribution. The vendored computer backend retains Inspect's MIT license. A small local availability check makes its browser actions return a recoverable tool error when Firefox ESR is absent, rather than timing out and aborting the sample.
+The `visual_agent` solver accepts `harness` (`react` or `codex`), `max_screenshots` (`3`), `tool_timeout` (`180` seconds), ReAct's `compaction_threshold` (`787500` tokens), and the `codex` settings described above. Codex has its own `codex.compaction_threshold` (`193800` tokens). The offline wiki file contains 750 pages with original article text and source URLs. See `THIRD_PARTY.md` for attribution. The vendored computer backend retains Inspect's MIT license. A small local availability check makes its browser actions return a recoverable tool error when Firefox ESR is absent, rather than timing out and aborting the sample.
 
 Desktop argument-parsing failures are returned to the model as recoverable tool errors so it can correct the action. Empty calls/batches, malformed coordinates or zoom regions, wrong field types and missing required fields are checked before any action in a batch executes. Supplying coordinates to mouse-down/up returns guidance to move the cursor first; stock Inspect silently ignores those coordinates. Batched waits accept fractional seconds; negative and non-finite durations are rejected.
 
@@ -84,3 +104,5 @@ Hawk's live viewer shows actions and screenshots when `log_realtime` is enabled.
 Run `pytest tests`, `ruff check .` and `ruff format --check .`. Tests exercise the actual task setup, stock computer parser, Bash/Python execution, the installed wiki file, invalid and valid integer submissions, unscored completion, and setup-error propagation through mockllm. They also exercise the real Hawk Compose-to-Kubernetes conversion. External execution is simulated in local tests; the separate Linux runtime probe must establish actual game startup before the paid gameplay smoke.
 
 Validate the real Docker runtime and tools locally with mockllm before launching on Hawk. Keep local containers bounded at two CPUs and 4 GB, reuse cached OS layers, mount the private archive read-only for installation, and remove the test containers afterwards. A scripted menu click, shell wiki search and Python file write/read verify integration, not model playing ability.
+
+`STS_CODEX_DOCKER_TEST=1 pytest tests/test_codex.py` additionally uses the cached `local/sts-hawk-os:0.2.4` image and a blank X display, at one CPU and 1 GiB. It runs the real pinned Codex executable and Inspect model/MCP bridge with scripted inference, including native shell/Python, the wiki, screenshot retention, recoverable input errors, integer submission, voluntary exit and compaction. It does not start the game or make paid model calls. Install the optional Codex extra first; a missing cached OS image must be built from the runtime OS dependencies before this test.

@@ -68,7 +68,7 @@ def first_combat(
             "prompt_origin": selected.origin_note,
             "requested_game_seed": game_seed,
             "wiki": "User-provided offline Fandom scrape (750 pages)",
-            "model_visible": "Stock desktop, bash and python tools; wiki at /opt/sts/wiki.md; submit",
+            "model_visible": "Desktop, sandbox shell/Python and integer submit; wiki at /opt/sts/wiki.md; harness recorded in solver configuration",
             "grading": "Unscored; verify gameplay and self-reported floor manually",
             "differences_from_epoch": "Offline wiki file; general shell/Python access; user-requested minimal prompt; 75% context compaction; no grader",
         },

@@ -1,3 +1,5 @@
+from typing import Any, Literal
+
 from inspect_ai.agent import AgentSubmit, as_solver, react
 from inspect_ai.solver import Solver, solver
 from inspect_ai.tool import ToolDef, bash, python, tool_with
@@ -16,8 +18,20 @@ def visual_agent(
     max_screenshots: int | None = DEFAULTS["max_screenshots"],
     tool_timeout: int | None = DEFAULTS["tool_timeout"],
     compaction_threshold: float = DEFAULTS["compaction_threshold"],
+    harness: Literal["react", "codex"] = DEFAULTS["harness"],
+    codex: dict[str, Any] = DEFAULTS["codex"],
 ) -> Solver:
-    """Use stock ReAct with desktop, shell and Python tools."""
+    """Select ReAct or native Codex while retaining the same game and submission."""
+    if harness == "codex":
+        from sts_hawk.native_codex import codex_solver
+
+        return codex_solver(
+            max_screenshots=max_screenshots,
+            tool_timeout=tool_timeout,
+            **codex,
+        )
+    if harness != "react":
+        raise ValueError(f"Unknown harness: {harness!r}; expected react or codex.")
     apply_hawk_image_counter_fix()
     # Keep function calling on stateless Responses API providers.
     desktop = desktop_tool(max_screenshots=max_screenshots, timeout=tool_timeout)

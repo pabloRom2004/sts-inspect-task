@@ -12,9 +12,17 @@ task:
 solver:
   solver: sts_hawk/visual_agent
   args:
+    harness: react
     max_screenshots: 3
     tool_timeout: 180
     compaction_threshold: 787500
+    codex:
+      version: 0.169.0
+      model_config: gpt-6-luna
+      context_window: 272000
+      compaction_threshold: 193800
+      cwd: /workspace
+      home_dir: /opt/sts/codex-home
 
 generate_config:
   max_tokens: 128000
