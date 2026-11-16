@@ -41,6 +41,7 @@ eval_config:
 
 sts2:
   ascension: 10
+  prompt_name: beat_game_sts2
   desktop_height: 800
 
 runtime_probe:

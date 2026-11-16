@@ -12,8 +12,8 @@ from inspect_ai.util import ExecResult
 from sts_hawk.task import runtime_probe, second_game
 
 
-@pytest.mark.parametrize("probe", [False, True])
-def test_sts2_setup_and_submission(monkeypatch, tmp_path, probe):
+@pytest.mark.parametrize("mode", ["full", "smoke", "probe", "actions"])
+def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
     """Run the actual StS2 composition through mock inference and desktop transport."""
     import inspect_ai.tool._tools._computer._common as computer_common
     import inspect_ai.tool._tools._execute as execute_tools
@@ -39,6 +39,8 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, probe):
                 self.actions += 1
                 self.commands.append(cmd)
                 return ExecResult(True, 0, '{"output":"StS2 fixture","error":null}', "")
+            if "tar -C /root/.local/share/SlayTheSpire2" in " ".join(cmd):
+                return ExecResult(True, 0, "cHJvZmlsZSBmaXh0dXJl", "")
             return ExecResult(True, 0, "setup or shell fixture", "")
 
     fixture = SandboxFixture()
@@ -51,10 +53,28 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, probe):
     monkeypatch.setattr(runtime, "sandbox", lambda: fixture)
     monkeypatch.setattr(execute_tools, "sandbox_env", lambda name=None: fixture)
     monkeypatch.setattr(computer_common, "computer_sandbox", computer_sandbox)
-    task = runtime_probe(game="sts2", wait_seconds=90) if probe else second_game()
-    assert task.name == "sts2_beat_game"
+    probe = mode in {"probe", "actions"}
+    if probe:
+        task = runtime_probe(
+            game="sts2",
+            wait_seconds=90,
+            actions=[{"action": "screenshot"}] if mode == "actions" else None,
+            capture_profile=mode == "actions",
+        )
+    else:
+        task = second_game(
+            prompt_name="first_combat_smoke_sts2"
+            if mode == "smoke"
+            else "beat_game_sts2"
+        )
+    assert task.name == (
+        "sts2_first_combat_smoke" if mode == "smoke" else "sts2_beat_game"
+    )
     assert task.dataset[0].id.startswith("sts2-ironclad-a10-")
-    assert "Complete all three Acts to win." in task.dataset[0].input
+    if mode == "smoke":
+        assert "Play the first combat, then stop" in task.dataset[0].input
+    else:
+        assert "Complete all three Acts to win." in task.dataset[0].input
     assert "Enter seed 1" in task.dataset[0].input
     assert "Heart" not in task.dataset[0].input
     assert "wiki" not in task.dataset[0].input
@@ -78,7 +98,7 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, probe):
     saved = read_eval_log(log.location)
     assert saved.status == "success"
     assert not saved.samples[0].scores
-    assert fixture.actions == 1
+    assert fixture.actions == (2 if mode == "actions" else 1)
     assert "/opt/sts/wiki.md" not in fixture.files
     assert "v0.107.1" in fixture.files["/opt/sts/install.sh"]
     assert "--force-steam=off" in fixture.files["/opt/sts/start.sh"]
@@ -86,6 +106,13 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, probe):
         assert not saved.stats.model_usage
         command = fixture.commands[0]
         assert float(command[command.index("--duration") + 1]) == 90
+        if mode == "actions":
+            assert any(
+                event.event == "info"
+                and isinstance(event.data, dict)
+                and event.data.get("profile_archive_base64") == "cHJvZmlsZSBmaXh0dXJl"
+                for event in saved.samples[0].events
+            )
     else:
         assert saved.samples[0].output.completion == "2"
 

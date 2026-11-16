@@ -105,7 +105,7 @@ Hawk's live viewer shows actions and screenshots when `log_realtime` is enabled.
 
 ## Slay the Spire 2
 
-`sts_hawk/second_game` uses the owned Linux **v0.107.1** copy, defaults to Ironclad at **A10**, and asks for all three Acts with one run and no restart. It retains the integer max-floor submission and has no grader:
+`sts_hawk/second_game` uses the owned Linux **v0.107.1** copy, defaults to Ironclad at **A10**, and asks for all three Acts with one run and no restart. It retains the integer max-floor submission and has no grader. Select `-T prompt_name=first_combat_smoke_sts2` to stop after one combat instead:
 
 ```bash
 inspect eval sts_hawk/second_game --model openrouter/openai/gpt-6-luna \
@@ -114,7 +114,9 @@ inspect eval sts_hawk/second_game --model openrouter/openai/gpt-6-luna \
 
 Supply a separate private StS2 runtime archive through `STS_ASSET_URL`. The installer checks the version. Startup uses the built-in `--force-steam=off` switch, OpenGL, a null ALSA device and a 1280×800 desktop. No game assembly patch is required. The archive contains Workshop `UnlockTheSpire` v1.0.3; an unlocked profile can be included as `profile/` and copied into the isolated container. Mod activation and A10 availability must be verified before gameplay. Never publish the game archive or Steam authentication files.
 
-No offline StS2 wiki is currently included; this task does not advertise the first game's wiki to the StS2 agent. This is an additional difference from Epoch. Local task/mock transport tests pass, but the x86 game currently crashes during startup under Docker emulation on the ARM Mac, including a separate latest-.NET control. Native x86 Hawk runtime validation is pending; this is not yet a verified StS2 gameplay result. Use `sts_hawk/runtime_probe -T game=sts2 -T wait_seconds=90` for a no-inference startup check with a longer observation window and game logs. The first native probe captured a black screen with the game cursor after 15 seconds; its successful Inspect completion does not establish menu readiness.
+No offline StS2 wiki is currently included; this task does not advertise the first game's wiki to the StS2 agent. This is an additional difference from Epoch. The user deferred wiki integration for the initial gameplay smoke. The game crashes under local AMD64 Docker emulation on the ARM Mac; native AMD64 Hawk startup is verified at the main menu, with about 28 seconds to menu readiness. Unlock configuration and gameplay need separate verification. Use `sts_hawk/runtime_probe -T game=sts2 -T wait_seconds=90` for a no-inference startup check and game logs. The earlier 15-second capture was too early to establish readiness.
+
+`runtime_probe` also accepts an operator-supplied `actions` list of stock computer calls and `capture_profile=true`. These run without model inference, retain screenshots in the transcript, and can export the isolated StS2 default profile as a compressed attachment in the private `.eval` log. This supports preparing and checking an unlocked starting profile; it does not add game-state tools or grading to the evaluated agent.
 
 ## Validation
 

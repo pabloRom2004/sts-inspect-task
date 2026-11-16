@@ -5,6 +5,7 @@ from typing import Any
 import yaml
 from inspect_ai import Task, task
 from inspect_ai.dataset import Sample
+from inspect_ai.log import transcript
 from inspect_ai.model import ChatMessageUser, GenerateConfig
 from inspect_ai.solver import Generate, Solver, TaskState, solver
 from inspect_ai.tool import computer
@@ -82,6 +83,7 @@ def second_game(
     character: str = ARGS["character"],
     ascension: int = DEFAULTS["sts2"]["ascension"],
     game_seed: str | int | None = ARGS["game_seed"],
+    prompt_name: str = DEFAULTS["sts2"]["prompt_name"],
     setup_timeout: int = ARGS["setup_timeout"],
     command_timeout: int = ARGS["command_timeout"],
     sandbox_image: str = ARGS["sandbox_image"],
@@ -93,7 +95,7 @@ def second_game(
         character=character,
         ascension=ascension,
         game_seed=game_seed,
-        prompt_name="beat_game_sts2",
+        prompt_name=prompt_name,
         setup_timeout=setup_timeout,
         command_timeout=command_timeout,
         sandbox_image=sandbox_image,
@@ -110,7 +112,7 @@ def second_game(
         differences_from_epoch="Built-in --force-steam=off startup; no offline StS2 wiki; general shell/Python; user prompt; 75% compaction; no grader",
     )
     return Task(
-        name="sts2_beat_game",
+        name=f"sts2_{prompt_name.removesuffix('_sts2')}",
         dataset=result.dataset,
         setup=prepare_game(setup_timeout, command_timeout, game="sts2"),
         solver=slv(**{**DEFAULTS["solver"]["args"], "wiki_path": None}),
@@ -127,6 +129,8 @@ def second_game(
 @solver
 def capture_runtime(
     wait_seconds: int = DEFAULTS["runtime_probe"]["wait_seconds"],
+    actions: list[dict[str, Any]] | None = None,
+    capture_profile: bool = False,
 ) -> Solver:
     """Capture the real sandbox once without calling a paid model."""
 
@@ -140,6 +144,27 @@ def capture_runtime(
                     )
                 )
             )
+            for action in actions or []:
+                state.messages.append(
+                    ChatMessageUser(content=await computer(timeout=180)(**action))
+                )
+            if capture_profile:
+                profile = await checked_exec(
+                    [
+                        "bash",
+                        "-lc",
+                        (
+                            "set -o pipefail; "
+                            "tar -C /root/.local/share/SlayTheSpire2 -czf - default "
+                            "| base64 -w 0"
+                        ),
+                    ],
+                    180,
+                )
+                transcript().info(
+                    {"profile_archive_base64": profile},
+                    source="sts_hawk.runtime_probe",
+                )
         finally:
             logger.info(
                 "Runtime diagnostics:\n%s",
@@ -170,11 +195,15 @@ def capture_runtime(
 def runtime_probe(
     game: str = "sts1",
     wait_seconds: int = DEFAULTS["runtime_probe"]["wait_seconds"],
+    actions: list[dict[str, Any]] | None = None,
+    capture_profile: bool = False,
     **kwargs: Any,
 ) -> Task:
     """Reuse the setup for a no-inference screenshot preflight."""
     if game not in {"sts1", "sts2"}:
         raise ValueError(f"Unknown game: {game}")
     result = second_game(**kwargs) if game == "sts2" else first_combat(**kwargs)
-    result.solver = capture_runtime(wait_seconds=wait_seconds)
+    result.solver = capture_runtime(
+        wait_seconds=wait_seconds, actions=actions, capture_profile=capture_profile
+    )
     return result

@@ -84,7 +84,27 @@ FIRST_COMBAT_SMOKE = Prompt(
     ),
 )
 
+FIRST_COMBAT_SMOKE_STS2 = Prompt(
+    title="first_combat_smoke_sts2",
+    role="subject",
+    origin="User request, 2026-11-16",
+    origin_note="StS2 integration smoke stopping after one combat; no offline StS2 wiki supplied.",
+    text=(
+        "Play Slay the Spire 2 on Ascension {ascension} as {character}.\n\n"
+        "Play the first combat, then stop and call submit with the maximum floor "
+        "reached as an integer. If you lose, stop and submit.\n\n"
+        "Play one round and do not restart the game.\n\n"
+        "{seed_instruction}"
+    ),
+)
+
 PROMPTS = {
     prompt.title: prompt
-    for prompt in [FIRST_COMBAT, BEAT_GAME, BEAT_GAME_STS2, FIRST_COMBAT_SMOKE]
+    for prompt in [
+        FIRST_COMBAT,
+        BEAT_GAME,
+        BEAT_GAME_STS2,
+        FIRST_COMBAT_SMOKE,
+        FIRST_COMBAT_SMOKE_STS2,
+    ]
 }
