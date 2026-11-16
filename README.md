@@ -109,7 +109,7 @@ Hawk's live viewer shows actions and screenshots when `log_realtime` is enabled.
 
 ```bash
 inspect eval sts_hawk/second_game --model openrouter/openai/gpt-6-luna \
-  -M responses_api=true -M responses_store=false -S harness=codex
+  -M responses_api=true -M responses_store=false -S harness=react
 ```
 
 Supply a separate private StS2 runtime archive through `STS_ASSET_URL`. The installer checks the version. Startup uses the built-in `--force-steam=off` switch, OpenGL, a null ALSA device and a 1280×800 desktop. No game assembly patch is required. The archive contains Workshop `UnlockTheSpire` v1.0.3; an unlocked profile can be included as `profile/` and copied into the isolated container. Mod activation and A10 availability must be verified before gameplay. Never publish the game archive or Steam authentication files.
