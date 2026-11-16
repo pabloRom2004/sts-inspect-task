@@ -50,6 +50,7 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
         return fixture
 
     monkeypatch.setenv("STS_ASSET_URL", "https://example.invalid/private-sts2-fixture")
+    monkeypatch.setenv("STS_PROFILE_BASE64", "cHJvZmlsZSBmaXh0dXJl")
     monkeypatch.setattr(runtime, "sandbox", lambda: fixture)
     monkeypatch.setattr(execute_tools, "sandbox_env", lambda name=None: fixture)
     monkeypatch.setattr(computer_common, "computer_sandbox", computer_sandbox)
@@ -100,10 +101,17 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
     assert not saved.samples[0].scores
     assert fixture.actions == (2 if mode == "actions" else 1)
     assert "/opt/sts/wiki.md" not in fixture.files
+    assert fixture.files["/opt/sts/profile.tar.gz"] == b"profile fixture"
     assert "v0.107.1" in fixture.files["/opt/sts/install.sh"]
     assert "--force-steam=off" in fixture.files["/opt/sts/start.sh"]
     if probe:
         assert not saved.stats.model_usage
+        assert any(
+            event.event == "info"
+            and isinstance(event.data, dict)
+            and event.data.get("runtime_diagnostics") == "setup or shell fixture"
+            for event in saved.samples[0].events
+        )
         command = fixture.commands[0]
         assert float(command[command.index("--duration") + 1]) == 90
         if mode == "actions":

@@ -166,26 +166,27 @@ def capture_runtime(
                     source="sts_hawk.runtime_probe",
                 )
         finally:
-            logger.info(
-                "Runtime diagnostics:\n%s",
-                await checked_exec(
-                    [
-                        "bash",
-                        "-lc",
-                        (
-                            "printf 'PID 1: '; tr '\\0' ' ' < /proc/1/cmdline; "
-                            "printf '\\n'; "
-                            "for file in /tmp/sts-startup.log /tmp/game.log "
-                            "/tmp/xvnc.log "
-                            "/root/.local/share/SlayTheSpire2/logs/godot.log; do "
-                            'if [ -f "$file" ]; then '
-                            "printf '\\n=== %s ===\\n' \"$file\"; "
-                            'tail -n 60 "$file"; fi; done'
-                        ),
-                    ],
-                    180,
-                ),
+            diagnostics = await checked_exec(
+                [
+                    "bash",
+                    "-lc",
+                    (
+                        "printf 'PID 1: '; tr '\\0' ' ' < /proc/1/cmdline; "
+                        "printf '\\n'; "
+                        "for file in /tmp/sts-startup.log /tmp/game.log "
+                        "/tmp/xvnc.log "
+                        "/root/.local/share/SlayTheSpire2/logs/godot.log; do "
+                        'if [ -f "$file" ]; then '
+                        "printf '\\n=== %s ===\\n' \"$file\"; "
+                        'tail -n 200 "$file"; fi; done'
+                    ),
+                ],
+                180,
             )
+            transcript().info(
+                {"runtime_diagnostics": diagnostics}, source="sts_hawk.runtime_probe"
+            )
+            logger.info("Runtime diagnostics:\n%s", diagnostics)
         return state
 
     return solve

@@ -27,3 +27,8 @@ if [ -d /game/profile ]; then
   mkdir -p /root/.local/share/SlayTheSpire2
   cp -a /game/profile/. /root/.local/share/SlayTheSpire2/
 fi
+if [ -f /opt/sts/profile.tar.gz ]; then
+  mkdir -p /root/.local/share/SlayTheSpire2
+  tar -xzf /opt/sts/profile.tar.gz -C /root/.local/share/SlayTheSpire2
+  rm /opt/sts/profile.tar.gz
+fi

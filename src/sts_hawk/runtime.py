@@ -1,5 +1,6 @@
 """Prepare the Linux runtime without a game-state bridge."""
 
+import base64
 import logging
 import os
 from pathlib import Path
@@ -38,6 +39,11 @@ def prepare_game(
             ["mkdir", "-p", "/opt/sts", "/opt/inspect/tool"], command_timeout
         )
         await sandbox().write_file("/opt/sts/asset-url", os.environ["STS_ASSET_URL"])
+        if game == "sts2" and os.environ.get("STS_PROFILE_BASE64"):
+            await sandbox().write_file(
+                "/opt/sts/profile.tar.gz",
+                base64.b64decode(os.environ["STS_PROFILE_BASE64"], validate=True),
+            )
         for name in ["install.sh", "start.sh"]:
             await sandbox().write_file(
                 f"/opt/sts/{name}", (runtime_assets / name).read_text()
