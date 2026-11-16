@@ -122,6 +122,8 @@ No offline StS2 wiki is currently included; this task does not advertise the fir
 
 `runtime_probe` also accepts an operator-supplied `actions` list of stock computer calls and `capture_profile=true`. These run without model inference, retain screenshots in the transcript, and can export the isolated StS2 default profile as a compressed attachment in the private `.eval` log. This supports preparing and checking an unlocked starting profile; it does not add game-state tools or grading to the evaluated agent.
 
+StS2 runtime probes wait for the game's complete-menu startup marker before issuing computer calls. Their diagnostic attachment includes cgroup CPU and memory counters and process memory/state alongside the game logs.
+
 ## Validation
 
 Run `pytest tests`, `ruff check .` and `ruff format --check .`. Tests exercise the actual task setup, stock computer parser, Bash/Python execution, the installed wiki file, invalid and valid integer submissions, unscored completion, and setup-error propagation through mockllm. They also exercise the real Hawk Compose-to-Kubernetes conversion. External execution is simulated in local tests; the separate Linux runtime probe must establish actual game startup before the paid gameplay smoke.

@@ -12,7 +12,7 @@ from inspect_ai.util import ExecResult
 from sts_hawk.task import runtime_probe, second_game
 
 
-@pytest.mark.parametrize("mode", ["full", "smoke", "probe", "actions"])
+@pytest.mark.parametrize("mode", ["full", "smoke", "probe", "actions", "failed-start"])
 def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
     """Run the actual StS2 composition through mock inference and desktop transport."""
     import inspect_ai.tool._tools._computer._common as computer_common
@@ -35,6 +35,8 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
 
         async def exec(self, cmd, **kwargs):
             """Simulate external execution while preserving real tool serialization."""
+            if mode == "failed-start" and "until grep" in " ".join(cmd):
+                return ExecResult(False, 1, "fixture startup failure", "")
             if cmd[:2] == ["python3", "/opt/inspect/tool/computer_tool.py"]:
                 self.actions += 1
                 self.commands.append(cmd)
@@ -54,7 +56,7 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
     monkeypatch.setattr(runtime, "sandbox", lambda: fixture)
     monkeypatch.setattr(execute_tools, "sandbox_env", lambda name=None: fixture)
     monkeypatch.setattr(computer_common, "computer_sandbox", computer_sandbox)
-    probe = mode in {"probe", "actions"}
+    probe = mode in {"probe", "actions", "failed-start"}
     if probe:
         task = runtime_probe(
             game="sts2",
@@ -95,8 +97,17 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
             ModelOutput.for_tool_call("mockllm/model", "submit", {"max_floor": 2}),
         ],
     )
-    log = inspect_eval(task, model=model, log_dir=str(tmp_path), display="none")[0]
+    log = inspect_eval(
+        task, model=model, log_dir=str(tmp_path), display="none", fail_on_error=False
+    )[0]
     saved = read_eval_log(log.location)
+    if mode == "failed-start":
+        assert saved.samples[0].error is not None
+        assert "fixture startup failure" in saved.samples[0].error.message
+        assert not saved.samples[0].model_usage
+        assert not saved.samples[0].scores
+        assert fixture.actions == 0
+        return
     assert saved.status == "success"
     assert not saved.samples[0].scores
     assert fixture.actions == (2 if mode == "actions" else 1)

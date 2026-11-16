@@ -137,6 +137,20 @@ def capture_runtime(
     async def solve(state: TaskState, generate: Generate) -> TaskState:
         """Exercise the installed stock computer tool before the real model smoke."""
         try:
+            if state.metadata.get("game") == "sts2":
+                await checked_exec(
+                    [
+                        "bash",
+                        "-lc",
+                        (
+                            "until grep -Fq 'main menu loaded (complete)' "
+                            "/tmp/game.log 2>/dev/null; do "
+                            "if [ -f /tmp/sts-failed ]; then "
+                            "tail -n 40 /tmp/game.log; exit 1; fi; sleep 1; done"
+                        ),
+                    ],
+                    180,
+                )
             state.messages.append(
                 ChatMessageUser(
                     content=await computer(timeout=180)(
@@ -178,7 +192,19 @@ def capture_runtime(
                         "/root/.local/share/SlayTheSpire2/logs/godot.log; do "
                         'if [ -f "$file" ]; then '
                         "printf '\\n=== %s ===\\n' \"$file\"; "
-                        'tail -n 200 "$file"; fi; done'
+                        'tail -n 200 "$file"; fi; done; '
+                        "printf '\\n=== Container resource counters ===\\n'; "
+                        "for file in /sys/fs/cgroup/memory.current "
+                        "/sys/fs/cgroup/memory.peak /sys/fs/cgroup/memory.max "
+                        "/sys/fs/cgroup/memory.events /sys/fs/cgroup/cpu.stat "
+                        "/sys/fs/cgroup/cpu.max; do "
+                        'if [ -r "$file" ]; then printf "%s: " "$file"; '
+                        'cat "$file"; fi; done; '
+                        "printf '\\n=== Process memory and state ===\\n'; "
+                        "for file in /proc/[0-9]*/status; do "
+                        'if [ -r "$file" ]; then printf "%s\\n" "$file"; '
+                        "awk '/^(Name|State|VmRSS|VmPeak|Threads):/' "
+                        '"$file" 2>/dev/null || true; fi; done'
                     ),
                 ],
                 180,
