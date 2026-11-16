@@ -20,6 +20,7 @@ def visual_agent(
     compaction_threshold: float = DEFAULTS["compaction_threshold"],
     harness: Literal["react", "codex"] = DEFAULTS["harness"],
     codex: dict[str, Any] = DEFAULTS["codex"],
+    wiki_path: str | None = DEFAULTS["wiki_path"],
 ) -> Solver:
     """Select ReAct or native Codex while retaining the same game and submission."""
     if harness == "codex":
@@ -36,11 +37,12 @@ def visual_agent(
     # Keep function calling on stateless Responses API providers.
     desktop = desktop_tool(max_screenshots=max_screenshots, timeout=tool_timeout)
     shell = bash(timeout=tool_timeout)
-    shell = tool_with(
-        shell,
-        description=ToolDef(shell).description
-        + "\nOffline Slay the Spire wiki: /opt/sts/wiki.md.",
-    )
+    if wiki_path is not None:
+        shell = tool_with(
+            shell,
+            description=ToolDef(shell).description
+            + f"\nOffline Slay the Spire wiki: {wiki_path}.",
+        )
     return as_solver(
         react(
             tools=[

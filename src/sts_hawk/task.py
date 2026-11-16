@@ -18,12 +18,14 @@ DEFAULTS = default_run_config()
 ARGS = DEFAULTS["task"]["args"]
 
 
-def sandbox_config(image: str) -> str:
+def sandbox_config(image: str, height: int | None = None) -> str:
     """Write the sample's Kubernetes-compatible single-service Compose config."""
     compose = yaml.safe_load(
         (Path(__file__).parent / "assets/compose.yaml").read_text()
     )
     compose["services"]["default"]["image"] = image
+    if height is not None:
+        compose["services"]["default"]["environment"]["HEIGHT"] = str(height)
     path = Path(tempfile.mkdtemp(prefix="sts-sandbox-")) / "compose.yaml"
     path.write_text(yaml.safe_dump(compose))
     return str(path)
@@ -75,6 +77,53 @@ def first_combat(
     )
 
 
+@task
+def second_game(
+    character: str = ARGS["character"],
+    ascension: int = DEFAULTS["sts2"]["ascension"],
+    game_seed: str | int | None = ARGS["game_seed"],
+    setup_timeout: int = ARGS["setup_timeout"],
+    command_timeout: int = ARGS["command_timeout"],
+    sandbox_image: str = ARGS["sandbox_image"],
+) -> Task:
+    """Reuse the agent and integer submission for StS2's three-Act A10 game."""
+    if not 0 <= ascension <= 10:
+        raise ValueError("Slay the Spire 2 v0.107.1 supports Ascension 0 through 10.")
+    result = first_combat(
+        character=character,
+        ascension=ascension,
+        game_seed=game_seed,
+        prompt_name="beat_game_sts2",
+        setup_timeout=setup_timeout,
+        command_timeout=command_timeout,
+        sandbox_image=sandbox_image,
+    )
+    sample = result.dataset[0]
+    sample.id = f"sts2-{sample.id}"
+    sample.metadata["game"] = "sts2"
+    slv = getattr(agent, DEFAULTS["solver"]["solver"].split("/")[-1])
+    result.metadata.update(
+        game="sts2",
+        game_version="v0.107.1",
+        wiki="No offline StS2 wiki supplied",
+        model_visible="Desktop, sandbox shell/Python and integer submit",
+        differences_from_epoch="Built-in --force-steam=off startup; no offline StS2 wiki; general shell/Python; user prompt; 75% compaction; no grader",
+    )
+    return Task(
+        name="sts2_beat_game",
+        dataset=result.dataset,
+        setup=prepare_game(setup_timeout, command_timeout, game="sts2"),
+        solver=slv(**{**DEFAULTS["solver"]["args"], "wiki_path": None}),
+        sandbox=(
+            "docker",
+            sandbox_config(sandbox_image, height=DEFAULTS["sts2"]["desktop_height"]),
+        ),
+        config=result.config,
+        metadata=result.metadata,
+        **DEFAULTS["eval_config"],
+    )
+
+
 @solver
 def capture_runtime() -> Solver:
     """Capture the real sandbox once without calling a paid model."""
@@ -109,8 +158,10 @@ def capture_runtime() -> Solver:
 
 
 @task
-def runtime_probe(**kwargs: Any) -> Task:
+def runtime_probe(game: str = "sts1", **kwargs: Any) -> Task:
     """Reuse the setup for a no-inference screenshot preflight."""
-    result = first_combat(**kwargs)
+    if game not in {"sts1", "sts2"}:
+        raise ValueError(f"Unknown game: {game}")
+    result = second_game(**kwargs) if game == "sts2" else first_combat(**kwargs)
     result.solver = capture_runtime()
     return result

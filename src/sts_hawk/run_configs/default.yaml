@@ -13,6 +13,7 @@ solver:
   solver: sts_hawk/visual_agent
   args:
     harness: react
+    wiki_path: /opt/sts/wiki.md
     max_screenshots: 3
     tool_timeout: 180
     compaction_threshold: 787500
@@ -37,3 +38,7 @@ eval_config:
   token_limit: null
   message_limit: null
   time_limit: null
+
+sts2:
+  ascension: 10
+  desktop_height: 800

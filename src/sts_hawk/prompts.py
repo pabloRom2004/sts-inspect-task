@@ -55,4 +55,17 @@ BEAT_GAME = Prompt(
     ),
 )
 
-PROMPTS = {prompt.title: prompt for prompt in [FIRST_COMBAT, BEAT_GAME]}
+BEAT_GAME_STS2 = Prompt(
+    title="beat_game_sts2",
+    role="subject",
+    origin="User request, 2026-11-16",
+    origin_note="Minimal StS2 prompt for the purchased v0.107.1 Linux copy; no offline StS2 wiki is supplied yet.",
+    text=(
+        "Try to beat Slay the Spire 2 on Ascension {ascension} as {character}.\n\n"
+        "Complete all three Acts to win.\n\n"
+        "Play one round and do not restart the game. Play until victory or defeat.\n\n"
+        "{seed_instruction}"
+    ),
+)
+
+PROMPTS = {prompt.title: prompt for prompt in [FIRST_COMBAT, BEAT_GAME, BEAT_GAME_STS2]}

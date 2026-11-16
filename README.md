@@ -99,6 +99,19 @@ The agent finishes with `submit(max_floor: int)`. Inspect stores the integer as 
 
 Hawk's live viewer shows actions and screenshots when `log_realtime` is enabled. No local viewer or relay is required. Installation and sandbox failures remain errors rather than game losses.
 
+## Slay the Spire 2
+
+`sts_hawk/second_game` uses the owned Linux **v0.107.1** copy, defaults to Ironclad at **A10**, and asks for all three Acts with one run and no restart. It retains the integer max-floor submission and has no grader:
+
+```bash
+inspect eval sts_hawk/second_game --model openrouter/openai/gpt-6-luna \
+  -M responses_api=true -M responses_store=false -S harness=codex
+```
+
+Supply a separate private StS2 runtime archive through `STS_ASSET_URL`. The installer checks the version. Startup uses the built-in `--force-steam=off` switch, OpenGL, a null ALSA device and a 1280×800 desktop. No game assembly patch is required. The archive contains Workshop `UnlockTheSpire` v1.0.3; an unlocked profile can be included as `profile/` and copied into the isolated container. Mod activation and A10 availability must be verified before gameplay. Never publish the game archive or Steam authentication files.
+
+No offline StS2 wiki is currently included; this task does not advertise the first game's wiki to the StS2 agent. This is an additional difference from Epoch. Local task/mock transport tests pass, but the x86 game currently crashes during startup under Docker emulation on the ARM Mac, including a separate latest-.NET control. Native x86 Hawk runtime validation is pending; this is not yet a verified StS2 gameplay result. Use `sts_hawk/runtime_probe -T game=sts2` for a no-inference startup check.
+
 ## Validation
 
 Run `pytest tests`, `ruff check .` and `ruff format --check .`. Tests exercise the actual task setup, stock computer parser, Bash/Python execution, the installed wiki file, invalid and valid integer submissions, unscored completion, and setup-error propagation through mockllm. They also exercise the real Hawk Compose-to-Kubernetes conversion. External execution is simulated in local tests; the separate Linux runtime probe must establish actual game startup before the paid gameplay smoke.
