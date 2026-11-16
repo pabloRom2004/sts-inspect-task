@@ -27,6 +27,7 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, probe):
             """Initialize per-sample setup and action evidence."""
             self.files = {}
             self.actions = 0
+            self.commands = []
 
         async def write_file(self, path, content):
             """Capture the actual file delivered to the sandbox."""
@@ -36,6 +37,7 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, probe):
             """Simulate external execution while preserving real tool serialization."""
             if cmd[:2] == ["python3", "/opt/inspect/tool/computer_tool.py"]:
                 self.actions += 1
+                self.commands.append(cmd)
                 return ExecResult(True, 0, '{"output":"StS2 fixture","error":null}', "")
             return ExecResult(True, 0, "setup or shell fixture", "")
 
@@ -49,7 +51,7 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, probe):
     monkeypatch.setattr(runtime, "sandbox", lambda: fixture)
     monkeypatch.setattr(execute_tools, "sandbox_env", lambda name=None: fixture)
     monkeypatch.setattr(computer_common, "computer_sandbox", computer_sandbox)
-    task = runtime_probe(game="sts2") if probe else second_game()
+    task = runtime_probe(game="sts2", wait_seconds=90) if probe else second_game()
     assert task.name == "sts2_beat_game"
     assert task.dataset[0].id.startswith("sts2-ironclad-a10-")
     assert "Complete all three Acts to win." in task.dataset[0].input
@@ -82,6 +84,8 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, probe):
     assert "--force-steam=off" in fixture.files["/opt/sts/start.sh"]
     if probe:
         assert not saved.stats.model_usage
+        command = fixture.commands[0]
+        assert float(command[command.index("--duration") + 1]) == 90
     else:
         assert saved.samples[0].output.completion == "2"
 

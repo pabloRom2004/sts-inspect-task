@@ -125,7 +125,9 @@ def second_game(
 
 
 @solver
-def capture_runtime() -> Solver:
+def capture_runtime(
+    wait_seconds: int = DEFAULTS["runtime_probe"]["wait_seconds"],
+) -> Solver:
     """Capture the real sandbox once without calling a paid model."""
 
     async def solve(state: TaskState, generate: Generate) -> TaskState:
@@ -133,7 +135,9 @@ def capture_runtime() -> Solver:
         try:
             state.messages.append(
                 ChatMessageUser(
-                    content=await computer(timeout=180)(action="wait", duration=15)
+                    content=await computer(timeout=180)(
+                        action="wait", duration=wait_seconds
+                    )
                 )
             )
         finally:
@@ -145,8 +149,13 @@ def capture_runtime() -> Solver:
                         "-lc",
                         (
                             "printf 'PID 1: '; tr '\\0' ' ' < /proc/1/cmdline; "
-                            "printf '\\n'; tail -30 /tmp/sts-startup.log /tmp/game.log "
-                            "/tmp/xvnc.log 2>/dev/null || true"
+                            "printf '\\n'; "
+                            "for file in /tmp/sts-startup.log /tmp/game.log "
+                            "/tmp/xvnc.log "
+                            "/root/.local/share/SlayTheSpire2/logs/godot.log; do "
+                            'if [ -f "$file" ]; then '
+                            "printf '\\n=== %s ===\\n' \"$file\"; "
+                            'tail -n 60 "$file"; fi; done'
                         ),
                     ],
                     180,
@@ -158,10 +167,14 @@ def capture_runtime() -> Solver:
 
 
 @task
-def runtime_probe(game: str = "sts1", **kwargs: Any) -> Task:
+def runtime_probe(
+    game: str = "sts1",
+    wait_seconds: int = DEFAULTS["runtime_probe"]["wait_seconds"],
+    **kwargs: Any,
+) -> Task:
     """Reuse the setup for a no-inference screenshot preflight."""
     if game not in {"sts1", "sts2"}:
         raise ValueError(f"Unknown game: {game}")
     result = second_game(**kwargs) if game == "sts2" else first_combat(**kwargs)
-    result.solver = capture_runtime()
+    result.solver = capture_runtime(wait_seconds=wait_seconds)
     return result
