@@ -10,13 +10,16 @@ class Prompt:
     text: str
     origin: str
     origin_note: str
+    seed_instruction: str = (
+        "Enter seed {game_seed} in the game's seed field before starting the run.\n\n"
+    )
 
     def render(
         self, character: str, ascension: int, game_seed: str | int | None
     ) -> str:
         """Include an optional seed instruction for the agent to enter through the game UI."""
         seed_instruction = (
-            f"Enter seed {game_seed} in the game's seed field before starting the run.\n\n"
+            self.seed_instruction.format(game_seed=game_seed)
             if game_seed is not None
             else ""
         )
@@ -55,11 +58,18 @@ BEAT_GAME = Prompt(
     ),
 )
 
+STS2_SEED_INSTRUCTION = (
+    "Choose Singleplayer > Custom. Enter seed {game_seed} in the Seed box "
+    "before starting the run. Leave all modifiers off.\n\n"
+)
+
+
 BEAT_GAME_STS2 = Prompt(
     title="beat_game_sts2",
     role="subject",
     origin="User request, 2026-11-16",
     origin_note="Minimal StS2 prompt for the purchased v0.107.1 Linux copy; no offline StS2 wiki is supplied yet.",
+    seed_instruction=STS2_SEED_INSTRUCTION,
     text=(
         "Try to beat Slay the Spire 2 on Ascension {ascension} as {character}.\n\n"
         "The game can take about a minute to load. "
@@ -91,6 +101,7 @@ FIRST_COMBAT_SMOKE_STS2 = Prompt(
     role="subject",
     origin="User request, 2026-11-16",
     origin_note="StS2 integration smoke stopping after one combat; no offline StS2 wiki supplied.",
+    seed_instruction=STS2_SEED_INSTRUCTION,
     text=(
         "Play Slay the Spire 2 on Ascension {ascension} as {character}.\n\n"
         "The game can take about a minute to load. "

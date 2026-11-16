@@ -83,6 +83,8 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
     else:
         assert "Complete all three Acts to win." in task.dataset[0].input
     assert "Enter seed 1" in task.dataset[0].input
+    assert "Choose Singleplayer > Custom." in task.dataset[0].input
+    assert "Leave all modifiers off." in task.dataset[0].input
     assert "Heart" not in task.dataset[0].input
     assert "wiki" not in task.dataset[0].input
     assert (
