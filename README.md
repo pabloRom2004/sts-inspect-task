@@ -41,6 +41,8 @@ For the full-game A20 attempt, pass `-T prompt_name=beat_game`. Its prompt is:
 
 The general tools and integer submission are unchanged. No first-combat stopping rule applies.
 
+For a bounded StS1 integration check, select `-T prompt_name=first_combat_smoke`. This separate prompt asks the model to read the wiki about its first enemy, finish that combat and call `submit` with the maximum floor reached. It retains the character, ascension, seed and no-restart instructions. It does not require a full-game victory and is not a performance benchmark prompt. The two existing StS1 prompts and their defaults are unchanged.
+
 Real model evaluations run on Hawk. Local validation uses mockllm. `sts_hawk/runtime_probe` performs the same installation and captures a screenshot without a model generation. These are separate checks: provider connectivity does not prove the game runs, and a runtime screenshot does not prove the agent can play.
 
 ### Configuration
@@ -83,7 +85,7 @@ Sandbox resources live in `assets/compose.yaml`. Two CPUs and 4 GB are initial s
 
 ## Parameters
 
-`first_combat` accepts `character` (`IRONCLAD`), `ascension` (`20`), `game_seed` (`"1"`), `prompt_name` (`first_combat`), `setup_timeout` (`900` seconds), `command_timeout` (`180` seconds) and `sandbox_image` (`ubuntu:24.04`). The `first_combat` entrypoint is retained for compatibility. The character parameter is included in both prompts and defaults to Ironclad. The full-game prompt also includes ascension. No hidden controller starts a run. Verify the actual selection from screenshots. The prompt no longer imposes a first-combat stopping rule; bounded smoke tests must be stopped externally.
+`first_combat` accepts `character` (`IRONCLAD`), `ascension` (`20`), `game_seed` (`"1"`), `prompt_name` (`first_combat`), `setup_timeout` (`900` seconds), `command_timeout` (`180` seconds) and `sandbox_image` (`ubuntu:24.04`). The `first_combat` entrypoint is retained for compatibility. The character parameter defaults to Ironclad. The `beat_game` and `first_combat_smoke` prompts also include ascension. No hidden controller starts a run. Verify the actual selection from screenshots. Only the explicitly selected `first_combat_smoke` prompt requests stopping after one combat; both existing gameplay prompts continue until victory or defeat.
 
 Pass `-T game_seed=1` to request literal seed `1` in the game's seed field. This instruction is included in either gameplay prompt, and the requested seed is recorded in task/sample metadata and the sample ID. The AI must enter it through the game interface; setup does not inject a seed. Set `game_seed: null` in task arguments to omit the instruction and retain the prior unseeded sample ID. This parameter is separate from `generate_config.seed`, which controls model sampling and remains unset. A requested seed is not proof of the seed actually used: verify the visible seed after the run starts.
 

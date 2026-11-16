@@ -68,4 +68,23 @@ BEAT_GAME_STS2 = Prompt(
     ),
 )
 
-PROMPTS = {prompt.title: prompt for prompt in [FIRST_COMBAT, BEAT_GAME, BEAT_GAME_STS2]}
+FIRST_COMBAT_SMOKE = Prompt(
+    title="first_combat_smoke",
+    role="subject",
+    origin="User request, 2026-11-16",
+    origin_note="Bounded StS1 integration check requiring an enemy wiki lookup, one combat and an integer submission; not a performance benchmark prompt.",
+    text=(
+        "Play Slay the Spire on Ascension {ascension} as {character}.\n\n"
+        "Read the offline wiki about the first enemy you encounter. "
+        "Play the first combat, then stop and call submit with the maximum floor "
+        "reached as an integer. If you lose, stop and submit.\n\n"
+        "Play one round and do not restart the game.\n\n"
+        "{seed_instruction}"
+        "An offline Slay the Spire wiki is available at /opt/sts/wiki.md."
+    ),
+)
+
+PROMPTS = {
+    prompt.title: prompt
+    for prompt in [FIRST_COMBAT, BEAT_GAME, BEAT_GAME_STS2, FIRST_COMBAT_SMOKE]
+}

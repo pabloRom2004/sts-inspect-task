@@ -34,7 +34,9 @@ def test_wiki_titles() -> None:
         assert "https://slay-the-spire.fandom.com" in articles[enemy]
 
 
-@pytest.mark.parametrize("mode", ["agent", "beat_game", "probe", "setup_error"])
+@pytest.mark.parametrize(
+    "mode", ["agent", "beat_game", "combat_smoke", "probe", "setup_error"]
+)
 def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) -> None:
     """Exercise setup, stock desktop/shell/Python tools and integer submission without a grader."""
     import inspect_ai.tool._tools._computer._common as computer_common
@@ -107,18 +109,35 @@ def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) ->
         runtime_probe()
         if mode == "probe"
         else first_combat(
-            prompt_name="beat_game" if mode == "beat_game" else "first_combat"
+            prompt_name=(
+                "beat_game"
+                if mode == "beat_game"
+                else "first_combat_smoke"
+                if mode == "combat_smoke"
+                else "first_combat"
+            )
         )
     )
     assert task.config.reasoning_effort == "max"
-    expected_prompt = (
-        "Try to beat Slay the Spire on Ascension 20 as Ironclad."
-        if mode == "beat_game"
-        else "play Slay the Spire for me as Ironclad"
-    )
+    if mode == "combat_smoke":
+        expected_prompt = (
+            "Play Slay the Spire on Ascension 20 as Ironclad.\n\n"
+            "Read the offline wiki about the first enemy you encounter. "
+            "Play the first combat, then stop and call submit with the maximum floor "
+            "reached as an integer. If you lose, stop and submit.\n\n"
+            "Play one round and do not restart the game."
+        )
+    else:
+        expected_prompt = (
+            "Try to beat Slay the Spire on Ascension 20 as Ironclad."
+            if mode == "beat_game"
+            else "play Slay the Spire for me as Ironclad"
+        )
+        expected_prompt += (
+            "\n\nDefeat the Heart to win."
+            "\n\nPlay one round and do not restart the game. Play until victory or defeat."
+        )
     expected_prompt += (
-        "\n\nDefeat the Heart to win."
-        "\n\nPlay one round and do not restart the game. Play until victory or defeat."
         "\n\nEnter seed 1 in the game's seed field before starting the run."
         "\n\nAn offline Slay the Spire wiki is available at /opt/sts/wiki.md."
     )
@@ -153,7 +172,9 @@ def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) ->
     assert submission.required == ["max_floor"]
 
 
-@pytest.mark.parametrize("prompt_name", ["first_combat", "beat_game"])
+@pytest.mark.parametrize(
+    "prompt_name", ["first_combat", "beat_game", "first_combat_smoke"]
+)
 @pytest.mark.parametrize("game_seed", [None, "1", 15])
 def test_game_seed_instruction_and_metadata(prompt_name, game_seed):
     """Keep game seeds in the prompt and run identity, separate from model sampling."""
