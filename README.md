@@ -116,6 +116,8 @@ Supply a separate private StS2 runtime archive through `STS_ASSET_URL`. The inst
 
 An isolated profile can also be supplied as a base64-encoded tar.gz through the optional `STS_PROFILE_BASE64` runner secret. Its contents are applied over the archive's profile before launch. This keeps the game archive fixed while preparing and verifying the unlocked starting state. Keep this profile private too.
 
+An optional `STS_RUNTIME_OVERLAY_BASE64` secret supplies a tar.gz of additional private mod directories. It is extracted under `/game/mods` with Python's data filter. The profile and mod-overlay archive hashes are recorded in sample metadata. No overlay is supplied by default.
+
 `second_game` accepts `frame_rate_limit` (default 60). The launcher applies it to the isolated settings before the game starts, including when no starting profile is supplied. It is recorded in task metadata. Software-rendering diagnostic runs can vary it without changing the task source.
 
 The Linux launcher preloads the system `libgcc_s.so.1` for the bundled Harmony 2.4.2 exception helper. Without it, mod initialization fails with `undefined symbol: _Unwind_RaiseException` even though the game reports the mod as loaded. This reproduces [Harmony issue 766](https://github.com/pardeike/Harmony/issues/766); the runtime setting preserves the frozen game assemblies rather than replacing Harmony with the newer release.

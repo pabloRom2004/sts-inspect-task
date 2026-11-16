@@ -53,6 +53,7 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
 
     monkeypatch.setenv("STS_ASSET_URL", "https://example.invalid/private-sts2-fixture")
     monkeypatch.setenv("STS_PROFILE_BASE64", "cHJvZmlsZSBmaXh0dXJl")
+    monkeypatch.setenv("STS_RUNTIME_OVERLAY_BASE64", "bW9kIGZpeHR1cmU=")
     monkeypatch.setattr(runtime, "sandbox", lambda: fixture)
     monkeypatch.setattr(execute_tools, "sandbox_env", lambda name=None: fixture)
     monkeypatch.setattr(computer_common, "computer_sandbox", computer_sandbox)
@@ -116,6 +117,8 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
     assert fixture.actions == (2 if mode == "actions" else 1)
     assert "/opt/sts/wiki.md" not in fixture.files
     assert fixture.files["/opt/sts/profile.tar.gz"] == b"profile fixture"
+    assert fixture.files["/opt/sts/runtime-overlay.tar.gz"] == b"mod fixture"
+    assert len(saved.samples[0].metadata["sts2_runtime_overlay_sha256"]) == 64
     assert fixture.files["/opt/sts/frame-rate-limit"] == str(frame_rate_limit)
     assert task.metadata["frame_rate_limit"] == frame_rate_limit
     assert "v0.107.1" in fixture.files["/opt/sts/install.sh"]

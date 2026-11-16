@@ -1,6 +1,7 @@
 """Prepare the Linux runtime without a game-state bridge."""
 
 import base64
+import hashlib
 import logging
 import os
 from pathlib import Path
@@ -48,11 +49,19 @@ def prepare_game(
             await sandbox().write_file(
                 "/opt/sts/frame-rate-limit", str(frame_rate_limit)
             )
-        if game == "sts2" and os.environ.get("STS_PROFILE_BASE64"):
-            await sandbox().write_file(
-                "/opt/sts/profile.tar.gz",
-                base64.b64decode(os.environ["STS_PROFILE_BASE64"], validate=True),
-            )
+        if game == "sts2":
+            for variable, filename, metadata_key in [
+                ("STS_PROFILE_BASE64", "profile.tar.gz", "sts2_profile_sha256"),
+                (
+                    "STS_RUNTIME_OVERLAY_BASE64",
+                    "runtime-overlay.tar.gz",
+                    "sts2_runtime_overlay_sha256",
+                ),
+            ]:
+                if encoded := os.environ.get(variable):
+                    data = base64.b64decode(encoded, validate=True)
+                    await sandbox().write_file(f"/opt/sts/{filename}", data)
+                    state.metadata[metadata_key] = hashlib.sha256(data).hexdigest()
         for name in ["install.sh", "start.sh"]:
             await sandbox().write_file(
                 f"/opt/sts/{name}", (runtime_assets / name).read_text()

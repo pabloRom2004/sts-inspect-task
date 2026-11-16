@@ -23,6 +23,15 @@ release = json.loads(Path('/game/release_info.json').read_text())
 if release.get('version') != 'v0.107.1':
     raise RuntimeError(f"Expected StS2 v0.107.1, received {release.get('version')!r}")
 PY
+if [ -f /opt/sts/runtime-overlay.tar.gz ]; then
+  mkdir -p /game/mods
+  python3 - <<'PY'
+import tarfile
+with tarfile.open('/opt/sts/runtime-overlay.tar.gz', 'r:gz') as archive:
+    archive.extractall('/game/mods', filter='data')
+PY
+  rm /opt/sts/runtime-overlay.tar.gz
+fi
 if [ -d /game/profile ]; then
   mkdir -p /root/.local/share/SlayTheSpire2
   cp -a /game/profile/. /root/.local/share/SlayTheSpire2/
