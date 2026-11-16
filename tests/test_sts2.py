@@ -57,18 +57,21 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
     monkeypatch.setattr(execute_tools, "sandbox_env", lambda name=None: fixture)
     monkeypatch.setattr(computer_common, "computer_sandbox", computer_sandbox)
     probe = mode in {"probe", "actions", "failed-start"}
+    frame_rate_limit = 10 if mode == "actions" else 60
     if probe:
         task = runtime_probe(
             game="sts2",
             wait_seconds=90,
             actions=[{"action": "screenshot"}] if mode == "actions" else None,
             capture_profile=mode == "actions",
+            frame_rate_limit=frame_rate_limit,
         )
     else:
         task = second_game(
             prompt_name="first_combat_smoke_sts2"
             if mode == "smoke"
-            else "beat_game_sts2"
+            else "beat_game_sts2",
+            frame_rate_limit=frame_rate_limit,
         )
     assert task.name == (
         "sts2_first_combat_smoke" if mode == "smoke" else "sts2_beat_game"
@@ -113,6 +116,8 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
     assert fixture.actions == (2 if mode == "actions" else 1)
     assert "/opt/sts/wiki.md" not in fixture.files
     assert fixture.files["/opt/sts/profile.tar.gz"] == b"profile fixture"
+    assert fixture.files["/opt/sts/frame-rate-limit"] == str(frame_rate_limit)
+    assert task.metadata["frame_rate_limit"] == frame_rate_limit
     assert "v0.107.1" in fixture.files["/opt/sts/install.sh"]
     assert "--force-steam=off" in fixture.files["/opt/sts/start.sh"]
     if probe:

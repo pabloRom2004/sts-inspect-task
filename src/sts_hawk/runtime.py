@@ -25,7 +25,10 @@ async def checked_exec(command: list[str], timeout: int) -> str:
 
 @solver
 def prepare_game(
-    setup_timeout: int, command_timeout: int, game: str = "sts1"
+    setup_timeout: int,
+    command_timeout: int,
+    game: str = "sts1",
+    frame_rate_limit: int | None = None,
 ) -> Solver:
     """Install the runtime and signal the game container to launch."""
 
@@ -39,6 +42,12 @@ def prepare_game(
             ["mkdir", "-p", "/opt/sts", "/opt/inspect/tool"], command_timeout
         )
         await sandbox().write_file("/opt/sts/asset-url", os.environ["STS_ASSET_URL"])
+        if game == "sts2":
+            if frame_rate_limit is None:
+                raise ValueError("StS2 setup requires an explicit frame rate limit.")
+            await sandbox().write_file(
+                "/opt/sts/frame-rate-limit", str(frame_rate_limit)
+            )
         if game == "sts2" and os.environ.get("STS_PROFILE_BASE64"):
             await sandbox().write_file(
                 "/opt/sts/profile.tar.gz",

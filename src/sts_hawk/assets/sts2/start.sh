@@ -20,18 +20,19 @@ python3 - <<'PY'
 import json
 from pathlib import Path
 path = Path('/root/.local/share/SlayTheSpire2/default/1/settings.save')
-if path.exists():
-    data = json.loads(path.read_text())
-    data.update({'fps_limit': 60, 'fullscreen': False,
-                 'window_size': {'X': 1280, 'Y': 800},
-                 'window_position': {'X': 0, 'Y': 0}})
-    path.write_text(json.dumps(data))
+path.parent.mkdir(parents=True, exist_ok=True)
+data = json.loads(path.read_text()) if path.exists() else {'schema_version': 5}
+frame_rate_limit = int(Path('/opt/sts/frame-rate-limit').read_text())
+data.update({'fps_limit': frame_rate_limit, 'fullscreen': False,
+             'window_size': {'X': 1280, 'Y': 800},
+             'window_position': {'X': 0, 'Y': 0}})
+path.write_text(json.dumps(data))
 PY
 echo 'Starting unmodified StS2 v0.107.1 with built-in offline platform flag'
 # Bundled Harmony 2.4.2 omits this dependency from its Linux exception helper.
 # Preload the system library to preserve the frozen game's assemblies.
 LD_PRELOAD=libgcc_s.so.1 ./SlayTheSpire2 --force-steam=off --rendering-driver opengl3 \
-  --render-thread separate --display-driver x11 --resolution 1280x800 --windowed --position 0,0 \
+  --display-driver x11 --resolution 1280x800 --windowed --position 0,0 \
   >/tmp/game.log 2>&1 &
 game_pid=$!
 timeout 180 xdotool search --sync --onlyvisible --name 'Slay.*Spire' > /tmp/sts-game-window

@@ -87,10 +87,13 @@ def second_game(
     setup_timeout: int = ARGS["setup_timeout"],
     command_timeout: int = ARGS["command_timeout"],
     sandbox_image: str = ARGS["sandbox_image"],
+    frame_rate_limit: int = DEFAULTS["sts2"]["frame_rate_limit"],
 ) -> Task:
     """Reuse the agent and integer submission for StS2's three-Act A10 game."""
     if not 0 <= ascension <= 10:
         raise ValueError("Slay the Spire 2 v0.107.1 supports Ascension 0 through 10.")
+    if frame_rate_limit < 0:
+        raise ValueError("The frame rate limit must be nonnegative.")
     result = first_combat(
         character=character,
         ascension=ascension,
@@ -107,6 +110,7 @@ def second_game(
     result.metadata.update(
         game="sts2",
         game_version="v0.107.1",
+        frame_rate_limit=frame_rate_limit,
         wiki="No offline StS2 wiki supplied",
         model_visible="Desktop, sandbox shell/Python and integer submit",
         differences_from_epoch="Built-in --force-steam=off startup; no offline StS2 wiki; general shell/Python; user prompt; 75% compaction; no grader",
@@ -114,7 +118,12 @@ def second_game(
     return Task(
         name=f"sts2_{prompt_name.removesuffix('_sts2')}",
         dataset=result.dataset,
-        setup=prepare_game(setup_timeout, command_timeout, game="sts2"),
+        setup=prepare_game(
+            setup_timeout,
+            command_timeout,
+            game="sts2",
+            frame_rate_limit=frame_rate_limit,
+        ),
         solver=slv(**{**DEFAULTS["solver"]["args"], "wiki_path": None}),
         sandbox=(
             "docker",
