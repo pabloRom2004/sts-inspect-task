@@ -41,13 +41,21 @@ def desktop_tool(max_screenshots: int | None, timeout: int | None) -> Tool:
                 {key: value for key, value in kwargs.items() if key != "actions"}
             ]
         for index, action in enumerate(actions, start=1):
-            validate_action(action, validator, index)
+            validate_action(action, validator, index, timeout)
         return await stock(**kwargs)
 
-    return tool_with(execute, name="desktop")
+    return tool_with(
+        execute,
+        name="desktop",
+        parameters={
+            "duration": "Duration in seconds for wait and hold_key; use 3 for a three-second pause."
+        },
+    )
 
 
-def validate_action(action: object, validator: Draft7Validator, index: int) -> None:
+def validate_action(
+    action: object, validator: Draft7Validator, index: int, timeout: int | None
+) -> None:
     """Return actionable errors for malformed fields and action-specific requirements."""
     error = next(validator.iter_errors(action), None)
     if error is not None:
@@ -70,6 +78,16 @@ def validate_action(action: object, validator: Draft7Validator, index: int) -> N
     duration = action.get("duration")
     if isinstance(duration, float) and not math.isfinite(duration):
         raise ToolError(f"Action {index}: duration must be finite.")
+    if (
+        action["action"] in ("wait", "hold_key")
+        and timeout is not None
+        and duration >= timeout
+    ):
+        raise ToolError(
+            f"Action {index}: duration is in seconds and must be less than the "
+            f"{timeout}-second tool timeout; received {duration:g}. "
+            "Use 3 for a three-second pause."
+        )
     if (
         action["action"] in ("left_mouse_down", "left_mouse_up")
         and action.get("coordinate") is not None

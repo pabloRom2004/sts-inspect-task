@@ -35,7 +35,7 @@ def test_wiki_titles() -> None:
 
 
 @pytest.mark.parametrize(
-    "mode", ["agent", "beat_game", "combat_smoke", "probe", "setup_error"]
+    "mode", ["agent", "beat_game", "combat_smoke", "long_wait", "probe", "setup_error"]
 )
 def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) -> None:
     """Exercise setup, stock desktop/shell/Python tools and integer submission without a grader."""
@@ -84,9 +84,22 @@ def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) ->
     monkeypatch.setattr(computer_common, "computer_sandbox", computer_sandbox)
     model = get_model(
         "mockllm/model",
-        custom_outputs=[
+        custom_outputs=(
+            [
+                ModelOutput.for_tool_call(
+                    "mockllm/model", "desktop", {"action": "wait", "duration": 3000}
+                )
+            ]
+            if mode == "long_wait"
+            else []
+        )
+        + [
             ModelOutput.for_tool_call(
-                "mockllm/model", "desktop", {"action": "screenshot"}
+                "mockllm/model",
+                "desktop",
+                {"action": "wait", "duration": 3}
+                if mode == "long_wait"
+                else {"action": "screenshot"},
             ),
             ModelOutput.for_tool_call(
                 "mockllm/model",
@@ -162,7 +175,19 @@ def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) ->
     assert "UNREACHABLE EXTRA TURN" not in str(sample.messages)
     assert sb.files["/opt/sts/wiki.md"] == (ASSETS / "wiki.md").read_text()
     tool_names = [msg.function for msg in sample.messages if msg.role == "tool"]
-    assert tool_names == ["desktop", "bash", "python", "submit", "submit"]
+    assert tool_names == (["desktop"] if mode == "long_wait" else []) + [
+        "desktop",
+        "bash",
+        "python",
+        "submit",
+        "submit",
+    ]
+    if mode == "long_wait":
+        assert any(
+            "duration is in seconds" in str(e.input)
+            for e in sample.events
+            if e.event == "model"
+        )
     assert sum(cmd[:3] == ["bash", "--login", "-c"] for cmd in sb.commands) == 2
     assert "/opt/inspect/tool/computer_tool.py" in sb.files
     assert any("/tmp/sts-runtime-ready" in str(cmd) for cmd in sb.commands)

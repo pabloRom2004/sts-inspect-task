@@ -180,7 +180,7 @@ def test_native_codex_docker(tmp_path, mode, caplog):
             code = """text(ALL_TOOLS.filter(t => /desktop|submit/.test(t.name)));
 text(await tools.exec_command({cmd: "python3 -c \\\"from pathlib import Path; p=Path('/workspace/native-test.txt');p.write_text('native python works');assert p.read_text()=='native python works';assert '# Cultist' in Path('/opt/sts/wiki.md').read_text();print('WIKI_AND_PYTHON_OK')\\\""}));
 const d=ALL_TOOLS.find(t => t.name.endsWith('__desktop'));
-text(await tools[d.name]({action:'wait',duration:-0.5}));"""
+text(await tools[d.name]({action:'wait',duration:3000}));"""
         elif phase <= 5:
             code = """const d=ALL_TOOLS.find(t => t.name.endsWith('__desktop'));
 const result=await tools[d.name]({action:'screenshot'});
@@ -238,5 +238,6 @@ text(await tools[s.name]({max_floor:1}));"""
     assert all(r["config"]["reasoning_effort"] == "max" for r in requests)
     assert all("spawn_agent" not in r["tools"] for r in requests)
     assert any("WIKI_AND_PYTHON_OK" in r["text"] for r in requests)
+    assert any("duration is in seconds" in r["text"] for r in requests)
     assert log.samples[0].store["FloorSubmission:max_floor"] == 1
     assert "NATIVE_CONTEXT [258400" in str(log.samples[0].messages)

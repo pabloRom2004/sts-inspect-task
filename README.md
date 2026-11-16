@@ -93,6 +93,8 @@ The `visual_agent` solver accepts `harness` (`react` or `codex`), `max_screensho
 
 Desktop argument-parsing failures are returned to the model as recoverable tool errors so it can correct the action. Empty calls/batches, malformed coordinates or zoom regions, wrong field types and missing required fields are checked before any action in a batch executes. Supplying coordinates to mouse-down/up returns guidance to move the cursor first; stock Inspect silently ignores those coordinates. Batched waits accept fractional seconds; negative and non-finite durations are rejected.
 
+Wait and key-hold durations are seconds. A duration at or above the configured tool timeout is rejected immediately with unit guidance because it cannot finish within that timeout. With the default 180-second timeout, `duration: 3000` returns an error immediately rather than sleeping until the command times out. Setting `tool_timeout: null` retains unlimited-duration behavior.
+
 Backend command timeouts also return tool errors. The timed-out command's process group is killed, and the model is told to check the screen before retrying because input may already have taken effect. This does not undo completed actions or make batches atomic: runtime errors can still occur partway through a valid batch. Unexpected backend failures, unavailable sandboxes and setup failures remain evaluation errors. Ordinary Bash/Python command failures already return their error output to the model.
 
 ## Submission and logs

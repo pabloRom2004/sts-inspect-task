@@ -20,6 +20,12 @@ from sts_hawk.desktop import desktop_tool
         ({"actions": [{"action": "key", "text": ["Return"]}]}, "text"),
         ({"actions": [{"action": "hold_key", "text": "Shift"}]}, "duration"),
         ({"actions": [{"action": "wait", "duration": float("nan")}]}, "finite"),
+        ({"action": "wait", "duration": 3000}, "duration is in seconds"),
+        ({"action": "wait", "duration": 180}, "180-second tool timeout"),
+        (
+            {"action": "hold_key", "text": "Shift", "duration": 3000},
+            "duration is in seconds",
+        ),
         (
             {"actions": [{"action": "left_mouse_down", "coordinate": [10, 20]}]},
             "use mouse_move first",
@@ -73,9 +79,9 @@ async def test_valid_call_and_unexpected_failure_passthrough(monkeypatch):
         """Capture the stock backend protocol without desktop input."""
 
         async def exec(self, cmd, **kwargs):
-            """Return success once, then an unexpected process failure."""
+            """Return valid transport results before an unexpected process failure."""
             commands.append(cmd)
-            if len(commands) == 1:
+            if len(commands) <= 2:
                 return ExecResult(True, 0, '{"output":"ok","error":null}', "")
             return ExecResult(False, 1, "", "display connection lost")
 
@@ -89,7 +95,10 @@ async def test_valid_call_and_unexpected_failure_passthrough(monkeypatch):
     tool = desktop_tool(3, 180)
     assert ToolDef(tool).name == "desktop"
     assert ToolDef(tool).model_input is not None
+    assert "seconds" in ToolDef(tool).parameters.properties["duration"].description
     await tool(actions=[{"action": "wait", "duration": 0.5}])
     assert commands[0][-3:] == ["wait", "--duration", "0.5"]
+    await desktop_tool(3, None)(action="wait", duration=3000)
+    assert commands[1][-3:] == ["wait", "--duration", "3000"]
     with pytest.raises(RuntimeError, match="display connection lost"):
         await tool(action="screenshot")
