@@ -28,7 +28,9 @@ if path.exists():
     path.write_text(json.dumps(data))
 PY
 echo 'Starting unmodified StS2 v0.107.1 with built-in offline platform flag'
-./SlayTheSpire2 --force-steam=off --rendering-driver opengl3 \
+# Bundled Harmony 2.4.2 omits this dependency from its Linux exception helper.
+# Preload the system library to preserve the frozen game's assemblies.
+LD_PRELOAD=libgcc_s.so.1 ./SlayTheSpire2 --force-steam=off --rendering-driver opengl3 \
   --display-driver x11 --resolution 1280x800 --windowed --position 0,0 \
   >/tmp/game.log 2>&1 &
 game_pid=$!
