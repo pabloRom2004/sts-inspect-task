@@ -31,7 +31,7 @@ echo 'Starting unmodified StS2 v0.107.1 with built-in offline platform flag'
 # Bundled Harmony 2.4.2 omits this dependency from its Linux exception helper.
 # Preload the system library to preserve the frozen game's assemblies.
 LD_PRELOAD=libgcc_s.so.1 ./SlayTheSpire2 --force-steam=off --rendering-driver opengl3 \
-  --display-driver x11 --resolution 1280x800 --windowed --position 0,0 \
+  --render-thread separate --display-driver x11 --resolution 1280x800 --windowed --position 0,0 \
   >/tmp/game.log 2>&1 &
 game_pid=$!
 timeout 180 xdotool search --sync --onlyvisible --name 'Slay.*Spire' > /tmp/sts-game-window
