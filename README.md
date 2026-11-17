@@ -83,6 +83,8 @@ StS2's optional `log_frame_rate` argument enables Godot's own FPS counter in the
 
 `gpu_count` requests NVIDIA devices on Hawk and includes the graphics driver capabilities. It defaults to zero. `sts_hawk/gpu_probe` checks device passthrough without installing the game or invoking a model; requesting a device alone does not switch the game away from software rendering.
 
+For StS2 hardware rendering, select `graphics_backend: virtualgl` together with `gpu_count: 1`. The sandbox installs the pinned official VirtualGL package, renders through its EGL backend, and retains the existing Xvnc display and computer tools. Startup checks the OpenGL renderer and fails if NVIDIA hardware rendering is not verified. The default remains `software` until the GPU gameplay test is verified.
+
 The sandbox installs Java 8, TigerVNC, graphics dependencies and Inspect's stock computer backend into Ubuntu 24.04, rendering at 1280×720. BaseMod, DeterminismFix and Unlock Everything are enabled. Fast Mode and SuperFastMode are disabled. The task does not load CommunicationMod or expose a custom game-state command tool. Shell and Python access are ordinary sandbox tools, without a wiki-only restriction.
 
 Startup explicitly focuses the game window. Without a window manager, Xvnc can leave keyboard focus on ModTheSpire's hidden launcher window even while mouse clicks reach the game.

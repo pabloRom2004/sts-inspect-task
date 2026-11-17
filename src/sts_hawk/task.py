@@ -128,6 +128,8 @@ def second_game(
     sandbox_image: str = ARGS["sandbox_image"],
     frame_rate_limit: int = DEFAULTS["sts2"]["frame_rate_limit"],
     log_frame_rate: bool = DEFAULTS["sts2"]["log_frame_rate"],
+    graphics_backend: str = DEFAULTS["sts2"]["graphics_backend"],
+    virtualgl: dict[str, str] = DEFAULTS["sts2"]["virtualgl"],
     sandbox_cpu: str = ARGS["sandbox_cpu"],
     sandbox_memory: str = ARGS["sandbox_memory"],
     gpu_count: int = ARGS["gpu_count"],
@@ -139,6 +141,8 @@ def second_game(
         raise ValueError("Slay the Spire 2 v0.107.1 supports Ascension 0 through 10.")
     if frame_rate_limit < 0:
         raise ValueError("The frame rate limit must be nonnegative.")
+    if graphics_backend not in {"software", "virtualgl"}:
+        raise ValueError("Choose the software or virtualgl graphics backend.")
     result = first_combat(
         character=character,
         ascension=ascension,
@@ -162,6 +166,8 @@ def second_game(
         game_version="v0.107.1",
         frame_rate_limit=frame_rate_limit,
         log_frame_rate=log_frame_rate,
+        graphics_backend=graphics_backend,
+        virtualgl=virtualgl if graphics_backend == "virtualgl" else None,
         wiki="No offline StS2 wiki supplied",
         model_visible="Desktop, sandbox shell/Python and integer submit",
         differences_from_epoch="Built-in --force-steam=off startup; no offline StS2 wiki; general shell/Python; user prompt; 75% compaction; no grader",
@@ -176,6 +182,8 @@ def second_game(
             game="sts2",
             frame_rate_limit=frame_rate_limit,
             log_frame_rate=log_frame_rate,
+            graphics_backend=graphics_backend,
+            virtualgl=virtualgl,
             processor_count=processor_count,
             renderer_threads=renderer_threads,
         ),
@@ -260,7 +268,7 @@ def capture_runtime(
                         "head -n 15 /tmp/game.log 2>/dev/null; "
                         "printf '\\n'; "
                         "for file in /tmp/sts-startup.log /tmp/game.log "
-                        "/tmp/xvnc.log "
+                        "/tmp/xvnc.log /tmp/sts-gpu.log "
                         "/root/.local/share/SlayTheSpire2/logs/godot.log; do "
                         'if [ -f "$file" ]; then '
                         "printf '\\n=== %s ===\\n' \"$file\"; "

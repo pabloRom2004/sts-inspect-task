@@ -34,6 +34,8 @@ def prepare_game(
     renderer_threads: int | None = None,
     java_heap_mb: int | None = None,
     log_frame_rate: bool | None = None,
+    graphics_backend: str | None = None,
+    virtualgl: dict[str, str] | None = None,
 ) -> Solver:
     """Install the runtime and signal the game container to launch."""
 
@@ -50,6 +52,12 @@ def prepare_game(
         )
     if game == "sts1" and (java_heap_mb is None or java_heap_mb <= 0):
         raise ValueError("StS1 setup requires a positive Java heap limit.")
+    if game == "sts2" and graphics_backend not in {"software", "virtualgl"}:
+        raise ValueError(
+            "StS2 setup requires a software or virtualgl graphics backend."
+        )
+    if graphics_backend == "virtualgl" and virtualgl is None:
+        raise ValueError("VirtualGL setup requires its verified package configuration.")
     runtime_assets = ASSETS if game == "sts1" else ASSETS / "sts2"
 
     async def solve(state: TaskState, generate: Generate) -> TaskState:
@@ -63,6 +71,12 @@ def prepare_game(
         if game == "sts1":
             await sandbox().write_file("/opt/sts/java-heap-mb", str(java_heap_mb))
         if game == "sts2":
+            await sandbox().write_file("/opt/sts/graphics-backend", graphics_backend)
+            if graphics_backend == "virtualgl":
+                for name in ["url", "sha256", "device"]:
+                    await sandbox().write_file(
+                        f"/opt/sts/virtualgl-{name}", virtualgl[name]
+                    )
             if frame_rate_limit is None or log_frame_rate is None:
                 raise ValueError("StS2 setup requires explicit frame rate settings.")
             await sandbox().write_file(

@@ -51,6 +51,11 @@ sts2:
   desktop_height: 800
   frame_rate_limit: 60
   log_frame_rate: false
+  graphics_backend: software
+  virtualgl:
+    url: https://github.com/VirtualGL/virtualgl/releases/download/3.1.5/virtualgl_3.1.5_amd64.deb
+    sha256: df3f7788ce41b182a47c0d298e5cd6d2d63579522cb41825970b7726e825485e
+    device: egl0
 
 runtime_probe:
   wait_seconds: 15
