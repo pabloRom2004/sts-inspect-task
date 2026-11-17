@@ -44,7 +44,9 @@ if [ "$graphics_backend" = virtualgl ]; then
   nvidia-smi --query-gpu=name,driver_version --format=csv >/tmp/sts-gpu.log 2>&1
   "${launcher[@]}" glxinfo -B >>/tmp/sts-gpu.log 2>&1
   cat /tmp/sts-gpu.log
-  if ! grep -q 'OpenGL renderer string:.*NVIDIA' /tmp/sts-gpu.log; then
+  if ! grep -q 'OpenGL vendor string:.*NVIDIA' /tmp/sts-gpu.log \
+    || ! grep -q 'OpenGL renderer string:.*[^[:space:]]' /tmp/sts-gpu.log \
+    || grep -Eiq 'OpenGL renderer string:.*(llvmpipe|softpipe|lavapipe|SwiftShader)' /tmp/sts-gpu.log; then
     echo 'Hardware NVIDIA rendering was not verified; refusing software fallback.' >&2
     exit 1
   fi
