@@ -130,11 +130,11 @@ StS2 runtime probes wait for the game's complete-menu startup marker before issu
 
 ## Human desktop debugging
 
-`sts_hawk/manual_session` starts the StS2 sandbox for human play without making model calls. It serves noVNC on runner port 6080 for Hawk's authenticated `attach` relay. The default session lasts two hours and retains the final profile and game logs. This is a debug session, not a benchmark result.
+`sts_hawk/manual_session` starts the StS2 sandbox for human play without making model calls. The authenticated proxy, noVNC and optional outbound browser tunnel all run inside the Linux game sandbox. The default session lasts two hours and retains the final profile and game logs. This is a debug session, not a benchmark result.
 
-After launching the task on Hawk, use `hawk attach RUN_ID --port 6080 --local-port 6082` and open `http://127.0.0.1:6082/`. The `/api/status` endpoint returns game diagnostics; `POST /api/finish` ends the session and cleans up its sandbox. Bindings from the local Hawk tunnel are loopback-only.
+The proxy listens on sandbox port 6080 by default. The `/api/status` endpoint returns game diagnostics; `POST /api/finish` ends the session and cleans up its sandbox. With local Docker, publish the chosen proxy port to a loopback address.
 
-When a deployment has no attach relay, set `browser_tunnel_enabled=true` and supply a private random `STS_MANUAL_ACCESS_TOKEN` of at least 32 characters through the runner's secrets. The task verifies a pinned official cloudflared binary, starts a temporary HTTPS tunnel, and rejects requests without the access-link cookie. Add `?access_token=TOKEN` to the tunnel URL once to connect; the key is exchanged for a secure HTTP-only cookie and removed by the redirect. Never commit the access key or include it in shared logs.
+On Hawk, set `browser_tunnel_enabled=true` and supply a private random `STS_MANUAL_ACCESS_TOKEN` of at least 32 characters through the runner's secrets. The task passes only its SHA256 digest into the sandbox, verifies a pinned official Linux AMD64 cloudflared binary, and starts a temporary HTTPS tunnel. Add `?access_token=TOKEN` to the logged tunnel URL once to connect; the key is exchanged for a secure HTTP-only cookie and removed by the redirect. Never commit the access key or include it in shared logs. This path needs no Hawk attach relay or runner-to-sandbox ingress exception.
 
 ## Validation
 

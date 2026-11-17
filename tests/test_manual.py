@@ -7,62 +7,27 @@ import io
 import pytest
 from aiohttp.test_utils import TestClient, TestServer
 
-from sts_hawk.manual import browser_tunnel, desktop_proxy
-
-
-@pytest.mark.parametrize("wrapped", [False, True])
-def test_display_policy_is_limited_to_own_runner(monkeypatch, wrapped):
-    """Keep the display exception scoped to the owning runner and one TCP port."""
-    from types import SimpleNamespace
-
-    from sts_hawk.manual import allow_runner_display
-
-    captured = {}
-    core = SimpleNamespace(
-        api_client=object(),
-        read_namespaced_pod=lambda name, namespace: SimpleNamespace(
-            metadata=SimpleNamespace(labels={"job-name": "fixture-runner"})
-        ),
-    )
-    monkeypatch.setenv("HOSTNAME", "fixture-runner-pod")
-    monkeypatch.setenv("POD_NAMESPACE", "runner-namespace")
-    monkeypatch.setattr("k8s_sandbox._kubernetes_api.k8s_client", lambda context: core)
-    monkeypatch.setattr(
-        "kubernetes.client.CustomObjectsApi",
-        lambda client: SimpleNamespace(
-            create_namespaced_custom_object=lambda **kwargs: captured.update(kwargs)
-        ),
-    )
-    environment = SimpleNamespace(
-        _pod=SimpleNamespace(
-            info=SimpleNamespace(context_name=None, namespace="sandbox-namespace")
-        )
-    )
-    if wrapped:
-        from inspect_ai.util._sandbox.events import SandboxEnvironmentProxy
-
-        environment = SandboxEnvironmentProxy(environment)
-    allow_runner_display(environment)
-    assert captured["namespace"] == "sandbox-namespace"
-    rule = captured["body"]["spec"]["ingress"][0]
-    assert rule["fromEndpoints"] == [
-        {
-            "matchLabels": {
-                "job-name": "fixture-runner",
-                "io.kubernetes.pod.namespace": "runner-namespace",
-            }
-        }
-    ]
-    assert rule["toPorts"] == [{"ports": [{"port": "6080", "protocol": "TCP"}]}]
+from sts_hawk.manual_server import browser_tunnel, desktop_proxy
 
 
 @pytest.mark.asyncio
-async def test_private_desktop_requires_access_link():
+@pytest.mark.parametrize("digest_only", [False, True])
+async def test_private_desktop_requires_access_link(digest_only):
     """Reject anonymous access and exchange a valid private link for a secure cookie."""
     token = "transport-fixture-access-key-123456789"
     finished = asyncio.Event()
     async with TestClient(
-        TestServer(desktop_proxy(None, "http://127.0.0.1:1", finished, token))
+        TestServer(
+            desktop_proxy(
+                None,
+                "http://127.0.0.1:1",
+                finished,
+                access_token=None if digest_only else token,
+                access_token_sha256=hashlib.sha256(token.encode()).hexdigest()
+                if digest_only
+                else None,
+            )
+        )
     ) as client:
         assert (await client.get("/api/health")).status == 403
         assert (await client.post("/api/finish")).status == 403
@@ -72,6 +37,7 @@ async def test_private_desktop_requires_access_link():
         response = await client.get("/?access_token=" + token, allow_redirects=False)
         assert response.status == 302
         cookie = response.cookies["sts_session"]
+        assert cookie.value == token
         assert cookie["httponly"] and cookie["secure"]
         assert cookie["samesite"] == "Strict"
         headers = {"Cookie": "sts_session=" + cookie.value}
