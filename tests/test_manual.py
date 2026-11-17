@@ -10,7 +10,8 @@ from aiohttp.test_utils import TestClient, TestServer
 from sts_hawk.manual import browser_tunnel, desktop_proxy
 
 
-def test_display_policy_is_limited_to_own_runner(monkeypatch):
+@pytest.mark.parametrize("wrapped", [False, True])
+def test_display_policy_is_limited_to_own_runner(monkeypatch, wrapped):
     """Keep the display exception scoped to the owning runner and one TCP port."""
     from types import SimpleNamespace
 
@@ -37,6 +38,10 @@ def test_display_policy_is_limited_to_own_runner(monkeypatch):
             info=SimpleNamespace(context_name=None, namespace="sandbox-namespace")
         )
     )
+    if wrapped:
+        from inspect_ai.util._sandbox.events import SandboxEnvironmentProxy
+
+        environment = SandboxEnvironmentProxy(environment)
     allow_runner_display(environment)
     assert captured["namespace"] == "sandbox-namespace"
     rule = captured["body"]["spec"]["ingress"][0]

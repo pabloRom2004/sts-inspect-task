@@ -195,6 +195,7 @@ async def browser_tunnel(port: int, url: str, sha256: str):
 
 def allow_runner_display(environment: SandboxEnvironment) -> None:
     """Allow this trusted runner to reach only its sandbox's noVNC port."""
+    environment = getattr(environment, "_sandbox", environment)
     pod = getattr(environment, "_pod", None)
     if pod is None:
         return
