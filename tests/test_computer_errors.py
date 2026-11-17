@@ -123,3 +123,46 @@ async def test_timeout_kills_child_commands(tmp_path):
     assert started.exists(), "The action must start before testing its cleanup"
     await asyncio.sleep(0.5)
     assert not leaked.exists()
+
+
+@pytest.mark.asyncio
+async def test_drag_releases_button_after_move_failure(monkeypatch):
+    """A failed drag must release the mouse button before propagating the error."""
+    monkeypatch.syspath_prepend(str(ASSETS / "computer"))
+    backend = importlib.import_module("_x11_client")
+    monkeypatch.setenv("WIDTH", "1280")
+    monkeypatch.setenv("HEIGHT", "800")
+    client = backend.X11Client()
+    client._drag_step_delay = 0
+    commands = []
+
+    async def shell(command, take_screenshot=True):
+        """Fail during held movement while recording the button cleanup."""
+        commands.append(command)
+        if "mousemove --sync 324 495" in command:
+            raise RuntimeError("movement failed")
+        return backend.ToolResult(output="", error="")
+
+    monkeypatch.setattr(client, "_shell", shell)
+    with pytest.raises(RuntimeError, match="movement failed"):
+        await client.left_click_drag((500, 690), (324, 495))
+    assert any("mousedown 1" in command for command in commands)
+    assert commands[-1].endswith("mouseup 1")
+
+
+@pytest.mark.asyncio
+async def test_drag_validates_destination_before_press(monkeypatch):
+    """An invalid drag destination must not leave a button pressed."""
+    monkeypatch.syspath_prepend(str(ASSETS / "computer"))
+    backend = importlib.import_module("_x11_client")
+    monkeypatch.setenv("WIDTH", "1280")
+    monkeypatch.setenv("HEIGHT", "800")
+    client = backend.X11Client()
+
+    async def unexpected_shell(command, take_screenshot=True):
+        """Reject any input before coordinate validation completes."""
+        raise AssertionError("Invalid coordinates reached X11")
+
+    monkeypatch.setattr(client, "_shell", unexpected_shell)
+    with pytest.raises(backend.X11CoordinateError):
+        await client.left_click_drag((500, 690), (1280, 495))

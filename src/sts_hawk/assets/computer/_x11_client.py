@@ -75,6 +75,7 @@ class X11Client:
     color_count: ColorCount | None = 256
 
     _screenshot_delay = 2.0
+    _drag_step_delay = 0.1
     _scaling_enabled = True
 
     @property
@@ -190,11 +191,19 @@ class X11Client:
     async def left_click_drag(
         self, start_coordinate: tuple[int, int], coordinate: tuple[int, int]
     ) -> ToolResult:
-        await self._move_mouse_to_coordinate(start_coordinate, False)
+        """Keep drag stages visible to frame polling and release after failures."""
         x, y = self._scale_coordinates("api_to_native", *coordinate)
-        return await self._shell(
-            f"{self.xdotool} mousedown 1 mousemove --sync {x} {y} mouseup 1"
-        )
+        await self._move_mouse_to_coordinate(start_coordinate, False)
+        await asyncio.sleep(self._drag_step_delay)
+        try:
+            await self._shell(f"{self.xdotool} mousedown 1", False)
+            # Frame-polled input can miss a press, move and release in one tick.
+            await asyncio.sleep(self._drag_step_delay)
+            await self._shell(f"{self.xdotool} mousemove --sync {x} {y}", False)
+            await asyncio.sleep(self._drag_step_delay)
+        finally:
+            result = await self._shell(f"{self.xdotool} mouseup 1", False)
+        return result.replace(base64_image=await self._take_screenshot_after_delay())
 
     async def scroll(
         self,
