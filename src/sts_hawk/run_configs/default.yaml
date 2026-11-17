@@ -47,3 +47,7 @@ sts2:
 
 runtime_probe:
   wait_seconds: 15
+
+manual_session:
+  port: 6080
+  session_seconds: 7200

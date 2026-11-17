@@ -128,6 +128,12 @@ No offline StS2 wiki is currently included; this task does not advertise the fir
 
 StS2 runtime probes wait for the game's complete-menu startup marker before issuing computer calls. Their diagnostic attachment includes cgroup CPU and memory counters and process memory/state alongside the game logs.
 
+## Human desktop debugging
+
+`sts_hawk/manual_session` starts the StS2 sandbox for human play without making model calls. It serves noVNC on runner port 6080 for Hawk's authenticated `attach` relay. The default session lasts two hours and retains the final profile and game logs. This is a debug session, not a benchmark result.
+
+After launching the task on Hawk, use `hawk attach RUN_ID --port 6080 --local-port 6082` and open `http://127.0.0.1:6082/`. The `/api/status` endpoint returns game diagnostics; `POST /api/finish` ends the session and cleans up its sandbox. Bindings from the local Hawk tunnel are loopback-only.
+
 ## Validation
 
 Run `pytest tests`, `ruff check .` and `ruff format --check .`. Tests exercise the actual task setup, stock computer parser, Bash/Python execution, the installed wiki file, invalid and valid integer submissions, unscored completion, and setup-error propagation through mockllm. They also exercise the real Hawk Compose-to-Kubernetes conversion. External execution is simulated in local tests; the separate Linux runtime probe must establish actual game startup before the paid gameplay smoke.
