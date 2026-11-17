@@ -193,6 +193,60 @@ async def browser_tunnel(port: int, url: str, sha256: str):
     return process, asyncio.create_task(output())
 
 
+def allow_runner_display(environment: SandboxEnvironment) -> None:
+    """Allow this trusted runner to reach only its sandbox's noVNC port."""
+    pod = getattr(environment, "_pod", None)
+    if pod is None:
+        return
+    from k8s_sandbox._kubernetes_api import k8s_client
+    from kubernetes import client
+
+    core = k8s_client(pod.info.context_name)
+    namespace = (
+        os.environ.get("POD_NAMESPACE")
+        or Path("/var/run/secrets/kubernetes.io/serviceaccount/namespace")
+        .read_text()
+        .strip()
+    )
+    runner = core.read_namespaced_pod(os.environ["HOSTNAME"], namespace)
+    job_key = next(
+        key
+        for key in ("job-name", "batch.kubernetes.io/job-name")
+        if key in runner.metadata.labels
+    )
+    labels = {
+        job_key: runner.metadata.labels[job_key],
+        "io.kubernetes.pod.namespace": namespace,
+    }
+    policy = {
+        "apiVersion": "cilium.io/v2",
+        "kind": "CiliumNetworkPolicy",
+        "metadata": {"generateName": "sts-manual-display-"},
+        "spec": {
+            "endpointSelector": {
+                "matchLabels": {
+                    "io.kubernetes.pod.namespace": pod.info.namespace,
+                    "inspect/service": "default",
+                }
+            },
+            "ingress": [
+                {
+                    "fromEndpoints": [{"matchLabels": labels}],
+                    "toPorts": [{"ports": [{"port": "6080", "protocol": "TCP"}]}],
+                }
+            ],
+        },
+    }
+    client.CustomObjectsApi(core.api_client).create_namespaced_custom_object(
+        group="cilium.io",
+        version="v2",
+        namespace=pod.info.namespace,
+        plural="ciliumnetworkpolicies",
+        body=policy,
+    )
+    logger.info("Allowed this runner's labels to reach its sandbox display on TCP 6080")
+
+
 @solver
 def manual_control(
     port: int = DEFAULTS["port"],
@@ -228,6 +282,7 @@ def manual_control(
         )
         if not result.success:
             raise RuntimeError(f"noVNC startup failed: {result.stderr}")
+        await asyncio.to_thread(allow_runner_display, environment)
         address = str(ipaddress.ip_address(result.stdout.split()[0]))
         target = (
             f"http://[{address}]:6080" if ":" in address else f"http://{address}:6080"

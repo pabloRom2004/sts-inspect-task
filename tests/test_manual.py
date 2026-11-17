@@ -10,6 +10,47 @@ from aiohttp.test_utils import TestClient, TestServer
 from sts_hawk.manual import browser_tunnel, desktop_proxy
 
 
+def test_display_policy_is_limited_to_own_runner(monkeypatch):
+    """Keep the display exception scoped to the owning runner and one TCP port."""
+    from types import SimpleNamespace
+
+    from sts_hawk.manual import allow_runner_display
+
+    captured = {}
+    core = SimpleNamespace(
+        api_client=object(),
+        read_namespaced_pod=lambda name, namespace: SimpleNamespace(
+            metadata=SimpleNamespace(labels={"job-name": "fixture-runner"})
+        ),
+    )
+    monkeypatch.setenv("HOSTNAME", "fixture-runner-pod")
+    monkeypatch.setenv("POD_NAMESPACE", "runner-namespace")
+    monkeypatch.setattr("k8s_sandbox._kubernetes_api.k8s_client", lambda context: core)
+    monkeypatch.setattr(
+        "kubernetes.client.CustomObjectsApi",
+        lambda client: SimpleNamespace(
+            create_namespaced_custom_object=lambda **kwargs: captured.update(kwargs)
+        ),
+    )
+    environment = SimpleNamespace(
+        _pod=SimpleNamespace(
+            info=SimpleNamespace(context_name=None, namespace="sandbox-namespace")
+        )
+    )
+    allow_runner_display(environment)
+    assert captured["namespace"] == "sandbox-namespace"
+    rule = captured["body"]["spec"]["ingress"][0]
+    assert rule["fromEndpoints"] == [
+        {
+            "matchLabels": {
+                "job-name": "fixture-runner",
+                "io.kubernetes.pod.namespace": "runner-namespace",
+            }
+        }
+    ]
+    assert rule["toPorts"] == [{"ports": [{"port": "6080", "protocol": "TCP"}]}]
+
+
 @pytest.mark.asyncio
 async def test_private_desktop_requires_access_link():
     """Reject anonymous access and exchange a valid private link for a secure cookie."""
