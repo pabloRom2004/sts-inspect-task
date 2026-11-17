@@ -166,3 +166,29 @@ async def test_drag_validates_destination_before_press(monkeypatch):
     monkeypatch.setattr(client, "_shell", unexpected_shell)
     with pytest.raises(backend.X11CoordinateError):
         await client.left_click_drag((500, 690), (1280, 495))
+
+
+@pytest.mark.asyncio
+async def test_drag_preserves_intermediate_command_errors(monkeypatch):
+    """Return movement errors even when releasing the mouse succeeds."""
+    monkeypatch.syspath_prepend(str(ASSETS / "computer"))
+    backend = importlib.import_module("_x11_client")
+    monkeypatch.setenv("WIDTH", "1280")
+    monkeypatch.setenv("HEIGHT", "800")
+    client = backend.X11Client()
+    client._drag_step_delay = 0
+
+    async def shell(command, take_screenshot=True):
+        """Return an error for held movement without raising an exception."""
+        error = "movement failed" if "mousemove --sync 324 495" in command else ""
+        return backend.ToolResult(output="", error=error)
+
+    async def screenshot():
+        """Avoid X11 while preserving the normal final screenshot contract."""
+        return "test-image"
+
+    monkeypatch.setattr(client, "_shell", shell)
+    monkeypatch.setattr(client, "_take_screenshot_after_delay", screenshot)
+    result = await client.left_click_drag((500, 690), (324, 495))
+    assert result.error == "movement failed"
+    assert result.base64_image == "test-image"

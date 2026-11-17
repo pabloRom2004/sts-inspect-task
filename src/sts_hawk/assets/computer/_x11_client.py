@@ -193,17 +193,23 @@ class X11Client:
     ) -> ToolResult:
         """Keep drag stages visible to frame polling and release after failures."""
         x, y = self._scale_coordinates("api_to_native", *coordinate)
-        await self._move_mouse_to_coordinate(start_coordinate, False)
+        results = [await self._move_mouse_to_coordinate(start_coordinate, False)]
         await asyncio.sleep(self._drag_step_delay)
         try:
-            await self._shell(f"{self.xdotool} mousedown 1", False)
+            results.append(await self._shell(f"{self.xdotool} mousedown 1", False))
             # Frame-polled input can miss a press, move and release in one tick.
             await asyncio.sleep(self._drag_step_delay)
-            await self._shell(f"{self.xdotool} mousemove --sync {x} {y}", False)
+            results.append(
+                await self._shell(f"{self.xdotool} mousemove --sync {x} {y}", False)
+            )
             await asyncio.sleep(self._drag_step_delay)
         finally:
-            result = await self._shell(f"{self.xdotool} mouseup 1", False)
-        return result.replace(base64_image=await self._take_screenshot_after_delay())
+            results.append(await self._shell(f"{self.xdotool} mouseup 1", False))
+        return ToolResult(
+            output="".join(result.output or "" for result in results),
+            error="".join(result.error or "" for result in results),
+            base64_image=await self._take_screenshot_after_delay(),
+        )
 
     async def scroll(
         self,
