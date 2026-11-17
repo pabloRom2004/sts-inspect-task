@@ -136,6 +136,23 @@ EPOCH_STS2 = Prompt(
     text=(EPOCH_ASSETS / "sts2-user.txt").read_text(),
 )
 
+EPOCH_FIRST_COMBAT_SMOKE = Prompt(
+    title="epoch_first_combat_smoke",
+    role="subject",
+    origin="User-requested replay-profile integration smoke, 2026-11-17",
+    origin_note="Original StS1 messages with an explicit first-combat stopping override and required wiki lookup; this is not a performance benchmark prompt.",
+    system_text=EPOCH_STS1.system_text,
+    text=EPOCH_STS1.text
+    + (
+        "\n\nSmoke test override: before acting in the first combat, use wiki_search "
+        "and wiki_fetch to read about the first enemy you encounter. Play that "
+        "combat, then stop immediately when it ends, whether you win or die, "
+        "and call submit with the maximum floor reached as an integer. "
+        "Do not enter a second combat. This stopping rule overrides the full-game "
+        "and Heart objective for this integration smoke only."
+    ),
+)
+
 PROMPTS = {
     prompt.title: prompt
     for prompt in [
@@ -146,5 +163,6 @@ PROMPTS = {
         FIRST_COMBAT_SMOKE_STS2,
         EPOCH_STS1,
         EPOCH_STS2,
+        EPOCH_FIRST_COMBAT_SMOKE,
     ]
 }

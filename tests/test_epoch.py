@@ -41,7 +41,7 @@ def test_replay_prompt_and_schema_provenance():
             )
 
 
-@pytest.mark.parametrize("game", ["sts1", "sts2"])
+@pytest.mark.parametrize("game", ["sts1", "sts2", "sts1_smoke"])
 @pytest.mark.parametrize("static_frames", [False, True])
 @pytest.mark.parametrize("retained_images", [None, 3])
 def test_epoch_task_loop(monkeypatch, tmp_path, game, static_frames, retained_images):
@@ -121,7 +121,15 @@ def test_epoch_task_loop(monkeypatch, tmp_path, game, static_frames, retained_im
             )
         ),
     )
-    task = first_combat() if game == "sts1" else second_game()
+    task = (
+        second_game()
+        if game == "sts2"
+        else first_combat(
+            prompt_name="epoch_first_combat_smoke"
+            if game == "sts1_smoke"
+            else "epoch_sts1"
+        )
+    )
     from sts_hawk.agent import visual_agent
 
     task.solver = visual_agent(max_screenshots=retained_images)
@@ -211,6 +219,16 @@ def test_epoch_task_loop(monkeypatch, tmp_path, game, static_frames, retained_im
     assert "wiki_search" in names and "memory" in names and "queue_actions" in names
     assert not {"bash", "python", "desktop"} & names
     assert sample.messages[0].text == task.dataset[0].input[0].text
+
+
+def test_first_combat_prompt_override():
+    """Keep the replay system and seed setup while making the smoke stopping rule explicit."""
+    task = first_combat(prompt_name="epoch_first_combat_smoke")
+    messages = task.dataset[0].input
+    assert messages[0].text == first_combat().dataset[0].input[0].text
+    assert "seed 1" in messages[1].text and "Ascension 20" in messages[1].text
+    assert "Do not enter a second combat." in messages[1].text
+    assert "wiki_search and wiki_fetch" in messages[1].text
 
 
 def test_give_up_ends_without_extra_model_call(tmp_path):
