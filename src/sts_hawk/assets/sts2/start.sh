@@ -2,7 +2,9 @@
 set -euo pipefail
 trap 'touch /tmp/sts-failed' EXIT
 export DISPLAY=:99 DISPLAY_NUM=99 WIDTH=1280 HEIGHT=800
-export LIBGL_ALWAYS_SOFTWARE=1 DOTNET_PROCESSOR_COUNT=2 LP_NUM_THREADS=1
+export LIBGL_ALWAYS_SOFTWARE=1
+export DOTNET_PROCESSOR_COUNT="$(cat /opt/sts/processor-count)"
+export LP_NUM_THREADS="$(cat /opt/sts/renderer-threads)"
 ulimit -n 8192
 exec >>/tmp/sts-startup.log 2>&1
 printf 'pcm.!default { type null }\n' > /etc/asound.conf

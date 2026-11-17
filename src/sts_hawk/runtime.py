@@ -30,11 +30,25 @@ def prepare_game(
     command_timeout: int,
     game: str = "sts1",
     frame_rate_limit: int | None = None,
+    processor_count: int | None = None,
+    renderer_threads: int | None = None,
+    java_heap_mb: int | None = None,
 ) -> Solver:
     """Install the runtime and signal the game container to launch."""
 
     if game not in {"sts1", "sts2"}:
         raise ValueError(f"Unknown game: {game}")
+    if (
+        processor_count is None
+        or processor_count <= 0
+        or renderer_threads is None
+        or renderer_threads <= 0
+    ):
+        raise ValueError(
+            "Runtime setup requires positive processor and renderer thread counts."
+        )
+    if game == "sts1" and (java_heap_mb is None or java_heap_mb <= 0):
+        raise ValueError("StS1 setup requires a positive Java heap limit.")
     runtime_assets = ASSETS if game == "sts1" else ASSETS / "sts2"
 
     async def solve(state: TaskState, generate: Generate) -> TaskState:
@@ -43,6 +57,10 @@ def prepare_game(
             ["mkdir", "-p", "/opt/sts", "/opt/inspect/tool"], command_timeout
         )
         await sandbox().write_file("/opt/sts/asset-url", os.environ["STS_ASSET_URL"])
+        await sandbox().write_file("/opt/sts/processor-count", str(processor_count))
+        await sandbox().write_file("/opt/sts/renderer-threads", str(renderer_threads))
+        if game == "sts1":
+            await sandbox().write_file("/opt/sts/java-heap-mb", str(java_heap_mb))
         if game == "sts2":
             if frame_rate_limit is None:
                 raise ValueError("StS2 setup requires an explicit frame rate limit.")

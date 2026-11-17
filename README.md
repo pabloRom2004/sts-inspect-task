@@ -42,11 +42,11 @@ For the previous minimal task, select `-T prompt_name=beat_game` or `first_comba
 
 The model interacts with a 1280×720 StS1 or 1280×800 StS2 X11 desktop in Docker, adapted to Kubernetes on Hawk. Licensed assets, profiles and credentials stay private. `prepare_game` installs the game before the interchangeable solver executes.
 
-The StS2 runtime preserves frozen v0.107.1 assemblies and accepts private profile/mod overlays through `STS_PROFILE_BASE64` and `STS_RUNTIME_OVERLAY_BASE64`. Its `frame_rate_limit` defaults to 60. Existing `runtime_probe` and `manual_session` entrypoints remain available for no-model startup diagnosis and human play. Their runtime implementation is unchanged by this port.
+The StS2 runtime preserves frozen v0.107.1 assemblies and accepts private profile/mod overlays through `STS_PROFILE_BASE64` and `STS_RUNTIME_OVERLAY_BASE64`. Its `frame_rate_limit` defaults to 60. Existing `runtime_probe` and `manual_session` entrypoints remain available for no-model startup diagnosis and human play. The human viewer uses noVNC and an authenticated proxy inside the game sandbox. On Hawk, `browser_tunnel_enabled=true` starts the verified cloudflared tunnel; supply a private `STS_MANUAL_ACCESS_TOKEN` of at least 32 characters. The access key is exchanged for an HTTP-only cookie. `POST /api/finish` ends the manual session and cleans up its sandbox.
 
 ## Parameters
 
-`first_combat` defaults to `character=IRONCLAD`, `ascension=20`, `game_seed='1'` and `prompt_name=epoch_sts1`. `second_game` defaults to Ascension 10 and `prompt_name=epoch_sts2`. Both retain setup timeout 900 seconds, command timeout 180 seconds and sandbox image `ubuntu:24.04`.
+`first_combat` defaults to `character=IRONCLAD`, `ascension=20`, `game_seed='1'` and `prompt_name=epoch_sts1`. `second_game` defaults to Ascension 10 and `prompt_name=epoch_sts2`. Both retain setup timeout 900 seconds, command timeout 180 seconds and sandbox image `ubuntu:24.04`. Both game sandboxes default to 6 CPUs and Compose memory `12G`, with `processor_count=6` and `renderer_threads=3`; StS1 uses `java_heap_mb=4608`. These are user-selected allocations, separate from Hawk runner memory, and can be overridden through the task parameters.
 
 The seed is the literal string the model types into the game. It is separate from model sampling, which remains unseeded. Replay prompts require an explicit game seed; legacy prompts still support `game_seed=None`.
 

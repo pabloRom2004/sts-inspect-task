@@ -7,16 +7,27 @@ import io
 import pytest
 from aiohttp.test_utils import TestClient, TestServer
 
-from sts_hawk.manual import browser_tunnel, desktop_proxy
+from sts_hawk.manual_server import browser_tunnel, desktop_proxy
 
 
 @pytest.mark.asyncio
-async def test_private_desktop_requires_access_link():
+@pytest.mark.parametrize("digest_only", [False, True])
+async def test_private_desktop_requires_access_link(digest_only):
     """Reject anonymous access and exchange a valid private link for a secure cookie."""
     token = "transport-fixture-access-key-123456789"
     finished = asyncio.Event()
     async with TestClient(
-        TestServer(desktop_proxy(None, "http://127.0.0.1:1", finished, token))
+        TestServer(
+            desktop_proxy(
+                None,
+                "http://127.0.0.1:1",
+                finished,
+                access_token=None if digest_only else token,
+                access_token_sha256=hashlib.sha256(token.encode()).hexdigest()
+                if digest_only
+                else None,
+            )
+        )
     ) as client:
         assert (await client.get("/api/health")).status == 403
         assert (await client.post("/api/finish")).status == 403
@@ -26,6 +37,7 @@ async def test_private_desktop_requires_access_link():
         response = await client.get("/?access_token=" + token, allow_redirects=False)
         assert response.status == 302
         cookie = response.cookies["sts_session"]
+        assert cookie.value == token
         assert cookie["httponly"] and cookie["secure"]
         assert cookie["samesite"] == "Strict"
         headers = {"Cookie": "sts_session=" + cookie.value}
