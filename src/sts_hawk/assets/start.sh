@@ -4,6 +4,8 @@ trap 'touch /tmp/sts-failed' EXIT
 ulimit -n 8192
 export DISPLAY=:99 DISPLAY_NUM=99 WIDTH=1280 HEIGHT=720
 export ALSOFT_DRIVERS=null
+export LIBGL_ALWAYS_SOFTWARE=1
+export LP_NUM_THREADS="$(cat /opt/sts/renderer-threads)"
 exec >>/tmp/sts-startup.log 2>&1
 echo 'Starting the X display with null audio'
 Xvnc :99 -geometry 1280x720 -depth 24 -rfbport 5900 -SecurityTypes None \
@@ -37,7 +39,8 @@ for name in ['COMBAT', 'MAP', 'SHOP', 'EVENT', 'REST', 'TREASURE', 'CARD_REWARD'
 data['NEOW_SKIP'] = 2
 player.write_text(json.dumps(data))
 PY
-java -XX:ActiveProcessorCount=2 -Xmx1536m -jar ModTheSpire.jar --skip-launcher --skip-intro \
+java -XX:ActiveProcessorCount="$(cat /opt/sts/processor-count)" \
+    -Xmx"$(cat /opt/sts/java-heap-mb)m" -jar ModTheSpire.jar --skip-launcher --skip-intro \
     --mods basemod,determinismfix,UnlockEverythingMod >/tmp/game.log 2>&1 &
 game_pid=$!
 # Xvnc has no window manager to move focus away from the launcher's FocusProxy.

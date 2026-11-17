@@ -190,6 +190,9 @@ def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) ->
         )
     assert sum(cmd[:3] == ["bash", "--login", "-c"] for cmd in sb.commands) == 2
     assert "/opt/inspect/tool/computer_tool.py" in sb.files
+    assert sb.files["/opt/sts/processor-count"] == "6"
+    assert sb.files["/opt/sts/renderer-threads"] == "3"
+    assert sb.files["/opt/sts/java-heap-mb"] == "4608"
     assert any("/tmp/sts-runtime-ready" in str(cmd) for cmd in sb.commands)
     assert any(getattr(msg, "error", None) for msg in sample.messages)
     submission = ToolDef(submit_floor()).parameters

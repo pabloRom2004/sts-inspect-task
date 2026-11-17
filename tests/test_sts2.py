@@ -122,6 +122,8 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
     assert fixture.files["/opt/sts/runtime-overlay.tar.gz"] == b"mod fixture"
     assert len(saved.samples[0].metadata["sts2_runtime_overlay_sha256"]) == 64
     assert fixture.files["/opt/sts/frame-rate-limit"] == str(frame_rate_limit)
+    assert fixture.files["/opt/sts/processor-count"] == "6"
+    assert fixture.files["/opt/sts/renderer-threads"] == "3"
     assert task.metadata["frame_rate_limit"] == frame_rate_limit
     assert "v0.107.1" in fixture.files["/opt/sts/install.sh"]
     assert "--force-steam=off" in fixture.files["/opt/sts/start.sh"]

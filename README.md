@@ -77,6 +77,8 @@ Differences from Epoch's benchmark include the user-specified prompt, general sh
 
 ## Runtime
 
+Both games default to six CPU cores and 12 GiB of sandbox RAM. The game runtime sees six processors and Mesa uses three rendering threads. StS1's Java heap limit is 4608 MiB. These values are task arguments in `default.yaml` and are recorded in task metadata; runner RAM is configured separately on Hawk.
+
 The sandbox installs Java 8, TigerVNC, graphics dependencies and Inspect's stock computer backend into Ubuntu 24.04, rendering at 1280×720. BaseMod, DeterminismFix and Unlock Everything are enabled. Fast Mode and SuperFastMode are disabled. The task does not load CommunicationMod or expose a custom game-state command tool. Shell and Python access are ordinary sandbox tools, without a wiki-only restriction.
 
 Startup explicitly focuses the game window. Without a window manager, Xvnc can leave keyboard focus on ModTheSpire's hidden launcher window even while mouse clicks reach the game.

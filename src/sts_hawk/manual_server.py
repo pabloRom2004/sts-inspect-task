@@ -94,8 +94,11 @@ def desktop_proxy(
                 "-lc",
                 (
                     "tail -n 150 /tmp/game.log /tmp/sts-manual-vnc.log 2>/dev/null; "
-                    "for f in memory.current memory.peak memory.events cpu.stat; do "
-                    'printf "\\n%s\\n" "$f"; cat "/sys/fs/cgroup/$f"; done'
+                    "for f in memory.current memory.peak memory.max memory.events cpu.stat cpu.max; do "
+                    'printf "\\n%s\\n" "$f"; cat "/sys/fs/cgroup/$f"; done; '
+                    "for pid in $(pgrep -x SlayTheSpire2); do "
+                    "tr '\\0' '\\n' < /proc/$pid/environ "
+                    "| sed -n '/^DOTNET_PROCESSOR_COUNT=/p;/^LP_NUM_THREADS=/p'; done"
                 ),
             ],
             timeout=30,

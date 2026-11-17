@@ -19,12 +19,15 @@ DEFAULTS = default_run_config()
 ARGS = DEFAULTS["task"]["args"]
 
 
-def sandbox_config(image: str, height: int | None = None) -> str:
+def sandbox_config(image: str, cpu: str, memory: str, height: int | None = None) -> str:
     """Write the sample's Kubernetes-compatible single-service Compose config."""
     compose = yaml.safe_load(
         (Path(__file__).parent / "assets/compose.yaml").read_text()
     )
     compose["services"]["default"]["image"] = image
+    compose["services"]["default"]["deploy"]["resources"]["limits"].update(
+        cpus=cpu, memory=memory
+    )
     if height is not None:
         compose["services"]["default"]["environment"]["HEIGHT"] = str(height)
     path = Path(tempfile.mkdtemp(prefix="sts-sandbox-")) / "compose.yaml"
@@ -41,6 +44,11 @@ def first_combat(
     setup_timeout: int = ARGS["setup_timeout"],
     command_timeout: int = ARGS["command_timeout"],
     sandbox_image: str = ARGS["sandbox_image"],
+    sandbox_cpu: str = ARGS["sandbox_cpu"],
+    sandbox_memory: str = ARGS["sandbox_memory"],
+    processor_count: int = ARGS["processor_count"],
+    renderer_threads: int = ARGS["renderer_threads"],
+    java_heap_mb: int = ARGS["java_heap_mb"],
 ) -> Task:
     """Compose a minimal Slay the Spire agent task with an offline wiki."""
     selected = PROMPTS[prompt_name]
@@ -61,13 +69,24 @@ def first_combat(
                 metadata={"requested_game_seed": game_seed},
             )
         ],
-        setup=prepare_game(setup_timeout, command_timeout),
+        setup=prepare_game(
+            setup_timeout,
+            command_timeout,
+            processor_count=processor_count,
+            renderer_threads=renderer_threads,
+            java_heap_mb=java_heap_mb,
+        ),
         solver=slv(**DEFAULTS["solver"]["args"]),
-        sandbox=("docker", sandbox_config(sandbox_image)),
+        sandbox=("docker", sandbox_config(sandbox_image, sandbox_cpu, sandbox_memory)),
         config=GenerateConfig(**DEFAULTS["generate_config"]),
         **DEFAULTS["eval_config"],
         metadata={
             "purpose": "Minimal gameplay task, not a SpireClimb score",
+            "sandbox_cpu": sandbox_cpu,
+            "sandbox_memory": sandbox_memory,
+            "processor_count": processor_count,
+            "renderer_threads": renderer_threads,
+            "java_heap_mb": java_heap_mb,
             "prompt_origin": selected.origin_note,
             "requested_game_seed": game_seed,
             "wiki": "User-provided offline Fandom scrape (750 pages)",
@@ -88,6 +107,10 @@ def second_game(
     command_timeout: int = ARGS["command_timeout"],
     sandbox_image: str = ARGS["sandbox_image"],
     frame_rate_limit: int = DEFAULTS["sts2"]["frame_rate_limit"],
+    sandbox_cpu: str = ARGS["sandbox_cpu"],
+    sandbox_memory: str = ARGS["sandbox_memory"],
+    processor_count: int = ARGS["processor_count"],
+    renderer_threads: int = ARGS["renderer_threads"],
 ) -> Task:
     """Reuse the agent and integer submission for StS2's three-Act A10 game."""
     if not 0 <= ascension <= 10:
@@ -102,6 +125,10 @@ def second_game(
         setup_timeout=setup_timeout,
         command_timeout=command_timeout,
         sandbox_image=sandbox_image,
+        sandbox_cpu=sandbox_cpu,
+        sandbox_memory=sandbox_memory,
+        processor_count=processor_count,
+        renderer_threads=renderer_threads,
     )
     sample = result.dataset[0]
     sample.id = f"sts2-{sample.id}"
@@ -115,6 +142,7 @@ def second_game(
         model_visible="Desktop, sandbox shell/Python and integer submit",
         differences_from_epoch="Built-in --force-steam=off startup; no offline StS2 wiki; general shell/Python; user prompt; 75% compaction; no grader",
     )
+    result.metadata.pop("java_heap_mb", None)
     return Task(
         name=f"sts2_{prompt_name.removesuffix('_sts2')}",
         dataset=result.dataset,
@@ -123,11 +151,18 @@ def second_game(
             command_timeout,
             game="sts2",
             frame_rate_limit=frame_rate_limit,
+            processor_count=processor_count,
+            renderer_threads=renderer_threads,
         ),
         solver=slv(**{**DEFAULTS["solver"]["args"], "wiki_path": None}),
         sandbox=(
             "docker",
-            sandbox_config(sandbox_image, height=DEFAULTS["sts2"]["desktop_height"]),
+            sandbox_config(
+                sandbox_image,
+                sandbox_cpu,
+                sandbox_memory,
+                height=DEFAULTS["sts2"]["desktop_height"],
+            ),
         ),
         config=result.config,
         metadata=result.metadata,

@@ -8,6 +8,11 @@ task:
     setup_timeout: 900
     sandbox_image: ubuntu:24.04
     command_timeout: 180
+    sandbox_cpu: '6'
+    sandbox_memory: 12G
+    processor_count: 6
+    renderer_threads: 3
+    java_heap_mb: 4608
 
 solver:
   solver: sts_hawk/visual_agent
