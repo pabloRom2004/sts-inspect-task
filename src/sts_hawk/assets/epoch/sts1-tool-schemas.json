@@ -1,0 +1,530 @@
+[
+  {
+    "name": "screenshot",
+    "description": "Capture the current screen as an image (1280x720).",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "One sentence on why, in your own voice."
+        }
+      },
+      "required": [
+        "intent"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "left_click",
+    "description": "Left-click at a pixel coordinate. Returns the settled post-click screenshot,\nor says the screen did not change \u2014 no follow-up call needed to see the result.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "One sentence on why, in your own voice."
+        },
+        "x": {
+          "type": "integer",
+          "description": "Pixels from the left edge (0-1279)."
+        },
+        "y": {
+          "type": "integer",
+          "description": "Pixels from the top edge (0-719)."
+        }
+      },
+      "required": [
+        "intent",
+        "x",
+        "y"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "right_click",
+    "description": "Right-click at a pixel coordinate. Returns the settled post-click screenshot,\nor says the screen did not change.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "One sentence on why, in your own voice."
+        },
+        "x": {
+          "type": "integer",
+          "description": "Pixels from the left edge (0-1279)."
+        },
+        "y": {
+          "type": "integer",
+          "description": "Pixels from the top edge (0-719)."
+        }
+      },
+      "required": [
+        "intent",
+        "x",
+        "y"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "left_click_drag",
+    "description": "Press at (x1, y1), drag to (x2, y2), release. Use to play a card onto a target.\nReturns the settled post-drag screenshot.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "One sentence on why, in your own voice."
+        },
+        "x1": {
+          "type": "integer",
+          "description": "Where the drag starts, pixels from the left."
+        },
+        "y1": {
+          "type": "integer",
+          "description": "Where the drag starts, pixels from the top."
+        },
+        "x2": {
+          "type": "integer",
+          "description": "Where the drag ends, pixels from the left."
+        },
+        "y2": {
+          "type": "integer",
+          "description": "Where the drag ends, pixels from the top."
+        }
+      },
+      "required": [
+        "intent",
+        "x1",
+        "y1",
+        "x2",
+        "y2"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "mouse_move",
+    "description": "Move the cursor without clicking. Returns the settled post-move screenshot \u2014\nhover an enemy and read its intent tooltip from the returned image in one step.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "One sentence on why, in your own voice."
+        },
+        "x": {
+          "type": "integer",
+          "description": "Pixels from the left edge."
+        },
+        "y": {
+          "type": "integer",
+          "description": "Pixels from the top edge."
+        }
+      },
+      "required": [
+        "intent",
+        "x",
+        "y"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "key",
+    "description": "Press a key or combo, xdotool style: \"Return\", \"Escape\", \"ctrl+s\".\nReturns the settled post-press screenshot.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "One sentence on why, in your own voice."
+        },
+        "keys": {
+          "type": "string",
+          "description": "The key or combination to press."
+        }
+      },
+      "required": [
+        "intent",
+        "keys"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "scroll",
+    "description": "Scroll the wheel with the cursor at a coordinate. Returns the settled\npost-scroll screenshot.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "One sentence on why, in your own voice."
+        },
+        "x": {
+          "type": "integer",
+          "description": "Pixels from the left edge."
+        },
+        "y": {
+          "type": "integer",
+          "description": "Pixels from the top edge."
+        },
+        "direction": {
+          "type": "string",
+          "description": "One of \"up\", \"down\", \"left\", \"right\"."
+        },
+        "amount": {
+          "type": "integer",
+          "description": "Wheel ticks, 1-30."
+        }
+      },
+      "required": [
+        "intent",
+        "x",
+        "y",
+        "direction",
+        "amount"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "wait_for_change",
+    "description": "Wait until the screen changes, then return a screenshot.\n\nRarely needed: every action already returns a settled post-action\nscreenshot. Reach for this only when you expect a LONG animation or a\ndelayed change (loading screens, act transitions, multi-second enemy\nturns). If nothing changed it says so and returns no image, because\nthe screen is identical to the last one you were shown.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "One sentence on why, in your own voice."
+        },
+        "timeout": {
+          "type": "number",
+          "description": "Give up after this many seconds. 10 is usually right; 30 max."
+        }
+      },
+      "required": [
+        "intent",
+        "timeout"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "memory",
+    "description": "Memory tool for managing persistent information.\n\nView your memory directory at the start of your work to recover\nany earlier progress. As you work, record important findings,\nintermediate results, and status to memory \u2014 your context window\nmay be compacted at any point, so information not saved to memory\ncan be lost.\n\nKeep memory organized: update or remove stale entries rather than\naccumulating. Do not create new files unless necessary.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "Command to execute (view, create, str_replace, insert, delete,\nrename)",
+          "enum": [
+            "view",
+            "create",
+            "str_replace",
+            "insert",
+            "delete",
+            "rename"
+          ]
+        },
+        "path": {
+          "description": "Required parameter for `view`, `create`, `str_replace`, `insert`,\nand `delete` commands. Path to file or directory in /memories, e.g.\n`/memories/file.txt` or `/memories/dir`.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "file_text": {
+          "description": "Required parameter for `create` command, with the content\nof the file to be created.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "old_str": {
+          "description": "Required parameter for `str_replace` command containing the\nstring in `path` to replace.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "new_str": {
+          "description": "Optional parameter for `str_replace` command containing the\nnew string (if not given, the string will be deleted).",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "insert_line": {
+          "description": "Required parameter for `insert` command. The `insert_text`\nwill be inserted AFTER the line `insert_line` of `path`.",
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "insert_text": {
+          "description": "Required parameter for `insert` command containing the\ntext to insert.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "view_range": {
+          "description": "Optional parameter for `view` command when `path` points\nto a file. If none is given, the full file is shown. If provided,\nthe file will be shown in the indicated line number range, e.g. [11, 12]\nwill show lines 11 and 12. Indexing at 1 to start. Setting `[start_line, -1]`\nshows all lines from `start_line` to the end of the file.",
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "old_path": {
+          "description": "Required parameter for `rename` command containing the current\npath.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "new_path": {
+          "description": "Required parameter for `rename` command containing the target\npath.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "command"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "queue_actions",
+    "description": "Run any number of inputs as one queued sequence, stopping at the first\nclick, drag, key press, or scroll that produces no screen change.\n\nUse this when you are CONFIDENT of several inputs in a row \u2014 confirm\ndialogs, a decided card sequence, walking a chosen map path, shopping a\ndecided list. Each step executes in order and the screen must react to\nit; a click/drag/key/scroll that changes nothing ABORTS the remaining\nsteps so a misread screen cannot cascade. Never queue through an\noutcome you have not seen before (unknown fights, unread rewards).\n\nSteps are objects with a \"do\" field:\n  {\"do\": \"left_click\", \"x\": 640, \"y\": 300}\n  {\"do\": \"right_click\", \"x\": 640, \"y\": 300}\n  {\"do\": \"left_click_drag\", \"x1\": 400, \"y1\": 700, \"x2\": 640, \"y2\": 400}\n  {\"do\": \"mouse_move\", \"x\": 640, \"y\": 300}\n  {\"do\": \"key\", \"keys\": \"Return\"}\n  {\"do\": \"scroll\", \"x\": 640, \"y\": 400, \"direction\": \"down\", \"amount\": 3}\n  {\"do\": \"wait\", \"seconds\": 2}\n\nReturns a text log of what ran (and what was skipped, if aborted) plus\nONE screenshot of the final settled screen \u2014 intermediate frames are\ndeliberately dropped to keep your context lean.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "intent": {
+          "type": "string",
+          "description": "One sentence on the plan, in your own voice."
+        },
+        "steps": {
+          "type": "array",
+          "description": "The inputs to run, in order.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "do": {
+                "type": "string"
+              },
+              "x": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "y": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "x1": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "y1": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "x2": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "y2": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "keys": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "direction": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "amount": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "seconds": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "do"
+            ]
+          }
+        }
+      },
+      "required": [
+        "intent",
+        "steps"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "wiki_search",
+    "description": "Search the Slay the Spire community wiki (slaythespire.wiki.gg), the\nonly site this tool reaches. Good for enemy move sets and intents, card\nand relic text and pools, events, map encounters and act structure.\nReturns up to five matching pages as title, URL and snippet; pass a URL\nto wiki_fetch to read the whole page. No match means the wiki has no\nsuch page (try other words), not that the thing does not exist.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "what to look for, in plain words (no site: prefix needed)."
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "wiki_fetch",
+    "description": "Read one page of the Slay the Spire community wiki: the article body\nas markdown (headings, paragraphs, tables), without site navigation.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "the page address, on https://slaythespire.wiki.gg/ (as returned\nby wiki_search). Any other host is refused."
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "give_up",
+    "description": "Stop playing and END THIS SESSION. It counts as a loss and cannot be undone.\n\nOnly for a game that is UNRECOVERABLY stuck: a blank or frozen screen\nthat stayed blank after the harness relaunched the game, controls that\ndo nothing for many turns in a row, a run that cannot be continued.\nNever because a fight or a run is going badly -- play those out.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "description": "What is stuck and what you already tried. Goes in the log."
+        }
+      },
+      "required": [
+        "reason"
+      ],
+      "additionalProperties": false
+    }
+  }
+]

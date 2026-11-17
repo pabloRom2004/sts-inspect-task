@@ -1,0 +1,27 @@
+{
+  "reference_revision": "cd56aefdd098b1f6f70b439df898cea0d94ed378",
+  "reference_origin": "https://github.com/epoch-research/steambench (not publicly available when checked)",
+  "sts1_reference": "2026-11-05T15-14-32-00-00_sts-play-seed13-a20-heart-defect_hffFmaWZPrnvpsfPwTbdAZ.eval",
+  "sts2_reference": "2026-09-22T16-00-59-00-00_sts-play-seed9-a10-ironclad_D5zVqJRNzRFNo49HbjtaAQ.eval",
+  "tool_schema_reference": "Complete 2026-09-29 StS2 Defect seed5 replay",
+  "system_bytes_verified": {
+    "sts1": "b2f7f470cdacf0fc1c961c7e4c68a3940d171d4767f4bed5a8759fd86c252101",
+    "sts2": "af10d9801ef8e49878a84d5cd5527b4e22a7d3ca01a5498043fb26ace4f19e31"
+  },
+  "changes": {
+    "sts1_user": "Only character, seed and ascension parameters",
+    "sts2_user": "Model-controlled Custom setup and requested minute-long loading notice",
+    "tools": "Exact per-game captured schemas, including recovered Luna StS1 schemas; original give_up retained and integer submit added",
+    "context": "Captured summary/300000/memory=true; no fixed image cap; provider-specific pruning only when verified",
+    "grading": "User requested no grader; integer floor self-report",
+    "limits": "40000 messages and 240000 seconds approximating the captured 4000-minute setup deadline; max_retries7 and Luna max_connections24"
+  },
+  "files": {
+    "sts1-tool-schemas.json": "4947603a6b9e0e49d15b1a6a9374899c761231e9f7763bdeaa66760e57e89d15",
+    "sts2-system.txt": "af10d9801ef8e49878a84d5cd5527b4e22a7d3ca01a5498043fb26ace4f19e31",
+    "sts1-user.txt": "61b57918bda482eb980dec1ab8e3c8d552083e79e16614329c0e86a2fc69cdb1",
+    "sts2-tool-schemas.json": "23e8330b2c53e520448b5b4e8f5c23f2e719c999f1c9ab09b925df1a4471c936",
+    "sts1-system.txt": "b2f7f470cdacf0fc1c961c7e4c68a3940d171d4767f4bed5a8759fd86c252101",
+    "sts2-user.txt": "1e95ba170100d7613f82681f351751f6a22b13e6516170ef91b3272b80ccde51"
+  }
+}

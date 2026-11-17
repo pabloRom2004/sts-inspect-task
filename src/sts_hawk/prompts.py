@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from pathlib import Path
 
 
 @dataclass(frozen=True)
@@ -10,6 +11,7 @@ class Prompt:
     text: str
     origin: str
     origin_note: str
+    system_text: str | None = None
     seed_instruction: str = (
         "Enter seed {game_seed} in the game's seed field before starting the run.\n\n"
     )
@@ -27,6 +29,7 @@ class Prompt:
             character=character,
             ascension=ascension,
             seed_instruction=seed_instruction,
+            game_seed=game_seed,
         )
 
 
@@ -113,6 +116,26 @@ FIRST_COMBAT_SMOKE_STS2 = Prompt(
     ),
 )
 
+EPOCH_ASSETS = Path(__file__).parent / "assets/epoch"
+
+EPOCH_STS1 = Prompt(
+    title="epoch_sts1",
+    role="subject",
+    origin="Supplied Epoch replay: sts_play_seed13_a20_heart_defect, 2026-11-05",
+    origin_note="Captured StS1 system/user messages, parameterized only for character, ascension and seed; integer reporting remains a task tool contract.",
+    system_text=(EPOCH_ASSETS / "sts1-system.txt").read_text(),
+    text=(EPOCH_ASSETS / "sts1-user.txt").read_text(),
+)
+
+EPOCH_STS2 = Prompt(
+    title="epoch_sts2",
+    role="subject",
+    origin="Supplied Epoch replay: sts_play_seed9_a10_ironclad, 2026-09-22",
+    origin_note="Captured StS2 system prompt; user message replaces the pre-started run with model-controlled Custom seed entry, as requested.",
+    system_text=(EPOCH_ASSETS / "sts2-system.txt").read_text(),
+    text=(EPOCH_ASSETS / "sts2-user.txt").read_text(),
+)
+
 PROMPTS = {
     prompt.title: prompt
     for prompt in [
@@ -121,5 +144,7 @@ PROMPTS = {
         BEAT_GAME_STS2,
         FIRST_COMBAT_SMOKE,
         FIRST_COMBAT_SMOKE_STS2,
+        EPOCH_STS1,
+        EPOCH_STS2,
     ]
 }

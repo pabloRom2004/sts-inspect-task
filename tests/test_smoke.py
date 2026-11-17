@@ -119,7 +119,7 @@ def test_real_setup_react_and_integer_submission(monkeypatch, tmp_path, mode) ->
         ],
     )
     task = (
-        runtime_probe()
+        runtime_probe(prompt_name="first_combat")
         if mode == "probe"
         else first_combat(
             prompt_name=(
@@ -265,7 +265,6 @@ async def test_stateless_responses_request(monkeypatch) -> None:
 
     from sts_hawk.agent import visual_agent
     from sts_hawk.desktop import desktop_tool
-    from sts_hawk.run_config import default_run_config
 
     visual_agent()
 
@@ -325,9 +324,7 @@ async def test_stateless_responses_request(monkeypatch) -> None:
             messages,
             tools=[
                 desktop_tool(
-                    max_screenshots=default_run_config()["solver"]["args"][
-                        "max_screenshots"
-                    ],
+                    max_screenshots=3,
                     timeout=180,
                 ),
                 bash(),

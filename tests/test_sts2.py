@@ -62,6 +62,7 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
     if probe:
         task = runtime_probe(
             game="sts2",
+            prompt_name="beat_game_sts2",
             wait_seconds=90,
             actions=[{"action": "screenshot"}] if mode == "actions" else None,
             capture_profile=mode == "actions",

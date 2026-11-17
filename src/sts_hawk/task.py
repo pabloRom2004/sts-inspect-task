@@ -4,19 +4,20 @@ from typing import Any
 
 import yaml
 from inspect_ai import Task, task
-from inspect_ai.dataset import Sample
 from inspect_ai.log import transcript
 from inspect_ai.model import ChatMessageUser, GenerateConfig
 from inspect_ai.solver import Generate, Solver, TaskState, solver
 from inspect_ai.tool import computer
 
 from sts_hawk import agent
+from sts_hawk.dataset import get_sts_dataset
 from sts_hawk.prompts import PROMPTS
 from sts_hawk.run_config import default_run_config
 from sts_hawk.runtime import checked_exec, logger, prepare_game
 
 DEFAULTS = default_run_config()
 ARGS = DEFAULTS["task"]["args"]
+EVAL_METADATA = yaml.safe_load((Path(__file__).parent / "eval.yaml").read_text())
 
 
 def sandbox_config(image: str, height: int | None = None) -> str:
@@ -42,38 +43,34 @@ def first_combat(
     command_timeout: int = ARGS["command_timeout"],
     sandbox_image: str = ARGS["sandbox_image"],
 ) -> Task:
-    """Compose a minimal Slay the Spire agent task with an offline wiki."""
+    """Compose gameplay from the selected prompt and its matching tool contract."""
     selected = PROMPTS[prompt_name]
     slv = getattr(agent, DEFAULTS["solver"]["solver"].split("/")[-1])
     return Task(
         name=f"sts_{prompt_name}",
-        dataset=[
-            Sample(
-                id=(
-                    f"{character.lower()}-a{ascension}-{prompt_name.replace('_', '-')}"
-                    + (f"-seed-{game_seed}" if game_seed is not None else "")
-                ),
-                input=selected.render(
-                    character=character.title(),
-                    ascension=ascension,
-                    game_seed=game_seed,
-                ),
-                metadata={"requested_game_seed": game_seed},
-            )
-        ],
+        version=EVAL_METADATA["version"],
+        dataset=get_sts_dataset(selected, character, ascension, game_seed),
         setup=prepare_game(setup_timeout, command_timeout),
         solver=slv(**DEFAULTS["solver"]["args"]),
         sandbox=("docker", sandbox_config(sandbox_image)),
         config=GenerateConfig(**DEFAULTS["generate_config"]),
         **DEFAULTS["eval_config"],
         metadata={
-            "purpose": "Minimal gameplay task, not a SpireClimb score",
+            "purpose": "Unscored replay-derived gameplay task"
+            if selected.system_text is not None
+            else "Minimal gameplay task, not a SpireClimb score",
             "prompt_origin": selected.origin_note,
             "requested_game_seed": game_seed,
-            "wiki": "User-provided offline Fandom scrape (750 pages)",
-            "model_visible": "Desktop, sandbox shell/Python and integer submit; wiki at /opt/sts/wiki.md; harness recorded in solver configuration",
+            "wiki": "Wiki-only search/fetch at slaythespire.wiki.gg"
+            if selected.system_text is not None
+            else "User-provided offline Fandom scrape (750 pages)",
+            "model_visible": "Replay action tools, per-run memory, wiki_search/wiki_fetch and integer submit"
+            if selected.system_text is not None
+            else "Desktop, sandbox shell/Python and integer submit; wiki at /opt/sts/wiki.md",
             "grading": "Unscored; verify gameplay and self-reported floor manually",
-            "differences_from_epoch": "Offline wiki file; general shell/Python access; user-requested minimal prompt; 75% context compaction; no grader",
+            "differences_from_epoch": "Compatible Inspect desktop adapter, independent screen-change detection/wiki retrieval; optional provider-specific image cap; integer submit alongside original give_up rather than automatic terminal-state grading; Inspect time-limit clock differs from external watchdog; game/runtime parity needs verification."
+            if selected.system_text is not None
+            else "Offline wiki file; general shell/Python access; user-requested minimal prompt; no grader",
         },
     )
 
@@ -106,17 +103,25 @@ def second_game(
     sample = result.dataset[0]
     sample.id = f"sts2-{sample.id}"
     sample.metadata["game"] = "sts2"
+    sample.metadata["desktop_height"] = DEFAULTS["sts2"]["desktop_height"]
     slv = getattr(agent, DEFAULTS["solver"]["solver"].split("/")[-1])
     result.metadata.update(
         game="sts2",
         game_version="v0.107.1",
         frame_rate_limit=frame_rate_limit,
-        wiki="No offline StS2 wiki supplied",
-        model_visible="Desktop, sandbox shell/Python and integer submit",
-        differences_from_epoch="Built-in --force-steam=off startup; no offline StS2 wiki; general shell/Python; user prompt; 75% compaction; no grader",
+        wiki="Wiki-only search/fetch at slaythespire.wiki.gg"
+        if sample.metadata["epoch_prompt"]
+        else "No offline StS2 wiki supplied",
+        model_visible="Replay action tools, per-run memory, wiki_search/wiki_fetch and integer submit"
+        if sample.metadata["epoch_prompt"]
+        else "Desktop, sandbox shell/Python and integer submit",
+        differences_from_epoch="Model navigates Custom and enters seed; game loading notice; compatible Inspect desktop adapter and independent wiki retrieval; integer self-report; runtime overlay and gameplay require independent verification."
+        if sample.metadata["epoch_prompt"]
+        else "Built-in --force-steam=off startup; no offline StS2 wiki; general shell/Python; user prompt; no grader",
     )
     return Task(
         name=f"sts2_{prompt_name.removesuffix('_sts2')}",
+        version=result.version,
         dataset=result.dataset,
         setup=prepare_game(
             setup_timeout,

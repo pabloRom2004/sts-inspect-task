@@ -1,0 +1,2 @@
+# Preserve the captured prompts byte-for-byte, including original trailing spaces.
+src/sts_hawk/assets/epoch/*-system.txt -text whitespace=-blank-at-eol

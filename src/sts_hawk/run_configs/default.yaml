@@ -4,7 +4,7 @@ task:
     character: IRONCLAD
     ascension: 20
     game_seed: '1'
-    prompt_name: first_combat
+    prompt_name: epoch_sts1
     setup_timeout: 900
     sandbox_image: ubuntu:24.04
     command_timeout: 180
@@ -13,10 +13,11 @@ solver:
   solver: sts_hawk/visual_agent
   args:
     harness: react
+    tool_profile: auto
     wiki_path: /opt/sts/wiki.md
-    max_screenshots: 3
+    max_screenshots: null
     tool_timeout: 180
-    compaction_threshold: 787500
+    compaction_threshold: 300000
     codex:
       version: 0.169.0
       model_config: gpt-6-luna
@@ -28,20 +29,21 @@ solver:
 generate_config:
   max_tokens: 128000
   reasoning_effort: max
-  max_connections: 1
-  parallel_tool_calls: false
+  max_retries: 7
+  max_connections: 24
+  parallel_tool_calls: null
   temperature: null
   seed: null
 
 eval_config:
   epochs: 1
   token_limit: null
-  message_limit: null
-  time_limit: null
+  message_limit: 40000
+  time_limit: 240000
 
 sts2:
   ascension: 10
-  prompt_name: beat_game_sts2
+  prompt_name: epoch_sts2
   desktop_height: 800
   frame_rate_limit: 60
 

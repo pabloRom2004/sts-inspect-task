@@ -1,145 +1,79 @@
-# Slay the Spire agent
+# Slay the Spire
 
-This standalone Inspect AI task runs Slay the Spire on Generality Hawk with Inspect ReAct or native Codex CLI. ReAct is the default. The task prompt is exactly:
+An Inspect AI adaptation of [Epoch's SpireClimb](https://epoch.ai/benchmarks/spireclimb), using prompts and tool schemas recovered from supplied Epoch replays. StS1 targets Ascension 20 and the Heart. StS2 targets Ascension 10 and all three Acts.
 
-> play Slay the Spire for me as Ironclad
->
-> Defeat the Heart to win.
->
-> Play one round and do not restart the game. Play until victory or defeat.
->
-> Enter seed 1 in the game's seed field before starting the run.
->
-> An offline Slay the Spire wiki is available at /opt/sts/wiki.md.
-
-The agent has desktop, shell and Python tools and can create files and run code in its sandbox. The offline wiki location is included in the task prompt and ReAct's Bash tool description. There is no custom wiki tool or required lookup sequence.
-
-It is an independent adaptation of [Epoch's published SpireClimb methodology](https://epoch.ai/benchmarks/spireclimb). Epoch's complete implementation and prompt were unavailable. This task has no automated grader and does not produce a SpireClimb benchmark score.
+The default task uses the captured game instructions, wiki-only search/fetch, persistent per-run notes and the replay action interface. This is an independent implementation with an integer floor self-report and no grader. It does not produce an official SpireClimb score. See [reproduction limits](docs/replay-parity.md).
 
 ## Usage
 
-Install the package with `pip install .`. Supply a licensed Linux game and the mods separately in a private runtime archive; game files are excluded from this repository. Set `STS_ASSET_URL` to a temporary private download URL for that archive.
+### Installation
 
-On the intended Linux infrastructure:
+```bash
+pip install -e '.[dev]'
+```
+
+Supply the licensed Linux game, mods and an unlocked profile privately through `STS_ASSET_URL`. The StS1 and StS2 archives are separate. Supply `TAVILY_API_KEY` privately to the runner, which performs wiki requests. It is not sent into the game sandbox or stored in task code. Local development can read `~/.config/tavily/api-key` instead.
+
+### Running evaluations
+
+These commands start one full game with model-controlled character, ascension and seed selection:
 
 ```bash
 inspect eval sts_hawk/first_combat --model openrouter/openai/gpt-6-luna \
   -M responses_api=true -M responses_store=false
+
+inspect eval sts_hawk/second_game --model openrouter/openai/gpt-6-luna \
+  -M responses_api=true -M responses_store=false
 ```
 
-For the full-game A20 attempt, pass `-T prompt_name=beat_game`. Its prompt is:
+`first_combat` is the retained entrypoint name; its new default prompt plays a complete game. The StS1 prompt is captured verbatim apart from character, ascension and seed parameters. For StS2, the model selects Singleplayer → Custom, enters the seed and leaves modifiers off. No script starts or pre-seeds either game.
 
-> Try to beat Slay the Spire on Ascension 20 as Ironclad.
->
-> Defeat the Heart to win.
->
-> Play one round and do not restart the game. Play until victory or defeat.
->
-> Enter seed 1 in the game's seed field before starting the run.
->
-> An offline Slay the Spire wiki is available at /opt/sts/wiki.md.
+Do not launch a performance batch until the game version, unlocked content, visible seed/difficulty and startup state are verified. StS1 must offer the full Neow bonus. StS2 startup and combat remain a separate runtime integration check.
 
-The general tools and integer submission are unchanged. No first-combat stopping rule applies.
+### Configurations
 
-For a bounded StS1 integration check, select `-T prompt_name=first_combat_smoke`. This separate prompt asks the model to read the wiki about its first enemy, finish that combat and call `submit` with the maximum floor reached. It retains the character, ascension, seed and no-restart instructions. It does not require a full-game victory and is not a performance benchmark prompt. The two existing StS1 prompts and their defaults are unchanged.
+[default.yaml](src/sts_hawk/run_configs/default.yaml) owns built-in defaults. Prompts are named objects in `prompts.py`; message bodies and captured schemas are packaged under `assets/epoch/`. The replay profile uses summary compaction at 300,000 tokens, matching the supplied plans, and retains screenshots until compaction by default, as observed in the complete Epoch replay. Set `max_screenshots` explicitly only for a verified provider image limit.
 
-Real model evaluations run on Hawk. Local validation uses mockllm. `sts_hawk/runtime_probe` performs the same installation and captures a screenshot without a model generation. These are separate checks: provider connectivity does not prove the game runs, and a runtime screenshot does not prove the agent can play.
+The available replay headers do not provide Epoch's complete implementation. We therefore provide no purported exact `original.yaml`; the captured settings and remaining differences are recorded in the parity document. The published methodology now describes `CompactionAuto`, while these replays explicitly configured summary compaction.
 
-### Configuration
+For the previous minimal task, select `-T prompt_name=beat_game` or `first_combat`. `tool_profile=auto` selects its original desktop/shell/Python tools and offline wiki. The earlier `first_combat_smoke` and `first_combat_smoke_sts2` prompts remain available. Historical CLI adapter details are preserved in [the legacy reference](docs/legacy-task.md); that adapter is not Codex Desktop's native computer-use backend.
 
-`src/sts_hawk/run_configs/default.yaml` owns task, solver, generation and evaluation defaults. Copy it to change settings; native Inspect run-config and solver overrides remain available. Setup stays outside the replaceable solver. This is a new smoke task with no upstream implementation to reproduce, so there is no `original.yaml`.
+## Environment
 
-The default selects one sample and stock Inspect ReAct with `computer()` exposed as `desktop`, `bash()` and `python()`. Up to the three latest desktop screenshots are sent to the model; the full screenshot history remains in the log. Hawk's pinned Inspect build has a per-tool count bug that otherwise drops the newest screenshot after Bash/Python calls. A version-scoped backport applies the upstream 0.3.289 fix. Keeping all screenshots was tested but hit the provider's 50-image request limit, so it is not the default. The same screenshot policy is applied before both native and summary compaction, because Inspect does not apply tool input handlers on those paths. Compaction is triggered at 787,500 tokens, following the user's 75% policy for Luna's verified 1,050,000-token context. Maximum response output is 128,000 tokens and reasoning effort is `max`. Model and billing-route selection belong to the Hawk launch configuration.
+The model interacts with a 1280×720 StS1 or 1280×800 StS2 X11 desktop in Docker, adapted to Kubernetes on Hawk. Licensed assets, profiles and credentials stay private. `prepare_game` installs the game before the interchangeable solver executes.
 
-The computer tool is exposed as `desktop` using Inspect's `tool_with`, with input validation before stock action execution and the backend error-handling fixes described below. Its model-visible schema and screenshot filtering are preserved. This keeps it as a function tool because Inspect's native OpenAI computer mode forces `store=true`, which OpenRouter's stateless Responses API rejects. Luna requires Responses for function calling with reasoning. Pass `responses_api: true` and `responses_store: false` in the Hawk model arguments too. ReAct supports the older Hawk Inspect 0.3.286.dev10+g3a44082ca build and newer releases. On that older build, include `agent-client-protocol==0.12.1` in runner packages: ACP 1.0 removed an import it needs. Inspect 0.3.289 fixes that upstream; Codex requires at least that release.
-
-### Codex CLI
-
-Install the optional adapter with `pip install '.[codex]'`. It requires Inspect >=0.3.289 and pins [Inspect SWE](https://meridianlabs-ai.github.io/inspect_swe/codex_cli.html) 0.3.0. Select Codex through the existing solver parameter:
-
-```bash
-inspect eval sts_hawk/first_combat --model openrouter/openai/gpt-6-luna \
-  -M responses_api=true -M responses_store=false \
-  -S harness=codex -T prompt_name=beat_game
-```
-
-[Codex CLI 0.169.0](https://github.com/openai/codex/releases/tag/rust-v0.169.0) runs inside the same Linux game sandbox. Its own agent loop, instructions, code-mode tools, shell and file handling replace ReAct. Inspect SWE proxies inference back to the selected Inspect model and records it in `.eval`; the Codex process receives a placeholder proxy key, not the provider credential. The desktop and integer `submit` tools are exposed through MCP. Subagents, goal tools and native web search are disabled. Native shell and Python remain available, including access to `/opt/sts/wiki.md`.
-
-`solver.args.codex` in `default.yaml` owns the native version, prompt/tool slug (`model_config`), context, compaction threshold and workspace paths. The slug is explicitly `gpt-6-luna` so an OpenRouter model name does not silently select Codex's generic fallback prompt. It selects Codex's local instructions and tools; it does not change the inference model. Change it deliberately when testing another model.
-
-The Codex arm uses its native 272,000-token context. Codex reserves 5% and reports 258,400 usable tokens in its native token-count events, so its explicit automatic-compaction threshold is 193,800 (75% of that verified effective window). ReAct retains 1,050,000 and 787,500 respectively. Both arms keep the 128,000 per-response output limit and `max` reasoning through Inspect's effective generation config. These are context-management differences in the comparison, not identical harness settings.
-
-The bridge removes all but the latest three images from outgoing model requests while retaining text and reasoning. Native Codex still owns its session history and compaction; this is not ReAct's compactor. Code-mode desktop calls must emit their returned image using `image(...)` for the next model request to include it. All executed desktop calls and their screenshots remain in tool events. On a valid submission, the next inference request receives a local integer final response and the run ends without a further provider call. If Codex exits normally without submitting, its final text is retained and `FloorSubmission:native_exit_without_submit` is set in the sample store. No floor is invented and the run is not labelled an infrastructure error. There is no automatic continuation after such a voluntary exit.
-
-This is the supported open-source Codex CLI harness with the existing Inspect desktop backend. It does not recreate the Codex Desktop app's built-in computer-use implementation. Setup, sandbox and native-process failures remain evaluation errors. Native checkpoint/resume and full-game performance need separate remote validation; short scripted transport tests do not establish them.
-
-Differences from Epoch's benchmark include the user-specified prompt, general shell/Python access, an offline Fandom wiki, the 75% compaction policy and no automated grading. The exact Epoch prompt has not been verified. Both prompts require defeating the Heart to win, but completion is not mechanically verified. The task requests one game seed at a time; it does not implement the full 15-seed benchmark.
-
-## Runtime
-
-The sandbox installs Java 8, TigerVNC, graphics dependencies and Inspect's stock computer backend into Ubuntu 24.04, rendering at 1280×720. BaseMod, DeterminismFix and Unlock Everything are enabled. Fast Mode and SuperFastMode are disabled. The task does not load CommunicationMod or expose a custom game-state command tool. Shell and Python access are ordinary sandbox tools, without a wiki-only restriction.
-
-Startup explicitly focuses the game window. Without a window manager, Xvnc can leave keyboard focus on ModTheSpire's hidden launcher window even while mouse clicks reach the game.
-
-Sandbox resources live in `assets/compose.yaml`. Two CPUs and 4 GB are initial single-smoke allocations, not measured production batch requirements. Container internet access is enabled for OS installation and the private archive download. Runtime assets and download URLs must stay private.
+The StS2 runtime preserves frozen v0.107.1 assemblies and accepts private profile/mod overlays through `STS_PROFILE_BASE64` and `STS_RUNTIME_OVERLAY_BASE64`. Its `frame_rate_limit` defaults to 60. Existing `runtime_probe` and `manual_session` entrypoints remain available for no-model startup diagnosis and human play. Their runtime implementation is unchanged by this port.
 
 ## Parameters
 
-`first_combat` accepts `character` (`IRONCLAD`), `ascension` (`20`), `game_seed` (`"1"`), `prompt_name` (`first_combat`), `setup_timeout` (`900` seconds), `command_timeout` (`180` seconds) and `sandbox_image` (`ubuntu:24.04`). The `first_combat` entrypoint is retained for compatibility. The character parameter defaults to Ironclad. The `beat_game` and `first_combat_smoke` prompts also include ascension. No hidden controller starts a run. Verify the actual selection from screenshots. Only the explicitly selected `first_combat_smoke` prompt requests stopping after one combat; both existing gameplay prompts continue until victory or defeat.
+`first_combat` defaults to `character=IRONCLAD`, `ascension=20`, `game_seed='1'` and `prompt_name=epoch_sts1`. `second_game` defaults to Ascension 10 and `prompt_name=epoch_sts2`. Both retain setup timeout 900 seconds, command timeout 180 seconds and sandbox image `ubuntu:24.04`.
 
-Pass `-T game_seed=1` to request literal seed `1` in the game's seed field. This instruction is included in either gameplay prompt, and the requested seed is recorded in task/sample metadata and the sample ID. The AI must enter it through the game interface; setup does not inject a seed. Set `game_seed: null` in task arguments to omit the instruction and retain the prior unseeded sample ID. This parameter is separate from `generate_config.seed`, which controls model sampling and remains unset. A requested seed is not proof of the seed actually used: verify the visible seed after the run starts.
+The seed is the literal string the model types into the game. It is separate from model sampling, which remains unseeded. Replay prompts require an explicit game seed; legacy prompts still support `game_seed=None`.
 
-The `visual_agent` solver accepts `harness` (`react` or `codex`), `max_screenshots` (`3`), `tool_timeout` (`180` seconds), ReAct's `compaction_threshold` (`787500` tokens), and the `codex` settings described above. Codex has its own `codex.compaction_threshold` (`193800` tokens). The offline wiki file contains 750 pages with original article text and source URLs. See `THIRD_PARTY.md` for attribution. The vendored computer backend retains Inspect's MIT license. A small local availability check makes its browser actions return a recoverable tool error when Firefox ESR is absent, rather than timing out and aborting the sample.
+`visual_agent` uses `tool_profile=auto`, no fixed screenshot cap, a 180-second tool timeout and a 300,000-token compaction threshold. `epoch` and `standard` select the tool profiles explicitly. The replay profile exposes `screenshot`, `left_click`, `right_click`, `left_click_drag`, `mouse_move`, `key`, `scroll`, `wait_for_change`, `queue_actions`, `memory`, `wiki_search`, `wiki_fetch`, `give_up` and `submit`.
 
-Desktop argument-parsing failures are returned to the model as recoverable tool errors so it can correct the action. Empty calls/batches, malformed coordinates or zoom regions, wrong field types and missing required fields are checked before any action in a batch executes. Supplying coordinates to mouse-down/up returns guidance to move the cursor first; stock Inspect silently ignores those coordinates. Batched waits accept fractional seconds; negative and non-finite durations are rejected.
+Default generation uses `max` reasoning and a 128,000-token maximum response. There is one epoch, a 40,000-message limit, a 240,000-second time limit and no cumulative token cap. The time limit approximates the replay setup’s 4,000-minute wall deadline through Inspect’s clock. Retry count is seven and the connection ceiling is 24, as in the captured Luna header. No automatic restart is performed. Select another model deliberately and verify its provider limits before launching.
 
-Wait and key-hold durations are seconds. A duration at or above the configured tool timeout is rejected immediately with unit guidance because it cannot finish within that timeout. With the default 180-second timeout, `duration: 3000` returns an error immediately rather than sleeping until the command times out. Setting `tool_timeout: null` retains unlimited-duration behavior.
+## Scoring and logs
 
-Backend command timeouts also return tool errors. The timed-out command's process group is killed, and the model is told to check the screen before retrying because input may already have taken effect. This does not undo completed actions or make batches atomic: runtime errors can still occur partway through a valid batch. Unexpected backend failures, unavailable sandboxes and setup failures remain evaluation errors. Ordinary Bash/Python command failures already return their error output to the model.
+`submit(max_floor: int)` ends the sample and records an unverified integer. There is no grader or aggregate score. Confirm terminal outcome and floor from screenshots separately. Invalid tool arguments, rejected wiki addresses and expected network/input errors are returned to the model; setup, sandbox and unexpected programming failures remain evaluation errors.
 
-## Submission and logs
-
-The agent finishes with `submit(max_floor: int)`. Inspect stores the integer as the final completion and retains the tool call. This is an unverified self-report. The user checks screenshots to determine gameplay progress and whether the floor report is accurate. Ordinary shell/Python calls are recorded in the transcript. There is no grader or aggregate score.
-
-Hawk's live viewer shows actions and screenshots when `log_realtime` is enabled. No local viewer or relay is required. Installation and sandbox failures remain errors rather than game losses.
-
-## Slay the Spire 2
-
-`sts_hawk/second_game` uses the owned Linux **v0.107.1** copy, defaults to Ironclad at **A10**, and asks for all three Acts with one run and no restart. It retains the integer max-floor submission and has no grader. Select `-T prompt_name=first_combat_smoke_sts2` to stop after one combat instead:
-
-```bash
-inspect eval sts_hawk/second_game --model openrouter/openai/gpt-6-luna \
-  -M responses_api=true -M responses_store=false -S harness=react
-```
-
-Supply a separate private StS2 runtime archive through `STS_ASSET_URL`. The installer checks the version. Startup uses the built-in `--force-steam=off` switch, OpenGL, a null ALSA device and a 1280×800 desktop. No game assembly patch is required. The archive contains Workshop `UnlockTheSpire` v1.0.3; an unlocked profile can be included as `profile/` and copied into the isolated container. Mod activation and A10 availability must be verified before gameplay. Never publish the game archive or Steam authentication files.
-
-An isolated profile can also be supplied as a base64-encoded tar.gz through the optional `STS_PROFILE_BASE64` runner secret. Its contents are applied over the archive's profile before launch. This keeps the game archive fixed while preparing and verifying the unlocked starting state. Keep this profile private too.
-
-An optional `STS_RUNTIME_OVERLAY_BASE64` secret supplies a tar.gz of additional private mod directories. It is extracted under `/game/mods` with Python's data filter. The profile and mod-overlay archive hashes are recorded in sample metadata. No overlay is supplied by default.
-
-`second_game` accepts `frame_rate_limit` (default 60). The launcher applies it to the isolated settings before the game starts, including when no starting profile is supplied. It is recorded in task metadata. Software-rendering diagnostic runs can vary it without changing the task source.
-
-The Linux launcher preloads the system `libgcc_s.so.1` for the bundled Harmony 2.4.2 exception helper. Without it, mod initialization fails with `undefined symbol: _Unwind_RaiseException` even though the game reports the mod as loaded. This reproduces [Harmony issue 766](https://github.com/pardeike/Harmony/issues/766); the runtime setting preserves the frozen game assemblies rather than replacing Harmony with the newer release.
-
-No offline StS2 wiki is currently included; this task does not advertise the first game's wiki to the StS2 agent. This is an additional difference from Epoch. The user deferred wiki integration for the initial gameplay smoke. The game crashes under local AMD64 Docker emulation on the ARM Mac; native AMD64 Hawk startup is verified at the main menu, with about 28 seconds to menu readiness. Unlock configuration and gameplay need separate verification. Use `sts_hawk/runtime_probe -T game=sts2 -T wait_seconds=90` for a no-inference startup check and game logs. The earlier 15-second capture was too early to establish readiness.
-
-`runtime_probe` also accepts an operator-supplied `actions` list of stock computer calls and `capture_profile=true`. These run without model inference, retain screenshots in the transcript, and can export the isolated StS2 default profile as a compressed attachment in the private `.eval` log. This supports preparing and checking an unlocked starting profile; it does not add game-state tools or grading to the evaluated agent.
-
-StS2 runtime probes wait for the game's complete-menu startup marker before issuing computer calls. Their diagnostic attachment includes cgroup CPU and memory counters and process memory/state alongside the game logs.
-
-## Human desktop debugging
-
-`sts_hawk/manual_session` starts the StS2 sandbox for human play without making model calls. It serves noVNC on runner port 6080 for Hawk's authenticated `attach` relay. The default session lasts two hours and retains the final profile and game logs. This is a debug session, not a benchmark result.
-
-After launching the task on Hawk, use `hawk attach RUN_ID --port 6080 --local-port 6082` and open `http://127.0.0.1:6082/`. The `/api/status` endpoint returns game diagnostics; `POST /api/finish` ends the session and cleans up its sandbox. Bindings from the local Hawk tunnel are loopback-only.
-
-When a deployment has no attach relay, set `browser_tunnel_enabled=true` and supply a private random `STS_MANUAL_ACCESS_TOKEN` of at least 32 characters through the runner's secrets. The task verifies a pinned official cloudflared binary, starts a temporary HTTPS tunnel, and rejects requests without the access-link cookie. Add `?access_token=TOKEN` to the tunnel URL once to connect; the key is exchanged for a secure HTTP-only cookie and removed by the redirect. Never commit the access key or include it in shared logs.
+Hawk's viewer can display live actions and screenshots. Keep repository `logs/` flat with only `.eval` files; put supporting files in `run-artifacts/<run-name>/`.
 
 ## Validation
 
-Run `pytest tests`, `ruff check .` and `ruff format --check .`. Tests exercise the actual task setup, stock computer parser, Bash/Python execution, the installed wiki file, invalid and valid integer submissions, unscored completion, and setup-error propagation through mockllm. They also exercise the real Hawk Compose-to-Kubernetes conversion. External execution is simulated in local tests; the separate Linux runtime probe must establish actual game startup before the paid gameplay smoke.
+```bash
+pytest tests
+ruff check .
+ruff format --check .
+```
 
-Validate the real Docker runtime and tools locally with mockllm before launching on Hawk. Keep local containers bounded at two CPUs and 4 GB, reuse cached OS layers, mount the private archive read-only for installation, and remove the test containers afterwards. A scripted menu click, shell wiki search and Python file write/read verify integration, not model playing ability.
+The tests run both task factories through mock inference, real tool parsing, wiki response formatting, persistent notes, malformed inputs, queue aborts and optional provider-specific image pruning, including repeated identical screenshots.
 
-`STS_CODEX_DOCKER_TEST=1 pytest tests/test_codex.py` additionally uses the cached `local/sts-hawk-os:0.2.4` image and a blank X display, at one CPU and 1 GiB. It runs the real pinned Codex executable and Inspect model/MCP bridge with scripted inference, including native shell/Python, the wiki, screenshot retention, recoverable input errors, integer submission, voluntary exit and compaction. It does not start the game or make paid model calls. Install the optional Codex extra first; a missing cached OS image must be built from the runtime OS dependencies before this test.
+For a bounded Docker/X11 transport test using the existing cached OS image:
+
+```bash
+STS_EPOCH_DOCKER_TEST=1 pytest tests/test_epoch_docker.py
+```
+
+This uses one CPU and 1 GiB, makes no paid model requests and starts no game. It establishes desktop transport, not gameplay or benchmark equivalence. Validate actual game startup before a paid gameplay smoke, then retain the review gate before a full batch.

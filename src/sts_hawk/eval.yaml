@@ -1,4 +1,4 @@
 name: sts_hawk/first_combat
-version: 2-A
-description: Unscored visual first-combat smoke with offline wiki and integer floor self-report.
+version: 3-A
+description: Replay-derived seeded StS1 A20 Heart and StS2 A10 gameplay with wiki references and integer floor self-report.
 upstream_methodology: https://epoch.ai/benchmarks/spireclimb
