@@ -1,0 +1,65 @@
+# Replay-derived generation and agent settings. Environment resources and
+# integration details remain local adaptations; see docs/replay-parity.md.
+task:
+  task: sts_hawk/first_combat
+  args:
+    character: IRONCLAD
+    ascension: 20
+    game_seed: '1'
+    prompt_name: epoch_sts1
+    setup_timeout: 900
+    sandbox_image: ubuntu:24.04
+    command_timeout: 180
+    sandbox_cpu: '6'
+    sandbox_memory: 12G
+    processor_count: 6
+    renderer_threads: 3
+    java_heap_mb: 4608
+
+solver:
+  solver: sts_hawk/visual_agent
+  args:
+    harness: react
+    tool_profile: auto
+    wiki_path: /opt/sts/wiki.md
+    max_screenshots: null
+    tool_timeout: 180
+    compaction_threshold: 300000
+    codex:
+      version: 0.169.0
+      model_config: gpt-6-luna
+      context_window: 272000
+      compaction_threshold: 193800
+      cwd: /workspace
+      home_dir: /opt/sts/codex-home
+
+generate_config:
+  max_tokens: 128000
+  reasoning_effort: max
+  max_retries: 7
+  max_connections: 24
+  parallel_tool_calls: null
+  temperature: null
+  seed: null
+
+eval_config:
+  epochs: 1
+  token_limit: null
+  message_limit: 40000
+  time_limit: 240000
+
+sts2:
+  ascension: 10
+  prompt_name: epoch_sts2
+  desktop_height: 800
+  frame_rate_limit: 60
+
+runtime_probe:
+  wait_seconds: 15
+
+manual_session:
+  port: 6080
+  session_seconds: 7200
+  browser_tunnel_enabled: false
+  cloudflared_url: https://github.com/cloudflare/cloudflared/releases/download/2026.11.0/cloudflared-linux-amd64
+  cloudflared_sha256: 51f7c68b57ed7269164075d7e789efce5b59355982f06392deeb037d982a51fd

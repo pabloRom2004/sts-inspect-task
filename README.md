@@ -34,7 +34,7 @@ Do not launch a performance batch until the game version, unlocked content, visi
 
 [default.yaml](src/sts_hawk/run_configs/default.yaml) owns built-in defaults. Prompts are named objects in `prompts.py`; message bodies and captured schemas are packaged under `assets/epoch/`. The replay profile uses summary compaction at 300,000 tokens, matching the supplied plans, and retains screenshots until compaction by default, as observed in the complete Epoch replay. Set `max_screenshots` explicitly only for a verified provider image limit.
 
-The available replay headers do not provide Epoch's complete implementation. We therefore provide no purported exact `original.yaml`; the captured settings and remaining differences are recorded in the parity document. The published methodology now describes `CompactionAuto`, while these replays explicitly configured summary compaction.
+[original.yaml](src/sts_hawk/run_configs/original.yaml) retains the replay-derived seven API retries. The maintained default permits 140 retries, as requested for provider outages. This original profile contains necessary local environment adaptations; the replay headers do not expose Epoch's complete implementation. Captured settings and remaining differences are recorded in the parity document. The published methodology now describes `CompactionAuto`, while these replays explicitly configured summary compaction.
 
 For the previous minimal task, select `-T prompt_name=beat_game` or `first_combat`. `tool_profile=auto` selects its original desktop/shell/Python tools and offline wiki. The earlier `first_combat_smoke` and `first_combat_smoke_sts2` prompts remain available. Historical CLI adapter details are preserved in [the legacy reference](docs/legacy-task.md); that adapter is not Codex Desktop's native computer-use backend.
 
@@ -52,7 +52,7 @@ The seed is the literal string the model types into the game. It is separate fro
 
 `visual_agent` uses `tool_profile=auto`, no fixed screenshot cap, a 180-second tool timeout and a 300,000-token compaction threshold. `epoch` and `standard` select the tool profiles explicitly. The replay profile exposes `screenshot`, `left_click`, `right_click`, `left_click_drag`, `mouse_move`, `key`, `scroll`, `wait_for_change`, `queue_actions`, `memory`, `wiki_search`, `wiki_fetch`, `give_up` and `submit`.
 
-Default generation uses `max` reasoning and a 128,000-token maximum response. There is one epoch, a 40,000-message limit, a 240,000-second time limit and no cumulative token cap. The time limit approximates the replay setup’s 4,000-minute wall deadline through Inspect’s clock. Retry count is seven and the connection ceiling is 24, as in the captured Luna header. No automatic restart is performed. Select another model deliberately and verify its provider limits before launching.
+Default generation uses `max` reasoning and a 128,000-token maximum response. There is one epoch, a 40,000-message limit, a 240,000-second time limit and no cumulative token cap. The time limit approximates the replay setup’s 4,000-minute wall deadline through Inspect’s clock. API requests permit 140 retries with Inspect’s exponential backoff; the original replay-derived profile uses seven. The connection ceiling is 24, as in the captured Luna header. No automatic restart is performed. Select another model deliberately and verify its provider limits before launching.
 
 ## Scoring and logs
 

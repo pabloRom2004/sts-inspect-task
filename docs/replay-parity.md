@@ -15,6 +15,7 @@ Reference messages came from the supplied Epoch `.eval` files. The StS1 system p
 | Images | Provider-dependent pruning; exact count unavailable | No fixed cap by default; complete Sonnet replay reached 102 images; optional provider cap |
 | End of run | Epoch terminal-state handling and `give_up` | Original `give_up` plus requested integer `submit`; no automatic grader |
 | Limits | Headers include 40000 messages and a 4000-minute setup deadline | 40000 messages; 240000-second Inspect deadline; clock/scope differ from external watchdog |
+| API retries | Seven in the recovered Luna header | Maintained default 140 at user request; `original.yaml` retains seven. This retries the same model request and does not restart the game. |
 
 The backend is an adapter, not Epoch's private playpen service. Screen-change detection compares captured image bytes; settling inherits the stock backend's two-second post-input delay. Animation, cursor changes or compression can count as a change. Epoch's exact settling/difference algorithm is unavailable. Queues are validated before execution and abort on an unchanged click/drag/key/scroll; a runtime error can still happen after earlier steps executed.
 

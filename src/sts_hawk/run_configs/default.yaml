@@ -34,7 +34,7 @@ solver:
 generate_config:
   max_tokens: 128000
   reasoning_effort: max
-  max_retries: 7
+  max_retries: 140
   max_connections: 24
   parallel_tool_calls: null
   temperature: null
