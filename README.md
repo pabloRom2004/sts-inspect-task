@@ -81,6 +81,8 @@ Both games default to six CPU cores and 12 GiB of sandbox RAM. The game runtime 
 
 StS2's optional `log_frame_rate` argument enables Godot's own FPS counter in the game log for diagnostics. It is disabled by default.
 
+`gpu_count` requests NVIDIA devices on Hawk and includes the graphics driver capabilities. It defaults to zero. `sts_hawk/gpu_probe` checks device passthrough without installing the game or invoking a model; requesting a device alone does not switch the game away from software rendering.
+
 The sandbox installs Java 8, TigerVNC, graphics dependencies and Inspect's stock computer backend into Ubuntu 24.04, rendering at 1280×720. BaseMod, DeterminismFix and Unlock Everything are enabled. Fast Mode and SuperFastMode are disabled. The task does not load CommunicationMod or expose a custom game-state command tool. Shell and Python access are ordinary sandbox tools, without a wiki-only restriction.
 
 Startup explicitly focuses the game window. Without a window manager, Xvnc can leave keyboard focus on ModTheSpire's hidden launcher window even while mouse clicks reach the game.

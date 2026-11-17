@@ -10,6 +10,7 @@ task:
     command_timeout: 180
     sandbox_cpu: '6'
     sandbox_memory: 12G
+    gpu_count: 0
     processor_count: 6
     renderer_threads: 3
     java_heap_mb: 4608
@@ -53,6 +54,9 @@ sts2:
 
 runtime_probe:
   wait_seconds: 15
+
+gpu_probe:
+  gpu_count: 1
 
 manual_session:
   game: sts2

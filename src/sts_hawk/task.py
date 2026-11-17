@@ -9,6 +9,7 @@ from inspect_ai.log import transcript
 from inspect_ai.model import ChatMessageUser, GenerateConfig
 from inspect_ai.solver import Generate, Solver, TaskState, solver
 from inspect_ai.tool import computer
+from inspect_ai.util import sandbox
 
 from sts_hawk import agent
 from sts_hawk.prompts import PROMPTS
@@ -19,7 +20,9 @@ DEFAULTS = default_run_config()
 ARGS = DEFAULTS["task"]["args"]
 
 
-def sandbox_config(image: str, cpu: str, memory: str, height: int | None = None) -> str:
+def sandbox_config(
+    image: str, cpu: str, memory: str, gpu_count: int, height: int | None = None
+) -> str:
     """Write the sample's Kubernetes-compatible single-service Compose config."""
     compose = yaml.safe_load(
         (Path(__file__).parent / "assets/compose.yaml").read_text()
@@ -28,6 +31,18 @@ def sandbox_config(image: str, cpu: str, memory: str, height: int | None = None)
     compose["services"]["default"]["deploy"]["resources"]["limits"].update(
         cpus=cpu, memory=memory
     )
+    if gpu_count < 0:
+        raise ValueError("The GPU count must be nonnegative.")
+    if gpu_count:
+        compose["services"]["default"]["x-k8s"] = {
+            "resources": {
+                "requests": {"nvidia.com/gpu": gpu_count},
+                "limits": {"nvidia.com/gpu": gpu_count},
+            }
+        }
+        compose["services"]["default"]["environment"]["NVIDIA_DRIVER_CAPABILITIES"] = (
+            "compute,utility,graphics,display"
+        )
     if height is not None:
         compose["services"]["default"]["environment"]["HEIGHT"] = str(height)
     path = Path(tempfile.mkdtemp(prefix="sts-sandbox-")) / "compose.yaml"
@@ -46,6 +61,7 @@ def first_combat(
     sandbox_image: str = ARGS["sandbox_image"],
     sandbox_cpu: str = ARGS["sandbox_cpu"],
     sandbox_memory: str = ARGS["sandbox_memory"],
+    gpu_count: int = ARGS["gpu_count"],
     processor_count: int = ARGS["processor_count"],
     renderer_threads: int = ARGS["renderer_threads"],
     java_heap_mb: int = ARGS["java_heap_mb"],
@@ -77,13 +93,17 @@ def first_combat(
             java_heap_mb=java_heap_mb,
         ),
         solver=slv(**DEFAULTS["solver"]["args"]),
-        sandbox=("docker", sandbox_config(sandbox_image, sandbox_cpu, sandbox_memory)),
+        sandbox=(
+            "docker",
+            sandbox_config(sandbox_image, sandbox_cpu, sandbox_memory, gpu_count),
+        ),
         config=GenerateConfig(**DEFAULTS["generate_config"]),
         **DEFAULTS["eval_config"],
         metadata={
             "purpose": "Minimal gameplay task, not a SpireClimb score",
             "sandbox_cpu": sandbox_cpu,
             "sandbox_memory": sandbox_memory,
+            "gpu_count": gpu_count,
             "processor_count": processor_count,
             "renderer_threads": renderer_threads,
             "java_heap_mb": java_heap_mb,
@@ -110,6 +130,7 @@ def second_game(
     log_frame_rate: bool = DEFAULTS["sts2"]["log_frame_rate"],
     sandbox_cpu: str = ARGS["sandbox_cpu"],
     sandbox_memory: str = ARGS["sandbox_memory"],
+    gpu_count: int = ARGS["gpu_count"],
     processor_count: int = ARGS["processor_count"],
     renderer_threads: int = ARGS["renderer_threads"],
 ) -> Task:
@@ -128,6 +149,7 @@ def second_game(
         sandbox_image=sandbox_image,
         sandbox_cpu=sandbox_cpu,
         sandbox_memory=sandbox_memory,
+        gpu_count=gpu_count,
         processor_count=processor_count,
         renderer_threads=renderer_threads,
     )
@@ -164,6 +186,7 @@ def second_game(
                 sandbox_image,
                 sandbox_cpu,
                 sandbox_memory,
+                gpu_count,
                 height=DEFAULTS["sts2"]["desktop_height"],
             ),
         ),
@@ -283,3 +306,61 @@ def runtime_probe(
         wait_seconds=wait_seconds, actions=actions, capture_profile=capture_profile
     )
     return result
+
+
+@solver
+def capture_gpu(command_timeout: int = ARGS["command_timeout"]) -> Solver:
+    """Verify a real GPU allocation before installing the game or graphics tools."""
+
+    async def solve(state: TaskState, generate: Generate) -> TaskState:
+        """Record the assigned device and available graphics driver libraries."""
+        result = await sandbox().exec(
+            [
+                "bash",
+                "-lc",
+                (
+                    "set -e; nvidia-smi --query-gpu=name,driver_version,memory.total --format=csv; "
+                    "printf '\\n=== Graphics devices ===\\n'; "
+                    "find /dev -maxdepth 2 \\( -name 'nvidia*' -o -name 'renderD*' \\) -print; "
+                    "printf '\\n=== Graphics libraries ===\\n'; "
+                    "ldconfig -p | sed -n '/libEGL/p;/libGLX/p;/nvidia/p'"
+                ),
+            ],
+            timeout=command_timeout,
+        )
+        transcript().info(
+            {
+                "gpu_diagnostics": result.stdout,
+                "stderr": result.stderr,
+                "success": result.success,
+            }
+        )
+        if not result.success:
+            raise RuntimeError("The requested GPU is not usable in the sandbox.")
+        return state
+
+    return solve
+
+
+@task
+def gpu_probe(
+    gpu_count: int = DEFAULTS["gpu_probe"]["gpu_count"],
+    sandbox_image: str = ARGS["sandbox_image"],
+    sandbox_cpu: str = ARGS["sandbox_cpu"],
+    sandbox_memory: str = ARGS["sandbox_memory"],
+    command_timeout: int = ARGS["command_timeout"],
+) -> Task:
+    """Check Hawk GPU passthrough without downloading the game or calling a model."""
+    return Task(
+        dataset=[Sample(input="Verify the allocated graphics device.")],
+        solver=capture_gpu(command_timeout),
+        sandbox=(
+            "docker",
+            sandbox_config(sandbox_image, sandbox_cpu, sandbox_memory, gpu_count),
+        ),
+        metadata={
+            "gpu_count": gpu_count,
+            "purpose": "No-inference GPU availability check",
+        },
+        **DEFAULTS["eval_config"],
+    )
