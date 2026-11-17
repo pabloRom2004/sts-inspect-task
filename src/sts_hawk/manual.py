@@ -14,13 +14,14 @@ from inspect_ai.util import sandbox
 
 from sts_hawk.run_config import default_run_config
 from sts_hawk.runtime import checked_exec, logger
-from sts_hawk.task import second_game
+from sts_hawk.task import first_combat, second_game
 
 DEFAULTS = default_run_config()["manual_session"]
 
 
 @solver
 def manual_control(
+    game: str = DEFAULTS["game"],
     port: int = DEFAULTS["port"],
     session_seconds: int = DEFAULTS["session_seconds"],
     browser_tunnel_enabled: bool = DEFAULTS["browser_tunnel_enabled"],
@@ -30,6 +31,8 @@ def manual_control(
     """Keep the authenticated browser tunnel next to the game in its Linux sandbox."""
     if not 1 <= port <= 65535 or session_seconds <= 0:
         raise ValueError("Use a valid TCP port and a positive session duration.")
+    if game not in {"sts1", "sts2"}:
+        raise ValueError(f"Unknown game: {game}")
 
     async def solve(state: TaskState, generate: Generate) -> TaskState:
         """Start the sandbox-native desktop services and retain final diagnostics."""
@@ -119,11 +122,17 @@ def manual_control(
                     session_seconds + 30,
                 )
         finally:
+            archive = (
+                "mkdir -p /game/saves; tar -C /game -czf /tmp/sts-manual-profile.tar.gz preferences saves info.displayconfig"
+                if game == "sts1"
+                else "tar -C /root/.local/share/SlayTheSpire2 -czf /tmp/sts-manual-profile.tar.gz default"
+            )
             result = await environment.exec(
                 [
                     "bash",
                     "-lc",
-                    "tail -n 200 /tmp/game.log /tmp/sts-manual-vnc.log /tmp/sts-manual-proxy.log; tar -C /root/.local/share/SlayTheSpire2 -czf /tmp/sts-manual-profile.tar.gz default",
+                    "tail -n 200 /tmp/game.log /tmp/sts-manual-vnc.log /tmp/sts-manual-proxy.log; "
+                    + archive,
                 ],
                 timeout=30,
             )
@@ -144,6 +153,7 @@ def manual_control(
 
 @task
 def manual_session(
+    game: str = DEFAULTS["game"],
     port: int = DEFAULTS["port"],
     session_seconds: int = DEFAULTS["session_seconds"],
     browser_tunnel_enabled: bool = DEFAULTS["browser_tunnel_enabled"],
@@ -151,13 +161,16 @@ def manual_session(
     cloudflared_sha256: str = DEFAULTS["cloudflared_sha256"],
     **kwargs,
 ) -> Task:
-    """Reuse the exact StS2 Linux sandbox for human debugging without model calls."""
-    result = second_game(**kwargs)
+    """Reuse either game's Linux sandbox for human debugging without model calls."""
+    if game not in {"sts1", "sts2"}:
+        raise ValueError(f"Unknown game: {game}")
+    result = (first_combat if game == "sts1" else second_game)(**kwargs)
     return Task(
-        name="sts2_manual_session",
+        name=f"{game}_manual_session",
         dataset=result.dataset,
         setup=result.setup,
         solver=manual_control(
+            game=game,
             port=port,
             session_seconds=session_seconds,
             browser_tunnel_enabled=browser_tunnel_enabled,
@@ -168,6 +181,7 @@ def manual_session(
         config=result.config,
         metadata={
             **result.metadata,
+            "manual_game": game,
             "purpose": "Human Linux desktop debugging; no model calls or benchmark score",
         },
         **default_run_config()["eval_config"],

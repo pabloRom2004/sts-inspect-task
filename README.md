@@ -132,7 +132,7 @@ StS2 runtime probes wait for the game's complete-menu startup marker before issu
 
 ## Human desktop debugging
 
-`sts_hawk/manual_session` starts the StS2 sandbox for human play without making model calls. The authenticated proxy, noVNC and optional outbound browser tunnel all run inside the Linux game sandbox. The default session lasts two hours and retains the final profile and game logs. This is a debug session, not a benchmark result.
+`sts_hawk/manual_session` starts either game's sandbox for human play without making model calls. Set `game` to `sts1` or `sts2` (the default). The authenticated proxy, noVNC and optional outbound browser tunnel all run inside the Linux game sandbox. The default session lasts two hours and retains the final profile and game logs. This is a debug session, not a benchmark result.
 
 The proxy listens on sandbox port 6080 by default. The `/api/status` endpoint returns game diagnostics; `POST /api/finish` ends the session and cleans up its sandbox. With local Docker, publish the chosen proxy port to a loopback address.
 

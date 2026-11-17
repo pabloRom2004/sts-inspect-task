@@ -54,6 +54,7 @@ runtime_probe:
   wait_seconds: 15
 
 manual_session:
+  game: sts2
   port: 6080
   session_seconds: 7200
   browser_tunnel_enabled: false
