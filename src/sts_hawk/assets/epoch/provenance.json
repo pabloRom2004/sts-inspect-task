@@ -10,7 +10,7 @@
   },
   "changes": {
     "sts1_user": "Only character, seed and ascension parameters",
-    "sts2_user": "Model-controlled Custom setup and requested minute-long loading notice",
+    "sts2_user": "Model-controlled Custom setup; startup-wait notice removed at user request",
     "tools": "Exact per-game captured schemas, including recovered Luna StS1 schemas; original give_up retained and integer submit added",
     "context": "Captured summary/300000/memory=true; no fixed image cap; provider-specific pruning only when verified",
     "grading": "User requested no grader; integer floor self-report",
@@ -22,6 +22,6 @@
     "sts1-user.txt": "61b57918bda482eb980dec1ab8e3c8d552083e79e16614329c0e86a2fc69cdb1",
     "sts2-tool-schemas.json": "23e8330b2c53e520448b5b4e8f5c23f2e719c999f1c9ab09b925df1a4471c936",
     "sts1-system.txt": "b2f7f470cdacf0fc1c961c7e4c68a3940d171d4767f4bed5a8759fd86c252101",
-    "sts2-user.txt": "1e95ba170100d7613f82681f351751f6a22b13e6516170ef91b3272b80ccde51"
+    "sts2-user.txt": "405659c7f7742b0bd9f1541a9e9d43961bfa32646b5514622a2acc6e94e14bc8"
   }
 }

@@ -4,10 +4,12 @@ from typing import Any
 
 import yaml
 from inspect_ai import Task, task
+from inspect_ai.dataset import Sample
 from inspect_ai.log import transcript
 from inspect_ai.model import ChatMessageUser, GenerateConfig
 from inspect_ai.solver import Generate, Solver, TaskState, solver
 from inspect_ai.tool import computer
+from inspect_ai.util import sandbox
 
 from sts_hawk import agent
 from sts_hawk.dataset import get_sts_dataset
@@ -20,7 +22,14 @@ ARGS = DEFAULTS["task"]["args"]
 EVAL_METADATA = yaml.safe_load((Path(__file__).parent / "eval.yaml").read_text())
 
 
-def sandbox_config(image: str, cpu: str, memory: str, height: int | None = None) -> str:
+def sandbox_config(
+    image: str,
+    cpu: str,
+    memory: str,
+    gpu_count: int,
+    height: int | None = None,
+    node_selector: dict[str, str] | None = None,
+) -> str:
     """Write the sample's Kubernetes-compatible single-service Compose config."""
     compose = yaml.safe_load(
         (Path(__file__).parent / "assets/compose.yaml").read_text()
@@ -29,9 +38,34 @@ def sandbox_config(image: str, cpu: str, memory: str, height: int | None = None)
     compose["services"]["default"]["deploy"]["resources"]["limits"].update(
         cpus=cpu, memory=memory
     )
+    if gpu_count < 0:
+        raise ValueError("The GPU count must be nonnegative.")
+    if gpu_count:
+        compose["services"]["default"]["x-k8s"] = {
+            "resources": {
+                "requests": {"nvidia.com/gpu": gpu_count},
+                "limits": {"nvidia.com/gpu": gpu_count},
+            }
+        }
+        compose["services"]["default"]["environment"]["NVIDIA_DRIVER_CAPABILITIES"] = (
+            "compute,utility,graphics,display"
+        )
     if height is not None:
         compose["services"]["default"]["environment"]["HEIGHT"] = str(height)
     path = Path(tempfile.mkdtemp(prefix="sts-sandbox-")) / "compose.yaml"
+    if node_selector:
+        from k8s_sandbox.compose import convert_compose_to_helm_values
+
+        compose["services"]["default"].pop("platform")
+        path.write_text(yaml.safe_dump(compose))
+        values = convert_compose_to_helm_values(path)
+        values["services"]["default"]["nodeSelector"] = {
+            **node_selector,
+            "kubernetes.io/arch": "amd64",
+        }
+        path = path.with_name("values.yaml")
+        path.write_text(yaml.safe_dump(values))
+        return str(path)
     path.write_text(yaml.safe_dump(compose))
     return str(path)
 
@@ -47,6 +81,8 @@ def first_combat(
     sandbox_image: str = ARGS["sandbox_image"],
     sandbox_cpu: str = ARGS["sandbox_cpu"],
     sandbox_memory: str = ARGS["sandbox_memory"],
+    gpu_count: int = ARGS["gpu_count"],
+    sandbox_node_selector: dict[str, str] | None = ARGS["sandbox_node_selector"],
     processor_count: int = ARGS["processor_count"],
     renderer_threads: int = ARGS["renderer_threads"],
     java_heap_mb: int = ARGS["java_heap_mb"],
@@ -66,7 +102,16 @@ def first_combat(
             java_heap_mb=java_heap_mb,
         ),
         solver=slv(**DEFAULTS["solver"]["args"]),
-        sandbox=("docker", sandbox_config(sandbox_image, sandbox_cpu, sandbox_memory)),
+        sandbox=(
+            "k8s" if sandbox_node_selector else "docker",
+            sandbox_config(
+                sandbox_image,
+                sandbox_cpu,
+                sandbox_memory,
+                gpu_count,
+                node_selector=sandbox_node_selector,
+            ),
+        ),
         config=GenerateConfig(**DEFAULTS["generate_config"]),
         **DEFAULTS["eval_config"],
         metadata={
@@ -75,6 +120,8 @@ def first_combat(
             else "Minimal gameplay task, not a SpireClimb score",
             "sandbox_cpu": sandbox_cpu,
             "sandbox_memory": sandbox_memory,
+            "gpu_count": gpu_count,
+            "sandbox_node_selector": sandbox_node_selector,
             "processor_count": processor_count,
             "renderer_threads": renderer_threads,
             "java_heap_mb": java_heap_mb,
@@ -104,8 +151,13 @@ def second_game(
     command_timeout: int = ARGS["command_timeout"],
     sandbox_image: str = ARGS["sandbox_image"],
     frame_rate_limit: int = DEFAULTS["sts2"]["frame_rate_limit"],
+    log_frame_rate: bool = DEFAULTS["sts2"]["log_frame_rate"],
+    graphics_backend: str = DEFAULTS["sts2"]["graphics_backend"],
+    virtualgl: dict[str, str] = DEFAULTS["sts2"]["virtualgl"],
     sandbox_cpu: str = ARGS["sandbox_cpu"],
     sandbox_memory: str = ARGS["sandbox_memory"],
+    gpu_count: int = ARGS["gpu_count"],
+    sandbox_node_selector: dict[str, str] | None = ARGS["sandbox_node_selector"],
     processor_count: int = ARGS["processor_count"],
     renderer_threads: int = ARGS["renderer_threads"],
 ) -> Task:
@@ -114,6 +166,8 @@ def second_game(
         raise ValueError("Slay the Spire 2 v0.107.1 supports Ascension 0 through 10.")
     if frame_rate_limit < 0:
         raise ValueError("The frame rate limit must be nonnegative.")
+    if graphics_backend not in {"software", "virtualgl"}:
+        raise ValueError("Choose the software or virtualgl graphics backend.")
     result = first_combat(
         character=character,
         ascension=ascension,
@@ -124,6 +178,8 @@ def second_game(
         sandbox_image=sandbox_image,
         sandbox_cpu=sandbox_cpu,
         sandbox_memory=sandbox_memory,
+        gpu_count=gpu_count,
+        sandbox_node_selector=sandbox_node_selector,
         processor_count=processor_count,
         renderer_threads=renderer_threads,
     )
@@ -136,13 +192,16 @@ def second_game(
         game="sts2",
         game_version="v0.107.1",
         frame_rate_limit=frame_rate_limit,
+        log_frame_rate=log_frame_rate,
+        graphics_backend=graphics_backend,
+        virtualgl=virtualgl if graphics_backend == "virtualgl" else None,
         wiki="Wiki-only search/fetch at slaythespire.wiki.gg"
         if sample.metadata["epoch_prompt"]
         else "No offline StS2 wiki supplied",
         model_visible="Replay action tools, per-run memory, wiki_search/wiki_fetch and integer submit"
         if sample.metadata["epoch_prompt"]
         else "Desktop, sandbox shell/Python and integer submit",
-        differences_from_epoch="Model navigates Custom and enters seed; game loading notice; compatible Inspect desktop adapter and independent wiki retrieval; integer self-report; runtime overlay and gameplay require independent verification."
+        differences_from_epoch="Model navigates Custom and enters seed; compatible Inspect desktop adapter and independent wiki retrieval; integer self-report; runtime overlay and gameplay require independent verification."
         if sample.metadata["epoch_prompt"]
         else "Built-in --force-steam=off startup; no offline StS2 wiki; general shell/Python; user prompt; no grader",
     )
@@ -156,17 +215,22 @@ def second_game(
             command_timeout,
             game="sts2",
             frame_rate_limit=frame_rate_limit,
+            log_frame_rate=log_frame_rate,
+            graphics_backend=graphics_backend,
+            virtualgl=virtualgl,
             processor_count=processor_count,
             renderer_threads=renderer_threads,
         ),
         solver=slv(**{**DEFAULTS["solver"]["args"], "wiki_path": None}),
         sandbox=(
-            "docker",
+            "k8s" if sandbox_node_selector else "docker",
             sandbox_config(
                 sandbox_image,
                 sandbox_cpu,
                 sandbox_memory,
+                gpu_count,
                 height=DEFAULTS["sts2"]["desktop_height"],
+                node_selector=sandbox_node_selector,
             ),
         ),
         config=result.config,
@@ -235,9 +299,11 @@ def capture_runtime(
                     "-lc",
                     (
                         "printf 'PID 1: '; tr '\\0' ' ' < /proc/1/cmdline; "
+                        "printf '\\n=== Renderer startup ===\\n'; "
+                        "head -n 15 /tmp/game.log 2>/dev/null; "
                         "printf '\\n'; "
                         "for file in /tmp/sts-startup.log /tmp/game.log "
-                        "/tmp/xvnc.log "
+                        "/tmp/xvnc.log /tmp/sts-gpu.log "
                         "/root/.local/share/SlayTheSpire2/logs/godot.log; do "
                         'if [ -f "$file" ]; then '
                         "printf '\\n=== %s ===\\n' \"$file\"; "
@@ -283,3 +349,69 @@ def runtime_probe(
         wait_seconds=wait_seconds, actions=actions, capture_profile=capture_profile
     )
     return result
+
+
+@solver
+def capture_gpu(command_timeout: int = ARGS["command_timeout"]) -> Solver:
+    """Verify a real GPU allocation before installing the game or graphics tools."""
+
+    async def solve(state: TaskState, generate: Generate) -> TaskState:
+        """Record the assigned device and available graphics driver libraries."""
+        result = await sandbox().exec(
+            [
+                "bash",
+                "-lc",
+                (
+                    "set -e; nvidia-smi --query-gpu=name,driver_version,memory.total --format=csv; "
+                    "printf '\\n=== Graphics devices ===\\n'; "
+                    "find /dev -maxdepth 2 \\( -name 'nvidia*' -o -name 'renderD*' \\) -print; "
+                    "printf '\\n=== Graphics libraries ===\\n'; "
+                    "ldconfig -p | sed -n '/libEGL/p;/libGLX/p;/nvidia/p'"
+                ),
+            ],
+            timeout=command_timeout,
+        )
+        transcript().info(
+            {
+                "gpu_diagnostics": result.stdout,
+                "stderr": result.stderr,
+                "success": result.success,
+            }
+        )
+        if not result.success:
+            raise RuntimeError("The requested GPU is not usable in the sandbox.")
+        return state
+
+    return solve
+
+
+@task
+def gpu_probe(
+    gpu_count: int = DEFAULTS["gpu_probe"]["gpu_count"],
+    sandbox_image: str = ARGS["sandbox_image"],
+    sandbox_cpu: str = ARGS["sandbox_cpu"],
+    sandbox_memory: str = ARGS["sandbox_memory"],
+    sandbox_node_selector: dict[str, str] | None = ARGS["sandbox_node_selector"],
+    command_timeout: int = ARGS["command_timeout"],
+) -> Task:
+    """Check Hawk GPU passthrough without downloading the game or calling a model."""
+    return Task(
+        dataset=[Sample(input="Verify the allocated graphics device.")],
+        solver=capture_gpu(command_timeout),
+        sandbox=(
+            "k8s" if sandbox_node_selector else "docker",
+            sandbox_config(
+                sandbox_image,
+                sandbox_cpu,
+                sandbox_memory,
+                gpu_count,
+                node_selector=sandbox_node_selector,
+            ),
+        ),
+        metadata={
+            "gpu_count": gpu_count,
+            "purpose": "No-inference GPU availability check",
+            "sandbox_node_selector": sandbox_node_selector,
+        },
+        **DEFAULTS["eval_config"],
+    )

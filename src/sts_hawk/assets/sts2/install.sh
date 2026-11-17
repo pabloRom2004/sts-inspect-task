@@ -9,6 +9,15 @@ apt-get -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15 install -y --
   libxrandr2 libxcursor1 libxi6 libxtst6 xkb-data x11-xkb-utils libfontconfig1 \
   libasound2t64 libasound2-plugins libpulse0 libgcc-s1 \
   >>/tmp/sts-install.log 2>&1 || { tail -60 /tmp/sts-install.log; exit 1; }
+if [ "$(cat /opt/sts/graphics-backend)" = virtualgl ]; then
+  nvidia-smi --query-gpu=name,driver_version --format=csv
+  curl --fail --location --retry 2 --max-time 120 --silent --show-error \
+    "$(cat /opt/sts/virtualgl-url)" -o /tmp/virtualgl.deb
+  printf '%s  /tmp/virtualgl.deb\n' "$(cat /opt/sts/virtualgl-sha256)" | sha256sum -c -
+  apt-get install -y --no-install-recommends /tmp/virtualgl.deb mesa-utils \
+    >>/tmp/sts-install.log 2>&1 || { tail -60 /tmp/sts-install.log; exit 1; }
+  rm /tmp/virtualgl.deb
+fi
 mkdir -p /game
 curl --fail --location --retry 2 --max-time 600 --silent --show-error \
   "$(cat /opt/sts/asset-url)" -o /tmp/sts2-runtime.tar.zst

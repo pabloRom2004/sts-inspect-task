@@ -70,3 +70,67 @@ async def test_tunnel_runs_verified_executable(monkeypatch):
     )
     assert await process.wait() == 0
     await output
+
+
+@pytest.mark.parametrize("game", ["sts1", "sts2"])
+def test_manual_game_selection_and_profile_export(monkeypatch, tmp_path, game):
+    """Run the real manual solver and retain only the selected game's save data."""
+    from inspect_ai import eval as inspect_eval
+    from inspect_ai.util import ExecResult
+
+    from sts_hawk import manual, runtime
+
+    class Environment:
+        """Capture manual lifecycle commands without launching a game or model."""
+
+        def __init__(self):
+            """Initialize the command history and prepared server files."""
+            self.commands = []
+            self.files = {}
+
+        async def exec(self, cmd, **kwargs):
+            """Complete startup and finish signals through the real solver path."""
+            self.commands.append(cmd)
+            return ExecResult(True, 0, "Sandbox desktop ready", "")
+
+        async def write_file(self, path, content):
+            """Capture files prepared for the desktop server."""
+            self.files[path] = content
+
+        async def read_file(self, path, text=True):
+            """Return the fixture profile archive at the real export boundary."""
+            assert path == "/tmp/sts-manual-profile.tar.gz" and not text
+            return b"profile archive fixture"
+
+    environment = Environment()
+    monkeypatch.setattr(manual, "sandbox", lambda: environment)
+    monkeypatch.setattr(runtime, "sandbox", lambda: environment)
+    task = manual.manual_session(game=game)
+    assert task.name == f"{game}_manual_session"
+    assert task.metadata["manual_game"] == game
+    task.setup = None
+    task.sandbox = None
+    result = inspect_eval(
+        task, model="mockllm/model", log_dir=str(tmp_path), display="none"
+    )[0]
+    assert result.status == "success" and not result.samples[0].model_usage
+    archive_command = environment.commands[-1][-1]
+    if game == "sts1":
+        assert "tar -C /game" in archive_command
+        assert "preferences saves info.displayconfig" in archive_command
+    else:
+        assert "tar -C /root/.local/share/SlayTheSpire2" in archive_command
+    assert any(
+        event.event == "info"
+        and isinstance(event.data, dict)
+        and "profile_archive_base64" in event.data
+        for event in result.samples[0].events
+    )
+
+
+def test_manual_rejects_unknown_game():
+    """Reject an invalid game before preparing a sandbox."""
+    from sts_hawk.manual import manual_session
+
+    with pytest.raises(ValueError, match="Unknown game"):
+        manual_session(game="unknown")

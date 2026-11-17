@@ -59,6 +59,8 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
     monkeypatch.setattr(computer_common, "computer_sandbox", computer_sandbox)
     probe = mode in {"probe", "actions", "failed-start"}
     frame_rate_limit = 10 if mode == "actions" else 60
+    log_frame_rate = mode == "actions"
+    graphics_backend = "virtualgl" if mode == "actions" else "software"
     if probe:
         task = runtime_probe(
             game="sts2",
@@ -67,6 +69,8 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
             actions=[{"action": "screenshot"}] if mode == "actions" else None,
             capture_profile=mode == "actions",
             frame_rate_limit=frame_rate_limit,
+            log_frame_rate=log_frame_rate,
+            graphics_backend=graphics_backend,
         )
     else:
         task = second_game(
@@ -74,6 +78,8 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
             if mode == "smoke"
             else "beat_game_sts2",
             frame_rate_limit=frame_rate_limit,
+            log_frame_rate=log_frame_rate,
+            graphics_backend=graphics_backend,
         )
     assert task.name == (
         "sts2_first_combat_smoke" if mode == "smoke" else "sts2_beat_game"
@@ -123,6 +129,14 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
     assert fixture.files["/opt/sts/runtime-overlay.tar.gz"] == b"mod fixture"
     assert len(saved.samples[0].metadata["sts2_runtime_overlay_sha256"]) == 64
     assert fixture.files["/opt/sts/frame-rate-limit"] == str(frame_rate_limit)
+    assert fixture.files["/opt/sts/log-frame-rate"] == ("1" if log_frame_rate else "0")
+    assert task.metadata["log_frame_rate"] is log_frame_rate
+    assert fixture.files["/opt/sts/graphics-backend"] == graphics_backend
+    if graphics_backend == "virtualgl":
+        assert fixture.files["/opt/sts/virtualgl-device"] == "egl0"
+        assert fixture.files["/opt/sts/virtualgl-url"].endswith(
+            "virtualgl_3.1.5_amd64.deb"
+        )
     assert fixture.files["/opt/sts/processor-count"] == "6"
     assert fixture.files["/opt/sts/renderer-threads"] == "3"
     assert task.metadata["frame_rate_limit"] == frame_rate_limit
@@ -153,3 +167,9 @@ def test_sts2_rejects_unsupported_ascension():
     """Reject A20 rather than silently playing a different StS2 difficulty."""
     with pytest.raises(ValueError, match="Ascension 0 through 10"):
         second_game(ascension=20)
+
+
+def test_sts2_rejects_unknown_graphics_backend():
+    """Reject unsupported graphics modes before preparing an environment."""
+    with pytest.raises(ValueError, match="graphics backend"):
+        second_game(graphics_backend="unknown")

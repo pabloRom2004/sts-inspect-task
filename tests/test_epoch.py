@@ -41,7 +41,7 @@ def test_replay_prompt_and_schema_provenance():
             )
 
 
-@pytest.mark.parametrize("game", ["sts1", "sts2", "sts1_smoke"])
+@pytest.mark.parametrize("game", ["sts1", "sts2", "sts1_smoke", "sts2_smoke"])
 @pytest.mark.parametrize("static_frames", [False, True])
 @pytest.mark.parametrize("retained_images", [None, 3])
 def test_epoch_task_loop(monkeypatch, tmp_path, game, static_frames, retained_images):
@@ -122,8 +122,12 @@ def test_epoch_task_loop(monkeypatch, tmp_path, game, static_frames, retained_im
         ),
     )
     task = (
-        second_game()
-        if game == "sts2"
+        second_game(
+            prompt_name="epoch_first_combat_smoke_sts2"
+            if game == "sts2_smoke"
+            else "epoch_sts2"
+        )
+        if game.startswith("sts2")
         else first_combat(
             prompt_name="epoch_first_combat_smoke"
             if game == "sts1_smoke"
@@ -136,8 +140,9 @@ def test_epoch_task_loop(monkeypatch, tmp_path, game, static_frames, retained_im
     assert task.dataset[0].input[0].role == "system"
     assert "seed 1" in task.dataset[0].input[1].text
     assert ("Singleplayer, then Custom" in task.dataset[0].input[1].text) == (
-        game == "sts2"
+        game.startswith("sts2")
     )
+    assert "minute to load" not in task.dataset[0].input[1].text
     task.sandbox = None
     trajectory = [
         ("screenshot", {"intent": "Inspect the opening screen."}),

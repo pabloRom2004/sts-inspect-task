@@ -10,6 +10,8 @@ task:
     command_timeout: 180
     sandbox_cpu: '6'
     sandbox_memory: 12G
+    gpu_count: 0
+    sandbox_node_selector: null
     processor_count: 6
     renderer_threads: 3
     java_heap_mb: 4608
@@ -51,11 +53,21 @@ sts2:
   prompt_name: epoch_sts2
   desktop_height: 800
   frame_rate_limit: 60
+  log_frame_rate: false
+  graphics_backend: software
+  virtualgl:
+    url: https://github.com/VirtualGL/virtualgl/releases/download/3.1.5/virtualgl_3.1.5_amd64.deb
+    sha256: df3f7788ce41b182a47c0d298e5cd6d2d63579522cb41825970b7726e825485e
+    device: egl0
 
 runtime_probe:
   wait_seconds: 15
 
+gpu_probe:
+  gpu_count: 1
+
 manual_session:
+  game: sts2
   port: 6080
   session_seconds: 7200
   browser_tunnel_enabled: false

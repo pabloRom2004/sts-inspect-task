@@ -5,7 +5,7 @@ Reference messages came from the supplied Epoch `.eval` files. The StS1 system p
 | Setting | Reference | This task |
 | --- | --- | --- |
 | StS1 instructions | Captured system and user messages | Original system; only character, ascension and seed substitutions in the user message |
-| StS2 instructions | Captured system; already-started Custom run | Original system; user navigates Custom and enters seed, plus requested loading notice |
+| StS2 instructions | Captured system; already-started Custom run | Original system; user navigates Custom and enters seed |
 | Difficulty and objective | A20 Heart / A10 three Acts | Same requested objectives; verify actual UI selection |
 | Screen | 1280×720 / 1280×800 | Same configured viewport |
 | Actions | Pixel mouse/keyboard tools; unlimited StS1 queues / up to eight StS2 inputs | Same descriptions and schemas, translated to existing Inspect X11 backend |
@@ -25,6 +25,6 @@ Tavily's original search depth and the original fetch/conversion code are unavai
 
 The complete Sonnet replay’s reconstructed API requests contained up to 102 images. Its four summary compactions reset image history to zero. The incomplete Luna archive contains 185 complete model events and exact tool/API settings, but its message-reference pool is missing, so its precise image history cannot be reconstructed. Do not apply Sonnet’s observed image count as a Luna provider limit. The prior OpenRouter/Azure route rejected more than 50 images; verify the actual route and set an appropriate explicit cap before a paid Luna run.
 
-Game startup, mods, unlocked progress and the Neow bonus require separate in-game verification. Epoch corrected the missing StS1 Neow bonus on November 5. This task does not intentionally reproduce the older bug. Runtime launch scripts are unchanged by this port; StS2's first-combat startup issue remains owned by the runtime integration conversation.
+Game startup, mods, unlocked progress and the Neow bonus require separate in-game verification. Epoch corrected the missing StS1 Neow bonus on November 5. This task does not intentionally reproduce the older bug. The runtime includes the verified opt-in VirtualGL/T4 path from the StS2 integration. Its saved-combat GPU test verifies rendering; replay-agent first-combat and complete-run behavior still require separate verification. The user-requested fixed startup-wait notice has been removed.
 
 No full replay, game archive, personal instructions or credential is packaged with these assets. Captured prompt provenance is recorded in `assets/epoch/provenance.json`.
