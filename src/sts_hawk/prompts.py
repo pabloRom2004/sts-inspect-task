@@ -72,8 +72,6 @@ BEAT_GAME_STS2 = Prompt(
     seed_instruction=STS2_SEED_INSTRUCTION,
     text=(
         "Try to beat Slay the Spire 2 on Ascension {ascension} as {character}.\n\n"
-        "The game can take about a minute to load. "
-        "Wait for loading to finish before continuing.\n\n"
         "Complete all three Acts to win.\n\n"
         "Play one round and do not restart the game. Play until victory or defeat.\n\n"
         "{seed_instruction}"
@@ -104,8 +102,6 @@ FIRST_COMBAT_SMOKE_STS2 = Prompt(
     seed_instruction=STS2_SEED_INSTRUCTION,
     text=(
         "Play Slay the Spire 2 on Ascension {ascension} as {character}.\n\n"
-        "The game can take about a minute to load. "
-        "Wait for loading to finish before continuing.\n\n"
         "Play the first combat, then stop and call submit with the maximum floor "
         "reached as an integer. If you lose, stop and submit.\n\n"
         "Play one round and do not restart the game.\n\n"
