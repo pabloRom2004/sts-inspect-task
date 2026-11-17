@@ -49,6 +49,7 @@ sts2:
   prompt_name: beat_game_sts2
   desktop_height: 800
   frame_rate_limit: 60
+  log_frame_rate: false
 
 runtime_probe:
   wait_seconds: 15

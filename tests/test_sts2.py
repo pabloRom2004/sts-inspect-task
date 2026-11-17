@@ -59,6 +59,7 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
     monkeypatch.setattr(computer_common, "computer_sandbox", computer_sandbox)
     probe = mode in {"probe", "actions", "failed-start"}
     frame_rate_limit = 10 if mode == "actions" else 60
+    log_frame_rate = mode == "actions"
     if probe:
         task = runtime_probe(
             game="sts2",
@@ -66,6 +67,7 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
             actions=[{"action": "screenshot"}] if mode == "actions" else None,
             capture_profile=mode == "actions",
             frame_rate_limit=frame_rate_limit,
+            log_frame_rate=log_frame_rate,
         )
     else:
         task = second_game(
@@ -73,6 +75,7 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
             if mode == "smoke"
             else "beat_game_sts2",
             frame_rate_limit=frame_rate_limit,
+            log_frame_rate=log_frame_rate,
         )
     assert task.name == (
         "sts2_first_combat_smoke" if mode == "smoke" else "sts2_beat_game"
@@ -122,6 +125,8 @@ def test_sts2_setup_and_submission(monkeypatch, tmp_path, mode):
     assert fixture.files["/opt/sts/runtime-overlay.tar.gz"] == b"mod fixture"
     assert len(saved.samples[0].metadata["sts2_runtime_overlay_sha256"]) == 64
     assert fixture.files["/opt/sts/frame-rate-limit"] == str(frame_rate_limit)
+    assert fixture.files["/opt/sts/log-frame-rate"] == ("1" if log_frame_rate else "0")
+    assert task.metadata["log_frame_rate"] is log_frame_rate
     assert fixture.files["/opt/sts/processor-count"] == "6"
     assert fixture.files["/opt/sts/renderer-threads"] == "3"
     assert task.metadata["frame_rate_limit"] == frame_rate_limit

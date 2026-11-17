@@ -107,6 +107,7 @@ def second_game(
     command_timeout: int = ARGS["command_timeout"],
     sandbox_image: str = ARGS["sandbox_image"],
     frame_rate_limit: int = DEFAULTS["sts2"]["frame_rate_limit"],
+    log_frame_rate: bool = DEFAULTS["sts2"]["log_frame_rate"],
     sandbox_cpu: str = ARGS["sandbox_cpu"],
     sandbox_memory: str = ARGS["sandbox_memory"],
     processor_count: int = ARGS["processor_count"],
@@ -138,6 +139,7 @@ def second_game(
         game="sts2",
         game_version="v0.107.1",
         frame_rate_limit=frame_rate_limit,
+        log_frame_rate=log_frame_rate,
         wiki="No offline StS2 wiki supplied",
         model_visible="Desktop, sandbox shell/Python and integer submit",
         differences_from_epoch="Built-in --force-steam=off startup; no offline StS2 wiki; general shell/Python; user prompt; 75% compaction; no grader",
@@ -151,6 +153,7 @@ def second_game(
             command_timeout,
             game="sts2",
             frame_rate_limit=frame_rate_limit,
+            log_frame_rate=log_frame_rate,
             processor_count=processor_count,
             renderer_threads=renderer_threads,
         ),
@@ -230,6 +233,8 @@ def capture_runtime(
                     "-lc",
                     (
                         "printf 'PID 1: '; tr '\\0' ' ' < /proc/1/cmdline; "
+                        "printf '\\n=== Renderer startup ===\\n'; "
+                        "head -n 15 /tmp/game.log 2>/dev/null; "
                         "printf '\\n'; "
                         "for file in /tmp/sts-startup.log /tmp/game.log "
                         "/tmp/xvnc.log "

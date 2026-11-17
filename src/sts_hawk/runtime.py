@@ -33,6 +33,7 @@ def prepare_game(
     processor_count: int | None = None,
     renderer_threads: int | None = None,
     java_heap_mb: int | None = None,
+    log_frame_rate: bool | None = None,
 ) -> Solver:
     """Install the runtime and signal the game container to launch."""
 
@@ -62,10 +63,13 @@ def prepare_game(
         if game == "sts1":
             await sandbox().write_file("/opt/sts/java-heap-mb", str(java_heap_mb))
         if game == "sts2":
-            if frame_rate_limit is None:
-                raise ValueError("StS2 setup requires an explicit frame rate limit.")
+            if frame_rate_limit is None or log_frame_rate is None:
+                raise ValueError("StS2 setup requires explicit frame rate settings.")
             await sandbox().write_file(
                 "/opt/sts/frame-rate-limit", str(frame_rate_limit)
+            )
+            await sandbox().write_file(
+                "/opt/sts/log-frame-rate", "1" if log_frame_rate else "0"
             )
         if game == "sts2":
             for variable, filename, metadata_key in [
