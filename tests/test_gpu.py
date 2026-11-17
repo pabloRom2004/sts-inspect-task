@@ -8,7 +8,23 @@ from inspect_ai import eval as inspect_eval
 from inspect_ai.util import ExecResult
 from k8s_sandbox.compose._converter import convert_compose_to_helm_values
 
-from sts_hawk.task import gpu_probe, second_game
+from sts_hawk.task import first_combat, gpu_probe, second_game
+
+
+@pytest.mark.parametrize("factory", [first_combat, second_game, gpu_probe])
+def test_game_node_selector_survives_kubernetes_conversion(factory, tmp_path):
+    """Retain explicit GPU instance placement and the independently requested limits."""
+    selector = {"karpenter.k8s.aws/instance-family": "g4dn"}
+    task = factory(gpu_count=1, sandbox_node_selector=selector)
+    assert task.sandbox.type == "k8s"
+    values = yaml.safe_load(Path(task.sandbox.config).read_text())["services"][
+        "default"
+    ]
+    assert values["nodeSelector"] == {**selector, "kubernetes.io/arch": "amd64"}
+    assert values["resources"]["requests"]["nvidia.com/gpu"] == 1
+    assert values["resources"]["requests"]["cpu"] == "6"
+    assert values["resources"]["requests"]["memory"] == "12Gi"
+    assert task.metadata["sandbox_node_selector"] == selector
 
 
 @pytest.mark.parametrize("factory", [gpu_probe, second_game])
@@ -55,7 +71,8 @@ def test_gpu_probe_records_device_or_infrastructure_failure(
             )
 
     monkeypatch.setattr(task_module, "sandbox", lambda: Environment())
-    task = gpu_probe()
+    selector = {"karpenter.k8s.aws/instance-family": "g4dn"}
+    task = gpu_probe(sandbox_node_selector=selector)
     task.sandbox = None
     result = inspect_eval(
         task,
@@ -65,6 +82,7 @@ def test_gpu_probe_records_device_or_infrastructure_failure(
         fail_on_error=False,
     )[0]
     sample = result.samples[0]
+    assert result.eval.metadata["sandbox_node_selector"] == selector
     assert not sample.model_usage and not sample.scores
     assert (sample.error is None) is available
     info = next(

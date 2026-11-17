@@ -11,6 +11,7 @@ task:
     sandbox_cpu: '6'
     sandbox_memory: 12G
     gpu_count: 0
+    sandbox_node_selector: null
     processor_count: 6
     renderer_threads: 3
     java_heap_mb: 4608

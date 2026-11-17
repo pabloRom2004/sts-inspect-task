@@ -21,7 +21,12 @@ ARGS = DEFAULTS["task"]["args"]
 
 
 def sandbox_config(
-    image: str, cpu: str, memory: str, gpu_count: int, height: int | None = None
+    image: str,
+    cpu: str,
+    memory: str,
+    gpu_count: int,
+    height: int | None = None,
+    node_selector: dict[str, str] | None = None,
 ) -> str:
     """Write the sample's Kubernetes-compatible single-service Compose config."""
     compose = yaml.safe_load(
@@ -46,6 +51,19 @@ def sandbox_config(
     if height is not None:
         compose["services"]["default"]["environment"]["HEIGHT"] = str(height)
     path = Path(tempfile.mkdtemp(prefix="sts-sandbox-")) / "compose.yaml"
+    if node_selector:
+        from k8s_sandbox.compose import convert_compose_to_helm_values
+
+        compose["services"]["default"].pop("platform")
+        path.write_text(yaml.safe_dump(compose))
+        values = convert_compose_to_helm_values(path)
+        values["services"]["default"]["nodeSelector"] = {
+            **node_selector,
+            "kubernetes.io/arch": "amd64",
+        }
+        path = path.with_name("values.yaml")
+        path.write_text(yaml.safe_dump(values))
+        return str(path)
     path.write_text(yaml.safe_dump(compose))
     return str(path)
 
@@ -62,6 +80,7 @@ def first_combat(
     sandbox_cpu: str = ARGS["sandbox_cpu"],
     sandbox_memory: str = ARGS["sandbox_memory"],
     gpu_count: int = ARGS["gpu_count"],
+    sandbox_node_selector: dict[str, str] | None = ARGS["sandbox_node_selector"],
     processor_count: int = ARGS["processor_count"],
     renderer_threads: int = ARGS["renderer_threads"],
     java_heap_mb: int = ARGS["java_heap_mb"],
@@ -94,8 +113,14 @@ def first_combat(
         ),
         solver=slv(**DEFAULTS["solver"]["args"]),
         sandbox=(
-            "docker",
-            sandbox_config(sandbox_image, sandbox_cpu, sandbox_memory, gpu_count),
+            "k8s" if sandbox_node_selector else "docker",
+            sandbox_config(
+                sandbox_image,
+                sandbox_cpu,
+                sandbox_memory,
+                gpu_count,
+                node_selector=sandbox_node_selector,
+            ),
         ),
         config=GenerateConfig(**DEFAULTS["generate_config"]),
         **DEFAULTS["eval_config"],
@@ -104,6 +129,7 @@ def first_combat(
             "sandbox_cpu": sandbox_cpu,
             "sandbox_memory": sandbox_memory,
             "gpu_count": gpu_count,
+            "sandbox_node_selector": sandbox_node_selector,
             "processor_count": processor_count,
             "renderer_threads": renderer_threads,
             "java_heap_mb": java_heap_mb,
@@ -133,6 +159,7 @@ def second_game(
     sandbox_cpu: str = ARGS["sandbox_cpu"],
     sandbox_memory: str = ARGS["sandbox_memory"],
     gpu_count: int = ARGS["gpu_count"],
+    sandbox_node_selector: dict[str, str] | None = ARGS["sandbox_node_selector"],
     processor_count: int = ARGS["processor_count"],
     renderer_threads: int = ARGS["renderer_threads"],
 ) -> Task:
@@ -154,6 +181,7 @@ def second_game(
         sandbox_cpu=sandbox_cpu,
         sandbox_memory=sandbox_memory,
         gpu_count=gpu_count,
+        sandbox_node_selector=sandbox_node_selector,
         processor_count=processor_count,
         renderer_threads=renderer_threads,
     )
@@ -189,13 +217,14 @@ def second_game(
         ),
         solver=slv(**{**DEFAULTS["solver"]["args"], "wiki_path": None}),
         sandbox=(
-            "docker",
+            "k8s" if sandbox_node_selector else "docker",
             sandbox_config(
                 sandbox_image,
                 sandbox_cpu,
                 sandbox_memory,
                 gpu_count,
                 height=DEFAULTS["sts2"]["desktop_height"],
+                node_selector=sandbox_node_selector,
             ),
         ),
         config=result.config,
@@ -356,6 +385,7 @@ def gpu_probe(
     sandbox_image: str = ARGS["sandbox_image"],
     sandbox_cpu: str = ARGS["sandbox_cpu"],
     sandbox_memory: str = ARGS["sandbox_memory"],
+    sandbox_node_selector: dict[str, str] | None = ARGS["sandbox_node_selector"],
     command_timeout: int = ARGS["command_timeout"],
 ) -> Task:
     """Check Hawk GPU passthrough without downloading the game or calling a model."""
@@ -363,12 +393,19 @@ def gpu_probe(
         dataset=[Sample(input="Verify the allocated graphics device.")],
         solver=capture_gpu(command_timeout),
         sandbox=(
-            "docker",
-            sandbox_config(sandbox_image, sandbox_cpu, sandbox_memory, gpu_count),
+            "k8s" if sandbox_node_selector else "docker",
+            sandbox_config(
+                sandbox_image,
+                sandbox_cpu,
+                sandbox_memory,
+                gpu_count,
+                node_selector=sandbox_node_selector,
+            ),
         ),
         metadata={
             "gpu_count": gpu_count,
             "purpose": "No-inference GPU availability check",
+            "sandbox_node_selector": sandbox_node_selector,
         },
         **DEFAULTS["eval_config"],
     )
