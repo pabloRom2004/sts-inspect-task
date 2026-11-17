@@ -1,8 +1,14 @@
 """Expose a human-controlled desktop through Hawk's authenticated runner tunnel."""
 
 import asyncio
+import hashlib
+import hmac
 import ipaddress
+import os
+import tempfile
+import urllib.request
 from contextlib import suppress
+from pathlib import Path
 
 from aiohttp import ClientSession, ClientTimeout, WSMsgType, web
 from inspect_ai import Task, task
@@ -19,10 +25,37 @@ HOP_HEADERS = {"connection", "keep-alive", "transfer-encoding", "upgrade"}
 
 
 def desktop_proxy(
-    environment: SandboxEnvironment, target: str, finished: asyncio.Event
+    environment: SandboxEnvironment,
+    target: str,
+    finished: asyncio.Event,
+    access_token: str | None = None,
 ) -> web.Application:
     """Proxy noVNC and expose bounded diagnostics and a session-stop endpoint."""
-    app = web.Application()
+
+    @web.middleware
+    async def authenticate(request: web.Request, handler):
+        """Protect a browser tunnel with a private link and an HTTP-only cookie."""
+        if access_token is not None:
+            if hmac.compare_digest(request.query.get("access_token", ""), access_token):
+                response = web.HTTPFound("/vnc.html?autoconnect=1&resize=scale")
+                response.set_cookie(
+                    "sts_session",
+                    access_token,
+                    httponly=True,
+                    secure=True,
+                    samesite="Strict",
+                )
+                response.headers["Cache-Control"] = "no-store"
+                raise response
+            if not hmac.compare_digest(
+                request.cookies.get("sts_session", ""), access_token
+            ):
+                raise web.HTTPForbidden(
+                    text="Open the private session link to connect."
+                )
+        return await handler(request)
+
+    app = web.Application(middlewares=[authenticate])
     client_key = web.AppKey("client", ClientSession)
     connections: set[web.WebSocketResponse] = set()
 
@@ -125,9 +158,48 @@ def desktop_proxy(
     return app
 
 
+async def browser_tunnel(port: int, url: str, sha256: str):
+    """Start a verified cloudflared binary and forward its diagnostics."""
+    path = Path(tempfile.mkdtemp(prefix="sts-tunnel-")) / "cloudflared"
+
+    def download() -> None:
+        """Download the pinned official binary and verify its release digest."""
+        with urllib.request.urlopen(url, timeout=60) as response:
+            binary = response.read()
+        if hashlib.sha256(binary).hexdigest() != sha256:
+            raise RuntimeError("cloudflared release checksum does not match")
+        path.write_bytes(binary)
+        path.chmod(0o700)
+
+    await asyncio.to_thread(download)
+    process = await asyncio.create_subprocess_exec(
+        str(path),
+        "tunnel",
+        "--no-autoupdate",
+        "--protocol",
+        "http2",
+        "--url",
+        f"http://127.0.0.1:{port}",
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.STDOUT,
+        env={**os.environ, "GOMAXPROCS": "1"},
+    )
+
+    async def output() -> None:
+        """Record the public tunnel address without recording its private access key."""
+        async for line in process.stdout:
+            logger.info("Browser tunnel: %s", line.decode().strip())
+
+    return process, asyncio.create_task(output())
+
+
 @solver
 def manual_control(
-    port: int = DEFAULTS["port"], session_seconds: int = DEFAULTS["session_seconds"]
+    port: int = DEFAULTS["port"],
+    session_seconds: int = DEFAULTS["session_seconds"],
+    browser_tunnel_enabled: bool = DEFAULTS["browser_tunnel_enabled"],
+    cloudflared_url: str = DEFAULTS["cloudflared_url"],
+    cloudflared_sha256: str = DEFAULTS["cloudflared_sha256"],
 ) -> Solver:
     """Serve the sandbox desktop on a runner port without making model calls."""
     if not 1 <= port <= 65535 or session_seconds <= 0:
@@ -161,17 +233,43 @@ def manual_control(
             f"http://[{address}]:6080" if ":" in address else f"http://{address}:6080"
         )
         finished = asyncio.Event()
-        runner = web.AppRunner(desktop_proxy(environment, target, finished))
+        access_token = (
+            os.environ.get("STS_MANUAL_ACCESS_TOKEN")
+            if browser_tunnel_enabled
+            else None
+        )
+        if browser_tunnel_enabled and (access_token is None or len(access_token) < 32):
+            raise ValueError(
+                "A browser tunnel requires a private STS_MANUAL_ACCESS_TOKEN of at least 32 characters."
+            )
+        runner = web.AppRunner(
+            desktop_proxy(environment, target, finished, access_token), access_log=None
+        )
         await runner.setup()
         await web.TCPSite(runner, "0.0.0.0", port).start()
         logger.info("Human desktop ready on runner port %s; no model calls", port)
         transcript().info(
             {"manual_session_port": port, "session_seconds": session_seconds}
         )
+        tunnel = None
+        tunnel_output = None
         try:
+            if browser_tunnel_enabled:
+                tunnel, tunnel_output = await browser_tunnel(
+                    port, cloudflared_url, cloudflared_sha256
+                )
             with suppress(TimeoutError):
                 await asyncio.wait_for(finished.wait(), timeout=session_seconds)
         finally:
+            if tunnel is not None and tunnel.returncode is None:
+                tunnel.terminate()
+                with suppress(TimeoutError):
+                    await asyncio.wait_for(tunnel.wait(), timeout=10)
+                if tunnel.returncode is None:
+                    tunnel.kill()
+                    await tunnel.wait()
+            if tunnel_output is not None:
+                await tunnel_output
             await runner.cleanup()
             result = await environment.exec(
                 [
@@ -200,6 +298,9 @@ def manual_control(
 def manual_session(
     port: int = DEFAULTS["port"],
     session_seconds: int = DEFAULTS["session_seconds"],
+    browser_tunnel_enabled: bool = DEFAULTS["browser_tunnel_enabled"],
+    cloudflared_url: str = DEFAULTS["cloudflared_url"],
+    cloudflared_sha256: str = DEFAULTS["cloudflared_sha256"],
     **kwargs,
 ) -> Task:
     """Reuse the StS2 sandbox for interactive human debugging on Hawk."""
@@ -208,7 +309,13 @@ def manual_session(
         name="sts2_manual_session",
         dataset=result.dataset,
         setup=result.setup,
-        solver=manual_control(port=port, session_seconds=session_seconds),
+        solver=manual_control(
+            port=port,
+            session_seconds=session_seconds,
+            browser_tunnel_enabled=browser_tunnel_enabled,
+            cloudflared_url=cloudflared_url,
+            cloudflared_sha256=cloudflared_sha256,
+        ),
         sandbox=result.sandbox,
         config=result.config,
         metadata={

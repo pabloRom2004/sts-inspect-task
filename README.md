@@ -134,6 +134,8 @@ StS2 runtime probes wait for the game's complete-menu startup marker before issu
 
 After launching the task on Hawk, use `hawk attach RUN_ID --port 6080 --local-port 6082` and open `http://127.0.0.1:6082/`. The `/api/status` endpoint returns game diagnostics; `POST /api/finish` ends the session and cleans up its sandbox. Bindings from the local Hawk tunnel are loopback-only.
 
+When a deployment has no attach relay, set `browser_tunnel_enabled=true` and supply a private random `STS_MANUAL_ACCESS_TOKEN` of at least 32 characters through the runner's secrets. The task verifies a pinned official cloudflared binary, starts a temporary HTTPS tunnel, and rejects requests without the access-link cookie. Add `?access_token=TOKEN` to the tunnel URL once to connect; the key is exchanged for a secure HTTP-only cookie and removed by the redirect. Never commit the access key or include it in shared logs.
+
 ## Validation
 
 Run `pytest tests`, `ruff check .` and `ruff format --check .`. Tests exercise the actual task setup, stock computer parser, Bash/Python execution, the installed wiki file, invalid and valid integer submissions, unscored completion, and setup-error propagation through mockllm. They also exercise the real Hawk Compose-to-Kubernetes conversion. External execution is simulated in local tests; the separate Linux runtime probe must establish actual game startup before the paid gameplay smoke.

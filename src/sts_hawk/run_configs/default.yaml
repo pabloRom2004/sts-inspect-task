@@ -51,3 +51,6 @@ runtime_probe:
 manual_session:
   port: 6080
   session_seconds: 7200
+  browser_tunnel_enabled: false
+  cloudflared_url: https://github.com/cloudflare/cloudflared/releases/download/2026.11.0/cloudflared-linux-amd64
+  cloudflared_sha256: 51f7c68b57ed7269164075d7e789efce5b59355982f06392deeb037d982a51fd
