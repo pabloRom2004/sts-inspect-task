@@ -68,10 +68,11 @@ def test_wrong_letter_is_valid_but_incorrect(tmp_path):
 def test_full_dataset_and_smoke_independence(tmp_path):
     """Carry independent text prompts through two Inspect epochs."""
     full = trivia()
-    assert len(full.dataset) == 100
+    assert len(full.dataset) == 200
+    assert len(trivia(question_set="text100").dataset) == 100
     assert len(trivia(question_set="all200", include_images=True).dataset) == 200
     assert (
-        len(trivia(game="sts2", category="cards", include_images=False).dataset) == 24
+        len(trivia(game="sts2", category="cards", include_images=False).dataset) == 50
     )
     task = trivia(smoke=True)
     assert len(task.dataset) == 12
@@ -112,12 +113,12 @@ def _log_dir(tmp_path):
     return os.environ.get("SPIRE_TRIVIA_TEST_LOG_DIR", str(tmp_path))
 
 
-def test_default_text100_matches_fixed_protocol(tmp_path):
-    """Run all hundred unchanged text prompts through real generation and scoring boundaries."""
+def test_default_text200_matches_fixed_protocol(tmp_path):
+    """Run all two hundred text prompts through real generation and scoring boundaries."""
     task = trivia()
-    selection = json.loads((DATA_DIR / "text100-selection.json").read_text())
+    selection = json.loads((DATA_DIR / "text200-protocol.json").read_text())
     assert [s.id for s in task.dataset] == selection["selected_ids"]
-    assert len(task.dataset) == 100
+    assert len(task.dataset) == 200
     assert all(s.metadata["kind"] != "art_to_title" for s in task.dataset)
     model = get_model(
         "mockllm/model",
@@ -128,7 +129,7 @@ def test_default_text100_matches_fixed_protocol(tmp_path):
     log = inspect_eval(
         task, model=model, max_samples=1, log_dir=_log_dir(tmp_path), display="none"
     )[0]
-    assert log.status == "success" and len(log.samples) == 100
+    assert log.status == "success" and len(log.samples) == 200
     for sample in read_eval_log(log.location).samples:
         assert sample.error is None
         assert sample.scores["strict_letter"].value == {"accuracy": "C", "format": "C"}

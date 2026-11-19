@@ -35,13 +35,14 @@ def get_trivia_dataset(
     system_prompt: str,
 ) -> MemoryDataset:
     """Compose dataset filters and return independent text or image samples."""
+    if question_set not in {"text200", "text100", "all200"}:
+        raise ValueError("question_set must be text200, text100, or all200")
+    suffix = "-text200" if question_set == "text200" else ""
     records = [
         json.loads(line)
-        for line in (DATA_DIR / "participants.jsonl").read_text().splitlines()
+        for line in (DATA_DIR / f"participants{suffix}.jsonl").read_text().splitlines()
     ]
-    answers = json.loads((DATA_DIR / "answer-key.json").read_text())
-    if question_set not in {"text100", "all200"}:
-        raise ValueError("question_set must be text100 or all200")
+    answers = json.loads((DATA_DIR / f"answer-key{suffix}.json").read_text())
     if question_set == "text100":
         selected_ids = set(
             json.loads((DATA_DIR / "text100-selection.json").read_text())[
