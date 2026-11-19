@@ -25,6 +25,7 @@ KINDS = {
 
 
 def get_trivia_dataset(
+    question_set: str,
     game: str | None,
     category: str | None,
     question_kind: str | None,
@@ -39,6 +40,16 @@ def get_trivia_dataset(
         for line in (DATA_DIR / "participants.jsonl").read_text().splitlines()
     ]
     answers = json.loads((DATA_DIR / "answer-key.json").read_text())
+    if question_set not in {"text100", "all200"}:
+        raise ValueError("question_set must be text100 or all200")
+    if question_set == "text100":
+        selected_ids = set(
+            json.loads((DATA_DIR / "text100-selection.json").read_text())[
+                "selected_ids"
+            ]
+        )
+        records = [r for r in records if r["id"] in selected_ids]
+    records = [r for r in records if include_images or not r["image"]]
     if game is not None and game not in {"sts1", "sts2"}:
         raise ValueError("game must be sts1 or sts2")
     if category is not None and category not in CATEGORIES:
@@ -55,7 +66,10 @@ def get_trivia_dataset(
             for c in sorted(CATEGORIES):
                 options = [r for r in records if r["game"] == g and r["category"] == c]
                 if c == "cards":
-                    options = [r for r in options if r["kind"] == "art_to_title"]
+                    kind = (
+                        "art_to_title" if any(r["image"] for r in options) else "number"
+                    )
+                    options = [r for r in options if r["kind"] == kind]
                 if c == "monsters":
                     options = [r for r in options if r["kind"] == "number"]
                 selected.append(options[0]["id"])

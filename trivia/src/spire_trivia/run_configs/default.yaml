@@ -1,10 +1,11 @@
 task:
   task: spire_trivia/trivia
   args:
+    question_set: text100
     game: null
     category: null
     question_kind: null
-    include_images: true
+    include_images: false
     sample_ids: null
     smoke: false
     system_prompt: knowledge_only

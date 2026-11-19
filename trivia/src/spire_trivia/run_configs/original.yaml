@@ -1,0 +1,30 @@
+task:
+  task: spire_trivia/trivia
+  args:
+    question_set: all200
+    game: null
+    category: null
+    question_kind: null
+    include_images: true
+    sample_ids: null
+    smoke: false
+    system_prompt: knowledge_only
+    scorer: strict_letter
+
+solver:
+  solver: generate
+  args:
+    tool_calls: none
+
+generate_config:
+  max_tokens: null
+  reasoning_effort: null
+  temperature: null
+
+eval_config:
+  epochs: 1
+  epochs_reducer:
+  - mean
+  token_limit: null
+  time_limit: null
+  message_limit: null

@@ -1,6 +1,7 @@
 """Exercise scoring, image transport, independence, filters, and epochs through Inspect."""
 
 import json
+import os
 
 import pytest
 from inspect_ai import eval as inspect_eval
@@ -31,9 +32,9 @@ def test_strict_response_format(tmp_path, completion, valid):
         custom_outputs=[ModelOutput.from_content("mockllm/model", response)],
     )
     log = inspect_eval(
-        trivia(sample_ids=[question_id]),
+        trivia(question_set="all200", sample_ids=[question_id]),
         model=model,
-        log_dir=str(tmp_path),
+        log_dir=_log_dir(tmp_path),
         display="none",
     )[0]
     result = read_eval_log(log.location).samples[0]
@@ -53,9 +54,9 @@ def test_wrong_letter_is_valid_but_incorrect(tmp_path):
         custom_outputs=[ModelOutput.from_content("mockllm/model", wrong)],
     )
     log = inspect_eval(
-        trivia(sample_ids=["sts1-001"]),
+        trivia(question_set="all200", sample_ids=["sts1-001"]),
         model=model,
-        log_dir=str(tmp_path),
+        log_dir=_log_dir(tmp_path),
         display="none",
     )[0]
     assert log.samples[0].scores["strict_letter"].value == {
@@ -65,22 +66,23 @@ def test_wrong_letter_is_valid_but_incorrect(tmp_path):
 
 
 def test_full_dataset_and_smoke_independence(tmp_path):
-    """Carry real artwork and independent prompts through two Inspect epochs."""
+    """Carry independent text prompts through two Inspect epochs."""
     full = trivia()
-    assert len(full.dataset) == 200
+    assert len(full.dataset) == 100
+    assert len(trivia(question_set="all200", include_images=True).dataset) == 200
     assert (
-        len(trivia(game="sts2", category="cards", include_images=False).dataset) == 40
+        len(trivia(game="sts2", category="cards", include_images=False).dataset) == 24
     )
     task = trivia(smoke=True)
     assert len(task.dataset) == 12
     assert {s.metadata["game"] for s in task.dataset} == {"sts1", "sts2"}
-    assert len([s for s in task.dataset if s.metadata["kind"] == "art_to_title"]) == 2
+    assert len([s for s in task.dataset if s.metadata["kind"] == "art_to_title"]) == 0
     outputs = [ModelOutput.from_content("mockllm/model", "A")] * 24
     log = inspect_eval(
         task,
         model=get_model("mockllm/model", custom_outputs=outputs),
         epochs=2,
-        log_dir=str(tmp_path),
+        log_dir=_log_dir(tmp_path),
         display="none",
     )[0]
     assert log.status == "success"
@@ -90,12 +92,7 @@ def test_full_dataset_and_smoke_independence(tmp_path):
         assert [m.role for m in sample.messages] == ["system", "user", "assistant"]
         assert not sample.messages[-1].tool_calls
         assert "single uppercase letter" in sample.messages[0].text
-        if sample.metadata["kind"] == "art_to_title":
-            images = [
-                c for c in sample.messages[1].content if isinstance(c, ContentImage)
-            ]
-            assert len(images) == 1
-            assert images[0].image.startswith(("attachment:", "data:image/png;base64,"))
+        assert not any(isinstance(c, ContentImage) for c in sample.messages[1].content)
 
 
 def test_invalid_filters_fail_before_inference():
@@ -108,3 +105,49 @@ def test_invalid_filters_fail_before_inference():
     ]:
         with pytest.raises(ValueError):
             trivia(**kwargs)
+
+
+def _log_dir(tmp_path):
+    """Allow local validation to retain Inspect archives in the workspace log directory."""
+    return os.environ.get("SPIRE_TRIVIA_TEST_LOG_DIR", str(tmp_path))
+
+
+def test_default_text100_matches_fixed_protocol(tmp_path):
+    """Run all hundred unchanged text prompts through real generation and scoring boundaries."""
+    task = trivia()
+    selection = json.loads((DATA_DIR / "text100-selection.json").read_text())
+    assert [s.id for s in task.dataset] == selection["selected_ids"]
+    assert len(task.dataset) == 100
+    assert all(s.metadata["kind"] != "art_to_title" for s in task.dataset)
+    model = get_model(
+        "mockllm/model",
+        custom_outputs=[
+            ModelOutput.from_content("mockllm/model", s.target) for s in task.dataset
+        ],
+    )
+    log = inspect_eval(
+        task, model=model, max_samples=1, log_dir=_log_dir(tmp_path), display="none"
+    )[0]
+    assert log.status == "success" and len(log.samples) == 100
+    for sample in read_eval_log(log.location).samples:
+        assert sample.error is None
+        assert sample.scores["strict_letter"].value == {"accuracy": "C", "format": "C"}
+        assert [m.role for m in sample.messages] == ["system", "user", "assistant"]
+        assert not any(isinstance(c, ContentImage) for c in sample.messages[1].content)
+
+
+def test_archived_image_question_remains_explicit(tmp_path):
+    """Keep the original image protocol available only through explicit archive settings."""
+    task = trivia(question_set="all200", include_images=True, sample_ids=["sts1-041"])
+    model = get_model(
+        "mockllm/model",
+        custom_outputs=[
+            ModelOutput.from_content("mockllm/model", task.dataset[0].target)
+        ],
+    )
+    log = inspect_eval(task, model=model, log_dir=_log_dir(tmp_path), display="none")[0]
+    sample = read_eval_log(log.location).samples[0]
+    assert (
+        sample.error is None and sample.scores["strict_letter"].value["accuracy"] == "C"
+    )
+    assert any(isinstance(c, ContentImage) for c in sample.messages[1].content)

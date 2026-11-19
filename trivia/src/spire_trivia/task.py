@@ -15,6 +15,7 @@ from spire_trivia.scorers import SCORERS
 
 @task
 def trivia(
+    question_set: str = DEFAULT_ARGS["question_set"],
     game: str | None = DEFAULT_ARGS["game"],
     category: str | None = DEFAULT_ARGS["category"],
     question_kind: str | None = DEFAULT_ARGS["question_kind"],
@@ -33,6 +34,7 @@ def trivia(
     settings = DEFAULT_CONFIG["eval_config"]
     return Task(
         dataset=get_trivia_dataset(
+            question_set,
             game,
             category,
             question_kind,
@@ -50,9 +52,10 @@ def trivia(
         token_limit=settings["token_limit"],
         time_limit=settings["time_limit"],
         message_limit=settings["message_limit"],
-        version="0.1.0",
+        version="0.2.0",
         metadata={
             "dataset_revision": "2026-11-19",
+            "question_set": question_set,
             "single_turn": True,
             "tools": False,
         },
