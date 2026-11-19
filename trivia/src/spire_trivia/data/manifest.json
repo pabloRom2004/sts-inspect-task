@@ -1,0 +1,199 @@
+{
+  "created_date": "2026-11-19",
+  "archive_commit": "4e6b0e040ccd00eb04fb1ab7fb0b298c222d2f29",
+  "game_versions": {
+    "sts1": "base desktop game",
+    "sts2": "v0.107.1"
+  },
+  "count_by_game": {
+    "sts1": 100,
+    "sts2": 100
+  },
+  "count_by_category": {
+    "cards": 100,
+    "relics": 30,
+    "monsters": 30,
+    "potions": 20,
+    "events": 10,
+    "mechanics": 10
+  },
+  "count_by_kind": {
+    "description_to_title": 66,
+    "title_to_description": 54,
+    "number": 34,
+    "art_to_title": 20,
+    "moves_to_enemy": 16,
+    "definition_to_term": 10
+  },
+  "answer_distribution": {
+    "A": 25,
+    "B": 25,
+    "C": 25,
+    "D": 25,
+    "E": 25,
+    "F": 25,
+    "G": 25,
+    "H": 25
+  },
+  "system_prompt": "Answer this Slay the Spire trivia question using only your existing knowledge. Do not use tools, search, or external resources. Select exactly one of the eight choices. Your entire final response must be a single uppercase letter: A, B, C, D, E, F, G, or H. Do not include an explanation, punctuation, or any other text.",
+  "assets": [
+    {
+      "path": "assets/sts1-041.png",
+      "sha256": "1e87563444186eaab432200953833ad2cbda6864d5c381be6a850c47f0b26ea9",
+      "bytes": 31980
+    },
+    {
+      "path": "assets/sts1-042.png",
+      "sha256": "66b0f130340b994065dc25e1ceb06bd847db1c2bcbb6cb3464dca9b3405be51e",
+      "bytes": 41459
+    },
+    {
+      "path": "assets/sts1-043.png",
+      "sha256": "4a62fd2f226b60500f5edfae06f7240637c1cc7f256c7ca228db7fb9b3032a50",
+      "bytes": 17722
+    },
+    {
+      "path": "assets/sts1-044.png",
+      "sha256": "45d950a1359cec453dabf78054d446b5a6d0e2ea73afb85502ff830f4b1eba89",
+      "bytes": 29786
+    },
+    {
+      "path": "assets/sts1-045.png",
+      "sha256": "da9870e5bc6294efd84bb189f5aa542bf9d7cefd6dc7c2c88d09d2645dc8545c",
+      "bytes": 37134
+    },
+    {
+      "path": "assets/sts1-046.png",
+      "sha256": "83aa1813a4b9bbb464ad806a809f25cd4166c5dbba098027ad2a78fb5daa952e",
+      "bytes": 40207
+    },
+    {
+      "path": "assets/sts1-047.png",
+      "sha256": "6507178de9309d76722b2ed00fefbfa7366953b23b63909a29f13539c1e2d06f",
+      "bytes": 21756
+    },
+    {
+      "path": "assets/sts1-048.png",
+      "sha256": "e41781ffe60d280e82a1e4769ebf5f7aa90070a2bf129b5aa6033a75779ddf04",
+      "bytes": 54535
+    },
+    {
+      "path": "assets/sts1-049.png",
+      "sha256": "78d87198c787937648dea850d8c8ebd20f62423caa7219c085996b110e918cf3",
+      "bytes": 29097
+    },
+    {
+      "path": "assets/sts1-050.png",
+      "sha256": "24879e2baa6028b9b88add639af57c97adc65fc2318e668c29bb1cd7c66844a8",
+      "bytes": 34817
+    },
+    {
+      "path": "assets/sts2-041.png",
+      "sha256": "dee40cccf691d3d1e1fc760a31c515c0279d821c42d2e25f090185c064cec9a0",
+      "bytes": 42222
+    },
+    {
+      "path": "assets/sts2-042.png",
+      "sha256": "bace598380b30db482cbb7479eb4fbe1ad8e848fd7caebf174f8224d6974de7b",
+      "bytes": 58122
+    },
+    {
+      "path": "assets/sts2-043.png",
+      "sha256": "f2b319bc1fe503139b29dc458fd9f8066078a1b17b7f0e67ee460284fa5ad13c",
+      "bytes": 72751
+    },
+    {
+      "path": "assets/sts2-044.png",
+      "sha256": "9b54a2fbfd752f294d501ff002ae441f63117a7625b2987f554ad724384b4941",
+      "bytes": 68861
+    },
+    {
+      "path": "assets/sts2-045.png",
+      "sha256": "201921a3fc88f689515b71444eb3bda091635d198870c124dc9ee1778e731abc",
+      "bytes": 61647
+    },
+    {
+      "path": "assets/sts2-046.png",
+      "sha256": "a60b0a7f0534702d29ab8447f2c104a492ad68a84aab9e186972f840e7de5666",
+      "bytes": 61737
+    },
+    {
+      "path": "assets/sts2-047.png",
+      "sha256": "b388dbc9cbc657e459d2a74a90183016aef393602ba03f5e0150f02180d0808d",
+      "bytes": 67987
+    },
+    {
+      "path": "assets/sts2-048.png",
+      "sha256": "0fb177d0f98afb3fe6a7afc8e029ab3e48021b2fb602ac10b768cc9fd9393a40",
+      "bytes": 60638
+    },
+    {
+      "path": "assets/sts2-049.png",
+      "sha256": "02bee79baf5c339d8c8a34ce1edc94e3131fb2bd60453bf64385f72f5f1f5bd0",
+      "bytes": 69838
+    },
+    {
+      "path": "assets/sts2-050.png",
+      "sha256": "a88de5e485ee203eb7d96301122481e45d8d2282d639323315a75680a04dac75",
+      "bytes": 67949
+    }
+  ],
+  "sources": [
+    {
+      "file": "sts1-cards.json",
+      "sha256": "01fbd640d83c4455aa9631443e60784b9a0ff0b6e5034ea4f5ffdd0f63558360"
+    },
+    {
+      "file": "sts1-events.json",
+      "sha256": "b3c3b2ac7f51c3bcda4e67e3c3f2f46a8c06de4a7b0bfad0e76ccbe4b27b3ac2"
+    },
+    {
+      "file": "sts1-keywords.json",
+      "sha256": "9fe19e38b2c16c86801ee39e09d35efb9f2b8ad88f2220d57f88d877c1efa58e"
+    },
+    {
+      "file": "sts1-mechanics.json",
+      "sha256": "f4745b2186317140b1de5ab20c84ae12123b908d496991d479d64371fe2f683f"
+    },
+    {
+      "file": "sts1-monsters.json",
+      "sha256": "3664e3542252e1a6cb35646fc514546f0e0d2df72827c61f086cb0910176ad7e"
+    },
+    {
+      "file": "sts1-potions.json",
+      "sha256": "0efcd00f0d30c8a5e7627d584084f50299b1df34e72205fd41abd0929e561a2a"
+    },
+    {
+      "file": "sts1-relics.json",
+      "sha256": "6d80107642b4add6c4f2c0219a19266b7476ab36ef0dd425fc7e1290e4fe85cf"
+    },
+    {
+      "file": "sts2-cards.json",
+      "sha256": "6877d973417553eafea64d4d9e5e08616151e026dc35a15d0f3abd5d66122649"
+    },
+    {
+      "file": "sts2-events.json",
+      "sha256": "e30270a8d19df84927b4a79f4ea2c3f406ed9ef134543657ad1e743fd85ae215"
+    },
+    {
+      "file": "sts2-keywords.json",
+      "sha256": "ec337c7e2876d18fe06f9861d696df75763d22cc0f4c19f7cad8132cedeb0708"
+    },
+    {
+      "file": "sts2-monsters.json",
+      "sha256": "d2665468c27f0b89f5672f7f0841ae79313e1e5bdd9e1bd8904078ff4064b3dc"
+    },
+    {
+      "file": "sts2-potions.json",
+      "sha256": "6ceaf3e3f745c239b2abb8a16507fbc11ec5233e75ff32070c33e6aa54796d10"
+    },
+    {
+      "file": "sts2-relics.json",
+      "sha256": "1092dea97f3de009528efdc39008e6d159cf6023fb4e10158076cf05eca90ae2"
+    },
+    {
+      "file": "sts2-v0.107.1-cards.json",
+      "sha256": "22ef381db9d184a3d739b7805cdd730cdc30950735564b7d614966fbbe124aa7"
+    }
+  ]
+}

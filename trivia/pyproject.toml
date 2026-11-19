@@ -1,0 +1,19 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "spire-trivia"
+version = "0.1.0"
+description = "200 single-turn, eight-choice Slay the Spire knowledge questions"
+requires-python = ">=3.12"
+dependencies = ["inspect-ai>=0.3.289,<0.4", "PyYAML>=6"]
+
+[project.entry-points.inspect_ai]
+spire_trivia = "spire_trivia._registry"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/spire_trivia"]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
