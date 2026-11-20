@@ -1,7 +1,7 @@
 task:
   task: spire_trivia/trivia
   args:
-    question_set: text200-v5
+    question_set: text200-v6
     game: null
     category: null
     question_kind: null

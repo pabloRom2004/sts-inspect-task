@@ -36,6 +36,7 @@ def get_trivia_dataset(
 ) -> MemoryDataset:
     """Compose dataset filters and return independent text or image samples."""
     if question_set not in {
+        "text200-v6",
         "text200-v5",
         "text200-v4",
         "text200-v3",
@@ -45,9 +46,10 @@ def get_trivia_dataset(
         "all200",
     }:
         raise ValueError(
-            "question_set must be text200-v5, text200-v4, text200-v3, text200-v2, text200, text100, or all200"
+            "question_set must be text200-v6, text200-v5, text200-v4, text200-v3, text200-v2, text200, text100, or all200"
         )
     suffix = {
+        "text200-v6": "-text200-v6",
         "text200-v5": "-text200-v5",
         "text200-v4": "-text200-v4",
         "text200-v3": "-text200-v3",

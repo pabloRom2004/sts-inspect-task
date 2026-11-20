@@ -8,7 +8,7 @@ from spire_trivia.dataset import DATA_DIR
 
 def test_wiki_revision_and_numeric_focus():
     task = trivia()
-    assert task.metadata["question_set"] == "text200-v5"
+    assert task.metadata["question_set"] == "text200-v6"
     assert len(task.dataset) == 200
     for game in ["sts1", "sts2"]:
         samples = [s for s in task.dataset if s.metadata["game"] == game]
@@ -47,3 +47,21 @@ def test_preserve_precise_relic_effect():
     assert [m.text for m in current.input] == [
         m.text for m in previous.input
     ] and current.target == previous.target
+
+
+def test_slaver_variant_is_explicit():
+    sample = next(s for s in trivia().dataset if s.id == "sts1-239")
+    assert "Blue Slaver" in sample.input[1].text
+    assert not any(s.id == "sts1-228" for s in trivia().dataset)
+    old = trivia(
+        question_set="text200-v5",
+        system_prompt="knowledge_abstention_explicit",
+        scorer="abstention_letter",
+    )
+    previous = {s.id: s for s in old.dataset}
+    assert all(
+        [m.text for m in s.input] == [m.text for m in previous[s.id].input]
+        and s.target == previous[s.id].target
+        for s in trivia().dataset
+        if s.id != "sts1-239"
+    )

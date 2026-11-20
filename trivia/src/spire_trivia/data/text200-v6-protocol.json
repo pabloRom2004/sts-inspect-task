@@ -1,0 +1,28 @@
+{
+  "question_set": "text200-v6",
+  "parent_question_set": "text200-v5",
+  "unchanged_participant_inputs": 199,
+  "replacement": {
+    "old_id": "sts1-228",
+    "new_id": "sts1-239",
+    "reason": "The source calls both variants Slaver. Specify Blue Slaver so its 12-damage Stab is unambiguous.",
+    "entity_id": "SLAVERBLUE"
+  },
+  "revised_after_response_review": true,
+  "scoring": {
+    "correct": 1,
+    "incorrect": -1,
+    "abstain": 0,
+    "invalid": -1,
+    "abstain_letter": "I"
+  },
+  "system_prompt": "Answer this Slay the Spire trivia question using only your existing knowledge. Do not use tools, search, or external resources. Select exactly one of the nine choices. A correct answer scores +1, an incorrect answer scores −1, and I don’t know scores 0. Your entire final response must be a single uppercase letter: A, B, C, D, E, F, G, H, or I. Do not include an explanation, punctuation, or any other text.",
+  "counts_by_game": {
+    "sts1": 100,
+    "sts2": 100
+  },
+  "numeric_questions_by_game": {
+    "sts1": 55,
+    "sts2": 55
+  }
+}
