@@ -35,9 +35,9 @@ def get_trivia_dataset(
     system_prompt: str,
 ) -> MemoryDataset:
     """Compose dataset filters and return independent text or image samples."""
-    if question_set not in {"text200", "text100", "all200"}:
-        raise ValueError("question_set must be text200, text100, or all200")
-    suffix = "-text200" if question_set == "text200" else ""
+    if question_set not in {"text200-v2", "text200", "text100", "all200"}:
+        raise ValueError("question_set must be text200-v2, text200, text100, or all200")
+    suffix = {"text200-v2": "-text200-v2", "text200": "-text200"}.get(question_set, "")
     records = [
         json.loads(line)
         for line in (DATA_DIR / f"participants{suffix}.jsonl").read_text().splitlines()

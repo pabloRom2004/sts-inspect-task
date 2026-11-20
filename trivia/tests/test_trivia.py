@@ -113,10 +113,10 @@ def _log_dir(tmp_path):
     return os.environ.get("SPIRE_TRIVIA_TEST_LOG_DIR", str(tmp_path))
 
 
-def test_default_text200_matches_fixed_protocol(tmp_path):
+def test_default_text200_v2_matches_fixed_protocol(tmp_path):
     """Run all two hundred text prompts through real generation and scoring boundaries."""
     task = trivia()
-    selection = json.loads((DATA_DIR / "text200-protocol.json").read_text())
+    selection = json.loads((DATA_DIR / "text200-v2-protocol.json").read_text())
     assert [s.id for s in task.dataset] == selection["selected_ids"]
     assert len(task.dataset) == 200
     assert all(s.metadata["kind"] != "art_to_title" for s in task.dataset)
@@ -152,3 +152,24 @@ def test_archived_image_question_remains_explicit(tmp_path):
         sample.error is None and sample.scores["strict_letter"].value["accuracy"] == "C"
     )
     assert any(isinstance(c, ContentImage) for c in sample.messages[1].content)
+
+
+def test_replacement_preserves_historical_question_and_other_inputs():
+    """Keep the retired Block sample reproducible and change only one current sample."""
+    previous = {s.id: s for s in trivia(question_set="text200").dataset}
+    current = {s.id: s for s in trivia().dataset}
+    assert set(previous) - set(current) == {"sts1-096"}
+    assert set(current) - set(previous) == {"sts1-111"}
+    assert "Until next turn, prevents damage." in previous["sts1-096"].input[1].text
+    assert (
+        "Which buff negates the next debuff applied to its bearer?"
+        in current["sts1-111"].input[1].text
+    )
+    assert current["sts1-111"].target == "E"
+    assert "E. Artifact" in current["sts1-111"].input[1].text
+    for sample_id in set(previous) & set(current):
+        assert previous[sample_id].target == current[sample_id].target
+        assert previous[sample_id].metadata == current[sample_id].metadata
+        assert [(m.role, m.text) for m in previous[sample_id].input] == [
+            (m.role, m.text) for m in current[sample_id].input
+        ]

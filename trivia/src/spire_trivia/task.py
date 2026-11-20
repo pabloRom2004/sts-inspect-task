@@ -52,7 +52,7 @@ def trivia(
         token_limit=settings["token_limit"],
         time_limit=settings["time_limit"],
         message_limit=settings["message_limit"],
-        version="0.3.0",
+        version="0.4.0",
         metadata={
             "dataset_revision": "2026-11-19",
             "question_set": question_set,
