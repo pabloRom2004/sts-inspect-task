@@ -1,0 +1,1394 @@
+{
+  "question_set": "text200-v5",
+  "parent_question_set": "text200-v4",
+  "source": "Slay the Spire Wiki",
+  "wiki_snapshot_date": "2026-11-20",
+  "source_pages": {
+    "11161": {
+      "title": "Slay the Spire 2:Tutor",
+      "pageid": 11161,
+      "revision_id": 73456,
+      "revision_timestamp": "2026-11-15T00:28:46Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Tutor&oldid=73456",
+      "wikitext_sha256": "a84d05a464c3db2728c87f0da17f47d9fd5fcfa0eaee7b320c89ad1622c43695"
+    },
+    "10053": {
+      "title": "Slay the Spire 2:Royal Gamble",
+      "pageid": 10053,
+      "revision_id": 73195,
+      "revision_timestamp": "2026-11-15T00:17:57Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Royal_Gamble&oldid=73195",
+      "wikitext_sha256": "ad1463fa418f5eee0ef892c6a6f3a2b6013dde0c930385e2e6781959a0575992"
+    },
+    "10815": {
+      "title": "Slay the Spire 2:Largesse",
+      "pageid": 10815,
+      "revision_id": 72899,
+      "revision_timestamp": "2026-11-15T00:04:57Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Largesse&oldid=72899",
+      "wikitext_sha256": "10d5438b74d859526e41eb03284033dcd0d1d1085b3be35ce1165cbbbd611de9"
+    },
+    "11107": {
+      "title": "Slay the Spire 2:Hidden Cache",
+      "pageid": 11107,
+      "revision_id": 72821,
+      "revision_timestamp": "2026-11-15T00:01:37Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hidden_Cache&oldid=72821",
+      "wikitext_sha256": "c70a2c40b4b16b9cc61debc9c8f6d62c251ff051b04c56eeec5752d48b70e8a3"
+    },
+    "10066": {
+      "title": "Slay the Spire 2:Convergence",
+      "pageid": 10066,
+      "revision_id": 72527,
+      "revision_timestamp": "2026-11-14T23:49:23Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Convergence&oldid=72527",
+      "wikitext_sha256": "30db386898277c303c0ebc228b8be25d07d59de470a2e77d9b8f4443f1b2b9b5"
+    },
+    "9130": {
+      "title": "Slay the Spire 2:Glow",
+      "pageid": 9130,
+      "revision_id": 72773,
+      "revision_timestamp": "2026-11-14T23:59:37Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Glow&oldid=72773",
+      "wikitext_sha256": "84752a382bae2b15f50117c3b2401c12cdd8ceeb01debdcddcf473b535cedeef"
+    },
+    "10899": {
+      "title": "Slay the Spire 2:Constellation",
+      "pageid": 10899,
+      "revision_id": 72525,
+      "revision_timestamp": "2026-11-14T23:49:18Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Constellation&oldid=72525",
+      "wikitext_sha256": "fbc6101c263f84dd7c3a7bc418d8476fcdcba646fd74538e6444957b1bbd3099"
+    },
+    "9136": {
+      "title": "Slay the Spire 2:Spoils of Battle",
+      "pageid": 9136,
+      "revision_id": 73318,
+      "revision_timestamp": "2026-11-15T00:23:04Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Spoils_of_Battle&oldid=73318",
+      "wikitext_sha256": "1bdf57ea8f5092e2318236fc02718673c2d070e314635c3216d89446a115584a"
+    },
+    "10568": {
+      "title": "Slay the Spire 2:Time's Up",
+      "pageid": 10568,
+      "revision_id": 73425,
+      "revision_timestamp": "2026-11-15T00:27:28Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Time's_Up&oldid=73425",
+      "wikitext_sha256": "85834ab794b6bf59d2e2046716644cbd81a94e00236c66242c42b61e37098811"
+    },
+    "9474": {
+      "title": "Slay the Spire 2:Snap",
+      "pageid": 9474,
+      "revision_id": 73284,
+      "revision_timestamp": "2026-11-15T00:21:38Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Snap&oldid=73284",
+      "wikitext_sha256": "75250c8eac3cc54311c3601eb4ea3a889161acbe287c850f602a00190cafcd8e"
+    },
+    "10803": {
+      "title": "Slay the Spire 2:Squeeze",
+      "pageid": 10803,
+      "revision_id": 73322,
+      "revision_timestamp": "2026-11-15T00:23:12Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Squeeze&oldid=73322",
+      "wikitext_sha256": "2097180dbba3de73b13fdb6da8585b2ad29f8181e4941b3459888cc8be9248f9"
+    },
+    "10036": {
+      "title": "Slay the Spire 2:Sic 'Em",
+      "pageid": 10036,
+      "revision_id": 73256,
+      "revision_timestamp": "2026-11-15T00:20:31Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sic_'Em&oldid=73256",
+      "wikitext_sha256": "adcf0ce56cb1f141492c8548c49a696981ff3e6c4124847cb5445cdb3e8840f8"
+    },
+    "9925": {
+      "title": "Slay the Spire 2:Flatten",
+      "pageid": 9925,
+      "revision_id": 72714,
+      "revision_timestamp": "2026-11-14T23:57:08Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Flatten&oldid=72714",
+      "wikitext_sha256": "9760857e18c49691790c1263b39829eaf8d726b17deb3bd9770970696b196a3a"
+    },
+    "10475": {
+      "title": "Slay the Spire 2:High Five",
+      "pageid": 10475,
+      "revision_id": 72825,
+      "revision_timestamp": "2026-11-15T00:01:46Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:High_Five&oldid=72825",
+      "wikitext_sha256": "5388304885e80bc60081a44101816ceb9db6e1b99b0259d64aecfdcfafb98701"
+    },
+    "9332": {
+      "title": "Slay the Spire 2:Blight Strike",
+      "pageid": 9332,
+      "revision_id": 72394,
+      "revision_timestamp": "2026-11-14T23:43:00Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Blight_Strike&oldid=72394",
+      "wikitext_sha256": "1d58e3674c8c30a0f50951330d8960f90b915f697709a130e1e838441ebe7229"
+    },
+    "10016": {
+      "title": "Slay the Spire 2:Fetch",
+      "pageid": 10016,
+      "revision_id": 72699,
+      "revision_timestamp": "2026-11-14T23:56:32Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fetch&oldid=72699",
+      "wikitext_sha256": "165e25f2daeaa4c4082872785ab1cadff60c2348e86f29448855f4717ae0c62a"
+    },
+    "9128": {
+      "title": "Slay the Spire 2:Gather Light",
+      "pageid": 9128,
+      "revision_id": 72756,
+      "revision_timestamp": "2026-11-14T23:58:55Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Gather_Light&oldid=72756",
+      "wikitext_sha256": "4e3abcef8f87a67fe312d178460b147ecb59998235572ffe7238fda947d6df17"
+    },
+    "9978": {
+      "title": "Slay the Spire 2:Conqueror",
+      "pageid": 9978,
+      "revision_id": 72524,
+      "revision_timestamp": "2026-11-14T23:49:15Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Conqueror&oldid=72524",
+      "wikitext_sha256": "9adfd5f828908bbc0b6748358a1fd70c5a9d5b961936a6bf8a6b6c345fe3c599"
+    },
+    "9894": {
+      "title": "Slay the Spire 2:Bulwark",
+      "pageid": 9894,
+      "revision_id": 72450,
+      "revision_timestamp": "2026-11-14T23:45:14Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bulwark&oldid=72450",
+      "wikitext_sha256": "6645cfd160644e72136f5a291ec8643141c026c450ce6664bf64768774d9d76d"
+    },
+    "9135": {
+      "title": "Slay the Spire 2:Refine Blade",
+      "pageid": 9135,
+      "revision_id": 73165,
+      "revision_timestamp": "2026-11-15T00:16:45Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Refine_Blade&oldid=73165",
+      "wikitext_sha256": "4c069c801e308cee54138b17f6d8e1885f175cf6c4381c98876ebf1d65bccb51"
+    },
+    "11046": {
+      "title": "Slay the Spire 2:Hammer Time",
+      "pageid": 11046,
+      "revision_id": 72796,
+      "revision_timestamp": "2026-11-15T00:00:34Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hammer_Time&oldid=72796",
+      "wikitext_sha256": "61684eb8e909a2673992cf37bb80ba87943c62ba72f14f20111e8a2f9e3cf548"
+    },
+    "10268": {
+      "title": "Slay the Spire 2:Furnace",
+      "pageid": 10268,
+      "revision_id": 72746,
+      "revision_timestamp": "2026-11-14T23:58:29Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Furnace&oldid=72746",
+      "wikitext_sha256": "fbfd27102b54b895a75cb97e2e2c4615d78c9e74f7b6cba2fb269ad06f89f4b0"
+    },
+    "9141": {
+      "title": "Slay the Spire 2:Sword Sage",
+      "pageid": 9141,
+      "revision_id": 73369,
+      "revision_timestamp": "2026-11-15T00:25:09Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sword_Sage&oldid=73369",
+      "wikitext_sha256": "fc03059c6c12e32408a09058256d98fbec3bd6fd22db0c893384301b4f47cc87"
+    },
+    "10830": {
+      "title": "Slay the Spire 2:Seeking Edge",
+      "pageid": 10830,
+      "revision_id": 73227,
+      "revision_timestamp": "2026-11-15T00:19:20Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Seeking_Edge&oldid=73227",
+      "wikitext_sha256": "93edda9e813e7fbecd429dbd271eb57b1972b175d18ab8a5f636b7e2910d3785"
+    },
+    "11041": {
+      "title": "Slay the Spire 2:Child of the Stars",
+      "pageid": 11041,
+      "revision_id": 72489,
+      "revision_timestamp": "2026-11-14T23:47:57Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Child_of_the_Stars&oldid=72489",
+      "wikitext_sha256": "34ce4547bdcdc7a4211b94d28fac7554e95f40738207e8b1c549cc3821e4d6aa"
+    },
+    "10020": {
+      "title": "Slay the Spire 2:Black Hole",
+      "pageid": 10020,
+      "revision_id": 72386,
+      "revision_timestamp": "2026-11-14T23:42:39Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Black_Hole&oldid=72386",
+      "wikitext_sha256": "af70dbc34da543aea78562a037349e338ae21459cb837a48a5a3072d970b0825"
+    },
+    "8781": {
+      "title": "Slay the Spire 2:Genesis",
+      "pageid": 8781,
+      "revision_id": 72757,
+      "revision_timestamp": "2026-11-14T23:58:57Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Genesis&oldid=72757",
+      "wikitext_sha256": "20d943be7b9bf769427459b9ac5867af1a5dc35dba69280df327a71803d4daf3"
+    },
+    "9134": {
+      "title": "Slay the Spire 2:Parry",
+      "pageid": 9134,
+      "revision_id": 73064,
+      "revision_timestamp": "2026-11-15T00:12:26Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Parry&oldid=73064",
+      "wikitext_sha256": "22435f943e200625c16affbe6e56cbfabcfc51a89d63609721b92fc739416306"
+    },
+    "10365": {
+      "title": "Slay the Spire 2:Knife Trap",
+      "pageid": 10365,
+      "revision_id": 73877,
+      "revision_timestamp": "2026-11-17T01:41:10Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Knife_Trap&oldid=73877",
+      "wikitext_sha256": "d77f4e19e8e30a5a84b3e16fb4d8e1dfcdf6e266fb04abf6d978c351f2423e4a"
+    },
+    "10896": {
+      "title": "Slay the Spire 2:Concoct",
+      "pageid": 10896,
+      "revision_id": 72521,
+      "revision_timestamp": "2026-11-14T23:49:08Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Concoct&oldid=72521",
+      "wikitext_sha256": "6ec8c8e907af04f44c6e4ab67403b4740b539c76c10a1e1397cb3614cceaf364"
+    },
+    "10895": {
+      "title": "Slay the Spire 2:Blade Symphony",
+      "pageid": 10895,
+      "revision_id": 73775,
+      "revision_timestamp": "2026-11-16T02:53:37Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Blade_Symphony&oldid=73775",
+      "wikitext_sha256": "076a59a67f803b70e08aafa21c2dc1dd839866130539385bea8044a4c825e50c"
+    },
+    "10461": {
+      "title": "Slay the Spire 2:Outbreak",
+      "pageid": 10461,
+      "revision_id": 74071,
+      "revision_timestamp": "2026-11-18T21:59:58Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Outbreak&oldid=74071",
+      "wikitext_sha256": "6031e21465279bf79b1779927456d4e26801dca43d5430b3e95c563ca7779fd2"
+    },
+    "10451": {
+      "title": "Slay the Spire 2:Flanking",
+      "pageid": 10451,
+      "revision_id": 72712,
+      "revision_timestamp": "2026-11-14T23:57:03Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Flanking&oldid=72712",
+      "wikitext_sha256": "a42a3cbadcfd7923ba59e751362d04c96a731f635407b4227b11f3835e5b3c1e"
+    },
+    "9121": {
+      "title": "Slay the Spire 2:Corrosive Wave",
+      "pageid": 9121,
+      "revision_id": 72532,
+      "revision_timestamp": "2026-11-14T23:49:34Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Corrosive_Wave&oldid=72532",
+      "wikitext_sha256": "5749ddc10eff2dd7a65bd041d80b1f9b2bc44dc803cbd6dcd8e27360c9a9b0f4"
+    },
+    "10897": {
+      "title": "Slay the Spire 2:Fade",
+      "pageid": 10897,
+      "revision_id": 72685,
+      "revision_timestamp": "2026-11-14T23:55:55Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fade&oldid=72685",
+      "wikitext_sha256": "d8c555b396702514bb5b468e9be3087f69e2dc7e7fa8ebf00a329960de1dc5bc"
+    },
+    "10542": {
+      "title": "Slay the Spire 2:Fan of Knives",
+      "pageid": 10542,
+      "revision_id": 72688,
+      "revision_timestamp": "2026-11-14T23:56:02Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fan_of_Knives&oldid=72688",
+      "wikitext_sha256": "06dec1e25d4b6d2a43bfdde4452188ba2343dce3aa7e6bb5224d2fe464e925e2"
+    },
+    "11036": {
+      "title": "Slay the Spire 2:Master Planner",
+      "pageid": 11036,
+      "revision_id": 72943,
+      "revision_timestamp": "2026-11-15T00:06:57Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Master_Planner&oldid=72943",
+      "wikitext_sha256": "9bca818d752b43e9a6c472b8cb5e115c6307c48f93a324961158542cf71d5a95"
+    },
+    "11045": {
+      "title": "Slay the Spire 2:Sneaky",
+      "pageid": 11045,
+      "revision_id": 73286,
+      "revision_timestamp": "2026-11-15T00:21:42Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sneaky&oldid=73286",
+      "wikitext_sha256": "f73f17e6460d2ad71b05fe6058ea5f5317e08e2010aaf82e636400af57b6862d"
+    },
+    "10021": {
+      "title": "Slay the Spire 2:Bone Shards",
+      "pageid": 10021,
+      "revision_id": 72415,
+      "revision_timestamp": "2026-11-14T23:43:48Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bone_Shards&oldid=72415",
+      "wikitext_sha256": "62dcb2a16e45e56d8a512a6fceab02d4a8d548d29f100b3d527577872ad96b85"
+    },
+    "10037": {
+      "title": "Slay the Spire 2:Rattle",
+      "pageid": 10037,
+      "revision_id": 73154,
+      "revision_timestamp": "2026-11-15T00:16:17Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Rattle&oldid=73154",
+      "wikitext_sha256": "334c7ac2b91624953c26bcb90a1c0a37a559eef217172c2ef2f39a54d804b68c"
+    },
+    "11116": {
+      "title": "Slay the Spire 2:The Smith",
+      "pageid": 11116,
+      "revision_id": 73411,
+      "revision_timestamp": "2026-11-15T00:26:56Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Smith&oldid=73411",
+      "wikitext_sha256": "35038488126dfd6edb8d4559313ddae1af75aa2233dd82b0eaabe105a31b4a85"
+    },
+    "11117": {
+      "title": "Slay the Spire 2:Big Bang",
+      "pageid": 11117,
+      "revision_id": 72378,
+      "revision_timestamp": "2026-11-14T23:42:19Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Big_Bang&oldid=72378",
+      "wikitext_sha256": "078fd0bbec7c3de98ec584ce459d62e4886b172dc244e9946066931f76d9bab8"
+    },
+    "10898": {
+      "title": "Slay the Spire 2:Plot",
+      "pageid": 10898,
+      "revision_id": 73090,
+      "revision_timestamp": "2026-11-15T00:13:36Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Plot&oldid=73090",
+      "wikitext_sha256": "2cb018302d61319478244b18b9dd3a46239c3ddeb60a27b5f35cd5d12a33784b"
+    },
+    "9926": {
+      "title": "Slay the Spire 2:Molten Fist",
+      "pageid": 9926,
+      "revision_id": 72976,
+      "revision_timestamp": "2026-11-15T00:08:23Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Molten_Fist&oldid=72976",
+      "wikitext_sha256": "761e3041700f4c3576a68ebf873fcd4afd088123c2370ef34168f39dc4e6ccc7"
+    },
+    "10015": {
+      "title": "Slay the Spire 2:Howl from Beyond",
+      "pageid": 10015,
+      "revision_id": 72833,
+      "revision_timestamp": "2026-11-15T00:02:06Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Howl_from_Beyond&oldid=72833",
+      "wikitext_sha256": "4ffe5f77d6c0772da88a8b82a97bbb80379020376d85619c9d57d4d267ba6063"
+    },
+    "9315": {
+      "title": "Slay the Spire 2:Grapple",
+      "pageid": 9315,
+      "revision_id": 67445,
+      "revision_timestamp": "2026-10-28T13:04:53Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Grapple&oldid=67445",
+      "wikitext_sha256": "348ab021fa1edcf9b28d5e7bc4c79f5f383283c63a4c346217db4b7375e3b7e9"
+    },
+    "10447": {
+      "title": "Slay the Spire 2:Tank",
+      "pageid": 10447,
+      "revision_id": 73377,
+      "revision_timestamp": "2026-11-15T00:25:26Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Tank&oldid=73377",
+      "wikitext_sha256": "d8aba2d846158d02dbcf1586c1ce703a853164427229f718c023e2348646aadf"
+    },
+    "10139": {
+      "title": "Slay the Spire 2:Hellraiser",
+      "pageid": 10139,
+      "revision_id": 72818,
+      "revision_timestamp": "2026-11-15T00:01:29Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hellraiser&oldid=72818",
+      "wikitext_sha256": "33ca3145c012d28428df7ecc82639fc938b88550a0058ebb1a2310cf2d66259b"
+    },
+    "9233": {
+      "title": "Slay the Spire 2:Demonic Shield",
+      "pageid": 9233,
+      "revision_id": 72594,
+      "revision_timestamp": "2026-11-14T23:52:07Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Demonic_Shield&oldid=72594",
+      "wikitext_sha256": "048895e57f88b6650a9877e331a92bbac2d58e50b16508f39cbc50d0d9ba50f9"
+    },
+    "9996": {
+      "title": "Slay the Spire 2:Unmovable",
+      "pageid": 9996,
+      "revision_id": 73470,
+      "revision_timestamp": "2026-11-15T00:29:22Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Unmovable&oldid=73470",
+      "wikitext_sha256": "000a302d7b8d229a9c69cb56e6b3b31346b67426320574dfa484bc21b51ba35b"
+    },
+    "10043": {
+      "title": "Slay the Spire 2:Crescent Spear",
+      "pageid": 10043,
+      "revision_id": 72541,
+      "revision_timestamp": "2026-11-14T23:49:57Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Crescent_Spear&oldid=72541",
+      "wikitext_sha256": "75caae2560fcac94f45305cd1b9ea71f523190143422906021a83eac811ee38e"
+    },
+    "10054": {
+      "title": "Slay the Spire 2:Summon Forth",
+      "pageid": 10054,
+      "revision_id": 73357,
+      "revision_timestamp": "2026-11-15T00:24:42Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Summon_Forth&oldid=73357",
+      "wikitext_sha256": "b7cc898553ac9a1707b72623a825996c2fc156329a9f4b800574c15c4f9a9b7c"
+    },
+    "9536": {
+      "title": "Slay the Spire 2:Believe in You",
+      "pageid": 9536,
+      "revision_id": 72374,
+      "revision_timestamp": "2026-11-14T23:42:08Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Believe_in_You&oldid=72374",
+      "wikitext_sha256": "da00658f2462b94e2a67c79613c9c638d12bc01a502972f93ef4961c80ea4e1c"
+    },
+    "9552": {
+      "title": "Slay the Spire 2:Mimic",
+      "pageid": 9552,
+      "revision_id": 72966,
+      "revision_timestamp": "2026-11-15T00:07:57Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Mimic&oldid=72966",
+      "wikitext_sha256": "367ad598f46da26e6ff5de7319732cf09bdd30f9abddf011d1ebcd1f585a5794"
+    },
+    "9547": {
+      "title": "Slay the Spire 2:Intercept",
+      "pageid": 9547,
+      "revision_id": 72857,
+      "revision_timestamp": "2026-11-15T00:03:03Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Intercept&oldid=72857",
+      "wikitext_sha256": "02ad6ab2edff4965aac1bfe1d98fa765138f2586dc876b5d8ea8433eb2125868"
+    },
+    "9548": {
+      "title": "Slay the Spire 2:Lift",
+      "pageid": 9548,
+      "revision_id": 73839,
+      "revision_timestamp": "2026-11-16T20:45:59Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Lift&oldid=73839",
+      "wikitext_sha256": "cdbaf8ae43f4634b05856b851af4e5880133a0dcac088f0c363e92b8cddc6290"
+    },
+    "9546": {
+      "title": "Slay the Spire 2:Huddle Up",
+      "pageid": 9546,
+      "revision_id": 72834,
+      "revision_timestamp": "2026-11-15T00:02:08Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Huddle_Up&oldid=72834",
+      "wikitext_sha256": "1e425fe946784c6b19ba4e54e9615f9d35fc41608002641fefb9ba9600563504"
+    },
+    "9538": {
+      "title": "Slay the Spire 2:Coordinate",
+      "pageid": 9538,
+      "revision_id": 72530,
+      "revision_timestamp": "2026-11-14T23:49:29Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Coordinate&oldid=72530",
+      "wikitext_sha256": "b9be3b6edbe62f26ed5b5920f32ce8a75f7334919ec1a078ca8cae4cb150d9a6"
+    },
+    "9545": {
+      "title": "Slay the Spire 2:Gang Up",
+      "pageid": 9545,
+      "revision_id": 72755,
+      "revision_timestamp": "2026-11-14T23:58:53Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Gang_Up&oldid=72755",
+      "wikitext_sha256": "81c1c5e05479968f37be0e21d52d0bf6f3645211083516d334017124671aa4ad"
+    },
+    "9550": {
+      "title": "Slay the Spire 2:Knockdown",
+      "pageid": 9550,
+      "revision_id": 72889,
+      "revision_timestamp": "2026-11-15T00:04:28Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Knockdown&oldid=72889",
+      "wikitext_sha256": "b7a288a0f0a5f38368041e6f1bb20d69ca598d4a8bcc580b9b7d5d7d0c2e192b"
+    },
+    "10581": {
+      "title": "Slay the Spire 2:Sacrifice",
+      "pageid": 10581,
+      "revision_id": 73205,
+      "revision_timestamp": "2026-11-15T00:18:25Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sacrifice&oldid=73205",
+      "wikitext_sha256": "01149de7a503dca97e27b47e4f41a0edb42ac0f7d018ec2008c16238559559a4"
+    },
+    "10572": {
+      "title": "Slay the Spire 2:Oblivion",
+      "pageid": 10572,
+      "revision_id": 73020,
+      "revision_timestamp": "2026-11-15T00:10:22Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Oblivion&oldid=73020",
+      "wikitext_sha256": "0723491f838f9bc9a640b8ab3e3a7a5b7f89353a81678bc339553d0843859ecd"
+    },
+    "10022": {
+      "title": "Slay the Spire 2:Cleanse",
+      "pageid": 10022,
+      "revision_id": 72505,
+      "revision_timestamp": "2026-11-14T23:48:33Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Cleanse&oldid=72505",
+      "wikitext_sha256": "ce6628e559ec101a044bd5503dc8249cacab53417174c2ce9dfec74c2a0de252"
+    },
+    "10452": {
+      "title": "Slay the Spire 2:Death's Door",
+      "pageid": 10452,
+      "revision_id": 74063,
+      "revision_timestamp": "2026-11-18T21:48:24Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Death's_Door&oldid=74063",
+      "wikitext_sha256": "7ae0dce657e26a3908d32cf9a035bfe944a2be449e5caf2bac24c865b1518d85"
+    },
+    "9371": {
+      "title": "Slay the Spire 2:Scourge",
+      "pageid": 9371,
+      "revision_id": 73212,
+      "revision_timestamp": "2026-11-15T00:18:42Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Scourge&oldid=73212",
+      "wikitext_sha256": "6f871f6d03868690bd48efc30a644e4e3f998b351a57779e3866909370ee29d3"
+    },
+    "10017": {
+      "title": "Slay the Spire 2:No Escape",
+      "pageid": 10017,
+      "revision_id": 73009,
+      "revision_timestamp": "2026-11-15T00:09:54Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:No_Escape&oldid=73009",
+      "wikitext_sha256": "ab80fbd62e7f50b63629d5e92cb0013902a3b686af5bc1d771d6b7e7384d1239"
+    },
+    "9350": {
+      "title": "Slay the Spire 2:Negative Pulse",
+      "pageid": 9350,
+      "revision_id": 72995,
+      "revision_timestamp": "2026-11-15T00:09:16Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Negative_Pulse&oldid=72995",
+      "wikitext_sha256": "1537a472089e6ad67b0394501c943de7957903b207fcd6bdf1a1d320786e0166"
+    },
+    "9331": {
+      "title": "Slay the Spire 2:Afterlife",
+      "pageid": 9331,
+      "revision_id": 72311,
+      "revision_timestamp": "2026-11-14T23:39:39Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Afterlife&oldid=72311",
+      "wikitext_sha256": "489ad843f2807135b767ad885e7c74ebe42b97ada6c3b86c372c8ab46d7c6c0b"
+    },
+    "10580": {
+      "title": "Slay the Spire 2:Legion of Bone",
+      "pageid": 10580,
+      "revision_id": 72910,
+      "revision_timestamp": "2026-11-15T00:05:28Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Legion_of_Bone&oldid=72910",
+      "wikitext_sha256": "ecc6654168e89b070fd71292683076e00c3fee7444ef4df52523e6c259f2131e"
+    },
+    "10810": {
+      "title": "Slay the Spire 2:Reanimate",
+      "pageid": 10810,
+      "revision_id": 73156,
+      "revision_timestamp": "2026-11-15T00:16:23Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Reanimate&oldid=73156",
+      "wikitext_sha256": "d57aa9d137aa87ac8788079a1d1776e036ab7e2e24ef4b001d197034b4587c1c"
+    },
+    "10753": {
+      "title": "Slay the Spire 2:End of Days",
+      "pageid": 10753,
+      "revision_id": 72649,
+      "revision_timestamp": "2026-11-14T23:54:27Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:End_of_Days&oldid=72649",
+      "wikitext_sha256": "e5e0f5bb432d9f2c5aa05c7f84f7eb931bc6b35fa5a4a49b5b854619406c7652"
+    },
+    "10555": {
+      "title": "Slay the Spire 2:Spur",
+      "pageid": 10555,
+      "revision_id": 73320,
+      "revision_timestamp": "2026-11-15T00:23:08Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Spur&oldid=73320",
+      "wikitext_sha256": "2dc22bb8016558f69973932bb46fb57e84df950c932be16ca47efca0dad995de"
+    },
+    "9478": {
+      "title": "Slay the Spire 2:Invoke",
+      "pageid": 9478,
+      "revision_id": 72859,
+      "revision_timestamp": "2026-11-15T00:03:10Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Invoke&oldid=72859",
+      "wikitext_sha256": "eb8cca67c132cce0449bd9779236c23de636d4219bb114438b1f1232b4e2b6e3"
+    },
+    "9153": {
+      "title": "Slay the Spire 2:Dirge",
+      "pageid": 9153,
+      "revision_id": 72603,
+      "revision_timestamp": "2026-11-14T23:52:29Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Dirge&oldid=72603",
+      "wikitext_sha256": "7d87fbd9c63823d034976f85acbbe3fcaaa595e7a9db5ed1c715c5ecad2d13d7"
+    },
+    "10483": {
+      "title": "Slay the Spire 2:Glimpse Beyond",
+      "pageid": 10483,
+      "revision_id": 72768,
+      "revision_timestamp": "2026-11-14T23:59:25Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Glimpse_Beyond&oldid=72768",
+      "wikitext_sha256": "75c445d98a6373b743517380a012e081e805a2e66fdfd46d5682c3e958f8f85e"
+    },
+    "8812": {
+      "title": "Slay the Spire 2:Reaper Form",
+      "pageid": 8812,
+      "revision_id": 73158,
+      "revision_timestamp": "2026-11-15T00:16:27Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Reaper_Form&oldid=73158",
+      "wikitext_sha256": "5ae40dbddd28864cc44854ce9ec74e7737c2e8577e7c255f6a571651944d9ee9"
+    },
+    "9218": {
+      "title": "Slay the Spire 2:Deathbringer",
+      "pageid": 9218,
+      "revision_id": 72570,
+      "revision_timestamp": "2026-11-14T23:51:11Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Deathbringer&oldid=72570",
+      "wikitext_sha256": "220de233a2104e4c9e683dca0bcf5fb18439ae9b8d28d0a9763c665deb6b3daa"
+    },
+    "8780": {
+      "title": "Slay the Spire 2:Radiate",
+      "pageid": 8780,
+      "revision_id": 73145,
+      "revision_timestamp": "2026-11-15T00:15:56Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Radiate&oldid=73145",
+      "wikitext_sha256": "3ffaa8908fd62ae6d413be9f5f2106cd8ca00ee3cc85ec3b4e2f81c635f79e94"
+    },
+    "11119": {
+      "title": "Slay the Spire 2:Beat into Shape",
+      "pageid": 11119,
+      "revision_id": 72368,
+      "revision_timestamp": "2026-11-14T23:41:52Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Beat_into_Shape&oldid=72368",
+      "wikitext_sha256": "7f19f7ae8bb45b7663d6f584f0d91cd77cef7eeb832aae7677c305c31fb63955"
+    },
+    "11128": {
+      "title": "Slay the Spire 2:Shining Strike",
+      "pageid": 11128,
+      "revision_id": 73246,
+      "revision_timestamp": "2026-11-15T00:20:04Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Shining_Strike&oldid=73246",
+      "wikitext_sha256": "21a4bc600aca86f0a1375b3857c58ff0ce86ed0eb8752c52d6e159c75b2665fe"
+    },
+    "9147": {
+      "title": "Slay the Spire 2:Solar Strike",
+      "pageid": 9147,
+      "revision_id": 73291,
+      "revision_timestamp": "2026-11-15T00:21:58Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Solar_Strike&oldid=73291",
+      "wikitext_sha256": "493b544d8b0cc263561482cd6cbd0478d5c9a76bc6806eee7891431abe2c60c9"
+    },
+    "9137": {
+      "title": "Slay the Spire 2:Wrought in War",
+      "pageid": 9137,
+      "revision_id": 73544,
+      "revision_timestamp": "2026-11-15T00:32:29Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Wrought_in_War&oldid=73544",
+      "wikitext_sha256": "f2fbb0505871747175a0a8dda162cfbcead421a65cb736e27f09f0477a21db04"
+    },
+    "11125": {
+      "title": "Slay the Spire 2:Knockout Blow",
+      "pageid": 11125,
+      "revision_id": 74019,
+      "revision_timestamp": "2026-11-18T07:35:39Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Knockout_Blow&oldid=74019",
+      "wikitext_sha256": "601ec164534f6af00d5bb6c3364f6617c38af8843cf628e59d95bde88952e899"
+    },
+    "11039": {
+      "title": "Slay the Spire 2:Hailstorm",
+      "pageid": 11039,
+      "revision_id": 72795,
+      "revision_timestamp": "2026-11-15T00:00:31Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hailstorm&oldid=72795",
+      "wikitext_sha256": "ba296c4526f008a2ce94ef7d3c53fb436f1c0034c72e24f826d62d3c3d904094"
+    },
+    "10796": {
+      "title": "Slay the Spire 2:Ignition",
+      "pageid": 10796,
+      "revision_id": 72841,
+      "revision_timestamp": "2026-11-15T00:02:26Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Ignition&oldid=72841",
+      "wikitext_sha256": "ec2c684303dedddba6f27bc9afcfcee6164dab9f0834bc48d4218db3b40e522f"
+    },
+    "10047": {
+      "title": "Slay the Spire 2:Tesla Coil",
+      "pageid": 10047,
+      "revision_id": 73387,
+      "revision_timestamp": "2026-11-15T00:25:52Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Tesla_Coil&oldid=73387",
+      "wikitext_sha256": "0065699031f4cef585e7ebd606f03815dda224e58b4b9be5f9609c0d073170c6"
+    },
+    "11069": {
+      "title": "Slay the Spire 2:Focused Strike",
+      "pageid": 11069,
+      "revision_id": 72721,
+      "revision_timestamp": "2026-11-14T23:57:26Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Focused_Strike&oldid=72721",
+      "wikitext_sha256": "44eced3cc0db0b5487dd40d9a5d5aa571bdfc5cf5f8fccdb3c8f7d1e2e0846fd"
+    },
+    "10903": {
+      "title": "Slay the Spire 2:Hibernate",
+      "pageid": 10903,
+      "revision_id": 72820,
+      "revision_timestamp": "2026-11-15T00:01:35Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hibernate&oldid=72820",
+      "wikitext_sha256": "392060900cc5ce90750509c7288bceb40d6d229dd9f41ddfdcffee0740c05107"
+    },
+    "10249": {
+      "title": "Slay the Spire 2:Synthesis",
+      "pageid": 10249,
+      "revision_id": 73373,
+      "revision_timestamp": "2026-11-15T00:25:18Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Synthesis&oldid=73373",
+      "wikitext_sha256": "9327ff72e892b2b8416fde2e932a8a684899c9855660aa84f2cdc34a17d83710"
+    },
+    "10794": {
+      "title": "Slay the Spire 2:Energy Surge",
+      "pageid": 10794,
+      "revision_id": 72653,
+      "revision_timestamp": "2026-11-14T23:54:38Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Energy_Surge&oldid=72653",
+      "wikitext_sha256": "4343753ffa8e6ff8da475b3ee30888e64c7495d59b0c964a81caac4d013a51eb"
+    },
+    "11017": {
+      "title": "Slay the Spire 2:Lightning Rod",
+      "pageid": 11017,
+      "revision_id": 72915,
+      "revision_timestamp": "2026-11-15T00:05:40Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Lightning_Rod&oldid=72915",
+      "wikitext_sha256": "a6ce9c880fe641ac90914e36082c1d7cddfea4487e55da01fadda4f1fc0da39d"
+    },
+    "10018": {
+      "title": "Slay the Spire 2:Calcify",
+      "pageid": 10018,
+      "revision_id": 72466,
+      "revision_timestamp": "2026-11-14T23:45:52Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Calcify&oldid=72466",
+      "wikitext_sha256": "be2dd614429d6234a355b7c91b495c0ef1d3c1884601c833421787aefb435332"
+    },
+    "10367": {
+      "title": "Slay the Spire 2:Shroud",
+      "pageid": 10367,
+      "revision_id": 73253,
+      "revision_timestamp": "2026-11-15T00:20:23Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Shroud&oldid=73253",
+      "wikitext_sha256": "4004fba6d75bb2abcf52bacd7ebc045fc8888d96c49ec5447bd627e4e83db7b0"
+    },
+    "10905": {
+      "title": "Slay the Spire 2:Imitation Learning",
+      "pageid": 10905,
+      "revision_id": 72842,
+      "revision_timestamp": "2026-11-15T00:02:28Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Imitation_Learning&oldid=72842",
+      "wikitext_sha256": "66df1a929d0dbab025ebc03215eb70a80b6d91cfca9a7f6de30a29e0a1ece6ad"
+    },
+    "8429": {
+      "title": "Slay the Spire 2:Bound Phylactery",
+      "pageid": 8429,
+      "revision_id": 72429,
+      "revision_timestamp": "2026-11-14T23:44:23Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bound_Phylactery&oldid=72429",
+      "wikitext_sha256": "942d865318bce8829baee78c748c8edaea8567609e13a351752ee79ae4cb9fa5"
+    },
+    "9467": {
+      "title": "Slay the Spire 2:Bone Flute",
+      "pageid": 9467,
+      "revision_id": 72414,
+      "revision_timestamp": "2026-11-14T23:43:47Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bone_Flute&oldid=72414",
+      "wikitext_sha256": "1dfd21c2de1d270aadb3030cc8b7b16cd615f473b54622b66ed086a64e4fc747"
+    },
+    "10458": {
+      "title": "Slay the Spire 2:Book Repair Knife",
+      "pageid": 10458,
+      "revision_id": 72418,
+      "revision_timestamp": "2026-11-14T23:43:57Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Book_Repair_Knife&oldid=72418",
+      "wikitext_sha256": "a19cc09c3f259a70645cdc9985894489beef24577338956a64f11c6117f727bd"
+    },
+    "8426": {
+      "title": "Slay the Spire 2:Divine Right",
+      "pageid": 8426,
+      "revision_id": 72612,
+      "revision_timestamp": "2026-11-14T23:52:51Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Divine_Right&oldid=72612",
+      "wikitext_sha256": "a925bd8b89b7ee04c3a06987d3ab5ca92aeba4406ab35bb9a839dddeb5094658"
+    },
+    "10217": {
+      "title": "Slay the Spire 2:Fencing Manual",
+      "pageid": 10217,
+      "revision_id": 72695,
+      "revision_timestamp": "2026-11-14T23:56:19Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fencing_Manual&oldid=72695",
+      "wikitext_sha256": "f9870f36dbcaeafe46853202ef83d91892343536522a62a59c7e1bc66ed6967f"
+    },
+    "10566": {
+      "title": "Slay the Spire 2:Undying Sigil",
+      "pageid": 10566,
+      "revision_id": 73468,
+      "revision_timestamp": "2026-11-15T00:29:16Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Undying_Sigil&oldid=73468",
+      "wikitext_sha256": "63a6a70c4feaa3062a36154e0725b59b08eee43240f6a15f765dde9663ef6cfb"
+    },
+    "11368": {
+      "title": "Slay the Spire 2:Mini Regent",
+      "pageid": 11368,
+      "revision_id": 72969,
+      "revision_timestamp": "2026-11-15T00:08:04Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Mini_Regent&oldid=72969",
+      "wikitext_sha256": "966e93f568eec89d136d51b6e2e9a5f52452a70bcf6b6d76c4c6fedc357091c7"
+    },
+    "11186": {
+      "title": "Slay the Spire 2:Galactic Dust",
+      "pageid": 11186,
+      "revision_id": 72750,
+      "revision_timestamp": "2026-11-14T23:58:39Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Galactic_Dust&oldid=72750",
+      "wikitext_sha256": "74f9fc4c2114483a5318090b9cd19364e06bc8cfb230623dd82849714d6bd3c7"
+    },
+    "11367": {
+      "title": "Slay the Spire 2:Lunar Pastry",
+      "pageid": 11367,
+      "revision_id": 72932,
+      "revision_timestamp": "2026-11-15T00:06:26Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Lunar_Pastry&oldid=72932",
+      "wikitext_sha256": "8e1a83fb4ccec0cce6b9ae43b6c2edebb05b4b7f759e5f11dd25a09ea8a4bb9c"
+    },
+    "8789": {
+      "title": "Slay the Spire 2:Phylactery Unbound",
+      "pageid": 8789,
+      "revision_id": 73082,
+      "revision_timestamp": "2026-11-15T00:13:18Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Phylactery_Unbound&oldid=73082",
+      "wikitext_sha256": "dc5a7f96f7e7d17b706a83fbd1d6cf65a5881a0f8f08dada76dbf7468d580bb3"
+    },
+    "11476": {
+      "title": "Slay the Spire 2:Bone Brew",
+      "pageid": 11476,
+      "revision_id": 72413,
+      "revision_timestamp": "2026-11-14T23:43:44Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bone_Brew&oldid=72413",
+      "wikitext_sha256": "8d922153a4cf0f72e1f21f42f70b337d2b26bf3e183add2344655d7aac00f0e2"
+    },
+    "11475": {
+      "title": "Slay the Spire 2:King's Courage",
+      "pageid": 11475,
+      "revision_id": 72884,
+      "revision_timestamp": "2026-11-15T00:04:13Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:King's_Courage&oldid=72884",
+      "wikitext_sha256": "82c6529ee6c827966e8706896f1d91848984cf983dbfeadf2561dd9db8d4505a"
+    },
+    "11454": {
+      "title": "Slay the Spire 2:Star Potion",
+      "pageid": 11454,
+      "revision_id": 73326,
+      "revision_timestamp": "2026-11-15T00:23:23Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Star_Potion&oldid=73326",
+      "wikitext_sha256": "75a8248834e2b91c4f59e45520728b8e5f01f8f583ea7544cf77175c6389e6f5"
+    },
+    "11455": {
+      "title": "Slay the Spire 2:Potion of Doom",
+      "pageid": 11455,
+      "revision_id": 73105,
+      "revision_timestamp": "2026-11-15T00:14:15Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Potion_of_Doom&oldid=73105",
+      "wikitext_sha256": "96a0495a7f5191df30746d0923307bd30e388cbbb207955dcf07371f9c987fa5"
+    },
+    "11431": {
+      "title": "Slay the Spire 2:Foul Potion",
+      "pageid": 11431,
+      "revision_id": 72733,
+      "revision_timestamp": "2026-11-14T23:57:54Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Foul_Potion&oldid=72733",
+      "wikitext_sha256": "6e05bec13e3b3ee3c080cc7645d1c966f53d30a2334cfbaecc66314bb02c9ac1"
+    },
+    "8540": {
+      "title": "Slay the Spire 2:Amalgamator",
+      "pageid": 8540,
+      "revision_id": 72320,
+      "revision_timestamp": "2026-11-14T23:39:59Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Amalgamator&oldid=72320",
+      "wikitext_sha256": "f7f4c97018fb9a75df286996f67e10226557434542355529fcb5139c7958ea07"
+    },
+    "8548": {
+      "title": "Slay the Spire 2:The Lantern Key",
+      "pageid": 8548,
+      "revision_id": 73402,
+      "revision_timestamp": "2026-11-15T00:26:33Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Lantern_Key&oldid=73402",
+      "wikitext_sha256": "a8299cbc0b01fe148a5bf2e521e6c91d9440615a67f7ad702bcd084974799559"
+    },
+    "8819": {
+      "title": "Slay the Spire 2:War Historian, Repy",
+      "pageid": 8819,
+      "revision_id": 73512,
+      "revision_timestamp": "2026-11-15T00:31:05Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:War_Historian,_Repy&oldid=73512",
+      "wikitext_sha256": "ee7da6b35831e2e3ac9632c86972f95bae83ee40fdcd202ff40b8a93426a1f4b"
+    },
+    "8544": {
+      "title": "Slay the Spire 2:Field of Man-Sized Holes",
+      "pageid": 8544,
+      "revision_id": 72701,
+      "revision_timestamp": "2026-11-14T23:56:38Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Field_of_Man-Sized_Holes&oldid=72701",
+      "wikitext_sha256": "e5bb03c92ab567877c50fa9748a219d6211f0002fc2d9f1d12096df5fdf88cbc"
+    },
+    "9902": {
+      "title": "Slay the Spire 2:Symbiote",
+      "pageid": 9902,
+      "revision_id": 73370,
+      "revision_timestamp": "2026-11-15T00:25:11Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Symbiote&oldid=73370",
+      "wikitext_sha256": "87190adea504b3a40e99f09c996540d1e040a860f2f042c40ada673cb1b37cc2"
+    },
+    "8252": {
+      "title": "Slay the Spire 2:Morphic Grove",
+      "pageid": 8252,
+      "revision_id": 72980,
+      "revision_timestamp": "2026-11-15T00:08:31Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Morphic_Grove&oldid=72980",
+      "wikitext_sha256": "7b279f0a64b4518f6429771942a3700ae83f81e1738633144e242514163438fa"
+    },
+    "8960": {
+      "title": "Slay the Spire 2:Brain Leech",
+      "pageid": 8960,
+      "revision_id": 72434,
+      "revision_timestamp": "2026-11-14T23:44:37Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Brain_Leech&oldid=72434",
+      "wikitext_sha256": "d8b3c87ff3486e79d867a991aa60b2808869f8182235a80551a1b6e2031e3346"
+    },
+    "8251": {
+      "title": "Slay the Spire 2:Luminous Choir",
+      "pageid": 8251,
+      "revision_id": 72930,
+      "revision_timestamp": "2026-11-15T00:06:22Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Luminous_Choir&oldid=72930",
+      "wikitext_sha256": "7e7ebd85b43e957c86663da858d71f9908f6612687a9e6492ec553288f9cc564"
+    },
+    "10286": {
+      "title": "Slay the Spire 2:Aeonglass",
+      "pageid": 10286,
+      "revision_id": 73845,
+      "revision_timestamp": "2026-11-16T21:11:50Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Aeonglass&oldid=73845",
+      "wikitext_sha256": "7c68fded4bf1613e1a70ed4987f58f549133ea19a259e74364affa575ff4f4b4"
+    },
+    "8527": {
+      "title": "Slay the Spire 2:Entomancer",
+      "pageid": 8527,
+      "revision_id": 72660,
+      "revision_timestamp": "2026-11-14T23:54:52Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Entomancer&oldid=72660",
+      "wikitext_sha256": "265fe888c0d387d8a87e67c8ed3bb13dd82257b2549b9ccf53b3d0c54119c9dd"
+    },
+    "8397": {
+      "title": "Slay the Spire 2:Living Fog",
+      "pageid": 8397,
+      "revision_id": 72918,
+      "revision_timestamp": "2026-11-15T00:05:48Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Living_Fog&oldid=72918",
+      "wikitext_sha256": "b4f6bb450d43c9c5caac1a0b5dc3fd23df22620d9f135225c6cf505bdaaf2f39"
+    },
+    "7818": {
+      "title": "Slay the Spire 2:Vantom",
+      "pageid": 7818,
+      "revision_id": 73483,
+      "revision_timestamp": "2026-11-15T00:29:53Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Vantom&oldid=73483",
+      "wikitext_sha256": "341eec8aa66dabf24c6a33479e8c346c2bea3759373304f70c383402be490c5e"
+    },
+    "8530": {
+      "title": "Slay the Spire 2:The Insatiable",
+      "pageid": 8530,
+      "revision_id": 73400,
+      "revision_timestamp": "2026-11-15T00:26:27Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Insatiable&oldid=73400",
+      "wikitext_sha256": "34b6811dcae7757e0097c88eb7b94672a52501f33219137d8a4510d1113f5ddc"
+    },
+    "7806": {
+      "title": "Slay the Spire 2:Cubex Construct",
+      "pageid": 7806,
+      "revision_id": 72548,
+      "revision_timestamp": "2026-11-14T23:50:14Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Cubex_Construct&oldid=72548",
+      "wikitext_sha256": "e75de8c54b17ad1fa472db618eb4674199f5c2a50fd32330c4a1bb396255e3b2"
+    },
+    "8594": {
+      "title": "Slay the Spire 2:Soul Nexus",
+      "pageid": 8594,
+      "revision_id": 73299,
+      "revision_timestamp": "2026-11-15T00:22:17Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Soul_Nexus&oldid=73299",
+      "wikitext_sha256": "9a5260ac909ba5af02c7fb32420a8983075d81e06c4c8c0826b64d4dba0430c6"
+    },
+    "7221": {
+      "title": "Slay the Spire 2:Fossil Stalker",
+      "pageid": 7221,
+      "revision_id": 72732,
+      "revision_timestamp": "2026-11-14T23:57:51Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fossil_Stalker&oldid=72732",
+      "wikitext_sha256": "72ee639b8fd64db630b0454a29b7c440d2fcab584ead20501235cf904c1fa6ae"
+    },
+    "8407": {
+      "title": "Slay the Spire 2:Soul Fysh",
+      "pageid": 8407,
+      "revision_id": 73298,
+      "revision_timestamp": "2026-11-15T00:22:14Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Soul_Fysh&oldid=73298",
+      "wikitext_sha256": "27ce883dfe35f34292f0cc89e06404131b0a12be055c317ce1628fb02703ae00"
+    },
+    "8595": {
+      "title": "Slay the Spire 2:Queen",
+      "pageid": 8595,
+      "revision_id": 73139,
+      "revision_timestamp": "2026-11-15T00:15:40Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Queen&oldid=73139",
+      "wikitext_sha256": "121b18b9d1c27739a617ac76551b1b26e2eda2e58723bdfe4313918aa63fbfe8"
+    },
+    "8531": {
+      "title": "Slay the Spire 2:Knowledge Demon",
+      "pageid": 8531,
+      "revision_id": 73952,
+      "revision_timestamp": "2026-11-17T22:43:19Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Knowledge_Demon&oldid=73952",
+      "wikitext_sha256": "7a187d0d8f271091ccb9be480d0a1c59031fc6779ffe47db0b13d6e2af91379e"
+    },
+    "8586": {
+      "title": "Slay the Spire 2:Frog Knight",
+      "pageid": 8586,
+      "revision_id": 72739,
+      "revision_timestamp": "2026-11-14T23:58:10Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Frog_Knight&oldid=72739",
+      "wikitext_sha256": "147223cac84ec9f22a571dd34016cb991c20ac72905a5d20396aca7690436b54"
+    },
+    "8517": {
+      "title": "Slay the Spire 2:Hunter Killer",
+      "pageid": 8517,
+      "revision_id": 72836,
+      "revision_timestamp": "2026-11-15T00:02:12Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hunter_Killer&oldid=72836",
+      "wikitext_sha256": "ff74e97455d7f52a4b87783c15fd369fec1bb94c46343a19fecee264986c36ce"
+    },
+    "8593": {
+      "title": "Slay the Spire 2:Mecha Knight",
+      "pageid": 8593,
+      "revision_id": 72952,
+      "revision_timestamp": "2026-11-15T00:07:22Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Mecha_Knight&oldid=72952",
+      "wikitext_sha256": "4de0da08874db50bab2772b51648170f9ae64be8f4cb82264bc97b34df6f37d0"
+    },
+    "8524": {
+      "title": "Slay the Spire 2:The Obscura",
+      "pageid": 8524,
+      "revision_id": 73407,
+      "revision_timestamp": "2026-11-15T00:26:46Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Obscura&oldid=73407",
+      "wikitext_sha256": "35cb97cc1fbb5c567318113556f35b9fe24a9ecfc1e6dbdf4b64139de3141035"
+    },
+    "8751": {
+      "title": "Slay the Spire 2:Doom",
+      "pageid": 8751,
+      "revision_id": 73671,
+      "revision_timestamp": "2026-11-15T22:35:55Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Doom&oldid=73671",
+      "wikitext_sha256": "27ff4dd916e4890e6041689baff9925089b277f2991f6a00cbded43ed74efc98"
+    },
+    "8821": {
+      "title": "Slay the Spire 2:Sovereign Blade",
+      "pageid": 8821,
+      "revision_id": 73302,
+      "revision_timestamp": "2026-11-15T00:22:24Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sovereign_Blade&oldid=73302",
+      "wikitext_sha256": "0a720e360704108e0924ccd38a70109b1af0f8be9bf8efee04931674b4a8ac91"
+    },
+    "7222": {
+      "title": "Slay the Spire 2:Regent",
+      "pageid": 7222,
+      "revision_id": 73941,
+      "revision_timestamp": "2026-11-17T22:03:11Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Regent&oldid=73941",
+      "wikitext_sha256": "8bb4a22bcd8e73b5b1aaca43a6a52e76e05ba59fdb46754de5fd1388f9b8c2d7"
+    },
+    "7225": {
+      "title": "Slay the Spire 2:Necrobinder",
+      "pageid": 7225,
+      "revision_id": 73932,
+      "revision_timestamp": "2026-11-17T21:25:41Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Necrobinder&oldid=73932",
+      "wikitext_sha256": "c120751aafde1ab9be8058f0526d169d856366c754d5cee3074545136d006aa0"
+    },
+    "11781": {
+      "title": "Slay the Spire 2:Sly",
+      "pageid": 11781,
+      "revision_id": 73280,
+      "revision_timestamp": "2026-11-15T00:21:29Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sly&oldid=73280",
+      "wikitext_sha256": "1d2f9980c321edcedbe150858292060553c4d58bb7fea4602628f575830c64d0"
+    },
+    "7770": {
+      "title": "Slay the Spire 2:Enchantments",
+      "pageid": 7770,
+      "revision_id": 72647,
+      "revision_timestamp": "2026-11-14T23:54:20Z",
+      "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Enchantments&oldid=72647",
+      "wikitext_sha256": "dbef07f5d786b7805f4fe9d3ba040878f1b11651b7f831be0697755d512a485f"
+    }
+  },
+  "system_prompt": "Answer this Slay the Spire trivia question using only your existing knowledge. Do not use tools, search, or external resources. Select exactly one of the nine choices. A correct answer scores +1, an incorrect answer scores −1, and I don’t know scores 0. Your entire final response must be a single uppercase letter: A, B, C, D, E, F, G, H, or I. Do not include an explanation, punctuation, or any other text.",
+  "scoring": {
+    "correct": 1,
+    "incorrect": -1,
+    "abstain": 0,
+    "invalid": -1,
+    "abstain_letter": "I"
+  },
+  "counts_by_game": {
+    "sts1": 100,
+    "sts2": 100
+  },
+  "counts_by_category": {
+    "cards": 60,
+    "relics": 10,
+    "potions": 5,
+    "events": 5,
+    "monsters": 15,
+    "mechanics": 5
+  },
+  "selection_uses_model_results": false,
+  "exclude_beta_flagged_pages": true,
+  "numeric_questions_by_game": {
+    "sts1": 55,
+    "sts2": 55
+  },
+  "sts1_replacements": [
+    {
+      "old_id": "sts1-001",
+      "new_id": "sts1-201",
+      "target": "Searing Blow",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-002",
+      "new_id": "sts1-202",
+      "target": "Ragnarok",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-003",
+      "new_id": "sts1-203",
+      "target": "Chrysalis",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-005",
+      "new_id": "sts1-204",
+      "target": "Backflip",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-008",
+      "new_id": "sts1-205",
+      "target": "Bandage Up",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-009",
+      "new_id": "sts1-206",
+      "target": "Sunder",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-010",
+      "new_id": "sts1-207",
+      "target": "Sneaky Strike",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-011",
+      "new_id": "sts1-208",
+      "target": "Juggernaut",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-012",
+      "new_id": "sts1-209",
+      "target": "Nirvana",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-013",
+      "new_id": "sts1-210",
+      "target": "Jack of All Trades",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-014",
+      "new_id": "sts1-211",
+      "target": "Biased Cognition",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-015",
+      "new_id": "sts1-212",
+      "target": "Accuracy",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-016",
+      "new_id": "sts1-213",
+      "target": "Uppercut",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-018",
+      "new_id": "sts1-214",
+      "target": "Rainbow",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-019",
+      "new_id": "sts1-215",
+      "target": "Burn",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-020",
+      "new_id": "sts1-216",
+      "target": "Flechettes",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-022",
+      "new_id": "sts1-217",
+      "target": "Bowling Bash",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-023",
+      "new_id": "sts1-218",
+      "target": "Leap",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-025",
+      "new_id": "sts1-219",
+      "target": "Piercing Wail",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-026",
+      "new_id": "sts1-220",
+      "target": "Twin Strike",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-053",
+      "new_id": "sts1-221",
+      "target": "Pen Nib",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-054",
+      "new_id": "sts1-222",
+      "target": "Thread and Needle",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-055",
+      "new_id": "sts1-223",
+      "target": "Runic Capacitor",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-056",
+      "new_id": "sts1-224",
+      "target": "Bird-Faced Urn",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-057",
+      "new_id": "sts1-225",
+      "target": "Chemical X",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-066",
+      "new_id": "sts1-226",
+      "target": "Mystic",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-067",
+      "new_id": "sts1-227",
+      "target": "Cultist",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-068",
+      "new_id": "sts1-228",
+      "target": "Slaver",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-069",
+      "new_id": "sts1-229",
+      "target": "Lagavulin",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-070",
+      "new_id": "sts1-230",
+      "target": "Darkling",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-071",
+      "new_id": "sts1-231",
+      "target": "Snecko",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-072",
+      "new_id": "sts1-232",
+      "target": "Hexaghost",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-073",
+      "new_id": "sts1-233",
+      "target": "Spike Slime (L)",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-081",
+      "new_id": "sts1-234",
+      "target": "Liquid Bronze",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-082",
+      "new_id": "sts1-235",
+      "target": "Bottled Miracle",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-083",
+      "new_id": "sts1-236",
+      "target": "Fruit Juice",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-084",
+      "new_id": "sts1-237",
+      "target": "Weak Potion",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    },
+    {
+      "old_id": "sts1-085",
+      "new_id": "sts1-238",
+      "target": "Explosive Potion",
+      "reason": "Replace generic matching with a specific printed number or base attack value."
+    }
+  ],
+  "move_matching_removed_both_games": true,
+  "gold_plated_cables_unchanged": true,
+  "novelty_rules": [
+    "Wiki-scraped facts, not the previous StS2 export.",
+    "Cross-check the full first-game catalog, not only our questions.",
+    "New cards for existing characters are eligible after individual checks against StS1; no entirely new mechanic is required. Other cards and relics use Stars, Forge/Sovereign Blade, Osty/Summon, Doom or co-op.",
+    "Soul-only effects, Eternal, renamed effects, returning enemy families and numeric retunes do not qualify.",
+    "Events identify specific new stories and named characters."
+  ],
+  "excluded_examples": [
+    {
+      "sts2": "Eternal",
+      "sts1": "Curse of the Bell and Ascender’s Bane",
+      "reason": "The unremovable-card restriction already exists."
+    },
+    {
+      "sts2": "One-Two Punch",
+      "sts1": "Double Tap",
+      "reason": "Same next-Attack duplication effect."
+    },
+    {
+      "sts2": "Soul-only card generation",
+      "sts1": "Insight generation",
+      "reason": "Drawing cards from a generated token alone is not a new system."
+    }
+  ]
+}

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "spire-trivia"
-version = "0.6.0"
+version = "0.7.0"
 description = "200 text-only, single-turn Slay the Spire knowledge questions"
 requires-python = ">=3.12"
 dependencies = ["inspect-ai>=0.3.289,<0.4", "PyYAML>=6"]

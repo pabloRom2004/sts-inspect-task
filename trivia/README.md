@@ -1,10 +1,10 @@
 # Spire Trivia
 
-Two separate text-only benchmarks of 100 independent questions each for Slay the Spire 1 and 2. The maintained `text200-v4` revision asks only about new StS2 cards, enemies, relics, potions, events and mechanics. Each question has eight factual choices A–H plus I (I don't know). The StS1 factual questions are unchanged from the prior bank.
+Two separate text-only benchmarks of 100 independent questions each for Slay the Spire 1 and 2. The maintained `text200-v5` revision asks only about new StS2 cards, enemies, relics, potions, events and mechanics. Each question has eight factual choices A–H plus I (I don't know). Generic move matching is removed in both games; each has 55 numerical questions. The Gold-Plated Cables effect question is retained.
 
 Each game contains 50 card questions, 15 relic questions, 15 enemy questions, 10 potion questions, 5 event questions and 5 mechanics questions. StS2 mechanics cover Eternal, Sly, Doom, Clone and Imbued. Data is pinned to [Spire Archive](https://github.com/nkhoit/spire-archive/tree/4e6b0e040ccd00eb04fb1ab7fb0b298c222d2f29); StS2 uses v0.107.1. Cards are unupgraded and enemy damage is at Ascension 0 before modifiers.
 
-Targets and entity-based distractors in StS2 are absent from the pinned StS1 name/ID catalog. Copied or numerically retuned effect templates, explicit returning counterparts, test records and returning enemy families are excluded. Shared primitives such as Energy and Block can occur within new content. `data/sts2-novelty-audit.json` records target and choice identities; `data/text200-v4-protocol.json` records selection and prompt rules. Selection did not use model results.
+StS2 facts are scraped from exact Slay the Spire Wiki revisions saved on 20 November 2026. New cards for existing characters are eligible after individual review; returning content, simple renames and numerical retunes are excluded. Novelty checks cover the full first-game catalog. `data/sts2-wiki-novelty-audit.json` records each new-content reason, and `data/text200-v5-protocol.json` records page revisions and selection rules. The snapshot excludes pages marked Beta content. Selection did not use model results.
 
 ## Usage
 
@@ -39,7 +39,7 @@ The earlier banks and results remain frozen. V1 (`text200`) replaced artwork wit
 
 Inspect's `--sample-id`, `--sample-shuffle`, `--epochs` and `--limit` controls are supported. The YAML owns solver and generation defaults; runtime overrides remain available. Extra-tool or multi-turn runs require separate reporting.
 
-- `question_set`: `text200-v4` by default. Historical choices are `text200-v3`, `text200-v2`, `text200`, `text100` and `all200`.
+- `question_set`: `text200-v5` by default. Historical choices include `text200-v4`, `text200-v3`, `text200-v2`, `text200`, `text100` and `all200`.
 - `game`: `sts1`, `sts2`, or null for both.
 - `category`: `cards`, `relics`, `monsters`, `potions`, `events`, `mechanics`, or null.
 - `question_kind`: a participant format key or null.

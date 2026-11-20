@@ -1,0 +1,5580 @@
+{
+  "question_set": "text200-v5",
+  "scope": "Wiki-sourced, semantically reviewed new StS2 content",
+  "first_game_wiki_catalog_counts": {
+    "Cards": 368,
+    "Relics": 183,
+    "Monsters": 24,
+    "Events": 54,
+    "Potions": 44,
+    "Keywords": 0,
+    "Buffs": 0,
+    "Debuffs": 0
+  },
+  "sts1_keys": [
+    "accuracy",
+    "accursedblacksmith",
+    "acidslimel",
+    "acidslimem",
+    "acidslimes",
+    "acrobatics",
+    "activate",
+    "adaptation",
+    "addict",
+    "adrenaline",
+    "afterimage",
+    "aggregate",
+    "akabeko",
+    "alchemize",
+    "allforone",
+    "alloutattack",
+    "alpha",
+    "ambrosia",
+    "amplify",
+    "anchor",
+    "ancientpotion",
+    "ancientteaset",
+    "ancientwriting",
+    "angelform",
+    "anger",
+    "angry",
+    "anoteforyourself",
+    "apologyslime",
+    "apotheosis",
+    "apparition",
+    "armaments",
+    "artifact",
+    "artofwar",
+    "ascendersbane",
+    "ascensionmodelevel1",
+    "ascensionmodelevel10",
+    "ascensionmodelevel11",
+    "ascensionmodelevel12",
+    "ascensionmodelevel13",
+    "ascensionmodelevel14",
+    "ascensionmodelevel15",
+    "ascensionmodelevel16",
+    "ascensionmodelevel17",
+    "ascensionmodelevel18",
+    "ascensionmodelevel19",
+    "ascensionmodelevel2",
+    "ascensionmodelevel20",
+    "ascensionmodelevel3",
+    "ascensionmodelevel4",
+    "ascensionmodelevel5",
+    "ascensionmodelevel6",
+    "ascensionmodelevel7",
+    "ascensionmodelevel8",
+    "ascensionmodelevel9",
+    "astrolabe",
+    "athousandcuts",
+    "attack",
+    "attackblock",
+    "attackburn",
+    "attackdebuff",
+    "attackpotion",
+    "augmenter",
+    "autoshields",
+    "awakenedone",
+    "backattack",
+    "backflip",
+    "backstab",
+    "backtobasics",
+    "bagofmarbles",
+    "bagofpreparation",
+    "balllightning",
+    "bandageup",
+    "banditbear",
+    "banditchild",
+    "banditleader",
+    "bane",
+    "barrage",
+    "barricade",
+    "bash",
+    "battlehymn",
+    "battletrance",
+    "beam",
+    "beamcell",
+    "bear",
+    "bearhug",
+    "beatofdeath",
+    "beggar",
+    "bellow",
+    "berserk",
+    "bias",
+    "biasedcognition",
+    "bigattack",
+    "bigbite",
+    "bigfish",
+    "bighit",
+    "bigstab",
+    "birdfacedurn",
+    "bite",
+    "blackblood",
+    "blackstar",
+    "bladedance",
+    "blasphemer",
+    "blasphemy",
+    "blessingoftheforge",
+    "blind",
+    "blizzard",
+    "block",
+    "blockattack",
+    "blockpotion",
+    "blockreturn",
+    "blockreturnpower",
+    "blocks",
+    "bloodforblood",
+    "bloodletting",
+    "bloodpotion",
+    "bloodshots",
+    "bloodvial",
+    "bloodyidol",
+    "bludgeon",
+    "bluecandle",
+    "blunt",
+    "blur",
+    "bodyslam",
+    "bolt",
+    "bonfireelementals",
+    "bonfirespirits",
+    "bookofstabbing",
+    "boost",
+    "boot",
+    "bootsequence",
+    "bottledflame",
+    "bottledlightning",
+    "bottledmiracle",
+    "bottledtornado",
+    "bouncingflask",
+    "bowlingbash",
+    "brilliance",
+    "brimstone",
+    "bronzeautomaton",
+    "bronzeorb",
+    "bronzescales",
+    "brutality",
+    "buff",
+    "buffer",
+    "buffthorns",
+    "bullettime",
+    "bullrush",
+    "bullseye",
+    "burn",
+    "burningblood",
+    "burningpact",
+    "burns",
+    "burnstrike",
+    "burst",
+    "bustedcrown",
+    "byrd",
+    "cables",
+    "calculatedgamble",
+    "calipers",
+    "callingbell",
+    "calm",
+    "caltrops",
+    "cannotchangestance",
+    "cannotchangestancepower",
+    "capacitor",
+    "captainswheel",
+    "cardslist",
+    "carnage",
+    "carvereality",
+    "catalyst",
+    "cauldron",
+    "caw",
+    "centennialpuzzle",
+    "centurion",
+    "centurionandmystic",
+    "ceramicfish",
+    "champ",
+    "championbelt",
+    "channel",
+    "channeled",
+    "chaos",
+    "charge",
+    "chargebattery",
+    "chargeup",
+    "charging",
+    "chargingup",
+    "charonsashes",
+    "chemicalx",
+    "chill",
+    "choke",
+    "choked",
+    "chomp",
+    "chompychomps",
+    "chosen",
+    "chrysalis",
+    "circleofpower",
+    "circleofprotection",
+    "circlet",
+    "clash",
+    "claw",
+    "clearthemind",
+    "cleave",
+    "cloakanddagger",
+    "cloakclasp",
+    "clockworksouvenir",
+    "closeup",
+    "clothesline",
+    "clumsy",
+    "coffeedripper",
+    "coldsnap",
+    "collect",
+    "colorlesscards",
+    "colorlesspotion",
+    "colosseum",
+    "combust",
+    "compiledriver",
+    "compulsive",
+    "concentrate",
+    "conclude",
+    "confused",
+    "confusion",
+    "conjureblade",
+    "consecrate",
+    "conserve",
+    "conservebattery",
+    "constrict",
+    "constricted",
+    "consume",
+    "controlled",
+    "coolheaded",
+    "coresurge",
+    "corpseexplosion",
+    "corpseexplosionpower",
+    "corrosivespit",
+    "corruptheart",
+    "corruption",
+    "councilofghosts",
+    "count",
+    "crackedcore",
+    "creativeai",
+    "crescendo",
+    "cripplingcloud",
+    "cripplingpoison",
+    "crushjoints",
+    "cultist",
+    "cultistheadpiece",
+    "cultistmask",
+    "cultistpotion",
+    "cunningpotion",
+    "curiosity",
+    "curlup",
+    "curse",
+    "cursedkey",
+    "cursedtome",
+    "curseofthebell",
+    "cutthroughfate",
+    "dagger",
+    "daggerspray",
+    "daggerthrow",
+    "damaru",
+    "dark",
+    "darkecho",
+    "darkembrace",
+    "darkling",
+    "darkness",
+    "darkshackles",
+    "darkstoneperiapt",
+    "darkstrike",
+    "dash",
+    "datadisk",
+    "daze",
+    "dazed",
+    "deadadventurer",
+    "deadbranch",
+    "deadlypoison",
+    "debilitate",
+    "debuff",
+    "deca",
+    "decay",
+    "deceivereality",
+    "deepbreath",
+    "defect",
+    "defectcards",
+    "defend",
+    "defendb",
+    "defenddefect",
+    "defendg",
+    "defendironclad",
+    "defendp",
+    "defendr",
+    "defendsilent",
+    "defendwatcher",
+    "defensivemode",
+    "defensivestance",
+    "deflect",
+    "defragment",
+    "demonform",
+    "designer",
+    "designerinspire",
+    "deusexmachina",
+    "deva",
+    "devaform",
+    "devotion",
+    "devotionpower",
+    "dexloss",
+    "dexterity",
+    "dexteritydown",
+    "dexteritypotion",
+    "diediedie",
+    "disarm",
+    "discardpile",
+    "discerningmonocle",
+    "discovery",
+    "distilledchaos",
+    "distraction",
+    "divider",
+    "divinity",
+    "dodgeandroll",
+    "dollysmirror",
+    "donu",
+    "doomandgloom",
+    "dopemagic",
+    "doppelganger",
+    "doubledamage",
+    "doubleenergy",
+    "doublestrike",
+    "doubletap",
+    "doubt",
+    "drain",
+    "dramaticentrance",
+    "draw",
+    "drawcard",
+    "drawpile",
+    "drawreduction",
+    "dreamcatcher",
+    "drool",
+    "dropkick",
+    "drugdealer",
+    "dualcast",
+    "duality",
+    "dualwield",
+    "duplication",
+    "duplicationpotion",
+    "duplicationpower",
+    "duplicator",
+    "duvudoll",
+    "echoattack",
+    "echoform",
+    "ectoplasm",
+    "electro",
+    "electrodynamics",
+    "elite",
+    "elixir",
+    "elixirpotion",
+    "emotionchip",
+    "empty",
+    "emptybody",
+    "emptycage",
+    "emptyfist",
+    "emptymind",
+    "enchiridion",
+    "encourage",
+    "endlessagony",
+    "endturndeath",
+    "enemy",
+    "energized",
+    "energizedblue",
+    "energy",
+    "energydown",
+    "energydownpower",
+    "energypotion",
+    "enfeeblingspores",
+    "enlightenment",
+    "enrage",
+    "entangle",
+    "entangled",
+    "entrench",
+    "entropicbrew",
+    "envenom",
+    "equilibrium",
+    "eruption",
+    "escapeplan",
+    "essenceofdarkness",
+    "essenceofsteel",
+    "establishment",
+    "establishmentpower",
+    "eternalfeather",
+    "ethereal",
+    "evaluate",
+    "eventslist",
+    "eviscerate",
+    "evoke",
+    "evoked",
+    "evolve",
+    "execute",
+    "exhaust",
+    "exhausted",
+    "exhausts",
+    "exhume",
+    "expertise",
+    "explode",
+    "exploder",
+    "explosive",
+    "explosivepotion",
+    "faceofcleric",
+    "faceslap",
+    "facetrader",
+    "fading",
+    "fairyinabottle",
+    "fairypotion",
+    "falling",
+    "fasting",
+    "fasting2",
+    "fatal",
+    "fatgremlin",
+    "fearnoevil",
+    "fearpotion",
+    "feed",
+    "feelnopain",
+    "fell",
+    "fiendfire",
+    "fiercebash",
+    "finesse",
+    "finisher",
+    "fireball",
+    "firebreathing",
+    "firepotion",
+    "fission",
+    "flail",
+    "flamebarrier",
+    "flametackle",
+    "flashofsteel",
+    "flechettes",
+    "flex",
+    "flexpotion",
+    "flight",
+    "flurryofblows",
+    "flyingknee",
+    "flyingsleeves",
+    "focus",
+    "focuspotion",
+    "followup",
+    "footwork",
+    "forcefield",
+    "foreigninfluence",
+    "foresight",
+    "forethought",
+    "forgottenaltar",
+    "fortify",
+    "fossilizedhelix",
+    "fountainofcleansing",
+    "frail",
+    "frailattack",
+    "fraillick",
+    "freeattackpower",
+    "frost",
+    "frozencore",
+    "frozenegg",
+    "frozenegg2",
+    "frozeneye",
+    "fruitjuice",
+    "ftl",
+    "fungibeast",
+    "fury",
+    "fusion",
+    "fusionhammer",
+    "fuzzylousedefensive",
+    "fuzzylousenormal",
+    "gainonestrength",
+    "gamblersbrew",
+    "gamblingchip",
+    "gash",
+    "genericstrengthuppower",
+    "geneticalgorithm",
+    "ghostinajar",
+    "ghostly",
+    "ghostlyarmor",
+    "ghosts",
+    "gianthead",
+    "ginger",
+    "girya",
+    "glacier",
+    "glare",
+    "glassknife",
+    "gloat",
+    "goairborne",
+    "gofortheeyes",
+    "goldeneye",
+    "goldenidol",
+    "goldenidolevent",
+    "goldenidolrelic",
+    "goldenshrine",
+    "goldenwing",
+    "goldplatedcables",
+    "goodinstincts",
+    "goopspray",
+    "grandfinale",
+    "gremlinfat",
+    "gremlinhorn",
+    "gremlinleader",
+    "gremlinmask",
+    "gremlinnob",
+    "gremlins",
+    "gremlinthief",
+    "gremlintsundere",
+    "gremlinvisage",
+    "gremlinwarrior",
+    "gremlinwizard",
+    "grow",
+    "growth",
+    "growthpower",
+    "halt",
+    "handdrill",
+    "handofgreed",
+    "happyflower",
+    "harden",
+    "haste",
+    "havoc",
+    "headbutt",
+    "headslam",
+    "heal",
+    "healer",
+    "heartofiron",
+    "heatsink",
+    "heatsinks",
+    "heavyblade",
+    "heavyslash",
+    "heelhook",
+    "hello",
+    "helloworld",
+    "hemokinesis",
+    "hex",
+    "hexaghost",
+    "hexaghostbody",
+    "hexaghostorb",
+    "hologram",
+    "holywater",
+    "horncleat",
+    "hoveringkite",
+    "hyperbeam",
+    "hypnotizingcoloredmushrooms",
+    "icecream",
+    "idle",
+    "immolate",
+    "impatience",
+    "impervious",
+    "impulse",
+    "incantation",
+    "incenseburner",
+    "indignation",
+    "infernalblade",
+    "inferno",
+    "infiniteblades",
+    "inflame",
+    "initialblockgain",
+    "injury",
+    "inkbottle",
+    "innate",
+    "innerpeace",
+    "inserter",
+    "insight",
+    "intangible",
+    "intangibleplayer",
+    "intimidate",
+    "invincible",
+    "ironclad",
+    "ironcladcards",
+    "ironwave",
+    "itistime",
+    "jackofalltrades",
+    "jawworm",
+    "jax",
+    "judgement",
+    "judgment",
+    "juggernaut",
+    "justfordevsdonttranslate",
+    "justlucky",
+    "juzubracelet",
+    "knowingskull",
+    "kunai",
+    "lab",
+    "lagavulin",
+    "lantern",
+    "laser",
+    "leap",
+    "leeswaffle",
+    "legsweep",
+    "lessonlearned",
+    "letteropener",
+    "liarsgame",
+    "lick",
+    "lifelink",
+    "lifesuck",
+    "lightning",
+    "lightningmastery",
+    "likewater",
+    "likewaterpower",
+    "limitbreak",
+    "liquidbronze",
+    "liquidmemories",
+    "liveforever",
+    "livingwall",
+    "lizardtail",
+    "locked",
+    "lockon",
+    "loop",
+    "looter",
+    "louse",
+    "louses",
+    "machinelearning",
+    "madgremlin",
+    "madness",
+    "magicflower",
+    "magnetism",
+    "malaise",
+    "malleable",
+    "mango",
+    "mantra",
+    "mark",
+    "markofpain",
+    "markofthebloom",
+    "maskedbandits",
+    "masterfulstab",
+    "masterofstrategy",
+    "masterreality",
+    "masterrealitypower",
+    "matchandkeep",
+    "matryoshka",
+    "maw",
+    "mawbank",
+    "mayhem",
+    "mealticket",
+    "meatonthebone",
+    "medicalkit",
+    "meditate",
+    "megadebuff",
+    "melange",
+    "melter",
+    "membershipcard",
+    "mentalfortress",
+    "merchant",
+    "mercuryhourglass",
+    "metallicize",
+    "metamorphosis",
+    "meteorstrike",
+    "mindblast",
+    "mindbloom",
+    "minion",
+    "miracle",
+    "mock",
+    "modeshift",
+    "moltenegg",
+    "moltenegg2",
+    "monsters",
+    "move99",
+    "mug",
+    "mugger",
+    "multicast",
+    "multihit",
+    "mummifiedhand",
+    "mushrooms",
+    "mutagenicstrength",
+    "mysterioussphere",
+    "mystic",
+    "necronomicon",
+    "necronomicurse",
+    "nemesis",
+    "neow",
+    "neowsblessing",
+    "neowslament",
+    "nest",
+    "neutral",
+    "neutralize",
+    "nextturnblock",
+    "nightmare",
+    "nightterror",
+    "nilryscodex",
+    "ninjascroll",
+    "nip",
+    "nirvana",
+    "nloth",
+    "nlothsgift",
+    "nlothshungryface",
+    "nlothsmask",
+    "noblock",
+    "noblockpower",
+    "nodraw",
+    "nomnomnom",
+    "normality",
+    "normaltackle",
+    "noskills",
+    "noteforyourself",
+    "noxiousfumes",
+    "nuclearbattery",
+    "nullifyattack",
+    "nunchaku",
+    "oddlysmoothstone",
+    "oddmushroom",
+    "offering",
+    "oldbeggar",
+    "oldcoin",
+    "omamori",
+    "omega",
+    "omegapower",
+    "ominousforge",
+    "omniscience",
+    "open",
+    "opener",
+    "orangepellets",
+    "orb",
+    "orbslot",
+    "orbwalker",
+    "orichalcum",
+    "ornamentalfan",
+    "orrery",
+    "outmaneuver",
+    "overclock",
+    "pain",
+    "painfulstabs",
+    "panacea",
+    "panache",
+    "pandorasbox",
+    "panicbutton",
+    "pantograph",
+    "papercrane",
+    "paperfrog",
+    "paperkrane",
+    "paperphrog",
+    "parasite",
+    "pathtovictory",
+    "pathtovictorypower",
+    "peacepipe",
+    "pear",
+    "peck",
+    "pennib",
+    "perfectedstrike",
+    "perplexingglare",
+    "perseverance",
+    "phantasmal",
+    "phantasmalkiller",
+    "philosophersstone",
+    "piercer",
+    "piercingwail",
+    "plasma",
+    "platedarmor",
+    "pleadingvagrant",
+    "pocketwatch",
+    "pointy",
+    "pointyspecial",
+    "poison",
+    "poisoned",
+    "poisonedstab",
+    "poisonpotion",
+    "poke",
+    "pommelstrike",
+    "potionbelt",
+    "potionofcapacity",
+    "potions",
+    "potionslist",
+    "powerpotion",
+    "powerthrough",
+    "pray",
+    "prayer",
+    "prayerwheel",
+    "predator",
+    "prepared",
+    "preparing",
+    "prepslam",
+    "preservedinsect",
+    "pressurepoints",
+    "pride",
+    "prismaticshard",
+    "prostrate",
+    "protect",
+    "pummel",
+    "puncture",
+    "purewater",
+    "purifier",
+    "purity",
+    "questioncard",
+    "quickslash",
+    "quicktackle",
+    "rage",
+    "ragnarok",
+    "rainbow",
+    "rake",
+    "rally",
+    "rampage",
+    "reachheaven",
+    "reactive",
+    "reaper",
+    "rebirth",
+    "reboot",
+    "rebound",
+    "rechargingcore",
+    "recklesscharge",
+    "recursion",
+    "recycle",
+    "redcirclet",
+    "redmask",
+    "redo",
+    "redskull",
+    "reflex",
+    "regalpillow",
+    "regen",
+    "regenerate",
+    "regeneration",
+    "regenpotion",
+    "regret",
+    "reincarnate",
+    "reinforcedbody",
+    "relics",
+    "relicslist",
+    "repair",
+    "reprogram",
+    "reptomancer",
+    "repulsor",
+    "rest",
+    "retain",
+    "retaincards",
+    "retained",
+    "retains",
+    "return",
+    "reverberate",
+    "revive",
+    "riddlewithholes",
+    "ringoftheserpent",
+    "ringofthesnake",
+    "ripandtear",
+    "ripple",
+    "ritual",
+    "ritualdagger",
+    "roar",
+    "rollattack",
+    "romeo",
+    "runiccapacitor",
+    "runiccube",
+    "runicdome",
+    "runicpyramid",
+    "rupture",
+    "rushdown",
+    "sacredbark",
+    "sadistic",
+    "sadisticnature",
+    "sanctity",
+    "sandsoftime",
+    "sashwhip",
+    "scouringwhip",
+    "scrape",
+    "scrapooze",
+    "scratch",
+    "scrawl",
+    "scry",
+    "scythe",
+    "sear",
+    "searingblow",
+    "secondwind",
+    "secretportal",
+    "secrettechnique",
+    "secretweapon",
+    "seeingred",
+    "seek",
+    "selfformingclay",
+    "selfrepair",
+    "sensorystone",
+    "sentinel",
+    "sentry",
+    "serpent",
+    "setup",
+    "seversoul",
+    "shackled",
+    "shame",
+    "shapes",
+    "sharphide",
+    "shelledparasite",
+    "shieldbash",
+    "shieldgremlin",
+    "shifting",
+    "shininglight",
+    "shiv",
+    "shivs",
+    "shockwave",
+    "shop",
+    "shovel",
+    "shrugitoff",
+    "shuriken",
+    "signaturemove",
+    "silent",
+    "silentcards",
+    "simmeringfury",
+    "simmeringrage",
+    "singingbowl",
+    "siphonsoul",
+    "skewer",
+    "skillburn",
+    "skillpotion",
+    "skim",
+    "skullbash",
+    "slam",
+    "slash",
+    "slaver",
+    "slaverblue",
+    "slaverboss",
+    "slaverred",
+    "slavers",
+    "slaverscollar",
+    "slice",
+    "slimeboss",
+    "slimed",
+    "slimes",
+    "slimetackle",
+    "sling",
+    "slingofcourage",
+    "slow",
+    "sludge",
+    "smash",
+    "smilingmask",
+    "smite",
+    "smokebomb",
+    "snakeplant",
+    "snakeskull",
+    "snakestrike",
+    "sneakygremlin",
+    "sneakystrike",
+    "snecko",
+    "sneckoeye",
+    "sneckooil",
+    "sneckoskull",
+    "soulstrike",
+    "sozu",
+    "spawn",
+    "spawndagger",
+    "spawnorbs",
+    "speedpotion",
+    "sphericguardian",
+    "spiker",
+    "spikeslimel",
+    "spikeslimem",
+    "spikeslimes",
+    "spiregrowth",
+    "spireheart",
+    "spireshield",
+    "spirespear",
+    "spiritpoop",
+    "spiritshield",
+    "spitweb",
+    "split",
+    "sporecloud",
+    "spores",
+    "spotweakness",
+    "squareofprotection",
+    "ssserpenthead",
+    "stab",
+    "stack",
+    "stance",
+    "stancepotion",
+    "stances",
+    "stasis",
+    "staticdischarge",
+    "status",
+    "steam",
+    "steambarrier",
+    "steampower",
+    "steroidpotion",
+    "sticky",
+    "stonecalendar",
+    "storm",
+    "stormofsteel",
+    "strangespoon",
+    "strawberry",
+    "streamline",
+    "strength",
+    "strengthdown",
+    "strengthen",
+    "strengthpotion",
+    "strengthup",
+    "strike",
+    "strikeb",
+    "strikedefect",
+    "strikedummy",
+    "strikeg",
+    "strikeironclad",
+    "strikep",
+    "striker",
+    "strikesilent",
+    "strikeup",
+    "strikewatcher",
+    "strongatk",
+    "study",
+    "stunned",
+    "suckerpunch",
+    "sunder",
+    "sundial",
+    "supportbeam",
+    "surrounded",
+    "survivor",
+    "sweepingbeam",
+    "swiftpotion",
+    "swiftstrike",
+    "swivel",
+    "swoop",
+    "swordboomerang",
+    "symbioticvirus",
+    "tackle",
+    "tactician",
+    "tail",
+    "tailwhip",
+    "talktothehand",
+    "tantrum",
+    "taskmaster",
+    "taunt",
+    "teardroplocket",
+    "tempest",
+    "terror",
+    "theabacus",
+    "thebomb",
+    "theboot",
+    "thechamp",
+    "thecleric",
+    "thecollector",
+    "thecolosseum",
+    "thecourier",
+    "thedivinefountain",
+    "theguardian",
+    "thejoust",
+    "thelibrary",
+    "themausoleum",
+    "themaw",
+    "themoaihead",
+    "thenest",
+    "thesilent",
+    "thespecimen",
+    "thessssserpent",
+    "thewomaninblue",
+    "thievery",
+    "thieves",
+    "thinkingahead",
+    "thirdeye",
+    "thorns",
+    "thousandcuts",
+    "thrash",
+    "threadandneedle",
+    "throughviolence",
+    "thunderclap",
+    "thunderstrike",
+    "timeeater",
+    "timemaze",
+    "timemazepower",
+    "timewarp",
+    "tingsha",
+    "tinychest",
+    "tinyhouse",
+    "todo",
+    "tomboflordredmask",
+    "toolbox",
+    "toolsofthetrade",
+    "torchhead",
+    "torii",
+    "toughbandages",
+    "toxicegg",
+    "toxicegg2",
+    "toyornithopter",
+    "tranquility",
+    "transform",
+    "transient",
+    "transmogrifier",
+    "transmorgrifier",
+    "transmutation",
+    "treasure",
+    "triattack",
+    "triburn",
+    "trip",
+    "truegrit",
+    "tungstenrod",
+    "turbo",
+    "turnip",
+    "twinslam",
+    "twinstrike",
+    "twistedfunnel",
+    "ultimateblast",
+    "unawakened",
+    "unceasingtop",
+    "underhandedstrike",
+    "undo",
+    "unknown",
+    "unload",
+    "unplayable",
+    "unraveling",
+    "upgrade",
+    "upgraded",
+    "upgradeshrine",
+    "uppercut",
+    "vajra",
+    "vampires",
+    "vault",
+    "velvetchoker",
+    "vengeance",
+    "venomology",
+    "ventsteam",
+    "vigilance",
+    "vigor",
+    "violence",
+    "violetlotus",
+    "void",
+    "voids",
+    "vulnerable",
+    "wallop",
+    "warcry",
+    "warpaint",
+    "warpedtongs",
+    "watcher",
+    "watchercards",
+    "waveofthehand",
+    "waveofthehandpower",
+    "weak",
+    "weaken",
+    "weakened",
+    "weakens",
+    "weaklick",
+    "weakpotion",
+    "weave",
+    "welllaidplans",
+    "wemeetagain",
+    "wheelkick",
+    "wheelofchange",
+    "whetstone",
+    "whirlwind",
+    "whitebeaststatue",
+    "whitenoise",
+    "wildstrike",
+    "windinghalls",
+    "windmillstrike",
+    "wingboots",
+    "wingedgreaves",
+    "wingstatue",
+    "winter",
+    "wireheading",
+    "wireheadingpower",
+    "wish",
+    "worldofgoop",
+    "worship",
+    "wound",
+    "wounds",
+    "woundtackle",
+    "wraithform",
+    "wraithformv2",
+    "wrath",
+    "wrathnextturn",
+    "wrathnextturnpower",
+    "wreathofflame",
+    "wristblade",
+    "writhe",
+    "writhingmass",
+    "yang",
+    "zap"
+  ],
+  "questions": [
+    {
+      "question_id": "sts2-301",
+      "target": {
+        "entity_id": "TUTOR",
+        "entity_name": "Tutor",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Tutor&oldid=73456",
+        "wiki_page_id": 11161,
+        "wiki_revision_id": 73456,
+        "wiki_revision_timestamp": "2026-11-15T00:28:46Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-Tutor.png",
+        "infobox_description": "Another player chooses a card in their Draw Pile to add into their Hand."
+      },
+      "novelty_basis": "co-op interaction with other player characters",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "TUTOR",
+          "name": "Tutor",
+          "wiki_revision_id": 73456,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Tutor&oldid=73456"
+        },
+        {
+          "id": "ROYAL_GAMBLE",
+          "name": "Royal Gamble",
+          "wiki_revision_id": 73195,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Royal_Gamble&oldid=73195"
+        },
+        {
+          "id": "LARGESSE",
+          "name": "Largesse",
+          "wiki_revision_id": 72899,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Largesse&oldid=72899"
+        },
+        {
+          "id": "HIDDEN_CACHE",
+          "name": "Hidden Cache",
+          "wiki_revision_id": 72821,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hidden_Cache&oldid=72821"
+        },
+        {
+          "id": "CONVERGENCE",
+          "name": "Convergence",
+          "wiki_revision_id": 72527,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Convergence&oldid=72527"
+        },
+        {
+          "id": "GLOW",
+          "name": "Glow",
+          "wiki_revision_id": 72773,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Glow&oldid=72773"
+        },
+        {
+          "id": "CONSTELLATION",
+          "name": "Constellation",
+          "wiki_revision_id": 72525,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Constellation&oldid=72525"
+        },
+        {
+          "id": "SPOILS_OF_BATTLE",
+          "name": "Spoils of Battle",
+          "wiki_revision_id": 73318,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Spoils_of_Battle&oldid=73318"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-302",
+      "target": {
+        "entity_id": "TIMES_UP",
+        "entity_name": "Time's Up",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Time's_Up&oldid=73425",
+        "wiki_page_id": 10568,
+        "wiki_revision_id": 73425,
+        "wiki_revision_timestamp": "2026-11-15T00:27:28Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-TimesUp.png",
+        "infobox_description": "(;{{KW2|Retain}}.<br>)Deal damage equal to the enemy's {{BD2|Doom}}."
+      },
+      "novelty_basis": "Doom, the threshold-based death debuff",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "TIMES_UP",
+          "name": "Time's Up",
+          "wiki_revision_id": 73425,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Time's_Up&oldid=73425"
+        },
+        {
+          "id": "SNAP",
+          "name": "Snap",
+          "wiki_revision_id": 73284,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Snap&oldid=73284"
+        },
+        {
+          "id": "SQUEEZE",
+          "name": "Squeeze",
+          "wiki_revision_id": 73322,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Squeeze&oldid=73322"
+        },
+        {
+          "id": "SIC_EM",
+          "name": "Sic 'Em",
+          "wiki_revision_id": 73256,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sic_'Em&oldid=73256"
+        },
+        {
+          "id": "FLATTEN",
+          "name": "Flatten",
+          "wiki_revision_id": 72714,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Flatten&oldid=72714"
+        },
+        {
+          "id": "HIGH_FIVE",
+          "name": "High Five",
+          "wiki_revision_id": 72825,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:High_Five&oldid=72825"
+        },
+        {
+          "id": "BLIGHT_STRIKE",
+          "name": "Blight Strike",
+          "wiki_revision_id": 72394,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Blight_Strike&oldid=72394"
+        },
+        {
+          "id": "FETCH",
+          "name": "Fetch",
+          "wiki_revision_id": 72699,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fetch&oldid=72699"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-303",
+      "target": {
+        "entity_id": "CONVERGENCE",
+        "entity_name": "Convergence",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Convergence&oldid=72527",
+        "wiki_page_id": 10066,
+        "wiki_revision_id": 72527,
+        "wiki_revision_timestamp": "2026-11-14T23:49:23Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-Convergence.png",
+        "infobox_description": "Next turn,<br>gain {{Icon2|RE}} and {{Icon2|ST}}(;{{Icon2|ST}}).<br>{{KW2|Retain}} your Hand this turn."
+      },
+      "novelty_basis": "Stars, the Regent-specific secondary resource",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "CONVERGENCE",
+          "name": "Convergence",
+          "wiki_revision_id": 72527,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Convergence&oldid=72527"
+        },
+        {
+          "id": "GATHER_LIGHT",
+          "name": "Gather Light",
+          "wiki_revision_id": 72756,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Gather_Light&oldid=72756"
+        },
+        {
+          "id": "CONQUEROR",
+          "name": "Conqueror",
+          "wiki_revision_id": 72524,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Conqueror&oldid=72524"
+        },
+        {
+          "id": "CONSTELLATION",
+          "name": "Constellation",
+          "wiki_revision_id": 72525,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Constellation&oldid=72525"
+        },
+        {
+          "id": "HIDDEN_CACHE",
+          "name": "Hidden Cache",
+          "wiki_revision_id": 72821,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hidden_Cache&oldid=72821"
+        },
+        {
+          "id": "BULWARK",
+          "name": "Bulwark",
+          "wiki_revision_id": 72450,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bulwark&oldid=72450"
+        },
+        {
+          "id": "REFINE_BLADE",
+          "name": "Refine Blade",
+          "wiki_revision_id": 73165,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Refine_Blade&oldid=73165"
+        },
+        {
+          "id": "LARGESSE",
+          "name": "Largesse",
+          "wiki_revision_id": 72899,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Largesse&oldid=72899"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-304",
+      "target": {
+        "entity_id": "HAMMER_TIME",
+        "entity_name": "Hammer Time",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hammer_Time&oldid=72796",
+        "wiki_page_id": 11046,
+        "wiki_revision_id": 72796,
+        "wiki_revision_timestamp": "2026-11-15T00:00:34Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-HammerTime.png",
+        "infobox_description": "Whenever you {{KW2|Forge}}, all allies {{KW2|Forge}} as well."
+      },
+      "novelty_basis": "Forge and the generated Sovereign Blade; co-op interaction with other player characters",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "HAMMER_TIME",
+          "name": "Hammer Time",
+          "wiki_revision_id": 72796,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hammer_Time&oldid=72796"
+        },
+        {
+          "id": "FURNACE",
+          "name": "Furnace",
+          "wiki_revision_id": 72746,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Furnace&oldid=72746"
+        },
+        {
+          "id": "SWORD_SAGE",
+          "name": "Sword Sage",
+          "wiki_revision_id": 73369,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sword_Sage&oldid=73369"
+        },
+        {
+          "id": "SEEKING_EDGE",
+          "name": "Seeking Edge",
+          "wiki_revision_id": 73227,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Seeking_Edge&oldid=73227"
+        },
+        {
+          "id": "CHILD_OF_THE_STARS",
+          "name": "Child of the Stars",
+          "wiki_revision_id": 72489,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Child_of_the_Stars&oldid=72489"
+        },
+        {
+          "id": "BLACK_HOLE",
+          "name": "Black Hole",
+          "wiki_revision_id": 72386,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Black_Hole&oldid=72386"
+        },
+        {
+          "id": "GENESIS",
+          "name": "Genesis",
+          "wiki_revision_id": 72757,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Genesis&oldid=72757"
+        },
+        {
+          "id": "PARRY",
+          "name": "Parry",
+          "wiki_revision_id": 73064,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Parry&oldid=73064"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-305",
+      "target": {
+        "entity_id": "KNIFE_TRAP",
+        "entity_name": "Knife Trap",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Knife_Trap&oldid=73877",
+        "wiki_page_id": 10365,
+        "wiki_revision_id": 73877,
+        "wiki_revision_timestamp": "2026-11-17T01:41:10Z",
+        "source_kind": "wiki",
+        "image": "StS2_Silent-KnifeTrap.png",
+        "infobox_description": "(Play;Upgrade and play) every {{C2|Shiv}} in your {{KW2|Exhaust}} {{2|Pile}} on the enemy."
+      },
+      "novelty_basis": "New Silent Skill: plays Shivs directly from the Exhaust Pile, not merely generating or retrieving Shivs.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "KNIFE_TRAP",
+          "name": "Knife Trap",
+          "wiki_revision_id": 73877,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Knife_Trap&oldid=73877"
+        },
+        {
+          "id": "CONCOCT",
+          "name": "Concoct",
+          "wiki_revision_id": 72521,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Concoct&oldid=72521"
+        },
+        {
+          "id": "BLADE_SYMPHONY",
+          "name": "Blade Symphony",
+          "wiki_revision_id": 73775,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Blade_Symphony&oldid=73775"
+        },
+        {
+          "id": "OUTBREAK",
+          "name": "Outbreak",
+          "wiki_revision_id": 74071,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Outbreak&oldid=74071"
+        },
+        {
+          "id": "FLANKING",
+          "name": "Flanking",
+          "wiki_revision_id": 72712,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Flanking&oldid=72712"
+        },
+        {
+          "id": "CORROSIVE_WAVE",
+          "name": "Corrosive Wave",
+          "wiki_revision_id": 72532,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Corrosive_Wave&oldid=72532"
+        },
+        {
+          "id": "FADE",
+          "name": "Fade",
+          "wiki_revision_id": 72685,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fade&oldid=72685"
+        },
+        {
+          "id": "FAN_OF_KNIVES",
+          "name": "Fan of Knives",
+          "wiki_revision_id": 72688,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fan_of_Knives&oldid=72688"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-306",
+      "target": {
+        "entity_id": "MASTER_PLANNER",
+        "entity_name": "Master Planner",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Master_Planner&oldid=72943",
+        "wiki_page_id": 11036,
+        "wiki_revision_id": 72943,
+        "wiki_revision_timestamp": "2026-11-15T00:06:57Z",
+        "source_kind": "wiki",
+        "image": "StS2_Silent-MasterPlanner.png",
+        "infobox_description": "When you play a Skill, it gains {{KW2|Sly}}."
+      },
+      "novelty_basis": "New Silent Power: grants the new discard-to-play Sly property to played Skills.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "MASTER_PLANNER",
+          "name": "Master Planner",
+          "wiki_revision_id": 72943,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Master_Planner&oldid=72943"
+        },
+        {
+          "id": "FAN_OF_KNIVES",
+          "name": "Fan of Knives",
+          "wiki_revision_id": 72688,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fan_of_Knives&oldid=72688"
+        },
+        {
+          "id": "SNEAKY",
+          "name": "Sneaky",
+          "wiki_revision_id": 73286,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sneaky&oldid=73286"
+        },
+        {
+          "id": "CONCOCT",
+          "name": "Concoct",
+          "wiki_revision_id": 72521,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Concoct&oldid=72521"
+        },
+        {
+          "id": "BLADE_SYMPHONY",
+          "name": "Blade Symphony",
+          "wiki_revision_id": 73775,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Blade_Symphony&oldid=73775"
+        },
+        {
+          "id": "CORROSIVE_WAVE",
+          "name": "Corrosive Wave",
+          "wiki_revision_id": 72532,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Corrosive_Wave&oldid=72532"
+        },
+        {
+          "id": "FLANKING",
+          "name": "Flanking",
+          "wiki_revision_id": 72712,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Flanking&oldid=72712"
+        },
+        {
+          "id": "OUTBREAK",
+          "name": "Outbreak",
+          "wiki_revision_id": 74071,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Outbreak&oldid=74071"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-307",
+      "target": {
+        "entity_id": "FLATTEN",
+        "entity_name": "Flatten",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Flatten&oldid=72714",
+        "wiki_page_id": 9925,
+        "wiki_revision_id": 72714,
+        "wiki_revision_timestamp": "2026-11-14T23:57:08Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-Flatten.png",
+        "infobox_description": "{{KW2|Osty}} deals (12;16) damage.<br>This card costs 0 {{Icon2|NE}} if {{KW2|Osty}} has attacked this turn."
+      },
+      "novelty_basis": "Osty, the Necrobinder companion and Summon system",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "FLATTEN",
+          "name": "Flatten",
+          "wiki_revision_id": 72714,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Flatten&oldid=72714"
+        },
+        {
+          "id": "BONE_SHARDS",
+          "name": "Bone Shards",
+          "wiki_revision_id": 72415,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bone_Shards&oldid=72415"
+        },
+        {
+          "id": "SQUEEZE",
+          "name": "Squeeze",
+          "wiki_revision_id": 73322,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Squeeze&oldid=73322"
+        },
+        {
+          "id": "FETCH",
+          "name": "Fetch",
+          "wiki_revision_id": 72699,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fetch&oldid=72699"
+        },
+        {
+          "id": "BLIGHT_STRIKE",
+          "name": "Blight Strike",
+          "wiki_revision_id": 72394,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Blight_Strike&oldid=72394"
+        },
+        {
+          "id": "TIMES_UP",
+          "name": "Time's Up",
+          "wiki_revision_id": 73425,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Time's_Up&oldid=73425"
+        },
+        {
+          "id": "RATTLE",
+          "name": "Rattle",
+          "wiki_revision_id": 73154,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Rattle&oldid=73154"
+        },
+        {
+          "id": "HIGH_FIVE",
+          "name": "High Five",
+          "wiki_revision_id": 72825,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:High_Five&oldid=72825"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-308",
+      "target": {
+        "entity_id": "SNEAKY",
+        "entity_name": "Sneaky",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sneaky&oldid=73286",
+        "wiki_page_id": 11045,
+        "wiki_revision_id": 73286,
+        "wiki_revision_timestamp": "2026-11-15T00:21:42Z",
+        "source_kind": "wiki",
+        "image": "StS2_Silent-Sneaky.png",
+        "infobox_description": "{{KW2|Sly}}.<br>Whenever another player attacks an enemy, gain (1;2) {{KW2|Block}}."
+      },
+      "novelty_basis": "co-op interaction with other player characters",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "SNEAKY",
+          "name": "Sneaky",
+          "wiki_revision_id": 73286,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sneaky&oldid=73286"
+        },
+        {
+          "id": "FAN_OF_KNIVES",
+          "name": "Fan of Knives",
+          "wiki_revision_id": 72688,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fan_of_Knives&oldid=72688"
+        },
+        {
+          "id": "MASTER_PLANNER",
+          "name": "Master Planner",
+          "wiki_revision_id": 72943,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Master_Planner&oldid=72943"
+        },
+        {
+          "id": "FADE",
+          "name": "Fade",
+          "wiki_revision_id": 72685,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fade&oldid=72685"
+        },
+        {
+          "id": "FLANKING",
+          "name": "Flanking",
+          "wiki_revision_id": 72712,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Flanking&oldid=72712"
+        },
+        {
+          "id": "BLADE_SYMPHONY",
+          "name": "Blade Symphony",
+          "wiki_revision_id": 73775,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Blade_Symphony&oldid=73775"
+        },
+        {
+          "id": "CORROSIVE_WAVE",
+          "name": "Corrosive Wave",
+          "wiki_revision_id": 72532,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Corrosive_Wave&oldid=72532"
+        },
+        {
+          "id": "CONCOCT",
+          "name": "Concoct",
+          "wiki_revision_id": 72521,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Concoct&oldid=72521"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-309",
+      "target": {
+        "entity_id": "HIDDEN_CACHE",
+        "entity_name": "Hidden Cache",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hidden_Cache&oldid=72821",
+        "wiki_page_id": 11107,
+        "wiki_revision_id": 72821,
+        "wiki_revision_timestamp": "2026-11-15T00:01:37Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-HiddenCache.png",
+        "infobox_description": "Gain {{Icon2|ST}}.<br>Next turn, gain {{Icon2|ST}}{{Icon2|ST}}{{Icon2|ST}}(;{{Icon2|ST}})."
+      },
+      "novelty_basis": "Stars, the Regent-specific secondary resource",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "HIDDEN_CACHE",
+          "name": "Hidden Cache",
+          "wiki_revision_id": 72821,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hidden_Cache&oldid=72821"
+        },
+        {
+          "id": "THE_SMITH",
+          "name": "The Smith",
+          "wiki_revision_id": 73411,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Smith&oldid=73411"
+        },
+        {
+          "id": "ROYAL_GAMBLE",
+          "name": "Royal Gamble",
+          "wiki_revision_id": 73195,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Royal_Gamble&oldid=73195"
+        },
+        {
+          "id": "BIG_BANG",
+          "name": "Big Bang",
+          "wiki_revision_id": 72378,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Big_Bang&oldid=72378"
+        },
+        {
+          "id": "PLOT",
+          "name": "Plot",
+          "wiki_revision_id": 73090,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Plot&oldid=73090"
+        },
+        {
+          "id": "GATHER_LIGHT",
+          "name": "Gather Light",
+          "wiki_revision_id": 72756,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Gather_Light&oldid=72756"
+        },
+        {
+          "id": "LARGESSE",
+          "name": "Largesse",
+          "wiki_revision_id": 72899,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Largesse&oldid=72899"
+        },
+        {
+          "id": "CONVERGENCE",
+          "name": "Convergence",
+          "wiki_revision_id": 72527,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Convergence&oldid=72527"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-310",
+      "target": {
+        "entity_id": "MOLTEN_FIST",
+        "entity_name": "Molten Fist",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Molten_Fist&oldid=72976",
+        "wiki_page_id": 9926,
+        "wiki_revision_id": 72976,
+        "wiki_revision_timestamp": "2026-11-15T00:08:23Z",
+        "source_kind": "wiki",
+        "image": "StS2_Ironclad-MoltenFist.png",
+        "infobox_description": "Deal (10;14) damage.<br>Double the enemy's {{BD2|Vulnerable}}.<br>{{KW2|Exhaust}}."
+      },
+      "novelty_basis": "New Ironclad Attack: doubles the target’s existing Vulnerable stacks; not a retuned fixed-stack Vulnerable attack.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "MOLTEN_FIST",
+          "name": "Molten Fist",
+          "wiki_revision_id": 72976,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Molten_Fist&oldid=72976"
+        },
+        {
+          "id": "HOWL_FROM_BEYOND",
+          "name": "Howl from Beyond",
+          "wiki_revision_id": 72833,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Howl_from_Beyond&oldid=72833"
+        },
+        {
+          "id": "GRAPPLE",
+          "name": "Grapple",
+          "wiki_revision_id": 67445,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Grapple&oldid=67445"
+        },
+        {
+          "id": "TANK",
+          "name": "Tank",
+          "wiki_revision_id": 73377,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Tank&oldid=73377"
+        },
+        {
+          "id": "HELLRAISER",
+          "name": "Hellraiser",
+          "wiki_revision_id": 72818,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hellraiser&oldid=72818"
+        },
+        {
+          "id": "DEMONIC_SHIELD",
+          "name": "Demonic Shield",
+          "wiki_revision_id": 72594,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Demonic_Shield&oldid=72594"
+        },
+        {
+          "id": "UNMOVABLE",
+          "name": "Unmovable",
+          "wiki_revision_id": 73470,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Unmovable&oldid=73470"
+        },
+        {
+          "id": "CRESCENT_SPEAR",
+          "name": "Crescent Spear",
+          "wiki_revision_id": 72541,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Crescent_Spear&oldid=72541"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-311",
+      "target": {
+        "entity_id": "SQUEEZE",
+        "entity_name": "Squeeze",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Squeeze&oldid=73322",
+        "wiki_page_id": 10803,
+        "wiki_revision_id": 73322,
+        "wiki_revision_timestamp": "2026-11-15T00:23:12Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-Squeeze.png",
+        "infobox_description": "{{KW2|Osty}} deals (25;30) damage.<br>Deals (5;6) additional damage for ALL your other {{KW2|Osty}} Attacks."
+      },
+      "novelty_basis": "Osty, the Necrobinder companion and Summon system",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "SQUEEZE",
+          "name": "Squeeze",
+          "wiki_revision_id": 73322,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Squeeze&oldid=73322"
+        },
+        {
+          "id": "FLATTEN",
+          "name": "Flatten",
+          "wiki_revision_id": 72714,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Flatten&oldid=72714"
+        },
+        {
+          "id": "TIMES_UP",
+          "name": "Time's Up",
+          "wiki_revision_id": 73425,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Time's_Up&oldid=73425"
+        },
+        {
+          "id": "FETCH",
+          "name": "Fetch",
+          "wiki_revision_id": 72699,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fetch&oldid=72699"
+        },
+        {
+          "id": "HIGH_FIVE",
+          "name": "High Five",
+          "wiki_revision_id": 72825,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:High_Five&oldid=72825"
+        },
+        {
+          "id": "BLIGHT_STRIKE",
+          "name": "Blight Strike",
+          "wiki_revision_id": 72394,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Blight_Strike&oldid=72394"
+        },
+        {
+          "id": "SIC_EM",
+          "name": "Sic 'Em",
+          "wiki_revision_id": 73256,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sic_'Em&oldid=73256"
+        },
+        {
+          "id": "RATTLE",
+          "name": "Rattle",
+          "wiki_revision_id": 73154,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Rattle&oldid=73154"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-312",
+      "target": {
+        "entity_id": "SUMMON_FORTH",
+        "entity_name": "Summon Forth",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Summon_Forth&oldid=73357",
+        "wiki_page_id": 10054,
+        "wiki_revision_id": 73357,
+        "wiki_revision_timestamp": "2026-11-15T00:24:42Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-SummonForth.png",
+        "infobox_description": "Put {{C2|Sovereign Blade}} into your {{2|Hand}} from anywhere. <br> {{KW2|Forge}} (8;11)."
+      },
+      "novelty_basis": "Forge and the generated Sovereign Blade",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "SUMMON_FORTH",
+          "name": "Summon Forth",
+          "wiki_revision_id": 73357,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Summon_Forth&oldid=73357"
+        },
+        {
+          "id": "CONQUEROR",
+          "name": "Conqueror",
+          "wiki_revision_id": 72524,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Conqueror&oldid=72524"
+        },
+        {
+          "id": "CONSTELLATION",
+          "name": "Constellation",
+          "wiki_revision_id": 72525,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Constellation&oldid=72525"
+        },
+        {
+          "id": "BIG_BANG",
+          "name": "Big Bang",
+          "wiki_revision_id": 72378,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Big_Bang&oldid=72378"
+        },
+        {
+          "id": "TUTOR",
+          "name": "Tutor",
+          "wiki_revision_id": 73456,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Tutor&oldid=73456"
+        },
+        {
+          "id": "GLOW",
+          "name": "Glow",
+          "wiki_revision_id": 72773,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Glow&oldid=72773"
+        },
+        {
+          "id": "THE_SMITH",
+          "name": "The Smith",
+          "wiki_revision_id": 73411,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Smith&oldid=73411"
+        },
+        {
+          "id": "LARGESSE",
+          "name": "Largesse",
+          "wiki_revision_id": 72899,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Largesse&oldid=72899"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-313",
+      "target": {
+        "entity_id": "THE_SMITH",
+        "entity_name": "The Smith",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Smith&oldid=73411",
+        "wiki_page_id": 11116,
+        "wiki_revision_id": 73411,
+        "wiki_revision_timestamp": "2026-11-15T00:26:56Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-TheSmith.png",
+        "infobox_description": "{{KW2|Forge}} (30;40)."
+      },
+      "novelty_basis": "Forge and the generated Sovereign Blade",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "THE_SMITH",
+          "name": "The Smith",
+          "wiki_revision_id": 73411,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Smith&oldid=73411"
+        },
+        {
+          "id": "GATHER_LIGHT",
+          "name": "Gather Light",
+          "wiki_revision_id": 72756,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Gather_Light&oldid=72756"
+        },
+        {
+          "id": "GLOW",
+          "name": "Glow",
+          "wiki_revision_id": 72773,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Glow&oldid=72773"
+        },
+        {
+          "id": "CONSTELLATION",
+          "name": "Constellation",
+          "wiki_revision_id": 72525,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Constellation&oldid=72525"
+        },
+        {
+          "id": "BULWARK",
+          "name": "Bulwark",
+          "wiki_revision_id": 72450,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bulwark&oldid=72450"
+        },
+        {
+          "id": "SUMMON_FORTH",
+          "name": "Summon Forth",
+          "wiki_revision_id": 73357,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Summon_Forth&oldid=73357"
+        },
+        {
+          "id": "TUTOR",
+          "name": "Tutor",
+          "wiki_revision_id": 73456,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Tutor&oldid=73456"
+        },
+        {
+          "id": "REFINE_BLADE",
+          "name": "Refine Blade",
+          "wiki_revision_id": 73165,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Refine_Blade&oldid=73165"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-314",
+      "target": {
+        "entity_id": "CHILD_OF_THE_STARS",
+        "entity_name": "Child of the Stars",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Child_of_the_Stars&oldid=72489",
+        "wiki_page_id": 11041,
+        "wiki_revision_id": 72489,
+        "wiki_revision_timestamp": "2026-11-14T23:47:57Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-ChildOfTheStars.png",
+        "infobox_description": "Whenever you spend {{Icon2|ST}} , gain (2;3) {{KW2|Block}} for each {{Icon2|ST}}  spent."
+      },
+      "novelty_basis": "Stars, the Regent-specific secondary resource",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "CHILD_OF_THE_STARS",
+          "name": "Child of the Stars",
+          "wiki_revision_id": 72489,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Child_of_the_Stars&oldid=72489"
+        },
+        {
+          "id": "SEEKING_EDGE",
+          "name": "Seeking Edge",
+          "wiki_revision_id": 73227,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Seeking_Edge&oldid=73227"
+        },
+        {
+          "id": "HAMMER_TIME",
+          "name": "Hammer Time",
+          "wiki_revision_id": 72796,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hammer_Time&oldid=72796"
+        },
+        {
+          "id": "GENESIS",
+          "name": "Genesis",
+          "wiki_revision_id": 72757,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Genesis&oldid=72757"
+        },
+        {
+          "id": "SWORD_SAGE",
+          "name": "Sword Sage",
+          "wiki_revision_id": 73369,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sword_Sage&oldid=73369"
+        },
+        {
+          "id": "BLACK_HOLE",
+          "name": "Black Hole",
+          "wiki_revision_id": 72386,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Black_Hole&oldid=72386"
+        },
+        {
+          "id": "PARRY",
+          "name": "Parry",
+          "wiki_revision_id": 73064,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Parry&oldid=73064"
+        },
+        {
+          "id": "FURNACE",
+          "name": "Furnace",
+          "wiki_revision_id": 72746,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Furnace&oldid=72746"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-315",
+      "target": {
+        "entity_id": "BELIEVE_IN_YOU",
+        "entity_name": "Believe in You",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Believe_in_You&oldid=72374",
+        "wiki_page_id": 9536,
+        "wiki_revision_id": 72374,
+        "wiki_revision_timestamp": "2026-11-14T23:42:08Z",
+        "source_kind": "wiki",
+        "image": "StS2_Colorless-BelieveInYou.png",
+        "infobox_description": "Another player gains <br>{{Icon2|CE}}{{Icon2|CE}}(;{{Icon2|CE}})."
+      },
+      "novelty_basis": "co-op interaction with other player characters",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "BELIEVE_IN_YOU",
+          "name": "Believe in You",
+          "wiki_revision_id": 72374,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Believe_in_You&oldid=72374"
+        },
+        {
+          "id": "MIMIC",
+          "name": "Mimic",
+          "wiki_revision_id": 72966,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Mimic&oldid=72966"
+        },
+        {
+          "id": "INTERCEPT",
+          "name": "Intercept",
+          "wiki_revision_id": 72857,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Intercept&oldid=72857"
+        },
+        {
+          "id": "LIFT",
+          "name": "Lift",
+          "wiki_revision_id": 73839,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Lift&oldid=73839"
+        },
+        {
+          "id": "HUDDLE_UP",
+          "name": "Huddle Up",
+          "wiki_revision_id": 72834,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Huddle_Up&oldid=72834"
+        },
+        {
+          "id": "COORDINATE",
+          "name": "Coordinate",
+          "wiki_revision_id": 72530,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Coordinate&oldid=72530"
+        },
+        {
+          "id": "GANG_UP",
+          "name": "Gang Up",
+          "wiki_revision_id": 72755,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Gang_Up&oldid=72755"
+        },
+        {
+          "id": "KNOCKDOWN",
+          "name": "Knockdown",
+          "wiki_revision_id": 72889,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Knockdown&oldid=72889"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-316",
+      "target": {
+        "entity_id": "BLIGHT_STRIKE",
+        "entity_name": "Blight Strike",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Blight_Strike&oldid=72394",
+        "wiki_page_id": 9332,
+        "wiki_revision_id": 72394,
+        "wiki_revision_timestamp": "2026-11-14T23:43:00Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-BlightStrike.png",
+        "infobox_description": "Deal (8;10) damage.<br>Apply {{BD2|Doom}} equal to damage dealt."
+      },
+      "novelty_basis": "Doom, the threshold-based death debuff",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "BLIGHT_STRIKE",
+          "name": "Blight Strike",
+          "wiki_revision_id": 72394,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Blight_Strike&oldid=72394"
+        },
+        {
+          "id": "SQUEEZE",
+          "name": "Squeeze",
+          "wiki_revision_id": 73322,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Squeeze&oldid=73322"
+        },
+        {
+          "id": "BONE_SHARDS",
+          "name": "Bone Shards",
+          "wiki_revision_id": 72415,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bone_Shards&oldid=72415"
+        },
+        {
+          "id": "HIGH_FIVE",
+          "name": "High Five",
+          "wiki_revision_id": 72825,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:High_Five&oldid=72825"
+        },
+        {
+          "id": "SNAP",
+          "name": "Snap",
+          "wiki_revision_id": 73284,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Snap&oldid=73284"
+        },
+        {
+          "id": "FLATTEN",
+          "name": "Flatten",
+          "wiki_revision_id": 72714,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Flatten&oldid=72714"
+        },
+        {
+          "id": "FETCH",
+          "name": "Fetch",
+          "wiki_revision_id": 72699,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fetch&oldid=72699"
+        },
+        {
+          "id": "SIC_EM",
+          "name": "Sic 'Em",
+          "wiki_revision_id": 73256,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sic_'Em&oldid=73256"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-317",
+      "target": {
+        "entity_id": "SACRIFICE",
+        "entity_name": "Sacrifice",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sacrifice&oldid=73205",
+        "wiki_page_id": 10581,
+        "wiki_revision_id": 73205,
+        "wiki_revision_timestamp": "2026-11-15T00:18:25Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-Sacrifice.png",
+        "infobox_description": "{{KW2|Retain}}.<br>If {{KW2|Osty}} is alive, he dies and you gain {{KW2|Block}} equal to triple his Max HP."
+      },
+      "novelty_basis": "Osty, the Necrobinder companion and Summon system",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "SACRIFICE",
+          "name": "Sacrifice",
+          "wiki_revision_id": 73205,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sacrifice&oldid=73205"
+        },
+        {
+          "id": "OBLIVION",
+          "name": "Oblivion",
+          "wiki_revision_id": 73020,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Oblivion&oldid=73020"
+        },
+        {
+          "id": "CLEANSE",
+          "name": "Cleanse",
+          "wiki_revision_id": 72505,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Cleanse&oldid=72505"
+        },
+        {
+          "id": "DEATHS_DOOR",
+          "name": "Death's Door",
+          "wiki_revision_id": 74063,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Death's_Door&oldid=74063"
+        },
+        {
+          "id": "SCOURGE",
+          "name": "Scourge",
+          "wiki_revision_id": 73212,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Scourge&oldid=73212"
+        },
+        {
+          "id": "NO_ESCAPE",
+          "name": "No Escape",
+          "wiki_revision_id": 73009,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:No_Escape&oldid=73009"
+        },
+        {
+          "id": "NEGATIVE_PULSE",
+          "name": "Negative Pulse",
+          "wiki_revision_id": 72995,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Negative_Pulse&oldid=72995"
+        },
+        {
+          "id": "AFTERLIFE",
+          "name": "Afterlife",
+          "wiki_revision_id": 72311,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Afterlife&oldid=72311"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-318",
+      "target": {
+        "entity_id": "PLOT",
+        "entity_name": "Plot",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Plot&oldid=73090",
+        "wiki_page_id": 10898,
+        "wiki_revision_id": 73090,
+        "wiki_revision_timestamp": "2026-11-15T00:13:36Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-Plot.png",
+        "infobox_description": "Next turn, ALL players draw (2;3) cards."
+      },
+      "novelty_basis": "co-op interaction with other player characters",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "PLOT",
+          "name": "Plot",
+          "wiki_revision_id": 73090,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Plot&oldid=73090"
+        },
+        {
+          "id": "THE_SMITH",
+          "name": "The Smith",
+          "wiki_revision_id": 73411,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Smith&oldid=73411"
+        },
+        {
+          "id": "GATHER_LIGHT",
+          "name": "Gather Light",
+          "wiki_revision_id": 72756,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Gather_Light&oldid=72756"
+        },
+        {
+          "id": "LARGESSE",
+          "name": "Largesse",
+          "wiki_revision_id": 72899,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Largesse&oldid=72899"
+        },
+        {
+          "id": "SUMMON_FORTH",
+          "name": "Summon Forth",
+          "wiki_revision_id": 73357,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Summon_Forth&oldid=73357"
+        },
+        {
+          "id": "TUTOR",
+          "name": "Tutor",
+          "wiki_revision_id": 73456,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Tutor&oldid=73456"
+        },
+        {
+          "id": "SPOILS_OF_BATTLE",
+          "name": "Spoils of Battle",
+          "wiki_revision_id": 73318,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Spoils_of_Battle&oldid=73318"
+        },
+        {
+          "id": "CONQUEROR",
+          "name": "Conqueror",
+          "wiki_revision_id": 72524,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Conqueror&oldid=72524"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-319",
+      "target": {
+        "entity_id": "SEEKING_EDGE",
+        "entity_name": "Seeking Edge",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Seeking_Edge&oldid=73227",
+        "wiki_page_id": 10830,
+        "wiki_revision_id": 73227,
+        "wiki_revision_timestamp": "2026-11-15T00:19:20Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-SeekingEdge.png",
+        "infobox_description": "{{KW2|Forge}} (7;11).<br>{{C2|Sovereign Blade}} now deals damage to ALL enemies."
+      },
+      "novelty_basis": "Forge and the generated Sovereign Blade",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "SEEKING_EDGE",
+          "name": "Seeking Edge",
+          "wiki_revision_id": 73227,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Seeking_Edge&oldid=73227"
+        },
+        {
+          "id": "SWORD_SAGE",
+          "name": "Sword Sage",
+          "wiki_revision_id": 73369,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sword_Sage&oldid=73369"
+        },
+        {
+          "id": "FURNACE",
+          "name": "Furnace",
+          "wiki_revision_id": 72746,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Furnace&oldid=72746"
+        },
+        {
+          "id": "CHILD_OF_THE_STARS",
+          "name": "Child of the Stars",
+          "wiki_revision_id": 72489,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Child_of_the_Stars&oldid=72489"
+        },
+        {
+          "id": "PARRY",
+          "name": "Parry",
+          "wiki_revision_id": 73064,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Parry&oldid=73064"
+        },
+        {
+          "id": "HAMMER_TIME",
+          "name": "Hammer Time",
+          "wiki_revision_id": 72796,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hammer_Time&oldid=72796"
+        },
+        {
+          "id": "BLACK_HOLE",
+          "name": "Black Hole",
+          "wiki_revision_id": 72386,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Black_Hole&oldid=72386"
+        },
+        {
+          "id": "GENESIS",
+          "name": "Genesis",
+          "wiki_revision_id": 72757,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Genesis&oldid=72757"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-320",
+      "target": {
+        "entity_id": "SCOURGE",
+        "entity_name": "Scourge",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Scourge&oldid=73212",
+        "wiki_page_id": 9371,
+        "wiki_revision_id": 73212,
+        "wiki_revision_timestamp": "2026-11-15T00:18:42Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-Scourge.png",
+        "infobox_description": "Apply (13;16) {{BD2|Doom}}.<br>Draw (1 card;2 cards)."
+      },
+      "novelty_basis": "Doom, the threshold-based death debuff",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "SCOURGE",
+          "name": "Scourge",
+          "wiki_revision_id": 73212,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Scourge&oldid=73212"
+        },
+        {
+          "id": "LEGION_OF_BONE",
+          "name": "Legion of Bone",
+          "wiki_revision_id": 72910,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Legion_of_Bone&oldid=72910"
+        },
+        {
+          "id": "NEGATIVE_PULSE",
+          "name": "Negative Pulse",
+          "wiki_revision_id": 72995,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Negative_Pulse&oldid=72995"
+        },
+        {
+          "id": "REANIMATE",
+          "name": "Reanimate",
+          "wiki_revision_id": 73156,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Reanimate&oldid=73156"
+        },
+        {
+          "id": "END_OF_DAYS",
+          "name": "End of Days",
+          "wiki_revision_id": 72649,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:End_of_Days&oldid=72649"
+        },
+        {
+          "id": "NO_ESCAPE",
+          "name": "No Escape",
+          "wiki_revision_id": 73009,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:No_Escape&oldid=73009"
+        },
+        {
+          "id": "SPUR",
+          "name": "Spur",
+          "wiki_revision_id": 73320,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Spur&oldid=73320"
+        },
+        {
+          "id": "DEATHS_DOOR",
+          "name": "Death's Door",
+          "wiki_revision_id": 74063,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Death's_Door&oldid=74063"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-321",
+      "target": {
+        "entity_id": "HELLRAISER",
+        "entity_name": "Hellraiser",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hellraiser&oldid=72818",
+        "wiki_page_id": 10139,
+        "wiki_revision_id": 72818,
+        "wiki_revision_timestamp": "2026-11-15T00:01:29Z",
+        "source_kind": "wiki",
+        "image": "StS2_Ironclad-Hellraiser.png",
+        "infobox_description": "Whenever you draw a card containing \"Strike\", it is played against a random enemy."
+      },
+      "novelty_basis": "New Ironclad Power: automatically plays Strike-named cards when drawn, a different trigger from StS1 replay powers.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "HELLRAISER",
+          "name": "Hellraiser",
+          "wiki_revision_id": 72818,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hellraiser&oldid=72818"
+        },
+        {
+          "id": "TANK",
+          "name": "Tank",
+          "wiki_revision_id": 73377,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Tank&oldid=73377"
+        },
+        {
+          "id": "UNMOVABLE",
+          "name": "Unmovable",
+          "wiki_revision_id": 73470,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Unmovable&oldid=73470"
+        },
+        {
+          "id": "MOLTEN_FIST",
+          "name": "Molten Fist",
+          "wiki_revision_id": 72976,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Molten_Fist&oldid=72976"
+        },
+        {
+          "id": "GRAPPLE",
+          "name": "Grapple",
+          "wiki_revision_id": 67445,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Grapple&oldid=67445"
+        },
+        {
+          "id": "DEMONIC_SHIELD",
+          "name": "Demonic Shield",
+          "wiki_revision_id": 72594,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Demonic_Shield&oldid=72594"
+        },
+        {
+          "id": "HOWL_FROM_BEYOND",
+          "name": "Howl from Beyond",
+          "wiki_revision_id": 72833,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Howl_from_Beyond&oldid=72833"
+        },
+        {
+          "id": "HAMMER_TIME",
+          "name": "Hammer Time",
+          "wiki_revision_id": 72796,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hammer_Time&oldid=72796"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-322",
+      "target": {
+        "entity_id": "SIC_EM",
+        "entity_name": "Sic 'Em",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sic_'Em&oldid=73256",
+        "wiki_page_id": 10036,
+        "wiki_revision_id": 73256,
+        "wiki_revision_timestamp": "2026-11-15T00:20:31Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-SicEm.png",
+        "infobox_description": "{{KW2|Osty}} deals (5;6) damage.<br>Whenever {{KW2|Osty}} hits this enemy this turn, {{KW2|Summon}} (3;4)."
+      },
+      "novelty_basis": "Osty, the Necrobinder companion and Summon system",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "SIC_EM",
+          "name": "Sic 'Em",
+          "wiki_revision_id": 73256,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sic_'Em&oldid=73256"
+        },
+        {
+          "id": "BONE_SHARDS",
+          "name": "Bone Shards",
+          "wiki_revision_id": 72415,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bone_Shards&oldid=72415"
+        },
+        {
+          "id": "RATTLE",
+          "name": "Rattle",
+          "wiki_revision_id": 73154,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Rattle&oldid=73154"
+        },
+        {
+          "id": "TIMES_UP",
+          "name": "Time's Up",
+          "wiki_revision_id": 73425,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Time's_Up&oldid=73425"
+        },
+        {
+          "id": "FETCH",
+          "name": "Fetch",
+          "wiki_revision_id": 72699,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fetch&oldid=72699"
+        },
+        {
+          "id": "SNAP",
+          "name": "Snap",
+          "wiki_revision_id": 73284,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Snap&oldid=73284"
+        },
+        {
+          "id": "HIGH_FIVE",
+          "name": "High Five",
+          "wiki_revision_id": 72825,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:High_Five&oldid=72825"
+        },
+        {
+          "id": "SQUEEZE",
+          "name": "Squeeze",
+          "wiki_revision_id": 73322,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Squeeze&oldid=73322"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-323",
+      "target": {
+        "entity_id": "INVOKE",
+        "entity_name": "Invoke",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Invoke&oldid=72859",
+        "wiki_page_id": 9478,
+        "wiki_revision_id": 72859,
+        "wiki_revision_timestamp": "2026-11-15T00:03:10Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-Invoke.png",
+        "infobox_description": "Next turn, {{KW2|Summon}} (2;3) and gain {{Icon2|NE}}{{Icon2|NE}}(;{{Icon2|NE}})."
+      },
+      "novelty_basis": "Osty, the Necrobinder companion and Summon system",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "INVOKE",
+          "name": "Invoke",
+          "wiki_revision_id": 72859,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Invoke&oldid=72859"
+        },
+        {
+          "id": "END_OF_DAYS",
+          "name": "End of Days",
+          "wiki_revision_id": 72649,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:End_of_Days&oldid=72649"
+        },
+        {
+          "id": "DEATHS_DOOR",
+          "name": "Death's Door",
+          "wiki_revision_id": 74063,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Death's_Door&oldid=74063"
+        },
+        {
+          "id": "DIRGE",
+          "name": "Dirge",
+          "wiki_revision_id": 72603,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Dirge&oldid=72603"
+        },
+        {
+          "id": "GLIMPSE_BEYOND",
+          "name": "Glimpse Beyond",
+          "wiki_revision_id": 72768,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Glimpse_Beyond&oldid=72768"
+        },
+        {
+          "id": "AFTERLIFE",
+          "name": "Afterlife",
+          "wiki_revision_id": 72311,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Afterlife&oldid=72311"
+        },
+        {
+          "id": "SCOURGE",
+          "name": "Scourge",
+          "wiki_revision_id": 73212,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Scourge&oldid=73212"
+        },
+        {
+          "id": "SPUR",
+          "name": "Spur",
+          "wiki_revision_id": 73320,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Spur&oldid=73320"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-324",
+      "target": {
+        "entity_id": "BULWARK",
+        "entity_name": "Bulwark",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bulwark&oldid=72450",
+        "wiki_page_id": 9894,
+        "wiki_revision_id": 72450,
+        "wiki_revision_timestamp": "2026-11-14T23:45:14Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-Bulwark.png",
+        "infobox_description": "Gain (12;15) {{KW2|Block}}.<br>{{KW2|Forge}} (10;13)."
+      },
+      "novelty_basis": "Forge and the generated Sovereign Blade",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "BULWARK",
+          "name": "Bulwark",
+          "wiki_revision_id": 72450,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bulwark&oldid=72450"
+        },
+        {
+          "id": "TUTOR",
+          "name": "Tutor",
+          "wiki_revision_id": 73456,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Tutor&oldid=73456"
+        },
+        {
+          "id": "BIG_BANG",
+          "name": "Big Bang",
+          "wiki_revision_id": 72378,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Big_Bang&oldid=72378"
+        },
+        {
+          "id": "SUMMON_FORTH",
+          "name": "Summon Forth",
+          "wiki_revision_id": 73357,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Summon_Forth&oldid=73357"
+        },
+        {
+          "id": "ROYAL_GAMBLE",
+          "name": "Royal Gamble",
+          "wiki_revision_id": 73195,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Royal_Gamble&oldid=73195"
+        },
+        {
+          "id": "SPOILS_OF_BATTLE",
+          "name": "Spoils of Battle",
+          "wiki_revision_id": 73318,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Spoils_of_Battle&oldid=73318"
+        },
+        {
+          "id": "CONVERGENCE",
+          "name": "Convergence",
+          "wiki_revision_id": 72527,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Convergence&oldid=72527"
+        },
+        {
+          "id": "GLOW",
+          "name": "Glow",
+          "wiki_revision_id": 72773,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Glow&oldid=72773"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-325",
+      "target": {
+        "entity_id": "GLOW",
+        "entity_name": "Glow",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Glow&oldid=72773",
+        "wiki_page_id": 9130,
+        "wiki_revision_id": 72773,
+        "wiki_revision_timestamp": "2026-11-14T23:59:37Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-Glow.png",
+        "infobox_description": "Gain {{Icon2|ST}}(;{{Icon2|ST}}).<br>Draw 1 card. <br>Next turn, draw 1 card."
+      },
+      "novelty_basis": "Stars, the Regent-specific secondary resource",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "GLOW",
+          "name": "Glow",
+          "wiki_revision_id": 72773,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Glow&oldid=72773"
+        },
+        {
+          "id": "HIDDEN_CACHE",
+          "name": "Hidden Cache",
+          "wiki_revision_id": 72821,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hidden_Cache&oldid=72821"
+        },
+        {
+          "id": "CONSTELLATION",
+          "name": "Constellation",
+          "wiki_revision_id": 72525,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Constellation&oldid=72525"
+        },
+        {
+          "id": "REFINE_BLADE",
+          "name": "Refine Blade",
+          "wiki_revision_id": 73165,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Refine_Blade&oldid=73165"
+        },
+        {
+          "id": "CONQUEROR",
+          "name": "Conqueror",
+          "wiki_revision_id": 72524,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Conqueror&oldid=72524"
+        },
+        {
+          "id": "CONVERGENCE",
+          "name": "Convergence",
+          "wiki_revision_id": 72527,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Convergence&oldid=72527"
+        },
+        {
+          "id": "SPOILS_OF_BATTLE",
+          "name": "Spoils of Battle",
+          "wiki_revision_id": 73318,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Spoils_of_Battle&oldid=73318"
+        },
+        {
+          "id": "PLOT",
+          "name": "Plot",
+          "wiki_revision_id": 73090,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Plot&oldid=73090"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-326",
+      "target": {
+        "entity_id": "UNMOVABLE",
+        "entity_name": "Unmovable",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Unmovable&oldid=73470",
+        "wiki_page_id": 9996,
+        "wiki_revision_id": 73470,
+        "wiki_revision_timestamp": "2026-11-15T00:29:22Z",
+        "source_kind": "wiki",
+        "image": "StS2_Ironclad-Unmovable.png",
+        "infobox_description": "The first time you gain {{KW2|Block}} from a card each turn, double the amount gained."
+      },
+      "novelty_basis": "New Ironclad Power: doubles the first card-granted Block each turn, rather than doubling accumulated Block like Entrench.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "UNMOVABLE",
+          "name": "Unmovable",
+          "wiki_revision_id": 73470,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Unmovable&oldid=73470"
+        },
+        {
+          "id": "TANK",
+          "name": "Tank",
+          "wiki_revision_id": 73377,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Tank&oldid=73377"
+        },
+        {
+          "id": "HELLRAISER",
+          "name": "Hellraiser",
+          "wiki_revision_id": 72818,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hellraiser&oldid=72818"
+        },
+        {
+          "id": "DEMONIC_SHIELD",
+          "name": "Demonic Shield",
+          "wiki_revision_id": 72594,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Demonic_Shield&oldid=72594"
+        },
+        {
+          "id": "HOWL_FROM_BEYOND",
+          "name": "Howl from Beyond",
+          "wiki_revision_id": 72833,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Howl_from_Beyond&oldid=72833"
+        },
+        {
+          "id": "GRAPPLE",
+          "name": "Grapple",
+          "wiki_revision_id": 67445,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Grapple&oldid=67445"
+        },
+        {
+          "id": "MOLTEN_FIST",
+          "name": "Molten Fist",
+          "wiki_revision_id": 72976,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Molten_Fist&oldid=72976"
+        },
+        {
+          "id": "REAPER_FORM",
+          "name": "Reaper Form",
+          "wiki_revision_id": 73158,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Reaper_Form&oldid=73158"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-327",
+      "target": {
+        "entity_id": "GLIMPSE_BEYOND",
+        "entity_name": "Glimpse Beyond",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Glimpse_Beyond&oldid=72768",
+        "wiki_page_id": 10483,
+        "wiki_revision_id": 72768,
+        "wiki_revision_timestamp": "2026-11-14T23:59:25Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-GlimpseBeyond.png",
+        "infobox_description": "ALL players add (3;4) {{C2|Soul|Souls}} into their {{2|Draw Pile}}.<br>{{KW2|Exhaust}}."
+      },
+      "novelty_basis": "co-op interaction with other player characters",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "GLIMPSE_BEYOND",
+          "name": "Glimpse Beyond",
+          "wiki_revision_id": 72768,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Glimpse_Beyond&oldid=72768"
+        },
+        {
+          "id": "REANIMATE",
+          "name": "Reanimate",
+          "wiki_revision_id": 73156,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Reanimate&oldid=73156"
+        },
+        {
+          "id": "NO_ESCAPE",
+          "name": "No Escape",
+          "wiki_revision_id": 73009,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:No_Escape&oldid=73009"
+        },
+        {
+          "id": "SACRIFICE",
+          "name": "Sacrifice",
+          "wiki_revision_id": 73205,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sacrifice&oldid=73205"
+        },
+        {
+          "id": "DEATHBRINGER",
+          "name": "Deathbringer",
+          "wiki_revision_id": 72570,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Deathbringer&oldid=72570"
+        },
+        {
+          "id": "END_OF_DAYS",
+          "name": "End of Days",
+          "wiki_revision_id": 72649,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:End_of_Days&oldid=72649"
+        },
+        {
+          "id": "LEGION_OF_BONE",
+          "name": "Legion of Bone",
+          "wiki_revision_id": 72910,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Legion_of_Bone&oldid=72910"
+        },
+        {
+          "id": "SCOURGE",
+          "name": "Scourge",
+          "wiki_revision_id": 73212,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Scourge&oldid=73212"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-328",
+      "target": {
+        "entity_id": "RADIATE",
+        "entity_name": "Radiate",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Radiate&oldid=73145",
+        "wiki_page_id": 8780,
+        "wiki_revision_id": 73145,
+        "wiki_revision_timestamp": "2026-11-15T00:15:56Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-Radiate.png",
+        "infobox_description": "Deal (3;4) damage to ALL enemies for each {{Icon2|ST}}  gained this turn."
+      },
+      "novelty_basis": "Stars, the Regent-specific secondary resource",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "RADIATE",
+          "name": "Radiate",
+          "wiki_revision_id": 73145,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Radiate&oldid=73145"
+        },
+        {
+          "id": "BEAT_INTO_SHAPE",
+          "name": "Beat into Shape",
+          "wiki_revision_id": 72368,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Beat_into_Shape&oldid=72368"
+        },
+        {
+          "id": "CRESCENT_SPEAR",
+          "name": "Crescent Spear",
+          "wiki_revision_id": 72541,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Crescent_Spear&oldid=72541"
+        },
+        {
+          "id": "SHINING_STRIKE",
+          "name": "Shining Strike",
+          "wiki_revision_id": 73246,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Shining_Strike&oldid=73246"
+        },
+        {
+          "id": "SOLAR_STRIKE",
+          "name": "Solar Strike",
+          "wiki_revision_id": 73291,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Solar_Strike&oldid=73291"
+        },
+        {
+          "id": "WROUGHT_IN_WAR",
+          "name": "Wrought in War",
+          "wiki_revision_id": 73544,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Wrought_in_War&oldid=73544"
+        },
+        {
+          "id": "KNOCKOUT_BLOW",
+          "name": "Knockout Blow",
+          "wiki_revision_id": 74019,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Knockout_Blow&oldid=74019"
+        },
+        {
+          "id": "BIG_BANG",
+          "name": "Big Bang",
+          "wiki_revision_id": 72378,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Big_Bang&oldid=72378"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-329",
+      "target": {
+        "entity_id": "HAILSTORM",
+        "entity_name": "Hailstorm",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hailstorm&oldid=72795",
+        "wiki_page_id": 11039,
+        "wiki_revision_id": 72795,
+        "wiki_revision_timestamp": "2026-11-15T00:00:31Z",
+        "source_kind": "wiki",
+        "image": "StS2_Defect-Hailstorm.png",
+        "infobox_description": "At the end of your turn, if you have {{KW2|Frost}}, deal (6;8) damage to ALL enemies."
+      },
+      "novelty_basis": "New Defect Power: deals AOE damage at turn end if Frost is present, unlike Blizzard’s attack scaling with Frost channeled.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "HAILSTORM",
+          "name": "Hailstorm",
+          "wiki_revision_id": 72795,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hailstorm&oldid=72795"
+        },
+        {
+          "id": "IGNITION",
+          "name": "Ignition",
+          "wiki_revision_id": 72841,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Ignition&oldid=72841"
+        },
+        {
+          "id": "TESLA_COIL",
+          "name": "Tesla Coil",
+          "wiki_revision_id": 73387,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Tesla_Coil&oldid=73387"
+        },
+        {
+          "id": "FOCUSED_STRIKE",
+          "name": "Focused Strike",
+          "wiki_revision_id": 72721,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Focused_Strike&oldid=72721"
+        },
+        {
+          "id": "HIBERNATE",
+          "name": "Hibernate",
+          "wiki_revision_id": 72820,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hibernate&oldid=72820"
+        },
+        {
+          "id": "SYNTHESIS",
+          "name": "Synthesis",
+          "wiki_revision_id": 73373,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Synthesis&oldid=73373"
+        },
+        {
+          "id": "ENERGY_SURGE",
+          "name": "Energy Surge",
+          "wiki_revision_id": 72653,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Energy_Surge&oldid=72653"
+        },
+        {
+          "id": "LIGHTNING_ROD",
+          "name": "Lightning Rod",
+          "wiki_revision_id": 72915,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Lightning_Rod&oldid=72915"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-330",
+      "target": {
+        "entity_id": "REFINE_BLADE",
+        "entity_name": "Refine Blade",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Refine_Blade&oldid=73165",
+        "wiki_page_id": 9135,
+        "wiki_revision_id": 73165,
+        "wiki_revision_timestamp": "2026-11-15T00:16:45Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-RefineBlade.png",
+        "infobox_description": "{{KW2|Forge}} (8;12).<br>Next turn, gain {{Icon2|RE}}."
+      },
+      "novelty_basis": "Forge and the generated Sovereign Blade",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "REFINE_BLADE",
+          "name": "Refine Blade",
+          "wiki_revision_id": 73165,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Refine_Blade&oldid=73165"
+        },
+        {
+          "id": "CONQUEROR",
+          "name": "Conqueror",
+          "wiki_revision_id": 72524,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Conqueror&oldid=72524"
+        },
+        {
+          "id": "PLOT",
+          "name": "Plot",
+          "wiki_revision_id": 73090,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Plot&oldid=73090"
+        },
+        {
+          "id": "SUMMON_FORTH",
+          "name": "Summon Forth",
+          "wiki_revision_id": 73357,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Summon_Forth&oldid=73357"
+        },
+        {
+          "id": "ROYAL_GAMBLE",
+          "name": "Royal Gamble",
+          "wiki_revision_id": 73195,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Royal_Gamble&oldid=73195"
+        },
+        {
+          "id": "BIG_BANG",
+          "name": "Big Bang",
+          "wiki_revision_id": 72378,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Big_Bang&oldid=72378"
+        },
+        {
+          "id": "HIDDEN_CACHE",
+          "name": "Hidden Cache",
+          "wiki_revision_id": 72821,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hidden_Cache&oldid=72821"
+        },
+        {
+          "id": "LARGESSE",
+          "name": "Largesse",
+          "wiki_revision_id": 72899,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Largesse&oldid=72899"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-331",
+      "target": {
+        "entity_id": "CALCIFY",
+        "entity_name": "Calcify",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Calcify&oldid=72466",
+        "wiki_page_id": 10018,
+        "wiki_revision_id": 72466,
+        "wiki_revision_timestamp": "2026-11-14T23:45:52Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-Calcify.png",
+        "infobox_description": "{{KW2|Osty|Osty's}} attacks deal (4;6) additional damage."
+      },
+      "novelty_basis": "Osty, the Necrobinder companion and Summon system",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "CALCIFY",
+          "name": "Calcify",
+          "wiki_revision_id": 72466,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Calcify&oldid=72466"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-332",
+      "target": {
+        "entity_id": "SHROUD",
+        "entity_name": "Shroud",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Shroud&oldid=73253",
+        "wiki_page_id": 10367,
+        "wiki_revision_id": 73253,
+        "wiki_revision_timestamp": "2026-11-15T00:20:23Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-Shroud.png",
+        "infobox_description": "Whenever you apply {{BD2|Doom}}, gain (3;4) {{KW2|Block}}."
+      },
+      "novelty_basis": "Doom, the threshold-based death debuff",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "SHROUD",
+          "name": "Shroud",
+          "wiki_revision_id": 73253,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Shroud&oldid=73253"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-333",
+      "target": {
+        "entity_id": "BLACK_HOLE",
+        "entity_name": "Black Hole",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Black_Hole&oldid=72386",
+        "wiki_page_id": 10020,
+        "wiki_revision_id": 72386,
+        "wiki_revision_timestamp": "2026-11-14T23:42:39Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-BlackHole.png",
+        "infobox_description": "Whenever you spend or gain {{Icon2|ST}}, deal (3;4) damage to ALL enemies."
+      },
+      "novelty_basis": "Stars, the Regent-specific secondary resource",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "BLACK_HOLE",
+          "name": "Black Hole",
+          "wiki_revision_id": 72386,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Black_Hole&oldid=72386"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-334",
+      "target": {
+        "entity_id": "KNOCKDOWN",
+        "entity_name": "Knockdown",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Knockdown&oldid=72889",
+        "wiki_page_id": 9550,
+        "wiki_revision_id": 72889,
+        "wiki_revision_timestamp": "2026-11-15T00:04:28Z",
+        "source_kind": "wiki",
+        "image": "StS2_Colorless-Knockdown.png",
+        "infobox_description": "Deal (10;14) damage.<br>The enemy takes (double;triple) damage from other players this turn."
+      },
+      "novelty_basis": "co-op interaction with other player characters",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "KNOCKDOWN",
+          "name": "Knockdown",
+          "wiki_revision_id": 72889,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Knockdown&oldid=72889"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-335",
+      "target": {
+        "entity_id": "LEGION_OF_BONE",
+        "entity_name": "Legion of Bone",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Legion_of_Bone&oldid=72910",
+        "wiki_page_id": 10580,
+        "wiki_revision_id": 72910,
+        "wiki_revision_timestamp": "2026-11-15T00:05:28Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-LegionOfBone.png",
+        "infobox_description": "ALL players {{KW2|Summon}} (6;8)."
+      },
+      "novelty_basis": "Osty, the Necrobinder companion and Summon system; co-op interaction with other player characters",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "LEGION_OF_BONE",
+          "name": "Legion of Bone",
+          "wiki_revision_id": 72910,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Legion_of_Bone&oldid=72910"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-336",
+      "target": {
+        "entity_id": "IMITATION_LEARNING",
+        "entity_name": "Imitation Learning",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Imitation_Learning&oldid=72842",
+        "wiki_page_id": 10905,
+        "wiki_revision_id": 72842,
+        "wiki_revision_timestamp": "2026-11-15T00:02:28Z",
+        "source_kind": "wiki",
+        "image": "StS2_Defect-ImitationLearning.png",
+        "infobox_description": "Choose another player. The next (2;3) times they play a Power, you play a copy of it.<br>{{KW2|Exhaust}}."
+      },
+      "novelty_basis": "co-op interaction with other player characters",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "IMITATION_LEARNING",
+          "name": "Imitation Learning",
+          "wiki_revision_id": 72842,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Imitation_Learning&oldid=72842"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-337",
+      "target": {
+        "entity_id": "HIGH_FIVE",
+        "entity_name": "High Five",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:High_Five&oldid=72825",
+        "wiki_page_id": 10475,
+        "wiki_revision_id": 72825,
+        "wiki_revision_timestamp": "2026-11-15T00:01:46Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-HighFive.png",
+        "infobox_description": "{{KW2|Osty}} deals (11;13) damage<br>and applies (2;3) {{BD2|Vulnerable}}<br>to ALL enemies."
+      },
+      "novelty_basis": "Osty, the Necrobinder companion and Summon system",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "HIGH_FIVE",
+          "name": "High Five",
+          "wiki_revision_id": 72825,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:High_Five&oldid=72825"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-338",
+      "target": {
+        "entity_id": "GRAPPLE",
+        "entity_name": "Grapple",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Grapple&oldid=67445",
+        "wiki_page_id": 9315,
+        "wiki_revision_id": 67445,
+        "wiki_revision_timestamp": "2026-10-28T13:04:53Z",
+        "source_kind": "wiki",
+        "image": "StS2 Ironclad-Grapple.png",
+        "infobox_description": "Deal (7;9) damage.<br>Whenever you gain {{KW2|Block}} this turn, deal 5 damage to the enemy."
+      },
+      "novelty_basis": "New Ironclad Attack: marks one target for damage from Block gained during this turn, combining an attack with a temporary target-specific trigger.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "GRAPPLE",
+          "name": "Grapple",
+          "wiki_revision_id": 67445,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Grapple&oldid=67445"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-339",
+      "target": {
+        "entity_id": "OUTBREAK",
+        "entity_name": "Outbreak",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Outbreak&oldid=74071",
+        "wiki_page_id": 10461,
+        "wiki_revision_id": 74071,
+        "wiki_revision_timestamp": "2026-11-18T21:59:58Z",
+        "source_kind": "wiki",
+        "image": "StS2_Silent-Outbreak.png",
+        "infobox_description": "Apply (9;12) {{BD2|Poison}} to ALL enemies.<br>{{BD2|Poison}} triggers immediately."
+      },
+      "novelty_basis": "New Silent Power: every third Poison application triggers AOE damage; not a renamed Poison application card.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "OUTBREAK",
+          "name": "Outbreak",
+          "wiki_revision_id": 74071,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Outbreak&oldid=74071"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-340",
+      "target": {
+        "entity_id": "FOCUSED_STRIKE",
+        "entity_name": "Focused Strike",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Focused_Strike&oldid=72721",
+        "wiki_page_id": 11069,
+        "wiki_revision_id": 72721,
+        "wiki_revision_timestamp": "2026-11-14T23:57:26Z",
+        "source_kind": "wiki",
+        "image": "StS2_Defect-FocusedStrike.png",
+        "infobox_description": "Deal (9;11) damage.<br>Gain (1;2) {{BD2|Focus}} this turn."
+      },
+      "novelty_basis": "New Defect Attack: deals damage and grants temporary Focus this turn, not a numerical retune of an existing attack.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "FOCUSED_STRIKE",
+          "name": "Focused Strike",
+          "wiki_revision_id": 72721,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Focused_Strike&oldid=72721"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-341",
+      "target": {
+        "entity_id": "CORROSIVE_WAVE",
+        "entity_name": "Corrosive Wave",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Corrosive_Wave&oldid=72532",
+        "wiki_page_id": 9121,
+        "wiki_revision_id": 72532,
+        "wiki_revision_timestamp": "2026-11-14T23:49:34Z",
+        "source_kind": "wiki",
+        "image": "StS2_Silent-CorrosiveWave.png",
+        "infobox_description": "Whenever you draw a card this turn, apply (2;3) {{BD2|Poison}} to ALL enemies."
+      },
+      "novelty_basis": "New Silent Skill: drawing cards applies Poison to all enemies this turn, rather than StS1 Envenom’s unblocked-attack trigger.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "CORROSIVE_WAVE",
+          "name": "Corrosive Wave",
+          "wiki_revision_id": 72532,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Corrosive_Wave&oldid=72532"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-342",
+      "target": {
+        "entity_id": "SHINING_STRIKE",
+        "entity_name": "Shining Strike",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Shining_Strike&oldid=73246",
+        "wiki_page_id": 11128,
+        "wiki_revision_id": 73246,
+        "wiki_revision_timestamp": "2026-11-15T00:20:04Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-ShiningStrike.png",
+        "infobox_description": "Deal (8;11) damage.<br>Gain {{Icon2|ST}}{{Icon2|ST}}.<br>Put this card on top of your {{2|Draw Pile}}."
+      },
+      "novelty_basis": "Stars, the Regent-specific secondary resource",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "SHINING_STRIKE",
+          "name": "Shining Strike",
+          "wiki_revision_id": 73246,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Shining_Strike&oldid=73246"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-343",
+      "target": {
+        "entity_id": "SYNTHESIS",
+        "entity_name": "Synthesis",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Synthesis&oldid=73373",
+        "wiki_page_id": 10249,
+        "wiki_revision_id": 73373,
+        "wiki_revision_timestamp": "2026-11-15T00:25:18Z",
+        "source_kind": "wiki",
+        "image": "StS2_Defect-Synthesis.png",
+        "infobox_description": "Deal (14;20) damage.<br>The next Power you play costs 0 {{Icon2|DE}}."
+      },
+      "novelty_basis": "New Defect Attack: damage plus making the next Power free; not a renamed or retuned first-game card.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "SYNTHESIS",
+          "name": "Synthesis",
+          "wiki_revision_id": 73373,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Synthesis&oldid=73373"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-344",
+      "target": {
+        "entity_id": "FAN_OF_KNIVES",
+        "entity_name": "Fan of Knives",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fan_of_Knives&oldid=72688",
+        "wiki_page_id": 10542,
+        "wiki_revision_id": 72688,
+        "wiki_revision_timestamp": "2026-11-14T23:56:02Z",
+        "source_kind": "wiki",
+        "image": "StS2_Silent-FanOfKnives.png",
+        "infobox_description": "{{C2|Shiv|Shivs}} now hit ALL enemies. <br>Add (4;5) {{C2|Shiv|Shivs}} into your {{2|Hand}}."
+      },
+      "novelty_basis": "New Silent Power: changes Shivs into AOE attacks and generates Shivs, unlike StS1 Accuracy’s damage bonus.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "FAN_OF_KNIVES",
+          "name": "Fan of Knives",
+          "wiki_revision_id": 72688,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fan_of_Knives&oldid=72688"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-345",
+      "target": {
+        "entity_id": "TESLA_COIL",
+        "entity_name": "Tesla Coil",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Tesla_Coil&oldid=73387",
+        "wiki_page_id": 10047,
+        "wiki_revision_id": 73387,
+        "wiki_revision_timestamp": "2026-11-15T00:25:52Z",
+        "source_kind": "wiki",
+        "image": "StS2_Defect-TeslaCoil.png",
+        "infobox_description": "Deal (3;4) damage.<br>Trigger all {{KW2|Lightning}} against the enemy(; twice)."
+      },
+      "novelty_basis": "New Defect Attack: triggers all existing Lightning against its target, rather than channeling new Lightning.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "TESLA_COIL",
+          "name": "Tesla Coil",
+          "wiki_revision_id": 73387,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Tesla_Coil&oldid=73387"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-346",
+      "target": {
+        "entity_id": "SPOILS_OF_BATTLE",
+        "entity_name": "Spoils of Battle",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Spoils_of_Battle&oldid=73318",
+        "wiki_page_id": 9136,
+        "wiki_revision_id": 73318,
+        "wiki_revision_timestamp": "2026-11-15T00:23:04Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-SpoilsOfBattle.png",
+        "infobox_description": "{{KW2|Forge}} (6;9). <br>Draw 2 cards."
+      },
+      "novelty_basis": "Forge and the generated Sovereign Blade",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "SPOILS_OF_BATTLE",
+          "name": "Spoils of Battle",
+          "wiki_revision_id": 73318,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Spoils_of_Battle&oldid=73318"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-347",
+      "target": {
+        "entity_id": "GATHER_LIGHT",
+        "entity_name": "Gather Light",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Gather_Light&oldid=72756",
+        "wiki_page_id": 9128,
+        "wiki_revision_id": 72756,
+        "wiki_revision_timestamp": "2026-11-14T23:58:55Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-GatherLight.png",
+        "infobox_description": "Gain (8;11) {{KW2|Block}}.<br>Gain {{Icon2|ST}}."
+      },
+      "novelty_basis": "Stars, the Regent-specific secondary resource",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "GATHER_LIGHT",
+          "name": "Gather Light",
+          "wiki_revision_id": 72756,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Gather_Light&oldid=72756"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-348",
+      "target": {
+        "entity_id": "CRESCENT_SPEAR",
+        "entity_name": "Crescent Spear",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Crescent_Spear&oldid=72541",
+        "wiki_page_id": 10043,
+        "wiki_revision_id": 72541,
+        "wiki_revision_timestamp": "2026-11-14T23:49:57Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-CrescentSpear.png",
+        "infobox_description": "Deal 8 damage.<br>Deals (2;3) additional damage for ALL your cards that have a {{Icon2|ST}} cost."
+      },
+      "novelty_basis": "Stars, the Regent-specific secondary resource",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "CRESCENT_SPEAR",
+          "name": "Crescent Spear",
+          "wiki_revision_id": 72541,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Crescent_Spear&oldid=72541"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-349",
+      "target": {
+        "entity_id": "AFTERLIFE",
+        "entity_name": "Afterlife",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Afterlife&oldid=72311",
+        "wiki_page_id": 9331,
+        "wiki_revision_id": 72311,
+        "wiki_revision_timestamp": "2026-11-14T23:39:39Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-Afterlife.png",
+        "infobox_description": "{{KW2|Summon}} (6;9).<br>{{KW2|Exhaust}}."
+      },
+      "novelty_basis": "Osty, the Necrobinder companion and Summon system",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "AFTERLIFE",
+          "name": "Afterlife",
+          "wiki_revision_id": 72311,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Afterlife&oldid=72311"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-350",
+      "target": {
+        "entity_id": "WROUGHT_IN_WAR",
+        "entity_name": "Wrought in War",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Wrought_in_War&oldid=73544",
+        "wiki_page_id": 9137,
+        "wiki_revision_id": 73544,
+        "wiki_revision_timestamp": "2026-11-15T00:32:29Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-WroughtInWar.png",
+        "infobox_description": "Deal (7;9) damage.<br>{{KW2|Forge}} (7;9)."
+      },
+      "novelty_basis": "Forge and the generated Sovereign Blade",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "WROUGHT_IN_WAR",
+          "name": "Wrought in War",
+          "wiki_revision_id": 73544,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Wrought_in_War&oldid=73544"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-351",
+      "target": {
+        "entity_id": "OBLIVION",
+        "entity_name": "Oblivion",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Oblivion&oldid=73020",
+        "wiki_page_id": 10572,
+        "wiki_revision_id": 73020,
+        "wiki_revision_timestamp": "2026-11-15T00:10:22Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-Oblivion.png",
+        "infobox_description": "Whenever you play a card this turn, apply (3;4) {{BD2|Doom}} to the enemy."
+      },
+      "novelty_basis": "Doom, the threshold-based death debuff",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "OBLIVION",
+          "name": "Oblivion",
+          "wiki_revision_id": 73020,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Oblivion&oldid=73020"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-352",
+      "target": {
+        "entity_id": "CLEANSE",
+        "entity_name": "Cleanse",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Cleanse&oldid=72505",
+        "wiki_page_id": 10022,
+        "wiki_revision_id": 72505,
+        "wiki_revision_timestamp": "2026-11-14T23:48:33Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-Cleanse.png",
+        "infobox_description": "{{KW2|Summon}} (3;5).<br>{{KW2|Exhaust}} 1 card from your {{2|Draw Pile}}."
+      },
+      "novelty_basis": "Osty, the Necrobinder companion and Summon system",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "CLEANSE",
+          "name": "Cleanse",
+          "wiki_revision_id": 72505,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Cleanse&oldid=72505"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-353",
+      "target": {
+        "entity_id": "LIGHTNING_ROD",
+        "entity_name": "Lightning Rod",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Lightning_Rod&oldid=72915",
+        "wiki_page_id": 11017,
+        "wiki_revision_id": 72915,
+        "wiki_revision_timestamp": "2026-11-15T00:05:40Z",
+        "source_kind": "wiki",
+        "image": "StS2_Defect-LightningRod.png",
+        "infobox_description": "Gain (4;7) {{KW2|Block}}.<br>At the start of the next 2 turns, {{KW2|Channel}} 1 {{KW2|Lightning}}."
+      },
+      "novelty_basis": "New Defect Skill: gains Block and schedules Lightning channeling over the next two turns.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "LIGHTNING_ROD",
+          "name": "Lightning Rod",
+          "wiki_revision_id": 72915,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Lightning_Rod&oldid=72915"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-354",
+      "target": {
+        "entity_id": "SPUR",
+        "entity_name": "Spur",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Spur&oldid=73320",
+        "wiki_page_id": 10555,
+        "wiki_revision_id": 73320,
+        "wiki_revision_timestamp": "2026-11-15T00:23:08Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-Spur.png",
+        "infobox_description": "{{KW2|Retain}}.<br>{{KW2|Summon}} (3;5).<br>{{KW2|Osty}} heals (5;7) HP."
+      },
+      "novelty_basis": "Osty, the Necrobinder companion and Summon system",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "SPUR",
+          "name": "Spur",
+          "wiki_revision_id": 73320,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Spur&oldid=73320"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-355",
+      "target": {
+        "entity_id": "HOWL_FROM_BEYOND",
+        "entity_name": "Howl from Beyond",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Howl_from_Beyond&oldid=72833",
+        "wiki_page_id": 10015,
+        "wiki_revision_id": 72833,
+        "wiki_revision_timestamp": "2026-11-15T00:02:06Z",
+        "source_kind": "wiki",
+        "image": "StS2_Ironclad-HowlFromBeyond.png",
+        "infobox_description": "Deal (18;24) damage to ALL enemies. <br>At the end of your turn, if this is in your {{KW2|Exhaust|Exhaust Pile}}, play it."
+      },
+      "novelty_basis": "New Ironclad Attack: plays itself from the Exhaust Pile at turn end; not a renamed AOE damage card.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "HOWL_FROM_BEYOND",
+          "name": "Howl from Beyond",
+          "wiki_revision_id": 72833,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Howl_from_Beyond&oldid=72833"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-356",
+      "target": {
+        "entity_id": "TANK",
+        "entity_name": "Tank",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Tank&oldid=73377",
+        "wiki_page_id": 10447,
+        "wiki_revision_id": 73377,
+        "wiki_revision_timestamp": "2026-11-15T00:25:26Z",
+        "source_kind": "wiki",
+        "image": "StS2_Ironclad-Tank.png",
+        "infobox_description": "Take 50% additional damage from enemies.<br>Allies take 50% less damage from enemies."
+      },
+      "novelty_basis": "co-op interaction with other player characters",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "TANK",
+          "name": "Tank",
+          "wiki_revision_id": 73377,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Tank&oldid=73377"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-357",
+      "target": {
+        "entity_id": "DEATHBRINGER",
+        "entity_name": "Deathbringer",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Deathbringer&oldid=72570",
+        "wiki_page_id": 9218,
+        "wiki_revision_id": 72570,
+        "wiki_revision_timestamp": "2026-11-14T23:51:11Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-Deathbringer.png",
+        "infobox_description": "Apply (21;26) {{BD2|Doom}} and 1 {{BD2|Weak}} to ALL enemies."
+      },
+      "novelty_basis": "Doom, the threshold-based death debuff",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "DEATHBRINGER",
+          "name": "Deathbringer",
+          "wiki_revision_id": 72570,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Deathbringer&oldid=72570"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-358",
+      "target": {
+        "entity_id": "NEGATIVE_PULSE",
+        "entity_name": "Negative Pulse",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Negative_Pulse&oldid=72995",
+        "wiki_page_id": 9350,
+        "wiki_revision_id": 72995,
+        "wiki_revision_timestamp": "2026-11-15T00:09:16Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-NegativePulse.png",
+        "infobox_description": "Gain (5;6) {{KW2|Block}}.<br>Apply (7;11) {{BD2|Doom}} to ALL enemies."
+      },
+      "novelty_basis": "Doom, the threshold-based death debuff",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "NEGATIVE_PULSE",
+          "name": "Negative Pulse",
+          "wiki_revision_id": 72995,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Negative_Pulse&oldid=72995"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-359",
+      "target": {
+        "entity_id": "REANIMATE",
+        "entity_name": "Reanimate",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Reanimate&oldid=73156",
+        "wiki_page_id": 10810,
+        "wiki_revision_id": 73156,
+        "wiki_revision_timestamp": "2026-11-15T00:16:23Z",
+        "source_kind": "wiki",
+        "image": "StS2_Necrobinder-Reanimate.png",
+        "infobox_description": "{{KW2|Summon}} (20;25).<br>{{KW2|Exhaust}}."
+      },
+      "novelty_basis": "Osty, the Necrobinder companion and Summon system",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "REANIMATE",
+          "name": "Reanimate",
+          "wiki_revision_id": 73156,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Reanimate&oldid=73156"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-360",
+      "target": {
+        "entity_id": "LARGESSE",
+        "entity_name": "Largesse",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Largesse&oldid=72899",
+        "wiki_page_id": 10815,
+        "wiki_revision_id": 72899,
+        "wiki_revision_timestamp": "2026-11-15T00:04:57Z",
+        "source_kind": "wiki",
+        "image": "StS2_Regent-Largesse.png",
+        "infobox_description": "Another player adds 1 random(; {{KW2|Upgrade|Upgraded}}) Colorless card to their {{2|Hand}}."
+      },
+      "novelty_basis": "co-op interaction with other player characters",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "LARGESSE",
+          "name": "Largesse",
+          "wiki_revision_id": 72899,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Largesse&oldid=72899"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-361",
+      "target": {
+        "entity_id": "BOUND_PHYLACTERY",
+        "entity_name": "Bound Phylactery",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bound_Phylactery&oldid=72429",
+        "wiki_page_id": 8429,
+        "wiki_revision_id": 72429,
+        "wiki_revision_timestamp": "2026-11-14T23:44:23Z",
+        "source_kind": "wiki",
+        "image": "StS2_BoundPhylactery.png",
+        "infobox_description": "At the start of your turn, {{KW2|Summon}} 1."
+      },
+      "novelty_basis": "Osty, the Necrobinder companion and Summon system",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "BOUND_PHYLACTERY",
+          "name": "Bound Phylactery",
+          "wiki_revision_id": 72429,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bound_Phylactery&oldid=72429"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-362",
+      "target": {
+        "entity_id": "BONE_FLUTE",
+        "entity_name": "Bone Flute",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bone_Flute&oldid=72414",
+        "wiki_page_id": 9467,
+        "wiki_revision_id": 72414,
+        "wiki_revision_timestamp": "2026-11-14T23:43:47Z",
+        "source_kind": "wiki",
+        "image": "StS2_BoneFlute.png",
+        "infobox_description": "Whenever {{KW2|Osty}} attacks, gain 2 {{KW2|Block}}."
+      },
+      "novelty_basis": "Osty, the Necrobinder companion and Summon system",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "BONE_FLUTE",
+          "name": "Bone Flute",
+          "wiki_revision_id": 72414,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bone_Flute&oldid=72414"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-363",
+      "target": {
+        "entity_id": "BOOK_REPAIR_KNIFE",
+        "entity_name": "Book Repair Knife",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Book_Repair_Knife&oldid=72418",
+        "wiki_page_id": 10458,
+        "wiki_revision_id": 72418,
+        "wiki_revision_timestamp": "2026-11-14T23:43:57Z",
+        "source_kind": "wiki",
+        "image": "StS2_BookRepairKnife.png",
+        "infobox_description": "Whenever a non-Minion enemy dies to {{BD2|Doom}}, heal 3 HP."
+      },
+      "novelty_basis": "Doom, the threshold-based death debuff",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "BOOK_REPAIR_KNIFE",
+          "name": "Book Repair Knife",
+          "wiki_revision_id": 72418,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Book_Repair_Knife&oldid=72418"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-364",
+      "target": {
+        "entity_id": "DIVINE_RIGHT",
+        "entity_name": "Divine Right",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Divine_Right&oldid=72612",
+        "wiki_page_id": 8426,
+        "wiki_revision_id": 72612,
+        "wiki_revision_timestamp": "2026-11-14T23:52:51Z",
+        "source_kind": "wiki",
+        "image": "StS2_DivineRight.png",
+        "infobox_description": "At the start of each combat, gain {{Icon2|ST}}{{Icon2|ST}}{{Icon2|ST}}."
+      },
+      "novelty_basis": "Stars, the Regent-specific secondary resource",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "DIVINE_RIGHT",
+          "name": "Divine Right",
+          "wiki_revision_id": 72612,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Divine_Right&oldid=72612"
+        },
+        {
+          "id": "BOOK_REPAIR_KNIFE",
+          "name": "Book Repair Knife",
+          "wiki_revision_id": 72418,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Book_Repair_Knife&oldid=72418"
+        },
+        {
+          "id": "FENCING_MANUAL",
+          "name": "Fencing Manual",
+          "wiki_revision_id": 72695,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fencing_Manual&oldid=72695"
+        },
+        {
+          "id": "BOUND_PHYLACTERY",
+          "name": "Bound Phylactery",
+          "wiki_revision_id": 72429,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bound_Phylactery&oldid=72429"
+        },
+        {
+          "id": "UNDYING_SIGIL",
+          "name": "Undying Sigil",
+          "wiki_revision_id": 73468,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Undying_Sigil&oldid=73468"
+        },
+        {
+          "id": "MINI_REGENT",
+          "name": "Mini Regent",
+          "wiki_revision_id": 72969,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Mini_Regent&oldid=72969"
+        },
+        {
+          "id": "BONE_FLUTE",
+          "name": "Bone Flute",
+          "wiki_revision_id": 72414,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bone_Flute&oldid=72414"
+        },
+        {
+          "id": "GALACTIC_DUST",
+          "name": "Galactic Dust",
+          "wiki_revision_id": 72750,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Galactic_Dust&oldid=72750"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-365",
+      "target": {
+        "entity_id": "FENCING_MANUAL",
+        "entity_name": "Fencing Manual",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fencing_Manual&oldid=72695",
+        "wiki_page_id": 10217,
+        "wiki_revision_id": 72695,
+        "wiki_revision_timestamp": "2026-11-14T23:56:19Z",
+        "source_kind": "wiki",
+        "image": "StS2_FencingManual.png",
+        "infobox_description": "At the start of each combat, {{KW2|Forge}} 10."
+      },
+      "novelty_basis": "Forge and the generated Sovereign Blade",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "FENCING_MANUAL",
+          "name": "Fencing Manual",
+          "wiki_revision_id": 72695,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fencing_Manual&oldid=72695"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-366",
+      "target": {
+        "entity_id": "GALACTIC_DUST",
+        "entity_name": "Galactic Dust",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Galactic_Dust&oldid=72750",
+        "wiki_page_id": 11186,
+        "wiki_revision_id": 72750,
+        "wiki_revision_timestamp": "2026-11-14T23:58:39Z",
+        "source_kind": "wiki",
+        "image": "StS2_GalacticDust.png",
+        "infobox_description": "For every 10 {{Icon2|ST}} spent, gain 10 {{KW2|Block}}."
+      },
+      "novelty_basis": "Stars, the Regent-specific secondary resource",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "GALACTIC_DUST",
+          "name": "Galactic Dust",
+          "wiki_revision_id": 72750,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Galactic_Dust&oldid=72750"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-367",
+      "target": {
+        "entity_id": "LUNAR_PASTRY",
+        "entity_name": "Lunar Pastry",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Lunar_Pastry&oldid=72932",
+        "wiki_page_id": 11367,
+        "wiki_revision_id": 72932,
+        "wiki_revision_timestamp": "2026-11-15T00:06:26Z",
+        "source_kind": "wiki",
+        "image": "StS2_LunarPastry.png",
+        "infobox_description": "At the end of your turn, gain {{Icon2|ST}}."
+      },
+      "novelty_basis": "Stars, the Regent-specific secondary resource",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "LUNAR_PASTRY",
+          "name": "Lunar Pastry",
+          "wiki_revision_id": 72932,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Lunar_Pastry&oldid=72932"
+        },
+        {
+          "id": "UNDYING_SIGIL",
+          "name": "Undying Sigil",
+          "wiki_revision_id": 73468,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Undying_Sigil&oldid=73468"
+        },
+        {
+          "id": "MINI_REGENT",
+          "name": "Mini Regent",
+          "wiki_revision_id": 72969,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Mini_Regent&oldid=72969"
+        },
+        {
+          "id": "FENCING_MANUAL",
+          "name": "Fencing Manual",
+          "wiki_revision_id": 72695,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fencing_Manual&oldid=72695"
+        },
+        {
+          "id": "BONE_FLUTE",
+          "name": "Bone Flute",
+          "wiki_revision_id": 72414,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bone_Flute&oldid=72414"
+        },
+        {
+          "id": "BOOK_REPAIR_KNIFE",
+          "name": "Book Repair Knife",
+          "wiki_revision_id": 72418,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Book_Repair_Knife&oldid=72418"
+        },
+        {
+          "id": "PHYLACTERY_UNBOUND",
+          "name": "Phylactery Unbound",
+          "wiki_revision_id": 73082,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Phylactery_Unbound&oldid=73082"
+        },
+        {
+          "id": "BOUND_PHYLACTERY",
+          "name": "Bound Phylactery",
+          "wiki_revision_id": 72429,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bound_Phylactery&oldid=72429"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-368",
+      "target": {
+        "entity_id": "MINI_REGENT",
+        "entity_name": "Mini Regent",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Mini_Regent&oldid=72969",
+        "wiki_page_id": 11368,
+        "wiki_revision_id": 72969,
+        "wiki_revision_timestamp": "2026-11-15T00:08:04Z",
+        "source_kind": "wiki",
+        "image": "StS2_MiniRegent.png",
+        "infobox_description": "The first time you spend {{Icon2|ST}} each turn, gain 1 {{BD2|Strength}}."
+      },
+      "novelty_basis": "Stars, the Regent-specific secondary resource",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "MINI_REGENT",
+          "name": "Mini Regent",
+          "wiki_revision_id": 72969,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Mini_Regent&oldid=72969"
+        },
+        {
+          "id": "GALACTIC_DUST",
+          "name": "Galactic Dust",
+          "wiki_revision_id": 72750,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Galactic_Dust&oldid=72750"
+        },
+        {
+          "id": "UNDYING_SIGIL",
+          "name": "Undying Sigil",
+          "wiki_revision_id": 73468,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Undying_Sigil&oldid=73468"
+        },
+        {
+          "id": "FENCING_MANUAL",
+          "name": "Fencing Manual",
+          "wiki_revision_id": 72695,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fencing_Manual&oldid=72695"
+        },
+        {
+          "id": "BONE_FLUTE",
+          "name": "Bone Flute",
+          "wiki_revision_id": 72414,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bone_Flute&oldid=72414"
+        },
+        {
+          "id": "BOUND_PHYLACTERY",
+          "name": "Bound Phylactery",
+          "wiki_revision_id": 72429,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bound_Phylactery&oldid=72429"
+        },
+        {
+          "id": "PHYLACTERY_UNBOUND",
+          "name": "Phylactery Unbound",
+          "wiki_revision_id": 73082,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Phylactery_Unbound&oldid=73082"
+        },
+        {
+          "id": "DIVINE_RIGHT",
+          "name": "Divine Right",
+          "wiki_revision_id": 72612,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Divine_Right&oldid=72612"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-369",
+      "target": {
+        "entity_id": "PHYLACTERY_UNBOUND",
+        "entity_name": "Phylactery Unbound",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Phylactery_Unbound&oldid=73082",
+        "wiki_page_id": 8789,
+        "wiki_revision_id": 73082,
+        "wiki_revision_timestamp": "2026-11-15T00:13:18Z",
+        "source_kind": "wiki",
+        "image": "StS2_PhylacteryUnbound.png",
+        "infobox_description": "At the start of each combat, {{KW2|Summon}} 5. At the start of your turn, {{KW2|Summon}} 2."
+      },
+      "novelty_basis": "Osty, the Necrobinder companion and Summon system",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "PHYLACTERY_UNBOUND",
+          "name": "Phylactery Unbound",
+          "wiki_revision_id": 73082,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Phylactery_Unbound&oldid=73082"
+        },
+        {
+          "id": "BOUND_PHYLACTERY",
+          "name": "Bound Phylactery",
+          "wiki_revision_id": 72429,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bound_Phylactery&oldid=72429"
+        },
+        {
+          "id": "MINI_REGENT",
+          "name": "Mini Regent",
+          "wiki_revision_id": 72969,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Mini_Regent&oldid=72969"
+        },
+        {
+          "id": "FENCING_MANUAL",
+          "name": "Fencing Manual",
+          "wiki_revision_id": 72695,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fencing_Manual&oldid=72695"
+        },
+        {
+          "id": "BONE_FLUTE",
+          "name": "Bone Flute",
+          "wiki_revision_id": 72414,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bone_Flute&oldid=72414"
+        },
+        {
+          "id": "LUNAR_PASTRY",
+          "name": "Lunar Pastry",
+          "wiki_revision_id": 72932,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Lunar_Pastry&oldid=72932"
+        },
+        {
+          "id": "UNDYING_SIGIL",
+          "name": "Undying Sigil",
+          "wiki_revision_id": 73468,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Undying_Sigil&oldid=73468"
+        },
+        {
+          "id": "BOOK_REPAIR_KNIFE",
+          "name": "Book Repair Knife",
+          "wiki_revision_id": 72418,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Book_Repair_Knife&oldid=72418"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-370",
+      "target": {
+        "entity_id": "UNDYING_SIGIL",
+        "entity_name": "Undying Sigil",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Undying_Sigil&oldid=73468",
+        "wiki_page_id": 10566,
+        "wiki_revision_id": 73468,
+        "wiki_revision_timestamp": "2026-11-15T00:29:16Z",
+        "source_kind": "wiki",
+        "image": "StS2_UndyingSigil.png",
+        "infobox_description": "Enemies with at least as much {{BD2|Doom}} as HP deal 50% less damage."
+      },
+      "novelty_basis": "Doom, the threshold-based death debuff",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "UNDYING_SIGIL",
+          "name": "Undying Sigil",
+          "wiki_revision_id": 73468,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Undying_Sigil&oldid=73468"
+        },
+        {
+          "id": "FENCING_MANUAL",
+          "name": "Fencing Manual",
+          "wiki_revision_id": 72695,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fencing_Manual&oldid=72695"
+        },
+        {
+          "id": "DIVINE_RIGHT",
+          "name": "Divine Right",
+          "wiki_revision_id": 72612,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Divine_Right&oldid=72612"
+        },
+        {
+          "id": "GALACTIC_DUST",
+          "name": "Galactic Dust",
+          "wiki_revision_id": 72750,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Galactic_Dust&oldid=72750"
+        },
+        {
+          "id": "BOUND_PHYLACTERY",
+          "name": "Bound Phylactery",
+          "wiki_revision_id": 72429,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bound_Phylactery&oldid=72429"
+        },
+        {
+          "id": "MINI_REGENT",
+          "name": "Mini Regent",
+          "wiki_revision_id": 72969,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Mini_Regent&oldid=72969"
+        },
+        {
+          "id": "PHYLACTERY_UNBOUND",
+          "name": "Phylactery Unbound",
+          "wiki_revision_id": 73082,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Phylactery_Unbound&oldid=73082"
+        },
+        {
+          "id": "LUNAR_PASTRY",
+          "name": "Lunar Pastry",
+          "wiki_revision_id": 72932,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Lunar_Pastry&oldid=72932"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-371",
+      "target": {
+        "entity_id": "BONE_BREW",
+        "entity_name": "Bone Brew",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bone_Brew&oldid=72413",
+        "wiki_page_id": 11476,
+        "wiki_revision_id": 72413,
+        "wiki_revision_timestamp": "2026-11-14T23:43:44Z",
+        "source_kind": "wiki",
+        "image": "StS2_BoneBrew.png",
+        "infobox_description": "{{KW2|Summon}} 15."
+      },
+      "novelty_basis": "Osty, the Necrobinder companion and Summon system",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "BONE_BREW",
+          "name": "Bone Brew",
+          "wiki_revision_id": 72413,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Bone_Brew&oldid=72413"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-372",
+      "target": {
+        "entity_id": "KINGS_COURAGE",
+        "entity_name": "King's Courage",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:King's_Courage&oldid=72884",
+        "wiki_page_id": 11475,
+        "wiki_revision_id": 72884,
+        "wiki_revision_timestamp": "2026-11-15T00:04:13Z",
+        "source_kind": "wiki",
+        "image": "StS2_KingsCourage.png",
+        "infobox_description": "{{KW2|Forge}} 15."
+      },
+      "novelty_basis": "Forge and the generated Sovereign Blade",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "KINGS_COURAGE",
+          "name": "King's Courage",
+          "wiki_revision_id": 72884,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:King's_Courage&oldid=72884"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-373",
+      "target": {
+        "entity_id": "STAR_POTION",
+        "entity_name": "Star Potion",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Star_Potion&oldid=73326",
+        "wiki_page_id": 11454,
+        "wiki_revision_id": 73326,
+        "wiki_revision_timestamp": "2026-11-15T00:23:23Z",
+        "source_kind": "wiki",
+        "image": "StS2_StarPotion.png",
+        "infobox_description": "Gain {{Icon2|ST}}{{Icon2|ST}}{{Icon2|ST}}."
+      },
+      "novelty_basis": "Stars, the Regent-specific secondary resource",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "STAR_POTION",
+          "name": "Star Potion",
+          "wiki_revision_id": 73326,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Star_Potion&oldid=73326"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-374",
+      "target": {
+        "entity_id": "POTION_OF_DOOM",
+        "entity_name": "Potion of Doom",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Potion_of_Doom&oldid=73105",
+        "wiki_page_id": 11455,
+        "wiki_revision_id": 73105,
+        "wiki_revision_timestamp": "2026-11-15T00:14:15Z",
+        "source_kind": "wiki",
+        "image": "StS2_PotionofDoom.png",
+        "infobox_description": "Apply 33 {{BD2|Doom}}."
+      },
+      "novelty_basis": "Doom, the threshold-based death debuff",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "POTION_OF_DOOM",
+          "name": "Potion of Doom",
+          "wiki_revision_id": 73105,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Potion_of_Doom&oldid=73105"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-375",
+      "target": {
+        "entity_id": "FOUL_POTION",
+        "entity_name": "Foul Potion",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Foul_Potion&oldid=72733",
+        "wiki_page_id": 11431,
+        "wiki_revision_id": 72733,
+        "wiki_revision_timestamp": "2026-11-14T23:57:54Z",
+        "source_kind": "wiki",
+        "image": "StS2_FoulPotion.png",
+        "infobox_description": "Deal 12 damage to EVERYONE.<br>Can be thrown at the Merchant for 100 Gold instead."
+      },
+      "novelty_basis": "New potion interaction: throwing it at the Merchant for Gold.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "FOUL_POTION",
+          "name": "Foul Potion",
+          "wiki_revision_id": 72733,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Foul_Potion&oldid=72733"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-376",
+      "target": {
+        "entity_id": "AMALGAMATOR",
+        "entity_name": "Amalgamator",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Amalgamator&oldid=72320",
+        "wiki_page_id": 8540,
+        "wiki_revision_id": 72320,
+        "wiki_revision_timestamp": "2026-11-14T23:39:59Z",
+        "source_kind": "wiki",
+        "image": "StS2 Amalgamator.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New named event, characters and scene; the question identifies its particular story rather than a generic reward.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "AMALGAMATOR",
+          "name": "Amalgamator",
+          "wiki_revision_id": 72320,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Amalgamator&oldid=72320"
+        },
+        {
+          "id": "THE_LANTERN_KEY",
+          "name": "The Lantern Key",
+          "wiki_revision_id": 73402,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Lantern_Key&oldid=73402"
+        },
+        {
+          "id": "WAR_HISTORIAN_REPY",
+          "name": "War Historian, Repy",
+          "wiki_revision_id": 73512,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:War_Historian,_Repy&oldid=73512"
+        },
+        {
+          "id": "FIELD_OF_MAN_SIZED_HOLES",
+          "name": "Field of Man-Sized Holes",
+          "wiki_revision_id": 72701,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Field_of_Man-Sized_Holes&oldid=72701"
+        },
+        {
+          "id": "SYMBIOTE",
+          "name": "Symbiote",
+          "wiki_revision_id": 73370,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Symbiote&oldid=73370"
+        },
+        {
+          "id": "MORPHIC_GROVE",
+          "name": "Morphic Grove",
+          "wiki_revision_id": 72980,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Morphic_Grove&oldid=72980"
+        },
+        {
+          "id": "BRAIN_LEECH",
+          "name": "Brain Leech",
+          "wiki_revision_id": 72434,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Brain_Leech&oldid=72434"
+        },
+        {
+          "id": "LUMINOUS_CHOIR",
+          "name": "Luminous Choir",
+          "wiki_revision_id": 72930,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Luminous_Choir&oldid=72930"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-377",
+      "target": {
+        "entity_id": "BRAIN_LEECH",
+        "entity_name": "Brain Leech",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Brain_Leech&oldid=72434",
+        "wiki_page_id": 8960,
+        "wiki_revision_id": 72434,
+        "wiki_revision_timestamp": "2026-11-14T23:44:37Z",
+        "source_kind": "wiki",
+        "image": "StS2 Brain Leech.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New named event, characters and scene; the question identifies its particular story rather than a generic reward.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "BRAIN_LEECH",
+          "name": "Brain Leech",
+          "wiki_revision_id": 72434,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Brain_Leech&oldid=72434"
+        },
+        {
+          "id": "WAR_HISTORIAN_REPY",
+          "name": "War Historian, Repy",
+          "wiki_revision_id": 73512,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:War_Historian,_Repy&oldid=73512"
+        },
+        {
+          "id": "FIELD_OF_MAN_SIZED_HOLES",
+          "name": "Field of Man-Sized Holes",
+          "wiki_revision_id": 72701,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Field_of_Man-Sized_Holes&oldid=72701"
+        },
+        {
+          "id": "SYMBIOTE",
+          "name": "Symbiote",
+          "wiki_revision_id": 73370,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Symbiote&oldid=73370"
+        },
+        {
+          "id": "LUMINOUS_CHOIR",
+          "name": "Luminous Choir",
+          "wiki_revision_id": 72930,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Luminous_Choir&oldid=72930"
+        },
+        {
+          "id": "AMALGAMATOR",
+          "name": "Amalgamator",
+          "wiki_revision_id": 72320,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Amalgamator&oldid=72320"
+        },
+        {
+          "id": "MORPHIC_GROVE",
+          "name": "Morphic Grove",
+          "wiki_revision_id": 72980,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Morphic_Grove&oldid=72980"
+        },
+        {
+          "id": "THE_LANTERN_KEY",
+          "name": "The Lantern Key",
+          "wiki_revision_id": 73402,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Lantern_Key&oldid=73402"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-378",
+      "target": {
+        "entity_id": "LUMINOUS_CHOIR",
+        "entity_name": "Luminous Choir",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Luminous_Choir&oldid=72930",
+        "wiki_page_id": 8251,
+        "wiki_revision_id": 72930,
+        "wiki_revision_timestamp": "2026-11-15T00:06:22Z",
+        "source_kind": "wiki",
+        "image": "StS2 Luminous Choir.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New named event, characters and scene; the question identifies its particular story rather than a generic reward.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "LUMINOUS_CHOIR",
+          "name": "Luminous Choir",
+          "wiki_revision_id": 72930,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Luminous_Choir&oldid=72930"
+        },
+        {
+          "id": "BRAIN_LEECH",
+          "name": "Brain Leech",
+          "wiki_revision_id": 72434,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Brain_Leech&oldid=72434"
+        },
+        {
+          "id": "FIELD_OF_MAN_SIZED_HOLES",
+          "name": "Field of Man-Sized Holes",
+          "wiki_revision_id": 72701,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Field_of_Man-Sized_Holes&oldid=72701"
+        },
+        {
+          "id": "WAR_HISTORIAN_REPY",
+          "name": "War Historian, Repy",
+          "wiki_revision_id": 73512,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:War_Historian,_Repy&oldid=73512"
+        },
+        {
+          "id": "THE_LANTERN_KEY",
+          "name": "The Lantern Key",
+          "wiki_revision_id": 73402,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Lantern_Key&oldid=73402"
+        },
+        {
+          "id": "SYMBIOTE",
+          "name": "Symbiote",
+          "wiki_revision_id": 73370,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Symbiote&oldid=73370"
+        },
+        {
+          "id": "AMALGAMATOR",
+          "name": "Amalgamator",
+          "wiki_revision_id": 72320,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Amalgamator&oldid=72320"
+        },
+        {
+          "id": "MORPHIC_GROVE",
+          "name": "Morphic Grove",
+          "wiki_revision_id": 72980,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Morphic_Grove&oldid=72980"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-379",
+      "target": {
+        "entity_id": "THE_LANTERN_KEY",
+        "entity_name": "The Lantern Key",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Lantern_Key&oldid=73402",
+        "wiki_page_id": 8548,
+        "wiki_revision_id": 73402,
+        "wiki_revision_timestamp": "2026-11-15T00:26:33Z",
+        "source_kind": "wiki",
+        "image": "StS2_Mysterious Knight.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New named event, characters and scene; the question identifies its particular story rather than a generic reward.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "THE_LANTERN_KEY",
+          "name": "The Lantern Key",
+          "wiki_revision_id": 73402,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Lantern_Key&oldid=73402"
+        },
+        {
+          "id": "WAR_HISTORIAN_REPY",
+          "name": "War Historian, Repy",
+          "wiki_revision_id": 73512,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:War_Historian,_Repy&oldid=73512"
+        },
+        {
+          "id": "SYMBIOTE",
+          "name": "Symbiote",
+          "wiki_revision_id": 73370,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Symbiote&oldid=73370"
+        },
+        {
+          "id": "AMALGAMATOR",
+          "name": "Amalgamator",
+          "wiki_revision_id": 72320,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Amalgamator&oldid=72320"
+        },
+        {
+          "id": "FIELD_OF_MAN_SIZED_HOLES",
+          "name": "Field of Man-Sized Holes",
+          "wiki_revision_id": 72701,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Field_of_Man-Sized_Holes&oldid=72701"
+        },
+        {
+          "id": "LUMINOUS_CHOIR",
+          "name": "Luminous Choir",
+          "wiki_revision_id": 72930,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Luminous_Choir&oldid=72930"
+        },
+        {
+          "id": "BRAIN_LEECH",
+          "name": "Brain Leech",
+          "wiki_revision_id": 72434,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Brain_Leech&oldid=72434"
+        },
+        {
+          "id": "MORPHIC_GROVE",
+          "name": "Morphic Grove",
+          "wiki_revision_id": 72980,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Morphic_Grove&oldid=72980"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-380",
+      "target": {
+        "entity_id": "WAR_HISTORIAN_REPY",
+        "entity_name": "War Historian, Repy",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:War_Historian,_Repy&oldid=73512",
+        "wiki_page_id": 8819,
+        "wiki_revision_id": 73512,
+        "wiki_revision_timestamp": "2026-11-15T00:31:05Z",
+        "source_kind": "wiki",
+        "image": "StS2_War_Historian_Repy.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New named event, characters and scene; the question identifies its particular story rather than a generic reward.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "WAR_HISTORIAN_REPY",
+          "name": "War Historian, Repy",
+          "wiki_revision_id": 73512,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:War_Historian,_Repy&oldid=73512"
+        },
+        {
+          "id": "THE_LANTERN_KEY",
+          "name": "The Lantern Key",
+          "wiki_revision_id": 73402,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Lantern_Key&oldid=73402"
+        },
+        {
+          "id": "LUMINOUS_CHOIR",
+          "name": "Luminous Choir",
+          "wiki_revision_id": 72930,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Luminous_Choir&oldid=72930"
+        },
+        {
+          "id": "AMALGAMATOR",
+          "name": "Amalgamator",
+          "wiki_revision_id": 72320,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Amalgamator&oldid=72320"
+        },
+        {
+          "id": "SYMBIOTE",
+          "name": "Symbiote",
+          "wiki_revision_id": 73370,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Symbiote&oldid=73370"
+        },
+        {
+          "id": "MORPHIC_GROVE",
+          "name": "Morphic Grove",
+          "wiki_revision_id": 72980,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Morphic_Grove&oldid=72980"
+        },
+        {
+          "id": "FIELD_OF_MAN_SIZED_HOLES",
+          "name": "Field of Man-Sized Holes",
+          "wiki_revision_id": 72701,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Field_of_Man-Sized_Holes&oldid=72701"
+        },
+        {
+          "id": "BRAIN_LEECH",
+          "name": "Brain Leech",
+          "wiki_revision_id": 72434,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Brain_Leech&oldid=72434"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-381",
+      "target": {
+        "entity_id": "AEONGLASS",
+        "entity_name": "Aeonglass",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Aeonglass&oldid=73845",
+        "wiki_page_id": 10286,
+        "wiki_revision_id": 73845,
+        "wiki_revision_timestamp": "2026-11-16T21:11:50Z",
+        "source_kind": "wiki",
+        "image": "StS2_Aeonglass.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New enemy identity and its wiki-documented named moves; not a returning enemy or a renamed StS1 family.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "AEONGLASS",
+          "name": "Aeonglass",
+          "wiki_revision_id": 73845,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Aeonglass&oldid=73845"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-382",
+      "target": {
+        "entity_id": "ENTOMANCER",
+        "entity_name": "Entomancer",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Entomancer&oldid=72660",
+        "wiki_page_id": 8527,
+        "wiki_revision_id": 72660,
+        "wiki_revision_timestamp": "2026-11-14T23:54:52Z",
+        "source_kind": "wiki",
+        "image": "StS2_Entomancer.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New enemy identity and its wiki-documented named moves; not a returning enemy or a renamed StS1 family.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "ENTOMANCER",
+          "name": "Entomancer",
+          "wiki_revision_id": 72660,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Entomancer&oldid=72660"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-383",
+      "target": {
+        "entity_id": "LIVING_FOG",
+        "entity_name": "Living Fog",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Living_Fog&oldid=72918",
+        "wiki_page_id": 8397,
+        "wiki_revision_id": 72918,
+        "wiki_revision_timestamp": "2026-11-15T00:05:48Z",
+        "source_kind": "wiki",
+        "image": "StS2_Living Fog.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New enemy identity and its wiki-documented named moves; not a returning enemy or a renamed StS1 family.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "LIVING_FOG",
+          "name": "Living Fog",
+          "wiki_revision_id": 72918,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Living_Fog&oldid=72918"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-384",
+      "target": {
+        "entity_id": "VANTOM",
+        "entity_name": "Vantom",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Vantom&oldid=73483",
+        "wiki_page_id": 7818,
+        "wiki_revision_id": 73483,
+        "wiki_revision_timestamp": "2026-11-15T00:29:53Z",
+        "source_kind": "wiki",
+        "image": "StS2_Vantom.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New enemy identity and its wiki-documented named moves; not a returning enemy or a renamed StS1 family.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "VANTOM",
+          "name": "Vantom",
+          "wiki_revision_id": 73483,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Vantom&oldid=73483"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-385",
+      "target": {
+        "entity_id": "THE_INSATIABLE",
+        "entity_name": "The Insatiable",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Insatiable&oldid=73400",
+        "wiki_page_id": 8530,
+        "wiki_revision_id": 73400,
+        "wiki_revision_timestamp": "2026-11-15T00:26:27Z",
+        "source_kind": "wiki",
+        "image": "StS2_The Insatiable.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New enemy identity and its wiki-documented named moves; not a returning enemy or a renamed StS1 family.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "THE_INSATIABLE",
+          "name": "The Insatiable",
+          "wiki_revision_id": 73400,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Insatiable&oldid=73400"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-386",
+      "target": {
+        "entity_id": "CUBEX_CONSTRUCT",
+        "entity_name": "Cubex Construct",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Cubex_Construct&oldid=72548",
+        "wiki_page_id": 7806,
+        "wiki_revision_id": 72548,
+        "wiki_revision_timestamp": "2026-11-14T23:50:14Z",
+        "source_kind": "wiki",
+        "image": "StS2_Cubex Construct.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New enemy identity and its wiki-documented named moves; not a returning enemy or a renamed StS1 family.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "CUBEX_CONSTRUCT",
+          "name": "Cubex Construct",
+          "wiki_revision_id": 72548,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Cubex_Construct&oldid=72548"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-387",
+      "target": {
+        "entity_id": "SOUL_NEXUS",
+        "entity_name": "Soul Nexus",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Soul_Nexus&oldid=73299",
+        "wiki_page_id": 8594,
+        "wiki_revision_id": 73299,
+        "wiki_revision_timestamp": "2026-11-15T00:22:17Z",
+        "source_kind": "wiki",
+        "image": "StS2_Soul Nexus.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New enemy identity and its wiki-documented named moves; not a returning enemy or a renamed StS1 family.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "SOUL_NEXUS",
+          "name": "Soul Nexus",
+          "wiki_revision_id": 73299,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Soul_Nexus&oldid=73299"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-388",
+      "target": {
+        "entity_id": "FOSSIL_STALKER",
+        "entity_name": "Fossil Stalker",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fossil_Stalker&oldid=72732",
+        "wiki_page_id": 7221,
+        "wiki_revision_id": 72732,
+        "wiki_revision_timestamp": "2026-11-14T23:57:51Z",
+        "source_kind": "wiki",
+        "image": "StS2_Fossil Stalker.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New enemy identity and its wiki-documented named moves; not a returning enemy or a renamed StS1 family.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "FOSSIL_STALKER",
+          "name": "Fossil Stalker",
+          "wiki_revision_id": 72732,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Fossil_Stalker&oldid=72732"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-389",
+      "target": {
+        "entity_id": "SOUL_FYSH",
+        "entity_name": "Soul Fysh",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Soul_Fysh&oldid=73298",
+        "wiki_page_id": 8407,
+        "wiki_revision_id": 73298,
+        "wiki_revision_timestamp": "2026-11-15T00:22:14Z",
+        "source_kind": "wiki",
+        "image": "StS2_Soul Fysh.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New enemy identity and its wiki-documented named moves; not a returning enemy or a renamed StS1 family.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "SOUL_FYSH",
+          "name": "Soul Fysh",
+          "wiki_revision_id": 73298,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Soul_Fysh&oldid=73298"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-390",
+      "target": {
+        "entity_id": "QUEEN",
+        "entity_name": "Queen",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Queen&oldid=73139",
+        "wiki_page_id": 8595,
+        "wiki_revision_id": 73139,
+        "wiki_revision_timestamp": "2026-11-15T00:15:40Z",
+        "source_kind": "wiki",
+        "image": "StS2_Queen.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New enemy identity and its wiki-documented named moves; not a returning enemy or a renamed StS1 family.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "QUEEN",
+          "name": "Queen",
+          "wiki_revision_id": 73139,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Queen&oldid=73139"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-391",
+      "target": {
+        "entity_id": "KNOWLEDGE_DEMON",
+        "entity_name": "Knowledge Demon",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Knowledge_Demon&oldid=73952",
+        "wiki_page_id": 8531,
+        "wiki_revision_id": 73952,
+        "wiki_revision_timestamp": "2026-11-17T22:43:19Z",
+        "source_kind": "wiki",
+        "image": "StS2_Knowledge Demon.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New enemy identity and its wiki-documented named moves; not a returning enemy or a renamed StS1 family.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "KNOWLEDGE_DEMON",
+          "name": "Knowledge Demon",
+          "wiki_revision_id": 73952,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Knowledge_Demon&oldid=73952"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-392",
+      "target": {
+        "entity_id": "FROG_KNIGHT",
+        "entity_name": "Frog Knight",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Frog_Knight&oldid=72739",
+        "wiki_page_id": 8586,
+        "wiki_revision_id": 72739,
+        "wiki_revision_timestamp": "2026-11-14T23:58:10Z",
+        "source_kind": "wiki",
+        "image": "StS2_Frog Knight.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New enemy identity and its wiki-documented named moves; not a returning enemy or a renamed StS1 family.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "FROG_KNIGHT",
+          "name": "Frog Knight",
+          "wiki_revision_id": 72739,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Frog_Knight&oldid=72739"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-393",
+      "target": {
+        "entity_id": "HUNTER_KILLER",
+        "entity_name": "Hunter Killer",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hunter_Killer&oldid=72836",
+        "wiki_page_id": 8517,
+        "wiki_revision_id": 72836,
+        "wiki_revision_timestamp": "2026-11-15T00:02:12Z",
+        "source_kind": "wiki",
+        "image": "StS2_Hunter Killer.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New enemy identity and its wiki-documented named moves; not a returning enemy or a renamed StS1 family.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "HUNTER_KILLER",
+          "name": "Hunter Killer",
+          "wiki_revision_id": 72836,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Hunter_Killer&oldid=72836"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-394",
+      "target": {
+        "entity_id": "MECHA_KNIGHT",
+        "entity_name": "Mecha Knight",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Mecha_Knight&oldid=72952",
+        "wiki_page_id": 8593,
+        "wiki_revision_id": 72952,
+        "wiki_revision_timestamp": "2026-11-15T00:07:22Z",
+        "source_kind": "wiki",
+        "image": "StS2_Mecha Knight.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New enemy identity and its wiki-documented named moves; not a returning enemy or a renamed StS1 family.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "MECHA_KNIGHT",
+          "name": "Mecha Knight",
+          "wiki_revision_id": 72952,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Mecha_Knight&oldid=72952"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-395",
+      "target": {
+        "entity_id": "THE_OBSCURA",
+        "entity_name": "The Obscura",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Obscura&oldid=73407",
+        "wiki_page_id": 8524,
+        "wiki_revision_id": 73407,
+        "wiki_revision_timestamp": "2026-11-15T00:26:46Z",
+        "source_kind": "wiki",
+        "image": "StS2_The Obscura.png",
+        "infobox_description": ""
+      },
+      "novelty_basis": "New enemy identity and its wiki-documented named moves; not a returning enemy or a renamed StS1 family.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "THE_OBSCURA",
+          "name": "The Obscura",
+          "wiki_revision_id": 73407,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:The_Obscura&oldid=73407"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-396",
+      "target": {
+        "entity_id": "WIKI_doom",
+        "entity_name": "Doom",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Doom&oldid=73671",
+        "wiki_page_id": 8751,
+        "wiki_revision_id": 73671,
+        "wiki_revision_timestamp": "2026-11-15T22:35:55Z",
+        "source_kind": "wiki",
+        "image": null,
+        "infobox_description": ""
+      },
+      "novelty_basis": "Threshold-based death, distinct from Poison’s HP loss.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "WIKI_doom",
+          "name": "Doom",
+          "wiki_revision_id": 73671,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Doom&oldid=73671"
+        },
+        {
+          "id": "WIKI_forge",
+          "name": "Forge",
+          "wiki_revision_id": 73302,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sovereign_Blade&oldid=73302"
+        },
+        {
+          "id": "WIKI_stars",
+          "name": "Stars",
+          "wiki_revision_id": 73941,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Regent&oldid=73941"
+        },
+        {
+          "id": "WIKI_osty",
+          "name": "Osty",
+          "wiki_revision_id": 73932,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Necrobinder&oldid=73932"
+        },
+        {
+          "id": "WIKI_sovereignblade",
+          "name": "Sovereign Blade",
+          "wiki_revision_id": 73302,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sovereign_Blade&oldid=73302"
+        },
+        {
+          "id": "WIKI_summon",
+          "name": "Summon",
+          "wiki_revision_id": 73932,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Necrobinder&oldid=73932"
+        },
+        {
+          "id": "WIKI_sly",
+          "name": "Sly",
+          "wiki_revision_id": 73280,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sly&oldid=73280"
+        },
+        {
+          "id": "WIKI_enchantments",
+          "name": "Enchantments",
+          "wiki_revision_id": 72647,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Enchantments&oldid=72647"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-397",
+      "target": {
+        "entity_id": "WIKI_forge",
+        "entity_name": "Forge",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sovereign_Blade&oldid=73302",
+        "wiki_page_id": 8821,
+        "wiki_revision_id": 73302,
+        "wiki_revision_timestamp": "2026-11-15T00:22:24Z",
+        "source_kind": "wiki",
+        "image": null,
+        "infobox_description": ""
+      },
+      "novelty_basis": "The new Forge action and generated scaling weapon.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "WIKI_forge",
+          "name": "Forge",
+          "wiki_revision_id": 73302,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sovereign_Blade&oldid=73302"
+        },
+        {
+          "id": "WIKI_doom",
+          "name": "Doom",
+          "wiki_revision_id": 73671,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Doom&oldid=73671"
+        },
+        {
+          "id": "WIKI_stars",
+          "name": "Stars",
+          "wiki_revision_id": 73941,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Regent&oldid=73941"
+        },
+        {
+          "id": "WIKI_osty",
+          "name": "Osty",
+          "wiki_revision_id": 73932,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Necrobinder&oldid=73932"
+        },
+        {
+          "id": "WIKI_sovereignblade",
+          "name": "Sovereign Blade",
+          "wiki_revision_id": 73302,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sovereign_Blade&oldid=73302"
+        },
+        {
+          "id": "WIKI_summon",
+          "name": "Summon",
+          "wiki_revision_id": 73932,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Necrobinder&oldid=73932"
+        },
+        {
+          "id": "WIKI_sly",
+          "name": "Sly",
+          "wiki_revision_id": 73280,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sly&oldid=73280"
+        },
+        {
+          "id": "WIKI_enchantments",
+          "name": "Enchantments",
+          "wiki_revision_id": 72647,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Enchantments&oldid=72647"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-398",
+      "target": {
+        "entity_id": "WIKI_stars",
+        "entity_name": "Stars",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Regent&oldid=73941",
+        "wiki_page_id": 7222,
+        "wiki_revision_id": 73941,
+        "wiki_revision_timestamp": "2026-11-17T22:03:11Z",
+        "source_kind": "wiki",
+        "image": null,
+        "infobox_description": ""
+      },
+      "novelty_basis": "Regent-specific secondary card resource.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "WIKI_stars",
+          "name": "Stars",
+          "wiki_revision_id": 73941,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Regent&oldid=73941"
+        },
+        {
+          "id": "WIKI_doom",
+          "name": "Doom",
+          "wiki_revision_id": 73671,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Doom&oldid=73671"
+        },
+        {
+          "id": "WIKI_forge",
+          "name": "Forge",
+          "wiki_revision_id": 73302,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sovereign_Blade&oldid=73302"
+        },
+        {
+          "id": "WIKI_osty",
+          "name": "Osty",
+          "wiki_revision_id": 73932,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Necrobinder&oldid=73932"
+        },
+        {
+          "id": "WIKI_sovereignblade",
+          "name": "Sovereign Blade",
+          "wiki_revision_id": 73302,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sovereign_Blade&oldid=73302"
+        },
+        {
+          "id": "WIKI_summon",
+          "name": "Summon",
+          "wiki_revision_id": 73932,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Necrobinder&oldid=73932"
+        },
+        {
+          "id": "WIKI_sly",
+          "name": "Sly",
+          "wiki_revision_id": 73280,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sly&oldid=73280"
+        },
+        {
+          "id": "WIKI_enchantments",
+          "name": "Enchantments",
+          "wiki_revision_id": 72647,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Enchantments&oldid=72647"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-399",
+      "target": {
+        "entity_id": "WIKI_osty",
+        "entity_name": "Osty",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Necrobinder&oldid=73932",
+        "wiki_page_id": 7225,
+        "wiki_revision_id": 73932,
+        "wiki_revision_timestamp": "2026-11-17T21:25:41Z",
+        "source_kind": "wiki",
+        "image": null,
+        "infobox_description": ""
+      },
+      "novelty_basis": "A named companion that absorbs damage and attacks for the player.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "WIKI_osty",
+          "name": "Osty",
+          "wiki_revision_id": 73932,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Necrobinder&oldid=73932"
+        },
+        {
+          "id": "WIKI_doom",
+          "name": "Doom",
+          "wiki_revision_id": 73671,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Doom&oldid=73671"
+        },
+        {
+          "id": "WIKI_forge",
+          "name": "Forge",
+          "wiki_revision_id": 73302,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sovereign_Blade&oldid=73302"
+        },
+        {
+          "id": "WIKI_stars",
+          "name": "Stars",
+          "wiki_revision_id": 73941,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Regent&oldid=73941"
+        },
+        {
+          "id": "WIKI_sovereignblade",
+          "name": "Sovereign Blade",
+          "wiki_revision_id": 73302,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sovereign_Blade&oldid=73302"
+        },
+        {
+          "id": "WIKI_summon",
+          "name": "Summon",
+          "wiki_revision_id": 73932,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Necrobinder&oldid=73932"
+        },
+        {
+          "id": "WIKI_sly",
+          "name": "Sly",
+          "wiki_revision_id": 73280,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sly&oldid=73280"
+        },
+        {
+          "id": "WIKI_enchantments",
+          "name": "Enchantments",
+          "wiki_revision_id": 72647,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Enchantments&oldid=72647"
+        }
+      ]
+    },
+    {
+      "question_id": "sts2-400",
+      "target": {
+        "entity_id": "WIKI_sovereignblade",
+        "entity_name": "Sovereign Blade",
+        "url": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sovereign_Blade&oldid=73302",
+        "wiki_page_id": 8821,
+        "wiki_revision_id": 73302,
+        "wiki_revision_timestamp": "2026-11-15T00:22:24Z",
+        "source_kind": "wiki",
+        "image": null,
+        "infobox_description": ""
+      },
+      "novelty_basis": "The new weapon card created and scaled by Forge.",
+      "first_game_name_match": false,
+      "reviewed_for_renamed_or_equivalent_content": true,
+      "choice_entities": [
+        {
+          "id": "WIKI_sovereignblade",
+          "name": "Sovereign Blade",
+          "wiki_revision_id": 73302,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sovereign_Blade&oldid=73302"
+        },
+        {
+          "id": "WIKI_doom",
+          "name": "Doom",
+          "wiki_revision_id": 73671,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Doom&oldid=73671"
+        },
+        {
+          "id": "WIKI_forge",
+          "name": "Forge",
+          "wiki_revision_id": 73302,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sovereign_Blade&oldid=73302"
+        },
+        {
+          "id": "WIKI_stars",
+          "name": "Stars",
+          "wiki_revision_id": 73941,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Regent&oldid=73941"
+        },
+        {
+          "id": "WIKI_osty",
+          "name": "Osty",
+          "wiki_revision_id": 73932,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Necrobinder&oldid=73932"
+        },
+        {
+          "id": "WIKI_summon",
+          "name": "Summon",
+          "wiki_revision_id": 73932,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Necrobinder&oldid=73932"
+        },
+        {
+          "id": "WIKI_sly",
+          "name": "Sly",
+          "wiki_revision_id": 73280,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Sly&oldid=73280"
+        },
+        {
+          "id": "WIKI_enchantments",
+          "name": "Enchantments",
+          "wiki_revision_id": 72647,
+          "source": "https://slaythespire.wiki.gg/index.php?title=Slay_the_Spire_2:Enchantments&oldid=72647"
+        }
+      ]
+    }
+  ],
+  "excluded_examples": [
+    {
+      "sts2": "Eternal",
+      "sts1": "Curse of the Bell and Ascender’s Bane",
+      "reason": "The unremovable-card restriction already exists."
+    },
+    {
+      "sts2": "One-Two Punch",
+      "sts1": "Double Tap",
+      "reason": "Same next-Attack duplication effect."
+    },
+    {
+      "sts2": "Soul-only card generation",
+      "sts1": "Insight generation",
+      "reason": "Drawing cards from a generated token alone is not a new system."
+    }
+  ]
+}

@@ -85,7 +85,13 @@ def test_novel_full_mock_round_trip(tmp_path):
     )[0]
     result = read_eval_log(log.location)
     assert result.status == "success" and len(result.samples) == 200
-    assert result.eval.model_generate_config.reasoning_effort == "medium"
+    assert result.plan.config.reasoning_effort == "medium"
+    assert all(
+        e.config.reasoning_effort == "medium"
+        for s in result.samples
+        for e in s.events
+        if e.event == "model"
+    )
     for s in result.samples:
         assert s.error is None and s.limit is None
         assert s.scores["abstention_letter"].value["net_score"] == wanted[s.id]

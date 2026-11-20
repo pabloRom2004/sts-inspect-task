@@ -33,6 +33,7 @@ def trivia(
     abstention_prompts = {
         "text200-v3": "knowledge_abstention",
         "text200-v4": "knowledge_abstention_explicit",
+        "text200-v5": "knowledge_abstention_explicit",
     }
     expected_prompt = abstention_prompts.get(question_set, "knowledge_only")
     expected_scorer = (
@@ -64,10 +65,10 @@ def trivia(
         token_limit=settings["token_limit"],
         time_limit=settings["time_limit"],
         message_limit=settings["message_limit"],
-        version="0.6.0",
+        version="0.7.0",
         metadata={
             "dataset_revision": "2026-11-20"
-            if question_set == "text200-v4"
+            if question_set in {"text200-v4", "text200-v5"}
             else "2026-11-19",
             "question_set": question_set,
             "single_turn": True,
