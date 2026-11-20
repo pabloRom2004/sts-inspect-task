@@ -31,7 +31,7 @@ Real-model runs belong on Hawk with the designated work billing route. The defau
 inspect eval spire_trivia/trivia --run-config src/spire_trivia/run_configs/default.yaml --model mockllm/model --limit 2 --log-dir ../../logs
 ```
 
-The completed full Luna text-only run used v1 (`text200`), pinned at commit `7cdb2941af384dbd71fa4579a1f1c34945faf077`. Its recorded score is unchanged; the v2 replacement has not been evaluated on Luna. The earlier artwork-inclusive run remains separate. Models, reasoning effort, response allowance, concurrency, and sample ceilings are explicit in Hawk artifacts. Each question has an independent one-turn context, so no compaction is used.
+The completed full Luna text-only run used v1 (`text200`), pinned at commit `7cdb2941af384dbd71fa4579a1f1c34945faf077`. Its recorded score is unchanged; the v2 replacement was evaluated in the subsequent three-run Luna experiment. The earlier artwork-inclusive run remains separate. Models, reasoning effort, response allowance, concurrency, and sample ceilings are explicit in Hawk artifacts. Each question has an independent one-turn context, so no compaction is used.
 
 ## Environment
 
@@ -60,3 +60,13 @@ Filters combine by intersection. Unknown IDs and empty intersections fail before
 After trimming surrounding whitespace, the entire final response must be one uppercase A–H letter. `accuracy` is one only for the exact correct letter. `format` is one for any valid A–H letter, including a wrong choice. Explanations, lowercase, punctuation, multiple letters, empty output, and prose refusals fail the format requirement. Infrastructure failures remain Inspect errors and are reported separately from incorrect answers. There is no model judge or partial credit. Uniform chance accuracy is 12.5%.
 
 The participant bank contains no reference answers or source metadata. The host loads keys into `Sample.target`. The browser artifact intentionally includes answers for review and is separate from model input. The v2 set preserves 199 participant inputs from v1 byte-for-byte and gives its one replacement a new ID. Historical inputs and answer keys remain separately available.
+
+## Abstention protocol
+
+Revision `text200-v3` adds `I. I don't know` to every `text200-v2` question while preserving all factual stems, A–H choices, targets and IDs. Select `question_set=text200-v3`, `system_prompt=knowledge_abstention`, and `scorer=abstention_letter` together. The eight-choice default and historical configs retain their behavior.
+
+```bash
+inspect eval spire_trivia/trivia -T question_set=text200-v3 -T system_prompt=knowledge_abstention -T scorer=abstention_letter -T game=sts1 --model mockllm/model --limit 2 --log-dir ../../logs
+```
+
+The model sees the scoring rule: correct +1, I (abstain) 0, wrong or malformed final answer -1. The entire trimmed final response must be one uppercase A–I letter. Provider failures and limits remain unscored and are never abstentions. Inspect reports mean `net_score`; per-game reports also show total points out of 100, correct/wrong/abstained/invalid counts, coverage and accuracy among valid non-abstained answers. Always launch and report StS1 and StS2 separately. This arm changes the available action and scoring incentives, without asking for numerical confidence.

@@ -25,11 +25,18 @@ def trivia(
     system_prompt: str = DEFAULT_ARGS["system_prompt"],
     scorer: str = DEFAULT_ARGS["scorer"],
 ) -> Task:
-    """Test independent eight-choice questions using one tool-free model turn."""
+    """Test independent factual questions using one tool-free model turn."""
     if system_prompt not in SYSTEM_MESSAGES:
         raise ValueError(f"Unknown system prompt: {system_prompt}")
     if scorer not in SCORERS:
         raise ValueError(f"Unknown scorer: {scorer}")
+    abstention = question_set == "text200-v3"
+    if abstention != (system_prompt == "knowledge_abstention") or abstention != (
+        scorer == "abstention_letter"
+    ):
+        raise ValueError(
+            "text200-v3 requires knowledge_abstention and abstention_letter; historical sets require their original prompt and scorer"
+        )
     solver = DEFAULT_CONFIG["solver"]
     settings = DEFAULT_CONFIG["eval_config"]
     return Task(
@@ -52,7 +59,7 @@ def trivia(
         token_limit=settings["token_limit"],
         time_limit=settings["time_limit"],
         message_limit=settings["message_limit"],
-        version="0.4.0",
+        version="0.5.0",
         metadata={
             "dataset_revision": "2026-11-19",
             "question_set": question_set,
