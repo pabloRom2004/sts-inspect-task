@@ -1,10 +1,10 @@
 # Spire Trivia
 
-200 independent, text-only, eight-choice questions about Slay the Spire 1 and 2. Each game has 50 card questions, 15 relic questions, 15 enemy questions, 10 potion questions, 5 event questions, and 5 mechanics questions. Cards cover matching in both directions and numerical recall. No images are supplied by default.
+Two separate text-only benchmarks of 100 independent questions each for Slay the Spire 1 and 2. The maintained `text200-v4` revision asks only about new StS2 cards, enemies, relics, potions, events and mechanics. Each question has eight factual choices A–H plus I (I don't know). The StS1 factual questions are unchanged from the prior bank.
 
-Data comes from [Spire Archive](https://github.com/nkhoit/spire-archive) at commit `4e6b0e0`; StS2 uses v0.107.1. Cards are unupgraded, and enemy attack values use Ascension 0 before modifiers. `data/text200-v2-protocol.json` records the current revision. It replaces the vague Block item `sts1-096` with a different Artifact question `sts1-111`, preserving the other 199 participant records from v1. `data/text200-protocol.json` retains v1 and its original 20 artwork-to-text replacements. There are 100 questions per game and 25 correct answers per letter overall.
+Each game contains 50 card questions, 15 relic questions, 15 enemy questions, 10 potion questions, 5 event questions and 5 mechanics questions. StS2 mechanics cover Eternal, Sly, Doom, Clone and Imbued. Data is pinned to [Spire Archive](https://github.com/nkhoit/spire-archive/tree/4e6b0e040ccd00eb04fb1ab7fb0b298c222d2f29); StS2 uses v0.107.1. Cards are unupgraded and enemy damage is at Ascension 0 before modifiers.
 
-This measures unaided multiple-choice knowledge recall. Accuracy cannot by itself establish literal training-data memorization or distinguish recognition from inference. This is a source-backed first version rather than a claim of expert certification of every source value.
+Targets and entity-based distractors in StS2 are absent from the pinned StS1 name/ID catalog. Copied or numerically retuned effect templates, explicit returning counterparts, test records and returning enemy families are excluded. Shared primitives such as Energy and Block can occur within new content. `data/sts2-novelty-audit.json` records target and choice identities; `data/text200-v4-protocol.json` records selection and prompt rules. Selection did not use model results.
 
 ## Usage
 
@@ -14,59 +14,47 @@ This measures unaided multiple-choice knowledge recall. Accuracy cannot by itsel
 uv pip install -e '.[dev]'
 ```
 
-### Running evaluations
+### Local validation
 
 ```bash
 inspect eval spire_trivia/trivia --model mockllm/model --limit 2 --log-dir ../../logs
-inspect eval spire_trivia/trivia -T smoke=true --model openrouter/openai/gpt-6-luna --log-dir ../../logs
+inspect eval spire_trivia/trivia -T game=sts2 -T smoke=true --model mockllm/model --log-dir ../../logs
 ```
 
-Real-model runs belong on Hawk with the designated work billing route. The default selects all 200 fixed text questions. `smoke=true` selects 12 of those, one per topic and game. Each sample makes one generation call and includes only a question and eight choices. No tools, lookup, examples, or prior questions are supplied. Every model should receive the same frozen question set.
+Each sample makes one generation call without tools, search, examples, prior answers or images. No game installation, Docker image or GPU is needed. Real-model evaluations belong on Hawk using the designated work billing route. Require a bounded successful Hawk smoke with the intended model, settings, prompts and scorer before a full run. A settings preference does not authorize adding models. Use explicit `game=sts1` and `game=sts2` filters and always report the two benchmarks separately.
 
-### Configurations
+### Configurations and historical reproduction
 
-`src/spire_trivia/run_configs/default.yaml` owns the maintained 200-question text-only defaults. `original.yaml` explicitly selects the historical 200-question bank with artwork. It preserves that bank's prompts, choices, and scoring settings; the original version 0.1.0 runtime is pinned at commit `6dc20362e0ebe1177eb4397b8ed8d170fd98af9e`. The archive configuration is for requested historical reproduction; future runs use the text-only default.
+`src/spire_trivia/run_configs/default.yaml` owns the complete maintained v4 configuration, including `knowledge_abstention_explicit`, `abstention_letter`, and medium reasoning. `original.yaml` selects the original artwork-inclusive bank and strict eight-letter scoring. The original 0.1.0 runtime remains pinned at commit `6dc20362e0ebe1177eb4397b8ed8d170fd98af9e`.
 
 ```bash
 inspect eval spire_trivia/trivia --run-config src/spire_trivia/run_configs/default.yaml --model mockllm/model --limit 2 --log-dir ../../logs
+inspect eval spire_trivia/trivia -T question_set=text200-v3 -T system_prompt=knowledge_abstention -T scorer=abstention_letter --model mockllm/model --limit 2 --log-dir ../../logs
+inspect eval spire_trivia/trivia -T question_set=text200-v2 -T system_prompt=knowledge_only -T scorer=strict_letter --model mockllm/model --limit 2 --log-dir ../../logs
 ```
 
-The completed full Luna text-only run used v1 (`text200`), pinned at commit `7cdb2941af384dbd71fa4579a1f1c34945faf077`. Its recorded score is unchanged; the v2 replacement was evaluated in the subsequent three-run Luna experiment. The earlier artwork-inclusive run remains separate. Models, reasoning effort, response allowance, concurrency, and sample ceilings are explicit in Hawk artifacts. Each question has an independent one-turn context, so no compaction is used.
+The earlier banks and results remain frozen. V1 (`text200`) replaced artwork with text. V2 replaced the vague Block definition with Artifact. V3 introduced I and negative scoring. V4 replaces the full StS2 bank with new-content-only questions and uses the user's exact scoring sentence; it adds no confidence or guessing advice. Earlier results are not v4 results. Each independent question has a single-turn context, so no compaction is used.
 
-## Environment
+## Options and parameters
 
-No game installation, Docker image, GPU, or sandbox is needed. Historical artwork remains bundled solely for explicit archive reproduction; the default 200-question inputs contain no images. Game content belongs to Mega Crit, and this is an unofficial research benchmark.
+Inspect's `--sample-id`, `--sample-shuffle`, `--epochs` and `--limit` controls are supported. The YAML owns solver and generation defaults; runtime overrides remain available. Extra-tool or multi-turn runs require separate reporting.
 
-## Options
-
-Inspect's `--sample-id`, `--sample-shuffle`, `--epochs`, and `--limit` controls select and repeat samples. `--solver` can replace native `generate(tool_calls="none")`; extra-tool or multi-turn runs should be reported separately.
-
-## Parameters
-
-- `question_set`: `text200-v2` by default; `text200` reproduces v1, including the retired question; `text100` selects the superseded fixed text subset; `all200` selects the original bank before other filters.
+- `question_set`: `text200-v4` by default. Historical choices are `text200-v3`, `text200-v2`, `text200`, `text100` and `all200`.
 - `game`: `sts1`, `sts2`, or null for both.
 - `category`: `cards`, `relics`, `monsters`, `potions`, `events`, `mechanics`, or null.
-- `question_kind`: a format key in the participant records, or null.
-- `include_images`: false by default; the text200 and text100 sets have no images regardless of this flag.
-- `sample_ids`: optional list of IDs from the selected set.
-- `smoke`: false by default; true selects 12 representative questions from the selected set.
-- `system_prompt`: `knowledge_only` by default.
-- `scorer`: `strict_letter` by default.
+- `question_kind`: a participant format key or null.
+- `include_images`: false by default. All maintained text banks have no images.
+- `sample_ids`: optional IDs from the selected bank.
+- `smoke`: false by default; true selects one question per topic and game before other filters.
+- `system_prompt`: `knowledge_abstention_explicit` for v4, `knowledge_abstention` for v3, or `knowledge_only` for earlier banks.
+- `scorer`: `abstention_letter` for v3/v4, `strict_letter` for earlier banks.
 
-Filters combine by intersection. Unknown IDs and empty intersections fail before inference. The default is one epoch; runtime overrides are honored with the mean reducer.
+Filters compose by intersection. Mismatched protocol/prompt/scorer combinations, unknown IDs and empty intersections fail before inference. The default is one epoch; runtime overrides use the configured mean reducer.
 
 ## Scoring
 
-After trimming surrounding whitespace, the entire final response must be one uppercase A–H letter. `accuracy` is one only for the exact correct letter. `format` is one for any valid A–H letter, including a wrong choice. Explanations, lowercase, punctuation, multiple letters, empty output, and prose refusals fail the format requirement. Infrastructure failures remain Inspect errors and are reported separately from incorrect answers. There is no model judge or partial credit. Uniform chance accuracy is 12.5%.
+A correct answer scores +1, an incorrect answer scores −1, and I don’t know scores 0.
 
-The participant bank contains no reference answers or source metadata. The host loads keys into `Sample.target`. The browser artifact intentionally includes answers for review and is separate from model input. The v2 set preserves 199 participant inputs from v1 byte-for-byte and gives its one replacement a new ID. Historical inputs and answer keys remain separately available.
+That sentence appears verbatim in the model prompt. The entire trimmed final response must be one uppercase A–I letter. Malformed replies score −1. Provider failures and limits remain unscored and are never treated as abstentions. Inspect averages `net_score`; reports also show per-game total points out of 100, correct/wrong/abstained/invalid counts, coverage and accuracy among answered valid questions. Historical strict scoring accepts only A–H and preserves its original accuracy/format outputs.
 
-## Abstention protocol
-
-Revision `text200-v3` adds `I. I don't know` to every `text200-v2` question while preserving all factual stems, A–H choices, targets and IDs. Select `question_set=text200-v3`, `system_prompt=knowledge_abstention`, and `scorer=abstention_letter` together. The eight-choice default and historical configs retain their behavior.
-
-```bash
-inspect eval spire_trivia/trivia -T question_set=text200-v3 -T system_prompt=knowledge_abstention -T scorer=abstention_letter -T game=sts1 --model mockllm/model --limit 2 --log-dir ../../logs
-```
-
-The model sees the scoring rule: correct +1, I (abstain) 0, wrong or malformed final answer -1. The entire trimmed final response must be one uppercase A–I letter. Provider failures and limits remain unscored and are never abstentions. Inspect reports mean `net_score`; per-game reports also show total points out of 100, correct/wrong/abstained/invalid counts, coverage and accuracy among valid non-abstained answers. Always launch and report StS1 and StS2 separately. This arm changes the available action and scoring incentives, without asking for numerical confidence.
+The participant bank contains no reference answers or source metadata. Answer keys are loaded host-side into `Sample.target`. The separate browser viewer intentionally includes answers and reference artwork. This is an unofficial research benchmark; game content belongs to Mega Crit. Multiple-choice performance does not by itself establish literal training-data memorization.

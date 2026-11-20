@@ -1,15 +1,15 @@
 task:
   task: spire_trivia/trivia
   args:
-    question_set: text200-v2
+    question_set: text200-v4
     game: null
     category: null
     question_kind: null
     include_images: false
     sample_ids: null
     smoke: false
-    system_prompt: knowledge_only
-    scorer: strict_letter
+    system_prompt: knowledge_abstention_explicit
+    scorer: abstention_letter
 
 solver:
   solver: generate
@@ -18,7 +18,7 @@ solver:
 
 generate_config:
   max_tokens: null
-  reasoning_effort: null
+  reasoning_effort: medium
   temperature: null
 
 eval_config:

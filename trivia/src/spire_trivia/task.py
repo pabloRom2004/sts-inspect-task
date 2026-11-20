@@ -30,12 +30,17 @@ def trivia(
         raise ValueError(f"Unknown system prompt: {system_prompt}")
     if scorer not in SCORERS:
         raise ValueError(f"Unknown scorer: {scorer}")
-    abstention = question_set == "text200-v3"
-    if abstention != (system_prompt == "knowledge_abstention") or abstention != (
-        scorer == "abstention_letter"
-    ):
+    abstention_prompts = {
+        "text200-v3": "knowledge_abstention",
+        "text200-v4": "knowledge_abstention_explicit",
+    }
+    expected_prompt = abstention_prompts.get(question_set, "knowledge_only")
+    expected_scorer = (
+        "abstention_letter" if question_set in abstention_prompts else "strict_letter"
+    )
+    if system_prompt != expected_prompt or scorer != expected_scorer:
         raise ValueError(
-            "text200-v3 requires knowledge_abstention and abstention_letter; historical sets require their original prompt and scorer"
+            f"{question_set} requires {expected_prompt} and {expected_scorer}"
         )
     solver = DEFAULT_CONFIG["solver"]
     settings = DEFAULT_CONFIG["eval_config"]
@@ -59,9 +64,11 @@ def trivia(
         token_limit=settings["token_limit"],
         time_limit=settings["time_limit"],
         message_limit=settings["message_limit"],
-        version="0.5.0",
+        version="0.6.0",
         metadata={
-            "dataset_revision": "2026-11-19",
+            "dataset_revision": "2026-11-20"
+            if question_set == "text200-v4"
+            else "2026-11-19",
             "question_set": question_set,
             "single_turn": True,
             "tools": False,

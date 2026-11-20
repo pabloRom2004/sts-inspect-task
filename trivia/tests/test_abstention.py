@@ -59,7 +59,14 @@ def test_abstention_score_round_trip(tmp_path, response, outcome, points, valid)
 
 def test_abstention_filters_and_factual_equivalence():
     """Keep both games at 100 questions and preserve every factual choice and target."""
-    old = {s.id: s for s in trivia().dataset}
+    old = {
+        s.id: s
+        for s in trivia(
+            question_set="text200-v2",
+            system_prompt="knowledge_only",
+            scorer="strict_letter",
+        ).dataset
+    }
     for game in ["sts1", "sts2"]:
         new = abstention_task(game=game)
         assert len(new.dataset) == 100
@@ -74,7 +81,7 @@ def test_abstention_cannot_use_baseline_scoring():
     with pytest.raises(ValueError):
         trivia(question_set="text200-v3")
     with pytest.raises(ValueError):
-        trivia(scorer="abstention_letter")
+        trivia(scorer="strict_letter")
 
 
 def test_negative_and_zero_scores_survive_epoch_reduction(tmp_path):

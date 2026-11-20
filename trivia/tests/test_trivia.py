@@ -11,6 +11,12 @@ from spire_trivia import trivia
 from spire_trivia.dataset import DATA_DIR
 
 
+def baseline_task(**kwargs):
+    """Select the frozen eight-choice protocol explicitly for historical regressions."""
+    kwargs.setdefault("question_set", "text200-v2")
+    return trivia(system_prompt="knowledge_only", scorer="strict_letter", **kwargs)
+
+
 @pytest.mark.parametrize(
     "completion,valid",
     [
@@ -32,7 +38,7 @@ def test_strict_response_format(tmp_path, completion, valid):
         custom_outputs=[ModelOutput.from_content("mockllm/model", response)],
     )
     log = inspect_eval(
-        trivia(question_set="all200", sample_ids=[question_id]),
+        baseline_task(question_set="all200", sample_ids=[question_id]),
         model=model,
         log_dir=_log_dir(tmp_path),
         display="none",
@@ -54,7 +60,7 @@ def test_wrong_letter_is_valid_but_incorrect(tmp_path):
         custom_outputs=[ModelOutput.from_content("mockllm/model", wrong)],
     )
     log = inspect_eval(
-        trivia(question_set="all200", sample_ids=["sts1-001"]),
+        baseline_task(question_set="all200", sample_ids=["sts1-001"]),
         model=model,
         log_dir=_log_dir(tmp_path),
         display="none",
@@ -67,14 +73,15 @@ def test_wrong_letter_is_valid_but_incorrect(tmp_path):
 
 def test_full_dataset_and_smoke_independence(tmp_path):
     """Carry independent text prompts through two Inspect epochs."""
-    full = trivia()
+    full = baseline_task()
     assert len(full.dataset) == 200
-    assert len(trivia(question_set="text100").dataset) == 100
-    assert len(trivia(question_set="all200", include_images=True).dataset) == 200
+    assert len(baseline_task(question_set="text100").dataset) == 100
+    assert len(baseline_task(question_set="all200", include_images=True).dataset) == 200
     assert (
-        len(trivia(game="sts2", category="cards", include_images=False).dataset) == 50
+        len(baseline_task(game="sts2", category="cards", include_images=False).dataset)
+        == 50
     )
-    task = trivia(smoke=True)
+    task = baseline_task(smoke=True)
     assert len(task.dataset) == 12
     assert {s.metadata["game"] for s in task.dataset} == {"sts1", "sts2"}
     assert len([s for s in task.dataset if s.metadata["kind"] == "art_to_title"]) == 0
@@ -105,7 +112,7 @@ def test_invalid_filters_fail_before_inference():
         {"category": "events", "question_kind": "art_to_title"},
     ]:
         with pytest.raises(ValueError):
-            trivia(**kwargs)
+            baseline_task(**kwargs)
 
 
 def _log_dir(tmp_path):
@@ -113,9 +120,9 @@ def _log_dir(tmp_path):
     return os.environ.get("SPIRE_TRIVIA_TEST_LOG_DIR", str(tmp_path))
 
 
-def test_default_text200_v2_matches_fixed_protocol(tmp_path):
+def test_historical_text200_v2_matches_fixed_protocol(tmp_path):
     """Run all two hundred text prompts through real generation and scoring boundaries."""
-    task = trivia()
+    task = baseline_task()
     selection = json.loads((DATA_DIR / "text200-v2-protocol.json").read_text())
     assert [s.id for s in task.dataset] == selection["selected_ids"]
     assert len(task.dataset) == 200
@@ -139,7 +146,9 @@ def test_default_text200_v2_matches_fixed_protocol(tmp_path):
 
 def test_archived_image_question_remains_explicit(tmp_path):
     """Keep the original image protocol available only through explicit archive settings."""
-    task = trivia(question_set="all200", include_images=True, sample_ids=["sts1-041"])
+    task = baseline_task(
+        question_set="all200", include_images=True, sample_ids=["sts1-041"]
+    )
     model = get_model(
         "mockllm/model",
         custom_outputs=[
@@ -156,8 +165,8 @@ def test_archived_image_question_remains_explicit(tmp_path):
 
 def test_replacement_preserves_historical_question_and_other_inputs():
     """Keep the retired Block sample reproducible and change only one current sample."""
-    previous = {s.id: s for s in trivia(question_set="text200").dataset}
-    current = {s.id: s for s in trivia().dataset}
+    previous = {s.id: s for s in baseline_task(question_set="text200").dataset}
+    current = {s.id: s for s in baseline_task().dataset}
     assert set(previous) - set(current) == {"sts1-096"}
     assert set(current) - set(previous) == {"sts1-111"}
     assert "Until next turn, prevents damage." in previous["sts1-096"].input[1].text
