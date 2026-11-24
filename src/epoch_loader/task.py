@@ -41,10 +41,18 @@ def load_private_task(expected_sha256: str):
 
 
 @task
-def first_combat(expected_sha256: str, game: str = DEFAULTS['game'], minutes: float = DEFAULTS['minutes'],
+def first_combat(expected_sha256: str, game: str = DEFAULTS['game'], minutes: float = DEFAULTS['smoke_minutes'],
                  web: bool = DEFAULTS['web']) -> Task:
     """Delegate the bounded game smoke to the verified private task package."""
     return load_private_task(expected_sha256).first_combat(game, minutes, web)
+
+
+@task
+def play_game(expected_sha256: str, game: str = DEFAULTS['game'], seed: str = DEFAULTS['seed'],
+              character: str = DEFAULTS['character'], minutes: float = DEFAULTS['minutes'],
+              web: bool = DEFAULTS['web']) -> Task:
+    """Delegate a complete game to the verified private task package."""
+    return load_private_task(expected_sha256).play_game(game, seed, character, minutes, web)
 
 
 @task

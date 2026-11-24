@@ -1,6 +1,9 @@
 task:
-  task: epoch_loader/first_combat
+  task: epoch_loader/play_game
   args:
     game: sts
-    minutes: 30
+    seed: '1'
+    character: Ironclad
+    minutes: 4000
+    smoke_minutes: 30
     web: true
