@@ -4,9 +4,9 @@ build-backend = "hatchling.build"
 
 [project]
 name = "epoch-hawk-loader"
-version = "0.1.0"
+version = "0.1.1"
 requires-python = ">=3.12"
-dependencies = ["inspect-ai==0.3.273", "openai==3.9.0", "inspect-swe==0.2.70", "mcp==2.2.0", "httpx", "pydantic>=2", "pyyaml", "markdownify"]
+dependencies = ["inspect-ai>=0.3.273,<0.4", "openai==3.9.0", "inspect-swe==0.2.70", "mcp==2.2.0", "httpx", "pydantic>=2", "pyyaml", "markdownify"]
 
 [project.entry-points.inspect_ai]
 epoch_loader = "epoch_loader.task"
