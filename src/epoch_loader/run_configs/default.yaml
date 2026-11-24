@@ -1,0 +1,6 @@
+task:
+  task: epoch_loader/first_combat
+  args:
+    game: sts
+    minutes: 30
+    web: true
