@@ -1,10 +1,10 @@
 # Spire Trivia
 
-Two separate text-only benchmarks of 100 independent questions each for Slay the Spire 1 and 2. The maintained `text200-v6` revision asks only about new StS2 cards, enemies, relics, potions, events and mechanics. Each question has eight factual choices A–H plus I (I don't know). Generic move matching is removed in both games; each has 55 numerical questions. The Gold-Plated Cables effect question is retained.
+Two separate text-only benchmarks of 100 independent questions each for Slay the Spire 1 and 2. The maintained `text200-v7` revision asks only about new StS2 cards, enemies, relics, potions, events and mechanics. Each question has eight factual choices A–H plus I (I don't know). Generic move matching is removed in both games; each has 55 numerical questions. The Gold-Plated Cables effect question is retained.
 
-Each game contains 50 card questions, 15 relic questions, 15 enemy questions, 10 potion questions, 5 event questions and 5 mechanics questions. StS2 mechanics cover Eternal, Sly, Doom, Clone and Imbued. Data is pinned to [Spire Archive](https://github.com/nkhoit/spire-archive/tree/4e6b0e040ccd00eb04fb1ab7fb0b298c222d2f29); StS2 uses v0.107.1. Cards are unupgraded and enemy damage is at Ascension 0 before modifiers.
+StS1 has 50 card, 15 relic, 15 enemy, 10 potion, 5 event and 5 mechanic questions. StS2 has 60 card, 10 relic, 15 enemy, 5 potion, 5 event and 5 mechanic questions. The StS2 participant prompt names v0.107.1 and its release date, 19 June 2026 UTC. Cards are unupgraded and enemy damage is at Ascension 0 before modifiers. [Archived patch data](https://github.com/nkhoit/spire-archive/tree/4e6b0e040ccd00eb04fb1ab7fb0b298c222d2f29/data/sts2/history/0.107.1) · [Mega Crit’s release announcement](https://store.steampowered.com/news/app/2868840/view/710026912607505280)
 
-StS2 facts are scraped from exact Slay the Spire Wiki revisions saved on 20 November 2026. New cards for existing characters are eligible after individual review; returning content, simple renames and numerical retunes are excluded. Novelty checks cover the full first-game catalog. `data/sts2-wiki-novelty-audit.json` records each new-content reason, and `data/text200-v6-protocol.json` records page revisions and selection rules. The snapshot excludes pages marked Beta content. Selection did not use model results.
+The v7 protocol lists all 100 StS2 targets and the 31 questions revised after checking the earlier November wiki quiz against the playing build. The scorer accepts a single uppercase A–I on the last nonempty response line. The separate format metric records whether the entire response was one letter. Historical revisions retain their original grading.
 
 ## Usage
 
@@ -39,7 +39,7 @@ The earlier banks and results remain frozen. V1 (`text200`) replaced artwork wit
 
 Inspect's `--sample-id`, `--sample-shuffle`, `--epochs` and `--limit` controls are supported. The YAML owns solver and generation defaults; runtime overrides remain available. Extra-tool or multi-turn runs require separate reporting.
 
-- `question_set`: `text200-v6` by default. Historical choices include `text200-v5`, `text200-v4`, `text200-v3`, `text200-v2`, `text200`, `text100` and `all200`.
+- `question_set`: `text200-v7` by default. Historical choices include `text200-v6`, `text200-v5`, `text200-v4`, `text200-v3`, `text200-v2`, `text200`, `text100` and `all200`.
 - `game`: `sts1`, `sts2`, or null for both.
 - `category`: `cards`, `relics`, `monsters`, `potions`, `events`, `mechanics`, or null.
 - `question_kind`: a participant format key or null.
