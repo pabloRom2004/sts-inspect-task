@@ -34,6 +34,7 @@ def trivia(
         "text200-v3": "knowledge_abstention",
         "text200-v4": "knowledge_abstention_explicit",
         "text200-v5": "knowledge_abstention_explicit",
+        "text200-v7": "knowledge_abstention_explicit",
         "text200-v6": "knowledge_abstention_explicit",
     }
     expected_prompt = abstention_prompts.get(question_set, "knowledge_only")
@@ -60,15 +61,19 @@ def trivia(
         solver=cast(
             Solver, registry_create("solver", solver["solver"], **solver["args"])
         ),
-        scorer=SCORERS[scorer](),
+        scorer=SCORERS[scorer](recover_final=True)
+        if question_set == "text200-v7"
+        else SCORERS[scorer](),
         config=GenerateConfig(**DEFAULT_CONFIG["generate_config"]),
         epochs=Epochs(settings["epochs"], settings["epochs_reducer"]),
         token_limit=settings["token_limit"],
         time_limit=settings["time_limit"],
         message_limit=settings["message_limit"],
-        version="0.7.1",
+        version="0.8.0" if question_set == "text200-v7" else "0.7.1",
         metadata={
-            "dataset_revision": "2026-11-20"
+            "dataset_revision": "2026-11-26"
+            if question_set == "text200-v7"
+            else "2026-11-20"
             if question_set in {"text200-v4", "text200-v5", "text200-v6"}
             else "2026-11-19",
             "question_set": question_set,

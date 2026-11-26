@@ -1,0 +1,752 @@
+{
+  "question_set": "text200-v7",
+  "sts2_version": "v0.107.1",
+  "archive_revision": "4e6b0e040ccd00eb04fb1ab7fb0b298c222d2f29",
+  "steam_announcement": "https://store.steampowered.com/news/app/2868840/view/1835871199305790",
+  "release_date_utc": "2026-06-19",
+  "verified_git_blobs": {
+    "data/sts2/history/0.107.1/cards.json": "bb907c5eb71415e6bf8139aa010c5d1464673ddb",
+    "data/sts2/history/0.107.1/enchantments.json": "41a692edc15a515e494b15279984683b8bb5bb22",
+    "data/sts2/history/0.107.1/events.json": "6d5a630f0d8073cea61f8dc2a489be956d98d4cc",
+    "data/sts2/history/0.107.1/keywords.json": "9ba2c1b8e7d685d6ea52ccb95bad9fe58a52b3e3",
+    "data/sts2/history/0.107.1/monsters.json": "e12856cc6685e484dd392e93a37001561c5047ff",
+    "data/sts2/history/0.107.1/potions.json": "1a66f2c21097e3efc48445e030bf758f7cae36a8",
+    "data/sts2/history/0.107.1/powers.json": "0d9c93121e1dabd267715e7896cec6378fe0c333",
+    "data/sts2/history/0.107.1/relics.json": "e287cc2e522c6939e143b4a9952bba8c4d69e410"
+  },
+  "reask_ids": [
+    "sts2-301",
+    "sts2-302",
+    "sts2-303",
+    "sts2-305",
+    "sts2-306",
+    "sts2-308",
+    "sts2-309",
+    "sts2-310",
+    "sts2-312",
+    "sts2-313",
+    "sts2-317",
+    "sts2-318",
+    "sts2-320",
+    "sts2-321",
+    "sts2-322",
+    "sts2-324",
+    "sts2-325",
+    "sts2-326",
+    "sts2-327",
+    "sts2-329",
+    "sts2-330",
+    "sts2-332",
+    "sts2-335",
+    "sts2-336",
+    "sts2-338",
+    "sts2-339",
+    "sts2-346",
+    "sts2-355",
+    "sts2-356",
+    "sts2-381",
+    "sts2-400"
+  ],
+  "items": [
+    {
+      "id": "sts2-301",
+      "original_entity": "Tutor",
+      "patch_entity": "Dirge",
+      "patch_record": "cards/DIRGE",
+      "reask": true
+    },
+    {
+      "id": "sts2-302",
+      "original_entity": "Time's Up",
+      "patch_entity": "Time's Up",
+      "patch_record": "cards/TIMES_UP",
+      "reask": true
+    },
+    {
+      "id": "sts2-303",
+      "original_entity": "Convergence",
+      "patch_entity": "Convergence",
+      "patch_record": "cards/CONVERGENCE",
+      "reask": true
+    },
+    {
+      "id": "sts2-304",
+      "original_entity": "Hammer Time",
+      "patch_entity": "Hammer Time",
+      "patch_record": "cards/HAMMER_TIME",
+      "reask": false
+    },
+    {
+      "id": "sts2-305",
+      "original_entity": "Knife Trap",
+      "patch_entity": "Knife Trap",
+      "patch_record": "cards/KNIFE_TRAP",
+      "reask": true
+    },
+    {
+      "id": "sts2-306",
+      "original_entity": "Master Planner",
+      "patch_entity": "Master Planner",
+      "patch_record": "cards/MASTER_PLANNER",
+      "reask": true
+    },
+    {
+      "id": "sts2-307",
+      "original_entity": "Flatten",
+      "patch_entity": "Flatten",
+      "patch_record": "cards/FLATTEN",
+      "reask": false
+    },
+    {
+      "id": "sts2-308",
+      "original_entity": "Sneaky",
+      "patch_entity": "Sneaky",
+      "patch_record": "cards/SNEAKY",
+      "reask": true
+    },
+    {
+      "id": "sts2-309",
+      "original_entity": "Hidden Cache",
+      "patch_entity": "Hidden Cache",
+      "patch_record": "cards/HIDDEN_CACHE",
+      "reask": true
+    },
+    {
+      "id": "sts2-310",
+      "original_entity": "Molten Fist",
+      "patch_entity": "Molten Fist",
+      "patch_record": "cards/MOLTEN_FIST",
+      "reask": true
+    },
+    {
+      "id": "sts2-311",
+      "original_entity": "Squeeze",
+      "patch_entity": "Squeeze",
+      "patch_record": "cards/SQUEEZE",
+      "reask": false
+    },
+    {
+      "id": "sts2-312",
+      "original_entity": "Summon Forth",
+      "patch_entity": "Summon Forth",
+      "patch_record": "cards/SUMMON_FORTH",
+      "reask": true
+    },
+    {
+      "id": "sts2-313",
+      "original_entity": "The Smith",
+      "patch_entity": "The Smith",
+      "patch_record": "cards/THE_SMITH",
+      "reask": true
+    },
+    {
+      "id": "sts2-314",
+      "original_entity": "Child of the Stars",
+      "patch_entity": "Child of the Stars",
+      "patch_record": "cards/CHILD_OF_THE_STARS",
+      "reask": false
+    },
+    {
+      "id": "sts2-315",
+      "original_entity": "Believe in You",
+      "patch_entity": "Believe in You",
+      "patch_record": "cards/BELIEVE_IN_YOU",
+      "reask": false
+    },
+    {
+      "id": "sts2-316",
+      "original_entity": "Blight Strike",
+      "patch_entity": "Blight Strike",
+      "patch_record": "cards/BLIGHT_STRIKE",
+      "reask": false
+    },
+    {
+      "id": "sts2-317",
+      "original_entity": "Sacrifice",
+      "patch_entity": "Sacrifice",
+      "patch_record": "cards/SACRIFICE",
+      "reask": true
+    },
+    {
+      "id": "sts2-318",
+      "original_entity": "Plot",
+      "patch_entity": "Lift",
+      "patch_record": "cards/LIFT",
+      "reask": true
+    },
+    {
+      "id": "sts2-319",
+      "original_entity": "Seeking Edge",
+      "patch_entity": "Seeking Edge",
+      "patch_record": "cards/SEEKING_EDGE",
+      "reask": false
+    },
+    {
+      "id": "sts2-320",
+      "original_entity": "Scourge",
+      "patch_entity": "Scourge",
+      "patch_record": "cards/SCOURGE",
+      "reask": true
+    },
+    {
+      "id": "sts2-321",
+      "original_entity": "Hellraiser",
+      "patch_entity": "Hellraiser",
+      "patch_record": "cards/HELLRAISER",
+      "reask": true
+    },
+    {
+      "id": "sts2-322",
+      "original_entity": "Sic 'Em",
+      "patch_entity": "Sic 'Em",
+      "patch_record": "cards/SIC_EM",
+      "reask": true
+    },
+    {
+      "id": "sts2-323",
+      "original_entity": "Invoke",
+      "patch_entity": "Invoke",
+      "patch_record": "cards/INVOKE",
+      "reask": false
+    },
+    {
+      "id": "sts2-324",
+      "original_entity": "Bulwark",
+      "patch_entity": "Bulwark",
+      "patch_record": "cards/BULWARK",
+      "reask": true
+    },
+    {
+      "id": "sts2-325",
+      "original_entity": "Glow",
+      "patch_entity": "Glow",
+      "patch_record": "cards/GLOW",
+      "reask": true
+    },
+    {
+      "id": "sts2-326",
+      "original_entity": "Unmovable",
+      "patch_entity": "Unmovable",
+      "patch_record": "cards/UNMOVABLE",
+      "reask": true
+    },
+    {
+      "id": "sts2-327",
+      "original_entity": "Glimpse Beyond",
+      "patch_entity": "Glimpse Beyond",
+      "patch_record": "cards/GLIMPSE_BEYOND",
+      "reask": true
+    },
+    {
+      "id": "sts2-328",
+      "original_entity": "Radiate",
+      "patch_entity": "Radiate",
+      "patch_record": "cards/RADIATE",
+      "reask": false
+    },
+    {
+      "id": "sts2-329",
+      "original_entity": "Hailstorm",
+      "patch_entity": "Hailstorm",
+      "patch_record": "cards/HAILSTORM",
+      "reask": true
+    },
+    {
+      "id": "sts2-330",
+      "original_entity": "Refine Blade",
+      "patch_entity": "Refine Blade",
+      "patch_record": "cards/REFINE_BLADE",
+      "reask": true
+    },
+    {
+      "id": "sts2-331",
+      "original_entity": "Calcify",
+      "patch_entity": "Calcify",
+      "patch_record": "cards/CALCIFY",
+      "reask": false
+    },
+    {
+      "id": "sts2-332",
+      "original_entity": "Shroud",
+      "patch_entity": "Shroud",
+      "patch_record": "cards/SHROUD",
+      "reask": true
+    },
+    {
+      "id": "sts2-333",
+      "original_entity": "Black Hole",
+      "patch_entity": "Black Hole",
+      "patch_record": "cards/BLACK_HOLE",
+      "reask": false
+    },
+    {
+      "id": "sts2-334",
+      "original_entity": "Knockdown",
+      "patch_entity": "Knockdown",
+      "patch_record": "cards/KNOCKDOWN",
+      "reask": false
+    },
+    {
+      "id": "sts2-335",
+      "original_entity": "Legion of Bone",
+      "patch_entity": "Legion of Bone",
+      "patch_record": "cards/LEGION_OF_BONE",
+      "reask": true
+    },
+    {
+      "id": "sts2-336",
+      "original_entity": "Imitation Learning",
+      "patch_entity": "Gang Up",
+      "patch_record": "cards/GANG_UP",
+      "reask": true
+    },
+    {
+      "id": "sts2-337",
+      "original_entity": "High Five",
+      "patch_entity": "High Five",
+      "patch_record": "cards/HIGH_FIVE",
+      "reask": false
+    },
+    {
+      "id": "sts2-338",
+      "original_entity": "Grapple",
+      "patch_entity": "Beat into Shape",
+      "patch_record": "cards/BEAT_INTO_SHAPE",
+      "reask": true
+    },
+    {
+      "id": "sts2-339",
+      "original_entity": "Outbreak",
+      "patch_entity": "Outbreak",
+      "patch_record": "cards/OUTBREAK",
+      "reask": true
+    },
+    {
+      "id": "sts2-340",
+      "original_entity": "Focused Strike",
+      "patch_entity": "Focused Strike",
+      "patch_record": "cards/FOCUSED_STRIKE",
+      "reask": false
+    },
+    {
+      "id": "sts2-341",
+      "original_entity": "Corrosive Wave",
+      "patch_entity": "Corrosive Wave",
+      "patch_record": "cards/CORROSIVE_WAVE",
+      "reask": false
+    },
+    {
+      "id": "sts2-342",
+      "original_entity": "Shining Strike",
+      "patch_entity": "Shining Strike",
+      "patch_record": "cards/SHINING_STRIKE",
+      "reask": false
+    },
+    {
+      "id": "sts2-343",
+      "original_entity": "Synthesis",
+      "patch_entity": "Synthesis",
+      "patch_record": "cards/SYNTHESIS",
+      "reask": false
+    },
+    {
+      "id": "sts2-344",
+      "original_entity": "Fan of Knives",
+      "patch_entity": "Fan of Knives",
+      "patch_record": "cards/FAN_OF_KNIVES",
+      "reask": false
+    },
+    {
+      "id": "sts2-345",
+      "original_entity": "Tesla Coil",
+      "patch_entity": "Tesla Coil",
+      "patch_record": "cards/TESLA_COIL",
+      "reask": false
+    },
+    {
+      "id": "sts2-346",
+      "original_entity": "Spoils of Battle",
+      "patch_entity": "Spoils of Battle",
+      "patch_record": "cards/SPOILS_OF_BATTLE",
+      "reask": true
+    },
+    {
+      "id": "sts2-347",
+      "original_entity": "Gather Light",
+      "patch_entity": "Gather Light",
+      "patch_record": "cards/GATHER_LIGHT",
+      "reask": false
+    },
+    {
+      "id": "sts2-348",
+      "original_entity": "Crescent Spear",
+      "patch_entity": "Crescent Spear",
+      "patch_record": "cards/CRESCENT_SPEAR",
+      "reask": false
+    },
+    {
+      "id": "sts2-349",
+      "original_entity": "Afterlife",
+      "patch_entity": "Afterlife",
+      "patch_record": "cards/AFTERLIFE",
+      "reask": false
+    },
+    {
+      "id": "sts2-350",
+      "original_entity": "Wrought in War",
+      "patch_entity": "Wrought in War",
+      "patch_record": "cards/WROUGHT_IN_WAR",
+      "reask": false
+    },
+    {
+      "id": "sts2-351",
+      "original_entity": "Oblivion",
+      "patch_entity": "Oblivion",
+      "patch_record": "cards/OBLIVION",
+      "reask": false
+    },
+    {
+      "id": "sts2-352",
+      "original_entity": "Cleanse",
+      "patch_entity": "Cleanse",
+      "patch_record": "cards/CLEANSE",
+      "reask": false
+    },
+    {
+      "id": "sts2-353",
+      "original_entity": "Lightning Rod",
+      "patch_entity": "Lightning Rod",
+      "patch_record": "cards/LIGHTNING_ROD",
+      "reask": false
+    },
+    {
+      "id": "sts2-354",
+      "original_entity": "Spur",
+      "patch_entity": "Spur",
+      "patch_record": "cards/SPUR",
+      "reask": false
+    },
+    {
+      "id": "sts2-355",
+      "original_entity": "Howl from Beyond",
+      "patch_entity": "Howl from Beyond",
+      "patch_record": "cards/HOWL_FROM_BEYOND",
+      "reask": true
+    },
+    {
+      "id": "sts2-356",
+      "original_entity": "Tank",
+      "patch_entity": "Tank",
+      "patch_record": "cards/TANK",
+      "reask": true
+    },
+    {
+      "id": "sts2-357",
+      "original_entity": "Deathbringer",
+      "patch_entity": "Deathbringer",
+      "patch_record": "cards/DEATHBRINGER",
+      "reask": false
+    },
+    {
+      "id": "sts2-358",
+      "original_entity": "Negative Pulse",
+      "patch_entity": "Negative Pulse",
+      "patch_record": "cards/NEGATIVE_PULSE",
+      "reask": false
+    },
+    {
+      "id": "sts2-359",
+      "original_entity": "Reanimate",
+      "patch_entity": "Reanimate",
+      "patch_record": "cards/REANIMATE",
+      "reask": false
+    },
+    {
+      "id": "sts2-360",
+      "original_entity": "Largesse",
+      "patch_entity": "Largesse",
+      "patch_record": "cards/LARGESSE",
+      "reask": false
+    },
+    {
+      "id": "sts2-361",
+      "original_entity": "Bound Phylactery",
+      "patch_entity": "Bound Phylactery",
+      "patch_record": "relics/BOUND_PHYLACTERY",
+      "reask": false
+    },
+    {
+      "id": "sts2-362",
+      "original_entity": "Bone Flute",
+      "patch_entity": "Bone Flute",
+      "patch_record": "relics/BONE_FLUTE",
+      "reask": false
+    },
+    {
+      "id": "sts2-363",
+      "original_entity": "Book Repair Knife",
+      "patch_entity": "Book Repair Knife",
+      "patch_record": "relics/BOOK_REPAIR_KNIFE",
+      "reask": false
+    },
+    {
+      "id": "sts2-364",
+      "original_entity": "Divine Right",
+      "patch_entity": "Divine Right",
+      "patch_record": "relics/DIVINE_RIGHT",
+      "reask": false
+    },
+    {
+      "id": "sts2-365",
+      "original_entity": "Fencing Manual",
+      "patch_entity": "Fencing Manual",
+      "patch_record": "relics/FENCING_MANUAL",
+      "reask": false
+    },
+    {
+      "id": "sts2-366",
+      "original_entity": "Galactic Dust",
+      "patch_entity": "Galactic Dust",
+      "patch_record": "relics/GALACTIC_DUST",
+      "reask": false
+    },
+    {
+      "id": "sts2-367",
+      "original_entity": "Lunar Pastry",
+      "patch_entity": "Lunar Pastry",
+      "patch_record": "relics/LUNAR_PASTRY",
+      "reask": false
+    },
+    {
+      "id": "sts2-368",
+      "original_entity": "Mini Regent",
+      "patch_entity": "Mini Regent",
+      "patch_record": "relics/MINI_REGENT",
+      "reask": false
+    },
+    {
+      "id": "sts2-369",
+      "original_entity": "Phylactery Unbound",
+      "patch_entity": "Phylactery Unbound",
+      "patch_record": "relics/PHYLACTERY_UNBOUND",
+      "reask": false
+    },
+    {
+      "id": "sts2-370",
+      "original_entity": "Undying Sigil",
+      "patch_entity": "Undying Sigil",
+      "patch_record": "relics/UNDYING_SIGIL",
+      "reask": false
+    },
+    {
+      "id": "sts2-371",
+      "original_entity": "Bone Brew",
+      "patch_entity": "Bone Brew",
+      "patch_record": "potions/BONE_BREW",
+      "reask": false
+    },
+    {
+      "id": "sts2-372",
+      "original_entity": "King's Courage",
+      "patch_entity": "King's Courage",
+      "patch_record": "potions/KINGS_COURAGE",
+      "reask": false
+    },
+    {
+      "id": "sts2-373",
+      "original_entity": "Star Potion",
+      "patch_entity": "Star Potion",
+      "patch_record": "potions/STAR_POTION",
+      "reask": false
+    },
+    {
+      "id": "sts2-374",
+      "original_entity": "Potion of Doom",
+      "patch_entity": "Potion of Doom",
+      "patch_record": "potions/POTION_OF_DOOM",
+      "reask": false
+    },
+    {
+      "id": "sts2-375",
+      "original_entity": "Foul Potion",
+      "patch_entity": "Foul Potion",
+      "patch_record": "potions/FOUL_POTION",
+      "reask": false
+    },
+    {
+      "id": "sts2-376",
+      "original_entity": "Amalgamator",
+      "patch_entity": "Amalgamator",
+      "patch_record": "events/AMALGAMATOR",
+      "reask": false
+    },
+    {
+      "id": "sts2-377",
+      "original_entity": "Brain Leech",
+      "patch_entity": "Brain Leech",
+      "patch_record": "events/BRAIN_LEECH",
+      "reask": false
+    },
+    {
+      "id": "sts2-378",
+      "original_entity": "Luminous Choir",
+      "patch_entity": "Luminous Choir",
+      "patch_record": "events/LUMINOUS_CHOIR",
+      "reask": false
+    },
+    {
+      "id": "sts2-379",
+      "original_entity": "The Lantern Key",
+      "patch_entity": "The Lantern Key",
+      "patch_record": "events/THE_LANTERN_KEY",
+      "reask": false
+    },
+    {
+      "id": "sts2-380",
+      "original_entity": "War Historian, Repy",
+      "patch_entity": "War Historian, Repy",
+      "patch_record": "events/WAR_HISTORIAN_REPY",
+      "reask": false
+    },
+    {
+      "id": "sts2-381",
+      "original_entity": "Aeonglass",
+      "patch_entity": "Aeonglass",
+      "patch_record": "monsters/AEONGLASS",
+      "reask": true
+    },
+    {
+      "id": "sts2-382",
+      "original_entity": "Entomancer",
+      "patch_entity": "Entomancer",
+      "patch_record": "monsters/ENTOMANCER",
+      "reask": false
+    },
+    {
+      "id": "sts2-383",
+      "original_entity": "Living Fog",
+      "patch_entity": "Living Fog",
+      "patch_record": "monsters/LIVING_FOG",
+      "reask": false
+    },
+    {
+      "id": "sts2-384",
+      "original_entity": "Vantom",
+      "patch_entity": "Vantom",
+      "patch_record": "monsters/VANTOM",
+      "reask": false
+    },
+    {
+      "id": "sts2-385",
+      "original_entity": "The Insatiable",
+      "patch_entity": "The Insatiable",
+      "patch_record": "monsters/THE_INSATIABLE",
+      "reask": false
+    },
+    {
+      "id": "sts2-386",
+      "original_entity": "Cubex Construct",
+      "patch_entity": "Cubex Construct",
+      "patch_record": "monsters/CUBEX_CONSTRUCT",
+      "reask": false
+    },
+    {
+      "id": "sts2-387",
+      "original_entity": "Soul Nexus",
+      "patch_entity": "Soul Nexus",
+      "patch_record": "monsters/SOUL_NEXUS",
+      "reask": false
+    },
+    {
+      "id": "sts2-388",
+      "original_entity": "Fossil Stalker",
+      "patch_entity": "Fossil Stalker",
+      "patch_record": "monsters/FOSSIL_STALKER",
+      "reask": false
+    },
+    {
+      "id": "sts2-389",
+      "original_entity": "Soul Fysh",
+      "patch_entity": "Soul Fysh",
+      "patch_record": "monsters/SOUL_FYSH",
+      "reask": false
+    },
+    {
+      "id": "sts2-390",
+      "original_entity": "Queen",
+      "patch_entity": "Queen",
+      "patch_record": "monsters/QUEEN",
+      "reask": false
+    },
+    {
+      "id": "sts2-391",
+      "original_entity": "Knowledge Demon",
+      "patch_entity": "Knowledge Demon",
+      "patch_record": "monsters/KNOWLEDGE_DEMON",
+      "reask": false
+    },
+    {
+      "id": "sts2-392",
+      "original_entity": "Frog Knight",
+      "patch_entity": "Frog Knight",
+      "patch_record": "monsters/FROG_KNIGHT",
+      "reask": false
+    },
+    {
+      "id": "sts2-393",
+      "original_entity": "Hunter Killer",
+      "patch_entity": "Hunter Killer",
+      "patch_record": "monsters/HUNTER_KILLER",
+      "reask": false
+    },
+    {
+      "id": "sts2-394",
+      "original_entity": "Mecha Knight",
+      "patch_entity": "Mecha Knight",
+      "patch_record": "monsters/MECHA_KNIGHT",
+      "reask": false
+    },
+    {
+      "id": "sts2-395",
+      "original_entity": "The Obscura",
+      "patch_entity": "The Obscura",
+      "patch_record": "monsters/THE_OBSCURA",
+      "reask": false
+    },
+    {
+      "id": "sts2-396",
+      "original_entity": "Doom",
+      "patch_entity": "Doom",
+      "patch_record": "powers/DOOM_POWER",
+      "reask": false
+    },
+    {
+      "id": "sts2-397",
+      "original_entity": "Forge",
+      "patch_entity": "Forge",
+      "patch_record": "cards/REFINE_BLADE",
+      "reask": false
+    },
+    {
+      "id": "sts2-398",
+      "original_entity": "Stars",
+      "patch_entity": "Stars",
+      "patch_record": "relics/LUNAR_PASTRY",
+      "reask": false
+    },
+    {
+      "id": "sts2-399",
+      "original_entity": "Osty",
+      "patch_entity": "Osty",
+      "patch_record": "cards/SACRIFICE",
+      "reask": false
+    },
+    {
+      "id": "sts2-400",
+      "original_entity": "Sovereign Blade",
+      "patch_entity": "Sovereign Blade",
+      "patch_record": "cards/SOVEREIGN_BLADE",
+      "reask": true
+    }
+  ]
+}

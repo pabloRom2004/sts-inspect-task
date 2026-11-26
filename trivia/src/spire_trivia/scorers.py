@@ -43,6 +43,13 @@ def strict_letter() -> Scorer:
     return score
 
 
+def final_choice(completion: str) -> str:
+    """Accept one uppercase choice on the last nonempty line of the final message."""
+    lines = completion.strip().splitlines()
+    last = lines[-1].strip() if lines else ""
+    return last if re.fullmatch("[A-I]", last) else ""
+
+
 @scorer(
     metrics={
         "net_score": [mean(), stderr()],
@@ -51,15 +58,17 @@ def strict_letter() -> Scorer:
         "format": [accuracy()],
     }
 )
-def abstention_letter() -> Scorer:
+def abstention_letter(recover_final: bool = False) -> Scorer:
     """Award +1 for a correct choice, 0 for I, and -1 for a wrong or malformed response."""
 
     async def score(state: TaskState, target: Target) -> Score:
         """Keep abstention distinct from errors while grading the complete final response."""
         answer = state.output.completion.strip()
-        valid = re.fullmatch("[A-I]", answer) is not None
-        correct = valid and answer == target.text
-        abstained = answer == "I"
+        exact = re.fullmatch("[A-I]", answer) is not None
+        choice = final_choice(answer) if recover_final else answer
+        valid = re.fullmatch("[A-I]", choice) is not None
+        correct = valid and choice == target.text
+        abstained = choice == "I"
         outcome = (
             "correct"
             if correct
@@ -74,7 +83,7 @@ def abstention_letter() -> Scorer:
                 "net_score": 1 if correct else 0 if abstained else -1,
                 "accuracy": CORRECT if correct else INCORRECT,
                 "abstention": CORRECT if abstained else INCORRECT,
-                "format": CORRECT if valid else INCORRECT,
+                "format": CORRECT if exact else INCORRECT,
             },
             answer=answer,
             explanation={
@@ -83,7 +92,7 @@ def abstention_letter() -> Scorer:
                 "wrong": "Incorrect choice (-1).",
                 "invalid": "Response is not exactly one uppercase A–I letter (-1).",
             }[outcome],
-            metadata={"outcome": outcome},
+            metadata={"outcome": outcome, "choice": choice if valid else None},
         )
 
     return score

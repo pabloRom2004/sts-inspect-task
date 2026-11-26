@@ -7,7 +7,7 @@ from spire_trivia.dataset import DATA_DIR
 
 
 def test_wiki_revision_and_numeric_focus():
-    task = trivia()
+    task = trivia(question_set="text200-v6")
     assert task.metadata["question_set"] == "text200-v6"
     assert len(task.dataset) == 200
     for game in ["sts1", "sts2"]:
@@ -43,16 +43,22 @@ def test_preserve_precise_relic_effect():
         scorer="abstention_letter",
     )
     previous = next(s for s in old.dataset if s.id == "sts1-058")
-    current = next(s for s in trivia().dataset if s.id == "sts1-058")
+    current = next(
+        s for s in trivia(question_set="text200-v6").dataset if s.id == "sts1-058"
+    )
     assert [m.text for m in current.input] == [
         m.text for m in previous.input
     ] and current.target == previous.target
 
 
 def test_slaver_variant_is_explicit():
-    sample = next(s for s in trivia().dataset if s.id == "sts1-239")
+    sample = next(
+        s for s in trivia(question_set="text200-v6").dataset if s.id == "sts1-239"
+    )
     assert "Blue Slaver" in sample.input[1].text
-    assert not any(s.id == "sts1-228" for s in trivia().dataset)
+    assert not any(
+        s.id == "sts1-228" for s in trivia(question_set="text200-v6").dataset
+    )
     old = trivia(
         question_set="text200-v5",
         system_prompt="knowledge_abstention_explicit",
@@ -62,6 +68,6 @@ def test_slaver_variant_is_explicit():
     assert all(
         [m.text for m in s.input] == [m.text for m in previous[s.id].input]
         and s.target == previous[s.id].target
-        for s in trivia().dataset
+        for s in trivia(question_set="text200-v6").dataset
         if s.id != "sts1-239"
     )
