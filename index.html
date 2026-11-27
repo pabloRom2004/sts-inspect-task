@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#261d26"><meta name="description" content="Test your Slay the Spire knowledge with 200 questions across both games.">
+  <title>Spire Trivia · Slay the Spire quiz</title>
+  <link rel="icon" href="data:,"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="gallery" aria-hidden="true">
+    <figure class="art a1"><img src="art/ragnarok.webp" alt=""><figcaption>Ragnarok</figcaption></figure>
+    <figure class="art a2"><img src="art/backflip.webp" alt=""><figcaption>Backflip</figcaption></figure>
+    <figure class="art a3"><img src="art/convergence.webp" alt=""><figcaption>Convergence</figcaption></figure>
+    <figure class="art a4"><img src="art/molten-fist.webp" alt=""><figcaption>Molten Fist</figcaption></figure>
+  </div>
+  <header class="mast"><span class="brand"><i aria-hidden="true"></i>Spire Trivia</span><a href="https://github.com/pabloRom2004/sts-inspect-task/tree/gh-pages/data" target="_blank" rel="noopener">Question bank <span aria-hidden="true">↗</span></a></header>
+  <main id="stage">
+    <div class="desk">
+      <div class="toolbar"><div class="tabs" role="group" aria-label="Game"><button data-game="sts1" aria-pressed="true">Slay the Spire 1</button><button data-game="sts2" aria-pressed="false">Slay the Spire 2</button></div><span id="score" title="Correct +1, wrong −1, I don’t know 0">0 points</span></div>
+      <section class="sheet" id="quiz" aria-label="Quiz question">
+        <div class="meta"><span id="category"></span><span id="version"></span></div>
+        <div class="prompt"><h1 id="question" tabindex="-1">Loading questions…</h1><p id="context"></p></div>
+        <div id="answers-area"><div id="choices" role="group" aria-label="Answer options"></div></div>
+        <div class="tools"><div id="choice-pager" hidden><button id="earlier" aria-label="Previous answer options">‹</button><span id="choice-range"></span><button id="later" aria-label="Next answer options">›</button></div></div>
+        <div class="response"><button id="pass" type="button">I don’t know</button><span id="feedback" role="status"></span></div>
+      </section>
+      <section class="sheet result" id="results" hidden aria-label="Quiz results"><div class="meta" id="result-game"></div><h1 id="result-title" tabindex="-1"></h1><p id="result-points"></p><dl id="breakdown"></dl><div class="result-actions"><button id="resume"></button><button id="review">Review answers</button></div></section>
+      <nav class="navigation" aria-label="Question navigation">
+        <button class="arrow prev" id="prev" aria-label="Previous question" title="Previous question">←</button>
+        <div class="progress"><span id="position">Question 1 of 100</span><div class="track"><i id="bar"></i></div></div>
+        <button class="arrow next" id="next" aria-label="Next question" title="Next question">→</button>
+      </nav>
+    </div>
+  </main>
+  <script type="module" src="quiz.js"></script>
+</body>
+</html>
