@@ -134,6 +134,7 @@ function render() {
   $('question').textContent = title;
   $('context').textContent = details.join('\n').trim();
   $('pass').disabled = Boolean(chosen);
+  $('pass').classList.toggle('passed', chosen === 'I');
   $('choices').classList.toggle('short-options',q.choices.slice(0,8).every(text=>text.length<=22));
   $('feedback').classList.toggle('scoring',!chosen);
   $('feedback').textContent = !chosen ? 'Correct +1 · Wrong −1 · Pass 0' : chosen===q.answer ? 'Correct · +1 point' :
@@ -179,6 +180,49 @@ let resizeFrame;
 function queueFit(){cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(fitAnswers);}
 window.addEventListener('resize',queueFit);
 window.visualViewport?.addEventListener('resize',queueFit);
+
+// Move the painted strips closest to the mouse a little farther than the rest.
+const mural = document.querySelector('.mural');
+const strips = Array.from(mural.children);
+const muralMotion = matchMedia('(any-hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference)');
+let pointerFrame = 0;
+let pointerX = 0;
+let pointerY = 0;
+
+function paintMural() {
+  pointerFrame = 0;
+  mural.style.translate = '0 ' + ((pointerY - 0.5) * 14) + 'px';
+  strips.forEach((strip, index) => {
+    const distance = Math.abs(pointerY - (index + 0.5) / strips.length);
+    const reach = 7 + 19 * Math.max(0, 1 - 2 * distance);
+    strip.style.transform = 'translateX(' + (pointerX * reach) + 'px)';
+  });
+}
+function followPointer(event) {
+  if (event.pointerType === 'touch') return;
+  pointerX = 2 * event.clientX / innerWidth - 1;
+  pointerY = event.clientY / innerHeight;
+  if (!pointerFrame) pointerFrame = requestAnimationFrame(paintMural);
+}
+function settleMural() {
+  cancelAnimationFrame(pointerFrame);
+  pointerFrame = 0;
+  mural.style.removeProperty('translate');
+  strips.forEach(strip => strip.style.removeProperty('transform'));
+}
+function configureMuralMotion() {
+  if (muralMotion.matches) {
+    window.addEventListener('pointermove', followPointer, {passive:true});
+  } else {
+    window.removeEventListener('pointermove', followPointer);
+    settleMural();
+  }
+}
+document.documentElement.addEventListener('pointerleave', settleMural);
+window.addEventListener('blur', settleMural);
+muralMotion.addEventListener('change', configureMuralMotion);
+configureMuralMotion();
+
 try {
   const response=await fetch('./data/questions.json');
   if (!response.ok) throw Error('Question bank unavailable');
